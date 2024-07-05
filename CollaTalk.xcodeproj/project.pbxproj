@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00604B512C3190B200FAC6DC /* CommonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00604B502C3190B200FAC6DC /* CommonStyle.swift */; };
+		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
+		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
+		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
 		00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */; };
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
@@ -16,6 +19,9 @@
 
 /* Begin PBXFileReference section */
 		00604B502C3190B200FAC6DC /* CommonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStyle.swift; sourceTree = "<group>"; };
+		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
 		00F878C72C2BEE5B002610A8 /* CollaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaTalkApp.swift; sourceTree = "<group>"; };
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +40,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0086B5A92C37DEB900AD889C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0086B5AC2C37E83B00AD889C /* OnboardingView.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		0086B5AE2C37E8F800AD889C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0086B5B22C37EA0300AD889C /* CustomModifiers */,
+				0086B5AF2C37E90600AD889C /* CustomViews */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0086B5AF2C37E90600AD889C /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		0086B5B22C37EA0300AD889C /* CustomModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */,
+			);
+			path = CustomModifiers;
+			sourceTree = "<group>";
+		};
 		00F878BE2C2BEE5B002610A8 = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +92,8 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				0086B5AE2C37E8F800AD889C /* Helpers */,
+				0086B5A92C37DEB900AD889C /* Scenes */,
 				00604B502C3190B200FAC6DC /* CommonStyle.swift */,
 				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
 				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
@@ -141,8 +182,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
+				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00604B512C3190B200FAC6DC /* CommonStyle.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
+				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
