@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @Binding var isBottomSheetPresented: Bool
+    
     var body: some View {
         VStack {
             Spacer()
@@ -26,6 +29,7 @@ struct OnboardingView: View {
             
             CustomButton {
                 print("시작하기")
+                isBottomSheetPresented = true
             } label: {
                 Text("시작하기")
             }
@@ -38,5 +42,5 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingView(isBottomSheetPresented: .constant(false))
 }

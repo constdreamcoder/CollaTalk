@@ -11,6 +11,10 @@
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
 		0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B62C37ED2800AD889C /* Fonts.swift */; };
+		0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B82C37F18E00AD889C /* BottomSheetView.swift */; };
+		0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */; };
+		0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BC2C37F2AD00AD889C /* AuthView.swift */; };
+		0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BE2C37F50500AD889C /* RoundedCorner.swift */; };
 		00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */; };
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
 		0086B5B62C37ED2800AD889C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		0086B5B82C37F18E00AD889C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewGrabber.swift; sourceTree = "<group>"; };
+		0086B5BC2C37F2AD00AD889C /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		0086B5BE2C37F50500AD889C /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		00F878C72C2BEE5B002610A8 /* CollaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaTalkApp.swift; sourceTree = "<group>"; };
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +51,9 @@
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
 				0086B5AC2C37E83B00AD889C /* OnboardingView.swift */,
+				0086B5BC2C37F2AD00AD889C /* AuthView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -62,6 +72,8 @@
 			isa = PBXGroup;
 			children = (
 				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
+				0086B5B82C37F18E00AD889C /* BottomSheetView.swift */,
+				0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -70,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */,
+				0086B5BE2C37F50500AD889C /* RoundedCorner.swift */,
 			);
 			path = CustomModifiers;
 			sourceTree = "<group>";
@@ -104,7 +117,6 @@
 				0086B5AE2C37E8F800AD889C /* Helpers */,
 				0086B5A92C37DEB900AD889C /* Scenes */,
 				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
-				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
 				00F878CE2C2BEE5C002610A8 /* Assets.xcassets */,
 				00F878D02C2BEE5C002610A8 /* Preview Content */,
 			);
@@ -191,10 +203,14 @@
 			files = (
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
+				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
+				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
+				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
+				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
