@@ -14,7 +14,7 @@ struct BottomButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(color)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .cornerRadius(8, corners: .allCorners)
             .padding(.horizontal, 16)
     }
 }

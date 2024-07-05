@@ -28,7 +28,7 @@ struct ContentView: View {
 
         }
         .sheet(isPresented: $isSignUpViewPresented) {
-
+            SignUpView(isPresented: $isSignUpViewPresented)
         }
     }
 }
