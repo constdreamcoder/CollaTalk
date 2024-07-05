@@ -17,6 +17,7 @@ struct SignUpView: View {
         
         ZStack {
             Color.backgroundPrimary
+                .ignoresSafeArea()
             
             VStack(spacing: 24) {
                 NavigationBarForCreatingNewFeature(title: .signUp, isPresented: $isPresented)

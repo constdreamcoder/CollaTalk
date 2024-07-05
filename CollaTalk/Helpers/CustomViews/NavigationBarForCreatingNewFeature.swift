@@ -11,6 +11,7 @@ struct NavigationBarForCreatingNewFeature: View {
     
     enum Feature: String {
         case signUp = "회원가입"
+        case login = "로그인"
     }
     
     let title: Feature

@@ -25,7 +25,7 @@ struct ContentView: View {
         }
         .animation(.interactiveSpring, value: isBottomSheetPresented)
         .sheet(isPresented: $isLoginViewPresented) {
-
+            LoginView(isPresented: $isLoginViewPresented)
         }
         .sheet(isPresented: $isSignUpViewPresented) {
             SignUpView(isPresented: $isSignUpViewPresented)
