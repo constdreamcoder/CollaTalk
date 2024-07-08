@@ -13,7 +13,7 @@ final class UserProvider: BaseProvider<UserService> {
     
     private override init() {}
     
-    func login(email: String, password: String) async -> UserInfo? {
+    func login(email: String, password: String) async throws -> UserInfo? {
         do {
             let loginRequest = LoginRequest(email: email, password: password)
             let response = try await request(.login(request: loginRequest))
@@ -22,12 +22,15 @@ final class UserProvider: BaseProvider<UserService> {
                 let userInfo = try decode(response.data, as: UserInfo.self)
                 return userInfo
             case 400...500:
-                print("서버 오류 발생!")
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
             default:
                 break
             }
         } catch {
-            print("login error", error)
+            throw error
         }
         
         return nil

@@ -9,6 +9,7 @@ import Foundation
 
 struct AppState {
     var loginState = LoginState()
+    var errorMessage = ""
 }
 
 struct LoginState {

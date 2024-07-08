@@ -15,7 +15,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     switch action {
     case .loginAction(let loginAction):
         switch loginAction {
-        case .login:
         case .writeEmail(let email):
             mutatingState.loginState.email = email
         case .writePassword(let password):
@@ -23,6 +22,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .moveToMainView:
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
+        case .loginError(let errorMessage):
+            print("로그인 에러")
+            print("errorMessage", errorMessage)
+            mutatingState.errorMessage = errorMessage
+        default:
+            break
         }
     }
     

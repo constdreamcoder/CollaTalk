@@ -41,7 +41,7 @@ struct UserInfo: Codable {
     }
 }
 
-struct Token: Decodable {
+struct Token: Codable {
     let accessToken: String
     let refreshToken: String
 }
