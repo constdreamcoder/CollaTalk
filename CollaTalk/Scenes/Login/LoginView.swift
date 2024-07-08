@@ -56,9 +56,16 @@ struct LoginView: View {
                 } label: {
                     Text("로그인")
                 }
-                .bottomButtonShape(.brandGreen)
+                .disabled(!isLoginButtonValid())
+                .bottomButtonShape(isLoginButtonValid() ? .brandGreen : .brandInactive)
             }
         }
+    }
+}
+
+extension LoginView {
+    private func isLoginButtonValid() -> Bool {
+        !store.state.loginState.isEmailEmpty && !store.state.loginState.isPWEmpty
     }
 }
 

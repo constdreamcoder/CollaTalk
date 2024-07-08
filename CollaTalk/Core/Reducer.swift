@@ -26,7 +26,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             print("로그인 에러")
             print("errorMessage", errorMessage)
             mutatingState.errorMessage = errorMessage
-        default:
+        case .isEmailEmpty(let isEmpty):
+            mutatingState.loginState.isEmailEmpty = isEmpty
+        case .isPWEmpty(let isEmpty):
+            mutatingState.loginState.isPWEmpty = isEmpty
+        case .login:
             break
         }
     }

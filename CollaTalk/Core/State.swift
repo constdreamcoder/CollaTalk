@@ -15,4 +15,6 @@ struct AppState {
 struct LoginState {
     var email = ""
     var password = ""
+    var isEmailEmpty = true
+    var isPWEmpty = true
 }
