@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthView: View {
-    
+        
     @Binding var isBottomSheetPresented: Bool
     @Binding var isLoginViewPresented: Bool
     @Binding var isSignUpViewPresented: Bool

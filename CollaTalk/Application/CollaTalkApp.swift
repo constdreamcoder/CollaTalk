@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct CollaTalkApp: App {
+    
+    let store = AppStore(
+        initial: AppState(),
+        reducer: appReducer,
+        middlewares: [userMiddleware]
+    )
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(store)
         }
     }
 }

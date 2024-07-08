@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+        
     @State private var isBottomSheetPresented: Bool = false
     @State private var isLoginViewPresented: Bool = false
     @State private var isSignUpViewPresented: Bool = false

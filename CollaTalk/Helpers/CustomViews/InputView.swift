@@ -9,32 +9,41 @@ import SwiftUI
 
 struct InputView: View {
     
-    @Binding var text: String
-
     private let title: String
     private let placeholder: String
     private let showRightButton: Bool
     private let isSecure: Bool
     private let isRightButtonDisable: Bool
+    private let textFieldGetter: () -> String
+    private let textFieldSetter: (String) -> Void
+    private let secureFieldGetter: () -> String
+    private let secureFieldSetter: (String) -> Void
     private let rightButtonAction: () -> Void
     
     init(
-        text: Binding<String>,
         title: String,
         placeholder: String,
         showRightButton: Bool = false,
         isSecure: Bool = false,
         isRightButtonDisable: Bool = true,
+        textFieldGetter: @escaping (() -> String),
+        textFieldSetter: @escaping (String) -> Void,
+        secureFieldGetter: @escaping () -> String,
+        secureFieldSetter: @escaping (String) -> Void,
         rightButtonAction: @escaping () -> Void
     ) {
-        self._text = text
         self.title = title
         self.placeholder = placeholder
         self.showRightButton = showRightButton
         self.isSecure = isSecure
         self.isRightButtonDisable = isRightButtonDisable
+        self.textFieldGetter = textFieldGetter
+        self.textFieldSetter = textFieldSetter
+        self.secureFieldGetter = secureFieldGetter
+        self.secureFieldSetter = secureFieldSetter
         self.rightButtonAction = rightButtonAction
     }
+    
         
     var body: some View {
         VStack(alignment: .leading) {
@@ -45,9 +54,21 @@ struct InputView: View {
                 
                 Group {
                     if isSecure {
-                        SecureField(placeholder, text: $text)
+                        SecureField(
+                            placeholder,
+                            text: Binding(
+                                get: secureFieldGetter,
+                                set: secureFieldSetter
+                            )
+                        )
                     } else {
-                        TextField(placeholder, text: $text)
+                        TextField(
+                            placeholder,
+                            text: Binding(
+                                get: textFieldGetter,
+                                set: textFieldSetter
+                            )
+                        )
                     }
                 }
                 .font(.title2)
@@ -77,5 +98,5 @@ struct InputView: View {
 }
 
 #Preview {
-    InputView(text: .constant(""), title: "이메일", placeholder: "이메일을 입력하세요",  rightButtonAction: {})
+    InputView(title: "이메일", placeholder: "이메일을 입력하세요",  textFieldGetter: {""}, textFieldSetter: { _ in }, secureFieldGetter: {""}, secureFieldSetter: { _ in }, rightButtonAction: {})
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
+		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
@@ -19,6 +21,11 @@
 		0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C22C3806B500AD889C /* SignUpView.swift */; };
 		0086B5C52C38089F00AD889C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C42C38089F00AD889C /* InputView.swift */; };
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
+		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
+		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
+		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
+		00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */; };
+		00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */; };
 		00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */; };
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
@@ -26,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
@@ -38,6 +46,11 @@
 		0086B5C22C3806B500AD889C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		0086B5C42C38089F00AD889C /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
+		00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		00F878C72C2BEE5B002610A8 /* CollaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaTalkApp.swift; sourceTree = "<group>"; };
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,20 +63,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0052C0FF2C3AD554003D08D3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0052C10B2C3AD6E5003D08D3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0086B5C62C3812DD00AD889C /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
 				0086B5AC2C37E83B00AD889C /* OnboardingView.swift */,
 				0086B5BC2C37F2AD00AD889C /* AuthView.swift */,
+				0052C10B2C3AD6E5003D08D3 /* Login */,
 				0086B5C22C3806B500AD889C /* SignUpView.swift */,
-				0086B5C62C3812DD00AD889C /* LoginView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -107,6 +137,18 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2B52C3BE9A000C1AFF1 /* Store.swift */,
+				00F6F2B72C3BE9F700C1AFF1 /* State.swift */,
+				00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */,
+				00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */,
+				00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		00F878BE2C2BEE5B002610A8 = {
 			isa = PBXGroup;
 			children = (
@@ -126,9 +168,11 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				00F6F2B42C3BE99700C1AFF1 /* Core */,
+				0052C0FF2C3AD554003D08D3 /* Application */,
+				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
 				0086B5AE2C37E8F800AD889C /* Helpers */,
 				0086B5A92C37DEB900AD889C /* Scenes */,
-				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
 				00F878CE2C2BEE5C002610A8 /* Assets.xcassets */,
 				00F878D02C2BEE5C002610A8 /* Preview Content */,
 			);
@@ -159,6 +203,9 @@
 			dependencies = (
 			);
 			name = CollaTalk;
+			packageProductDependencies = (
+				0052C1392C3AFB4D003D08D3 /* CombineMoya */,
+			);
 			productName = CollaTalk;
 			productReference = 00F878C72C2BEE5B002610A8 /* CollaTalk.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 00F878BE2C2BEE5B002610A8;
+			packageReferences = (
+				0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 00F878C82C2BEE5B002610A8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -216,14 +266,20 @@
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
+				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
+				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
+				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */,
+				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
+				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
 				0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
+				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0086B5C12C38065600AD889C /* NavigationBarForCreatingNewFeature.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
@@ -362,6 +418,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CollaTalk/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -394,6 +451,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CollaTalk/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0052C1392C3AFB4D003D08D3 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 00F878BF2C2BEE5B002610A8 /* Project object */;
 }
