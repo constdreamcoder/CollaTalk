@@ -14,7 +14,7 @@ final class Store<State, Action>: ObservableObject {
     @Published private(set) var state: State
     private let reducer: Reducer<State, Action>
     private let middlewares: [Middleware<State, Action>]
-    private let queue = DispatchQueue(label: "com.raywenderlich.ThreeDucks.store", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "serialQueue", qos: .userInitiated)
     private var subscriptions: Set<AnyCancellable> = []
     
     init(

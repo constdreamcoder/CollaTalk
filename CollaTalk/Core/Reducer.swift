@@ -16,11 +16,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .loginAction(let loginAction):
         switch loginAction {
         case .login:
-            print("login in reducer")
         case .writeEmail(let email):
             mutatingState.loginState.email = email
         case .writePassword(let password):
             mutatingState.loginState.password = password
+        case .clearLoginInfo:
+            mutatingState.loginState.email = ""
+            mutatingState.loginState.password = ""
         }
     }
     

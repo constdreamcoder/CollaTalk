@@ -14,10 +14,15 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     case .loginAction(let loginAction):
         switch loginAction {
         case .login:
-            print("login middleware")
             print("email: \(state.loginState.email), password: \(state.loginState.password)")
+            Task {
+                let userInfo = await UserProvider.shared.login(email:state.loginState.email, password: state.loginState.password)
+                guard let userInfo else { return }
+            }
+            return Just(.loginAction(.clearLoginInfo)).eraseToAnyPublisher()
         case .writeEmail(let email): break
         case .writePassword(let password): break
+        case .clearLoginInfo: break
         }
     }
     

@@ -26,6 +26,13 @@
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
 		00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */; };
 		00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */; };
+		00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2C12C3C115100C1AFF1 /* UserService.swift */; };
+		00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2C32C3C11E100C1AFF1 /* BaseService.swift */; };
+		00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2C62C3C129700C1AFF1 /* Headers.swift */; };
+		00F6F2CB2C3C13F700C1AFF1 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */; };
+		00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2CC2C3C14EF00C1AFF1 /* BaseProvider.swift */; };
+		00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */; };
+		00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2D42C3C206100C1AFF1 /* UserInfo.swift */; };
 		00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */; };
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
@@ -51,6 +58,13 @@
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
 		00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		00F6F2C12C3C115100C1AFF1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		00F6F2C32C3C11E100C1AFF1 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		00F6F2C62C3C129700C1AFF1 /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
+		00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		00F6F2CC2C3C14EF00C1AFF1 /* BaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProvider.swift; sourceTree = "<group>"; };
+		00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		00F6F2D42C3C206100C1AFF1 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00F878C72C2BEE5B002610A8 /* CollaTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollaTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaTalkApp.swift; sourceTree = "<group>"; };
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -149,6 +163,84 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		00F6F2BF2C3C105300C1AFF1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2C52C3C124500C1AFF1 /* Base */,
+				00F6F2C02C3C114600C1AFF1 /* Service */,
+				00F6F2C82C3C13DB00C1AFF1 /* Model */,
+				00F6F2CE2C3C184600C1AFF1 /* Provider */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		00F6F2C02C3C114600C1AFF1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2C12C3C115100C1AFF1 /* UserService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		00F6F2C52C3C124500C1AFF1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2CC2C3C14EF00C1AFF1 /* BaseProvider.swift */,
+				00F6F2C32C3C11E100C1AFF1 /* BaseService.swift */,
+				00F6F2C62C3C129700C1AFF1 /* Headers.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		00F6F2C82C3C13DB00C1AFF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2C92C3C13E200C1AFF1 /* Request */,
+				00F6F2D12C3C202F00C1AFF1 /* Response */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00F6F2C92C3C13E200C1AFF1 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2D22C3C203A00C1AFF1 /* User */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		00F6F2CE2C3C184600C1AFF1 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		00F6F2D12C3C202F00C1AFF1 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2D32C3C205900C1AFF1 /* User */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		00F6F2D22C3C203A00C1AFF1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		00F6F2D32C3C205900C1AFF1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2D42C3C206100C1AFF1 /* UserInfo.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		00F878BE2C2BEE5B002610A8 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +260,7 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				00F6F2BF2C3C105300C1AFF1 /* Network */,
 				00F6F2B42C3BE99700C1AFF1 /* Core */,
 				0052C0FF2C3AD554003D08D3 /* Application */,
 				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
@@ -273,15 +366,22 @@
 				0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
+				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
+				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				00F6F2CB2C3C13F700C1AFF1 /* LoginRequest.swift in Sources */,
 				0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */,
+				00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
+				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
+				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0086B5C12C38065600AD889C /* NavigationBarForCreatingNewFeature.swift in Sources */,
+				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +516,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;
@@ -449,6 +550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;

@@ -15,4 +15,5 @@ enum LoginAction {
     case login
     case writeEmail(email: String)
     case writePassword(password: String)
+    case clearLoginInfo
 }
