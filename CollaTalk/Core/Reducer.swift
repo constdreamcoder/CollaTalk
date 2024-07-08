@@ -20,7 +20,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.loginState.email = email
         case .writePassword(let password):
             mutatingState.loginState.password = password
-        case .clearLoginInfo:
+        case .moveToMainView:
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
         }

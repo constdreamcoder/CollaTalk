@@ -12,7 +12,7 @@
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
-		0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B62C37ED2800AD889C /* Fonts.swift */; };
+		0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B62C37ED2800AD889C /* Fonts+Ext.swift */; };
 		0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B82C37F18E00AD889C /* BottomSheetView.swift */; };
 		0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */; };
 		0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BC2C37F2AD00AD889C /* AuthView.swift */; };
@@ -21,6 +21,7 @@
 		0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C22C3806B500AD889C /* SignUpView.swift */; };
 		0086B5C52C38089F00AD889C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C42C38089F00AD889C /* InputView.swift */; };
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
+		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
 		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
@@ -44,7 +45,7 @@
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
-		0086B5B62C37ED2800AD889C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		0086B5B62C37ED2800AD889C /* Fonts+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts+Ext.swift"; sourceTree = "<group>"; };
 		0086B5B82C37F18E00AD889C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewGrabber.swift; sourceTree = "<group>"; };
 		0086B5BC2C37F2AD00AD889C /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		0086B5C22C3806B500AD889C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		0086B5C42C38089F00AD889C /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -146,9 +148,28 @@
 		0086B5B52C37ED0B00AD889C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0086B5B62C37ED2800AD889C /* Fonts.swift */,
+				0086B5B62C37ED2800AD889C /* Fonts+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00DFAF822C3C388F00D25633 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2C52C3C124500C1AFF1 /* Base */,
+				00F6F2C02C3C114600C1AFF1 /* Service */,
+				00F6F2C82C3C13DB00C1AFF1 /* Model */,
+				00F6F2CE2C3C184600C1AFF1 /* Provider */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		00DFAF832C3C389300D25633 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
@@ -166,10 +187,8 @@
 		00F6F2BF2C3C105300C1AFF1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				00F6F2C52C3C124500C1AFF1 /* Base */,
-				00F6F2C02C3C114600C1AFF1 /* Service */,
-				00F6F2C82C3C13DB00C1AFF1 /* Model */,
-				00F6F2CE2C3C184600C1AFF1 /* Provider */,
+				00DFAF832C3C389300D25633 /* Local */,
+				00DFAF822C3C388F00D25633 /* Remote */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -363,7 +382,7 @@
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
-				0086B5B72C37ED2800AD889C /* Fonts.swift in Sources */,
+				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
@@ -378,6 +397,7 @@
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
+				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0086B5C12C38065600AD889C /* NavigationBarForCreatingNewFeature.swift in Sources */,
