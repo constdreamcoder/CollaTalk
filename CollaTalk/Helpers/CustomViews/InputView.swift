@@ -19,6 +19,7 @@ struct InputView: View {
     private let secureFieldGetter: () -> String
     private let secureFieldSetter: (String) -> Void
     private let rightButtonAction: () -> Void
+    private let isValid: Bool
     
     init(
         title: String,
@@ -30,7 +31,8 @@ struct InputView: View {
         textFieldSetter: @escaping (String) -> Void,
         secureFieldGetter: @escaping () -> String,
         secureFieldSetter: @escaping (String) -> Void,
-        rightButtonAction: @escaping () -> Void
+        rightButtonAction: @escaping () -> Void,
+        isValid: Bool = true
     ) {
         self.title = title
         self.placeholder = placeholder
@@ -42,12 +44,14 @@ struct InputView: View {
         self.secureFieldGetter = secureFieldGetter
         self.secureFieldSetter = secureFieldSetter
         self.rightButtonAction = rightButtonAction
+        self.isValid = isValid
     }
     
         
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
+                .foregroundStyle(isValid ? .brandBlack : .brandError)
                 .font(.system(size: 15, weight: .bold))
             
             HStack {

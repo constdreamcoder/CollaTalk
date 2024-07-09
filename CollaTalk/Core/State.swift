@@ -9,7 +9,7 @@ import Foundation
 
 struct AppState {
     var loginState = LoginState()
-    var errorMessage = ""
+    var errorMessage: String? = nil
 }
 
 struct LoginState {
@@ -17,4 +17,6 @@ struct LoginState {
     var password = ""
     var isEmailEmpty = true
     var isPWEmpty = true
+    var isEmailValid = true
+    var isPWValid = true
 }

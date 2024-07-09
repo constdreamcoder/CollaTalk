@@ -13,11 +13,20 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
     case .loginAction(let loginAction):
         switch loginAction {
-        /// 로그인
+        /// 로그인 버튼이 클릭된 경우
         case .login:
-            // TODO: - 이메일 유효성 검사
-            // TODO: - 비밀번호 유효성 검사
+            /// 이메일 유효성 검사
+            let isEmailValid = ValidationCheck.email(input: state.loginState.email).validation
+         
+            /// 비밀번호 유효성 검사
+            let isPWValid = ValidationCheck.password(input: state.loginState.password).validation
+           
+            guard isEmailValid && isPWValid
+            else {
+                return Just(.loginAction(.isValid(isEmailValid: isEmailValid, isPWValid: isPWValid))).eraseToAnyPublisher()
+            }
 
+            /// 로그인
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
@@ -33,8 +42,10 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
+        /// 이메일가 입력되는 경우
         case .writeEmail(let email):
             return Just(.loginAction(.isEmailEmpty(isEmpty: email.isEmpty))).eraseToAnyPublisher()
+        /// 비밀번호가 입력되는 경우
         case .writePassword(let password):
             return Just(.loginAction(.isPWEmpty(isEmpty: password.isEmpty))).eraseToAnyPublisher()
         default: break

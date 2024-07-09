@@ -17,6 +17,7 @@ enum AppAction {
         case moveToMainView(userInfo: UserInfo)
         case isEmailEmpty(isEmpty: Bool)
         case isPWEmpty(isEmpty: Bool)
-        case loginError(errorMesssage: String)
+        case isValid(isEmailValid: Bool, isPWValid: Bool)
+        case loginError(errorMesssage: String?)
     }
 }

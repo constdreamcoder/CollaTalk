@@ -24,12 +24,25 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.loginState.password = ""
         case .loginError(let errorMessage):
             print("로그인 에러")
-            print("errorMessage", errorMessage)
-            mutatingState.errorMessage = errorMessage
+            mutatingState.errorMessage = "에러가 발생했어요. 잠시 후 다시 시도해주세요."
+            print("errorMessage", mutatingState.errorMessage ?? "")
         case .isEmailEmpty(let isEmpty):
             mutatingState.loginState.isEmailEmpty = isEmpty
         case .isPWEmpty(let isEmpty):
             mutatingState.loginState.isPWEmpty = isEmpty
+        case .isValid(let isEmailValid, let isPWValid):
+            mutatingState.loginState.isEmailValid = isEmailValid
+            mutatingState.loginState.isPWValid = isPWValid
+            if !isEmailValid && !isPWValid {
+                mutatingState.errorMessage = ValidationCheck.login(isValid: isEmailValid && isPWValid).validationMessage
+            } else if !isEmailValid {
+                mutatingState.errorMessage = ValidationCheck.email(input: state.loginState.email).validationMessage
+            } else if !isPWValid {
+                mutatingState.errorMessage = ValidationCheck.password(input: state.loginState.password).validationMessage
+            } else {
+                mutatingState.errorMessage = nil
+            }
+            print("errorMessage", mutatingState.errorMessage ?? "")
         case .login:
             break
         }

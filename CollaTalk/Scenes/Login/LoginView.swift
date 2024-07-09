@@ -33,7 +33,8 @@ struct LoginView: View {
                     textFieldSetter: { store.dispatch(.loginAction(.writeEmail(email: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.loginState.isEmailValid
                 )
                 .keyboardType(.emailAddress)
                 
@@ -45,7 +46,8 @@ struct LoginView: View {
                     textFieldSetter: { _ in },
                     secureFieldGetter: { store.state.loginState.password },
                     secureFieldSetter: { store.dispatch(.loginAction(.writePassword(password: $0))) },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.loginState.isPWValid
                 )
                 
                 Spacer()

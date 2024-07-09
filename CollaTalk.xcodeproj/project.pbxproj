@@ -24,6 +24,7 @@
 		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
 		00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF892C3C42DB00D25633 /* CommonError.swift */; };
+		00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
 		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
@@ -59,6 +60,7 @@
 		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		00DFAF892C3C42DB00D25633 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		0086B5AE2C37E8F800AD889C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				00C4F9B02C3CE5F90027B2D6 /* Enums */,
 				0086B5B52C37ED0B00AD889C /* Extensions */,
 				0086B5B22C37EA0300AD889C /* CustomModifiers */,
 				0086B5AF2C37E90600AD889C /* CustomViews */,
@@ -155,6 +158,14 @@
 				0086B5B62C37ED2800AD889C /* Fonts+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00C4F9B02C3CE5F90027B2D6 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		00DFAF822C3C388F00D25633 /* Remote */ = {
@@ -390,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
+				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
