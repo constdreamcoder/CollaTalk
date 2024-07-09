@@ -23,14 +23,14 @@ enum ValidationCheck {
         }
     }
     
-    var validationMessage: String? {
+    var validationMessage: String {
         switch self {
         case .email(let email):
-            return isValidEmail(email) ? nil : "이메일 형식이 올바르지 않습니다."
+            return isValidEmail(email) ? "" : "이메일 형식이 올바르지 않습니다."
         case .password(let password):
-            return isValidPassword(password) ? nil : "비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요."
+            return isValidPassword(password) ? "" : "비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요."
         case .login(let isValid):
-            return isValid ? nil : "이메일 또는 비밀번호가 올바르지 않습니다."
+            return isValid ? "" : "이메일 또는 비밀번호가 올바르지 않습니다."
         }
     }
 

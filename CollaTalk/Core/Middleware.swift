@@ -50,6 +50,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Just(.loginAction(.isPWEmpty(isEmpty: password.isEmpty))).eraseToAnyPublisher()
         default: break
         }
+    case .dismissToastMessage: break
     }
     
     return Empty().eraseToAnyPublisher()

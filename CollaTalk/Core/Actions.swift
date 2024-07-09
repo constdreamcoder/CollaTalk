@@ -9,6 +9,7 @@ import Foundation
 
 enum AppAction {
     case loginAction(LoginAction)
+    case dismissToastMessage
     
     enum LoginAction {
         case login
@@ -19,5 +20,6 @@ enum AppAction {
         case isPWEmpty(isEmpty: Bool)
         case isValid(isEmailValid: Bool, isPWValid: Bool)
         case loginError(errorMesssage: String?)
+        case intializeAllElements
     }
 }

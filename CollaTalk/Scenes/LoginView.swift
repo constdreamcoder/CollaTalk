@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @EnvironmentObject var store: AppStore
+    @EnvironmentObject private var store: AppStore
         
     @Binding var isPresented: Bool
     
@@ -61,6 +61,10 @@ struct LoginView: View {
                 .disabled(!isLoginButtonValid())
                 .bottomButtonShape(isLoginButtonValid() ? .brandGreen : .brandInactive)
             }
+        }
+        .onDisappear {
+            print("disappear")
+            store.dispatch(.loginAction(.intializeAllElements))
         }
     }
 }

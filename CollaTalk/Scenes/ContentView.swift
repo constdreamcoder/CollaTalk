@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
-        
+    
+    @EnvironmentObject private var store: AppStore
+    
+    @StateObject private var windowProvider = WindowProvider()
+    
     @State private var isBottomSheetPresented: Bool = false
     @State private var isLoginViewPresented: Bool = false
     @State private var isSignUpViewPresented: Bool = false
@@ -19,7 +24,7 @@ struct ContentView: View {
             
             AuthView(
                 isBottomSheetPresented: $isBottomSheetPresented,
-                isLoginViewPresented: $isLoginViewPresented, 
+                isLoginViewPresented: $isLoginViewPresented,
                 isSignUpViewPresented: $isSignUpViewPresented
             )
         }
@@ -29,6 +34,12 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isSignUpViewPresented) {
             SignUpView(isPresented: $isSignUpViewPresented)
+        }
+        .onReceive(Just(store.state.showToast)) { showToast in
+            if showToast {
+                windowProvider.showToast(message: store.state.errorMessage)
+                store.dispatch(.dismissToastMessage)
+            }
         }
     }
 }
