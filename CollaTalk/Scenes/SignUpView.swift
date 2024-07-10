@@ -52,7 +52,7 @@ struct SignUpView: View {
                 InputView(
                     title: "연락처",
                     placeholder: "전화번호를 입력하세요",
-                    textFieldGetter: { store.state.signUpState.phoneNumber },
+                    textFieldGetter: { validateAndFormatPhoneNumber(store.state.signUpState.phoneNumber) },
                     textFieldSetter: { store.dispatch(.signUpAction(.writePhoneNumber(phoneNumber: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
@@ -102,6 +102,27 @@ struct SignUpView: View {
 }
 
 extension SignUpView {
+    
+    private func validateAndFormatPhoneNumber(_ phoneNumber: String) -> String {
+        let cleanPhoneNumber = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        
+        guard cleanPhoneNumber.hasPrefix("01") else {
+            return phoneNumber
+        }
+        
+        if cleanPhoneNumber.count >= 11 {
+            let startIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+            let middleIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 7)
+            return "\(cleanPhoneNumber[..<startIndex])-\(cleanPhoneNumber[startIndex..<middleIndex])-\(cleanPhoneNumber[middleIndex...])"
+        } else if cleanPhoneNumber.count >= 10 {
+            let startIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+            let middleIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 6)
+            return "\(cleanPhoneNumber[..<startIndex])-\(cleanPhoneNumber[startIndex..<middleIndex])-\(cleanPhoneNumber[middleIndex...])"
+        } else {
+            return phoneNumber
+        }
+    }
+    
     private func isSignUpButtonValid() -> Bool {
         !store.state.signUpState.isEmailEmpty
         && !store.state.signUpState.isNicknameEmpty
