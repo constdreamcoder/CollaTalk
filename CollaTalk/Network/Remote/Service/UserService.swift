@@ -11,6 +11,7 @@ import Moya
 enum UserService {
     case login(request: LoginRequest)
     case validateEmail(request: EmailValidationRequest)
+    case join(request: JoinRequest)
 }
 
 extension UserService: BaseService {
@@ -21,12 +22,14 @@ extension UserService: BaseService {
             return "/users/login"
         case .validateEmail:
             return "/users/validation/email"
+        case .join:
+            return "/users/join"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .validateEmail, .login:
+        case .validateEmail, .login, .join:
             return .post
         }
     }
@@ -36,6 +39,8 @@ extension UserService: BaseService {
         case .login(let request):
             return .requestJSONEncodable(request)
         case .validateEmail(let request):
+            return .requestJSONEncodable(request)
+        case .join(let request):
             return .requestJSONEncodable(request)
         }
     }

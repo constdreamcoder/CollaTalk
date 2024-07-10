@@ -33,5 +33,6 @@ enum AppAction {
         case sendEmailValidation(isValid: Bool)
         case isValid(isEmailValid: Bool, isNicknameValid: Bool, isPhoneNumberValid: Bool, isPWValid: Bool, isPWForMatchCheckValid: Bool)
         case joinError(Error)
+        case moveToReadyToStartView(userInfo: UserInfo)
     }
 }

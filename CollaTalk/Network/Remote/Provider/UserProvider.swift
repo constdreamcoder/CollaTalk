@@ -47,7 +47,7 @@ final class UserProvider: BaseProvider<UserService> {
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
                 }
-                if let emailValidationError = EmailValidationError(rawValue: errorCode.errorCode) {
+                if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
                     throw emailValidationError
                 }
             default: break
@@ -56,5 +56,29 @@ final class UserProvider: BaseProvider<UserService> {
             throw error
         }
         return false
+    }
+    
+    func join(email: String, password: String, nickname: String, phone: String?) async throws -> UserInfo? {
+        do {
+            let joinRequest = JoinRequest(email: email, password: password, nickname: nickname, phone: phone, deviceToken: APIKeys.sampleDeviceToken)
+            let response = try await request(.join(request: joinRequest))
+            switch response.statusCode {
+            case 200:
+                let userInfo = try decode(response.data, as: UserInfo.self)
+                return userInfo
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+                if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
+                    throw emailValidationError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        return nil
     }
 }

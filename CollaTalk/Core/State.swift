@@ -9,6 +9,7 @@ import Foundation
 
 struct AppState {
     
+    var user: UserInfo? = nil
     var showToast: Bool = false
     var errorMessage: String = ""
     

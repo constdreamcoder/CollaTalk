@@ -21,9 +21,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writePassword(let password):
             mutatingState.loginState.password = password
             mutatingState.loginState.isPWEmpty = password.isEmpty
-        case .moveToMainView:
+        case .moveToMainView(let userInfo):
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
+            
+            mutatingState.user = userInfo
+            
         case .loginError(let errorMessage):
             mutatingState.errorMessage = ToastMessage.login(.failToLogin).message
             mutatingState.showToast = true
@@ -104,14 +107,22 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .emailDoubleCheck, .join: break
         case .joinError(let error):
             
-            if let error = error as? EmailValidationError {
-                if error == EmailValidationError.duplicatedData {
+            if let error = error as? JoinError {
+                if error == JoinError.duplicatedData {
                     mutatingState.errorMessage = ToastMessage.signUp(.joindAccount).message
-                } else if error == EmailValidationError.badRequest {
+                } else if error == JoinError.badRequest {
                     mutatingState.errorMessage = ToastMessage.signUp(.etc).message
                 }
                 mutatingState.showToast = true
             }
+        case .moveToReadyToStartView(let userInfo):
+            mutatingState.signUpState.email = ""
+            mutatingState.signUpState.nickname = ""
+            mutatingState.signUpState.phoneNumber = ""
+            mutatingState.signUpState.password = ""
+            mutatingState.signUpState.passwordForMatchCheck = ""
+            
+            mutatingState.user = userInfo
         }
         
     }

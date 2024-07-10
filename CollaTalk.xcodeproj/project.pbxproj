@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
 		002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */; };
-		002066F82C3EC3E8007E76BD /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* EmailValidationError.swift */; };
+		002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* JoinError.swift */; };
+		002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066FA2C3ED63D007E76BD /* JoinRequest.swift */; };
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
@@ -51,7 +52,8 @@
 /* Begin PBXFileReference section */
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDoubleCheckRequest.swift; sourceTree = "<group>"; };
-		002066F72C3EC3E8007E76BD /* EmailValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationError.swift; sourceTree = "<group>"; };
+		002066F72C3EC3E8007E76BD /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
+		002066FA2C3ED63D007E76BD /* JoinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequest.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -105,7 +107,7 @@
 		002066F92C3EC45C007E76BD /* User */ = {
 			isa = PBXGroup;
 			children = (
-				002066F72C3EC3E8007E76BD /* EmailValidationError.swift */,
+				002066F72C3EC3E8007E76BD /* JoinError.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -296,6 +298,7 @@
 			children = (
 				00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */,
 				002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */,
+				002066FA2C3ED63D007E76BD /* JoinRequest.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -431,9 +434,10 @@
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
-				002066F82C3EC3E8007E76BD /* EmailValidationError.swift in Sources */,
+				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
+				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,

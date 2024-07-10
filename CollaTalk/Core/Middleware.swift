@@ -111,6 +111,25 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         isPWForMatchCheckValid: isPasswordForMatchCheckValid)
                 )).eraseToAnyPublisher()
             }
+            
+            /// 회원가입
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let userInfo = try await UserProvider.shared.join(
+                            email: state.signUpState.email,
+                            password: state.signUpState.password,
+                            nickname: state.signUpState.nickname,
+                            phone: state.signUpState.phoneNumber
+                        )
+                        guard let userInfo else { return }
+                        UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
+                        promise(.success(.signUpAction(.moveToReadyToStartView(userInfo: userInfo))))
+                    } catch {
+                        promise(.success(.signUpAction(.joinError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
                     
         case .sendEmailValidation(let isValid):
             break

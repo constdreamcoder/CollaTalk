@@ -1,5 +1,5 @@
 //
-//  EmailValidationError.swift
+//  JoinError.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/10/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EmailValidationError: String, LocalizedError {
+enum JoinError: String, LocalizedError {
     case badRequest = "E11"
     case duplicatedData = "E12"
   
