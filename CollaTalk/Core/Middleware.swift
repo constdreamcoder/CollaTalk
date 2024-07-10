@@ -50,11 +50,31 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeEmail(let email):
             break
         case .emailDoubleCheck:
+            
+            /// 이메일 유효성 검사 네트워크 재요청 제한
+            if state.signUpState.isEmailDoubleChecked {
+                return Just(.signUpAction(.sendEmailValidation(isValid: true))).eraseToAnyPublisher()
+            }
+            
             /// 이메일 유효성 검사
             let isEmailValid = ValidationCheck.email(input: state.signUpState.email).validation
+            guard isEmailValid else {
+                return Just(.signUpAction(.sendEmailValidation(isValid: false))).eraseToAnyPublisher()
+            }
             
-            // TODO: - 이메일 중복 검사 API 구현
-            return Just(.signUpAction(.sendEmailValidation(isValid: isEmailValid))).eraseToAnyPublisher()
+            /// 이메일 중복 체크
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let isValidEmail = try await UserProvider.shared.validate(email: state.signUpState.email)
+                        if isValidEmail {
+                            promise(.success(.signUpAction(.sendEmailValidation(isValid: true))))
+                        }
+                    } catch {
+                        promise(.success(.signUpAction(.joinError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
             
         case .writeNickname(let nickname):
             break

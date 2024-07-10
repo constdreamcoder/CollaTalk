@@ -102,6 +102,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
         case .emailDoubleCheck, .join: break
+        case .joinError(let error):
+            
+            if let error = error as? EmailValidationError {
+                if error == EmailValidationError.duplicatedData {
+                    mutatingState.errorMessage = ToastMessage.signUp(.joindAccount).message
+                } else if error == EmailValidationError.badRequest {
+                    mutatingState.errorMessage = ToastMessage.signUp(.etc).message
+                }
+                mutatingState.showToast = true
+            }
         }
         
     }

@@ -10,6 +10,7 @@ import Moya
 
 enum UserService {
     case login(request: LoginRequest)
+    case validateEmail(request: EmailValidationRequest)
 }
 
 extension UserService: BaseService {
@@ -18,12 +19,14 @@ extension UserService: BaseService {
         switch self {
         case .login:
             return "/users/login"
+        case .validateEmail:
+            return "/users/validation/email"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login:
+        case .validateEmail, .login:
             return .post
         }
     }
@@ -31,6 +34,8 @@ extension UserService: BaseService {
     var task: Moya.Task {
         switch self {
         case .login(let request):
+            return .requestJSONEncodable(request)
+        case .validateEmail(let request):
             return .requestJSONEncodable(request)
         }
     }

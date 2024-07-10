@@ -26,13 +26,35 @@ final class UserProvider: BaseProvider<UserService> {
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
                 }
-            default:
-                break
+            default: break
             }
         } catch {
             throw error
         }
         
         return nil
+    }
+    
+    func validate(email: String) async throws -> Bool {
+        do {
+            let emailValidationRequest = EmailValidationRequest(email: email)
+            let response = try await request(.validateEmail(request: emailValidationRequest))
+            switch response.statusCode {
+            case 200:
+                return true
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+                if let emailValidationError = EmailValidationError(rawValue: errorCode.errorCode) {
+                    throw emailValidationError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        return false
     }
 }

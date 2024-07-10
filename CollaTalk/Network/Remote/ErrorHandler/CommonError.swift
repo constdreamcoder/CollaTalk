@@ -7,6 +7,13 @@
 
 import Foundation
 
+extension Error {
+    var asOriginalError: Self {
+        print("original Error type", self)
+        return self as Self
+    }
+}
+
 enum CommonError: String, LocalizedError {
     case invalidAccessAuthorization = "E01"
     case unknownRouterRoute = "E97"
