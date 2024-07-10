@@ -17,18 +17,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch loginAction {
         case .writeEmail(let email):
             mutatingState.loginState.email = email
+            mutatingState.loginState.isEmailEmpty = email.isEmpty
         case .writePassword(let password):
             mutatingState.loginState.password = password
+            mutatingState.loginState.isPWEmpty = password.isEmpty
         case .moveToMainView:
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
         case .loginError(let errorMessage):
             mutatingState.errorMessage = "에러가 발생했어요. 잠시 후 다시 시도해주세요."
             mutatingState.showToast = true
-        case .isEmailEmpty(let isEmpty):
-            mutatingState.loginState.isEmailEmpty = isEmpty
-        case .isPWEmpty(let isEmpty):
-            mutatingState.loginState.isPWEmpty = isEmpty
         case .isValid(let isEmailValid, let isPWValid):
             mutatingState.loginState.isEmailValid = isEmailValid
             mutatingState.loginState.isPWValid = isPWValid
@@ -57,20 +55,23 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch signUpAction {
         case .writeEmail(let email):
             mutatingState.signUpState.email = email
-            mutatingState.signUpState.isEmailEmpty = email == "" ? true : false
+            mutatingState.signUpState.isEmailEmpty = email.isEmpty
         case .writeNickname(let nickname):
             mutatingState.signUpState.nickname = nickname
+            mutatingState.signUpState.isNicknameEmpty = nickname.isEmpty
         case .writePhoneNumber(let phoneNumber):
             mutatingState.signUpState.phoneNumber = phoneNumber
         case .writePassword(let password):
             mutatingState.signUpState.password = password
+            mutatingState.signUpState.isPWEmpty = password.isEmpty
         case .writePasswordForMatchCheck(let passwordForMatchCheck):
             mutatingState.signUpState.passwordForMatchCheck = passwordForMatchCheck
-        case .emailDoubleCheck, .join: break
+            mutatingState.signUpState.isPWForMatchCheckEmpty = passwordForMatchCheck.isEmpty
         case .sendEmailValidation(let isValid):
             mutatingState.signUpState.isEmailValid = isValid
             mutatingState.errorMessage = ValidationCheck.email(input: state.signUpState.email).validationMessage
             mutatingState.showToast = true
+        case .emailDoubleCheck, .join: break
         }
     }
     

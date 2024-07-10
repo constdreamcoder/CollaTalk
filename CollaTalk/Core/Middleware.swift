@@ -42,12 +42,6 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-            /// 이메일가 입력되는 경우
-        case .writeEmail(let email):
-            return Just(.loginAction(.isEmailEmpty(isEmpty: email.isEmpty))).eraseToAnyPublisher()
-            /// 비밀번호가 입력되는 경우
-        case .writePassword(let password):
-            return Just(.loginAction(.isPWEmpty(isEmpty: password.isEmpty))).eraseToAnyPublisher()
         default: break
         }
     case .dismissToastMessage: break

@@ -39,7 +39,10 @@ struct AppState {
         var phoneNumber: String = ""
         var password: String = ""
         var passwordForMatchCheck: String = ""
-        var isEmailEmpty: Bool = true
         var isEmailValid: Bool = false
+        var isEmailEmpty: Bool = true
+        var isNicknameEmpty: Bool = true
+        var isPWEmpty: Bool = true
+        var isPWForMatchCheckEmpty: Bool = true
     }
 }

@@ -51,7 +51,7 @@ struct SignUpView: View {
                     title: "연락처",
                     placeholder: "전화번호를 입력하세요",
                     textFieldGetter: { store.state.signUpState.phoneNumber },
-                    textFieldSetter: { store.dispatch(.signUpAction(.writeNickname(nickname: $0))) },
+                    textFieldSetter: { store.dispatch(.signUpAction(.writePhoneNumber(phoneNumber: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {}
@@ -89,9 +89,19 @@ struct SignUpView: View {
                 } label: {
                     Text("가입하기")
                 }
-                .bottomButtonShape(.brandGreen)
+                .disabled(!isSignUpButtonValid())
+                .bottomButtonShape(isSignUpButtonValid() ? .brandGreen : .brandInactive)
             }
         }
+    }
+}
+
+extension SignUpView {
+    private func isSignUpButtonValid() -> Bool {
+        !store.state.signUpState.isEmailEmpty
+        && !store.state.signUpState.isNicknameEmpty
+        && !store.state.signUpState.isPWEmpty
+        && !store.state.signUpState.isPWForMatchCheckEmpty
     }
 }
 

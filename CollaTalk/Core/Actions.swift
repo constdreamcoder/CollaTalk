@@ -17,8 +17,6 @@ enum AppAction {
         case writeEmail(email: String)
         case writePassword(password: String)
         case moveToMainView(userInfo: UserInfo)
-        case isEmailEmpty(isEmpty: Bool)
-        case isPWEmpty(isEmpty: Bool)
         case isValid(isEmailValid: Bool, isPWValid: Bool)
         case loginError(errorMesssage: String?)
         case disappearView
