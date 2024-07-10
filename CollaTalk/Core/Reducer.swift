@@ -70,7 +70,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .sendEmailValidation(let isValid):
             mutatingState.signUpState.isEmailValid = isValid
             mutatingState.errorMessage = ValidationCheck.email(input: state.signUpState.email).validationMessage
-            mutatingState.showToast = !isValid
+            mutatingState.showToast = true
         }
     }
     
