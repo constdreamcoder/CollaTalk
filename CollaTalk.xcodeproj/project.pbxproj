@@ -205,11 +205,11 @@
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				00F6F2B52C3BE9A000C1AFF1 /* Store.swift */,
-				00F6F2B72C3BE9F700C1AFF1 /* State.swift */,
 				00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */,
 				00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */,
 				00F6F2BD2C3BF4FF00C1AFF1 /* Actions.swift */,
+				00F6F2B52C3BE9A000C1AFF1 /* Store.swift */,
+				00F6F2B72C3BE9F700C1AFF1 /* State.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -310,10 +310,10 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
+				0052C0FF2C3AD554003D08D3 /* Application */,
 				00F6F2BF2C3C105300C1AFF1 /* Network */,
 				00F6F2B42C3BE99700C1AFF1 /* Core */,
-				0052C0FF2C3AD554003D08D3 /* Application */,
-				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
 				0086B5AE2C37E8F800AD889C /* Helpers */,
 				0086B5A92C37DEB900AD889C /* Scenes */,
 				00F878CE2C2BEE5C002610A8 /* Assets.xcassets */,

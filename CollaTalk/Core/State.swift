@@ -8,17 +8,20 @@
 import Foundation
 
 struct AppState {
-    var loginState = LoginState()
+    
     var showToast: Bool = false
     var errorMessage: String = ""
     
+    var loginState = LoginState()
+    var signUpState = SignUpState()
+   
     struct LoginState {
-        var email = ""
-        var password = ""
-        var isEmailEmpty = true
-        var isPWEmpty = true
-        var isEmailValid = true
-        var isPWValid = true
+        var email: String = ""
+        var password: String = ""
+        var isEmailEmpty: Bool = true
+        var isPWEmpty: Bool = true
+        var isEmailValid: Bool = true
+        var isPWValid: Bool = true
         
         mutating func initializeAllStates() {
             self.email = ""
@@ -28,5 +31,13 @@ struct AppState {
             self.isEmailValid = true
             self.isPWValid = true
         }
+    }
+    
+    struct SignUpState {
+        var email: String = ""
+        var nickname: String = ""
+        var phoneNumber: String = ""
+        var password: String = ""
+        var passwordForMatchCheck: String = ""
     }
 }

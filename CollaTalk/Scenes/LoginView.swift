@@ -16,6 +16,7 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
 
+    // TODO: - 유효성 검사 오류시 해당 TextField Focus되게 구현
     var body: some View {
         ZStack {
             

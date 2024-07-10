@@ -56,6 +56,21 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         
     case .dismissToastMessage:
         mutatingState.showToast = false
+    case .signUpAction(let signUpAction):
+        switch signUpAction {
+        case .writeEmail(let email):
+            mutatingState.signUpState.email = email
+        case .writeNickname(let nickname):
+            mutatingState.signUpState.nickname = nickname
+        case .writePhoneNumber(let phoneNumber):
+            mutatingState.signUpState.phoneNumber = phoneNumber
+        case .writePassword(let password):
+            mutatingState.signUpState.password = password
+        case .writePasswordForMatchCheck(let passwordForMatchCheck):
+            mutatingState.signUpState.passwordForMatchCheck = passwordForMatchCheck
+        case .emailDoubleCheck, .join:
+            break
+        }
     }
     
     return mutatingState
