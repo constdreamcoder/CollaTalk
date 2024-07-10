@@ -21,7 +21,7 @@ enum AppAction {
         case isPWEmpty(isEmpty: Bool)
         case isValid(isEmailValid: Bool, isPWValid: Bool)
         case loginError(errorMesssage: String?)
-        case intializeAllElements
+        case disappearView
     }
     
     enum SignUpAction {
@@ -32,5 +32,6 @@ enum AppAction {
         case writePassword(password: String)
         case writePasswordForMatchCheck(passwordForMatchCheck: String)
         case join
+        case sendEmailValidation(isValid: Bool)
     }
 }

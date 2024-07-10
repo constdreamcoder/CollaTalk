@@ -65,7 +65,7 @@ struct LoginView: View {
         }
         .onDisappear {
             print("disappear")
-            store.dispatch(.loginAction(.intializeAllElements))
+            store.dispatch(.loginAction(.disappearView))
         }
     }
 }

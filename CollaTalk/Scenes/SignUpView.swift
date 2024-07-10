@@ -28,7 +28,7 @@ struct SignUpView: View {
                     title: "이메일",
                     placeholder: "이메일을 입력하세요",
                     showRightButton: true,
-                    isRightButtonDisable: store.state.signUpState.email == "",
+                    isRightButtonAble: !store.state.signUpState.isEmailEmpty,
                     textFieldGetter: { store.state.signUpState.email },
                     textFieldSetter: { store.dispatch(.signUpAction(.writeEmail(email: $0))) },
                     secureFieldGetter: { "" },

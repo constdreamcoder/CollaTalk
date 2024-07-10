@@ -53,19 +53,24 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     case .dismissToastMessage: break
     case .signUpAction(let signUpAction):
         switch signUpAction {
-        case .writeEmail(email: let email):
+        case .writeEmail(let email):
             break
         case .emailDoubleCheck:
+            print("")
+            /// 이메일 유효성 검사
+            let isEmailValid = ValidationCheck.email(input: state.signUpState.email).validation
+            return Just(.signUpAction(.sendEmailValidation(isValid: isEmailValid))).eraseToAnyPublisher()
+        case .writeNickname(let nickname):
             break
-        case .writeNickname(nickname: let nickname):
+        case .writePhoneNumber(let phoneNumber):
             break
-        case .writePhoneNumber(phoneNumber: let phoneNumber):
+        case .writePassword(let password):
             break
-        case .writePassword(password: let password):
-            break
-        case .writePasswordForMatchCheck(passwordForMatchCheck: let passwordForMatchCheck):
+        case .writePasswordForMatchCheck(let passwordForMatchCheck):
             break
         case .join:
+            break
+        case .sendEmailValidation(isValid: let isValid):
             break
         }
         
