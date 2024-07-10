@@ -31,5 +31,6 @@ enum AppAction {
         case writePasswordForMatchCheck(passwordForMatchCheck: String)
         case join
         case sendEmailValidation(isValid: Bool)
+        case isValid(isEmailValid: Bool, isNicknameValid: Bool, isPhoneNumberValid: Bool, isPWValid: Bool, isPWForMatchCheckValid: Bool)
     }
 }

@@ -10,7 +10,10 @@ import Foundation
 enum ValidationCheck {
     case email(input: String)
     case password(input: String)
+    case passwordForMatchCheck(input: String, password: String)
     case login(isValid: Bool)
+    case nickname(input: String)
+    case phoneNumber(input: String)
     
     var validation: Bool {
         switch self {
@@ -18,19 +21,14 @@ enum ValidationCheck {
             return isValidEmail(email)
         case .password(let password):
             return isValidPassword(password)
+        case .passwordForMatchCheck(let passwordForMatchCheck, let password):
+            return isValidPasswordForMatchCheck(passwordForMatchCheck, with: password)
         case .login(let isValid):
             return isValid
-        }
-    }
-    
-    var validationMessage: String {
-        switch self {
-        case .email(let email):
-            return isValidEmail(email) ? "사용 가능한 이메일입니다." : "이메일 형식이 올바르지 않습니다."
-        case .password(let password):
-            return isValidPassword(password) ? "" : "비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요."
-        case .login(let isValid):
-            return isValid ? "" : "이메일 또는 비밀번호가 올바르지 않습니다."
+        case .nickname(let nickname):
+            return isValidNickname(nickname)
+        case .phoneNumber(let phoneNumber):
+            return isValidPhoneNumber(phoneNumber)
         }
     }
 
@@ -49,4 +47,17 @@ enum ValidationCheck {
         return passwordTest.evaluate(with: password)
     }
     
+    private func isValidNickname(_ input: String) -> Bool {
+        return input.count >= 1 && input.count <= 30
+    }
+    
+    private func isValidPhoneNumber(_ input: String) -> Bool {
+        let regex = "^01\\d{8,9}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: input)
+    }
+    
+    private func isValidPasswordForMatchCheck(_ input: String, with password: String) -> Bool {
+        return input == password
+    }
 }

@@ -33,7 +33,8 @@ struct SignUpView: View {
                     textFieldSetter: { store.dispatch(.signUpAction(.writeEmail(email: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
-                    rightButtonAction: { store.dispatch(.signUpAction(.emailDoubleCheck)) }
+                    rightButtonAction: { store.dispatch(.signUpAction(.emailDoubleCheck)) },
+                    isValid: store.state.signUpState.isEmailValid
                 )
                 .keyboardType(.emailAddress)
                 
@@ -44,7 +45,8 @@ struct SignUpView: View {
                     textFieldSetter: { store.dispatch(.signUpAction(.writeNickname(nickname: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.signUpState.isNicknameValid
                 )
                 
                 InputView(
@@ -54,7 +56,8 @@ struct SignUpView: View {
                     textFieldSetter: { store.dispatch(.signUpAction(.writePhoneNumber(phoneNumber: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.signUpState.isPhoneNumberValid
                 )
                 .keyboardType(.numberPad)
                 
@@ -66,7 +69,8 @@ struct SignUpView: View {
                     textFieldSetter: { _ in },
                     secureFieldGetter: { store.state.signUpState.password },
                     secureFieldSetter: { store.dispatch(.signUpAction(.writePassword(password: $0))) },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.signUpState.isPWValid
                 )
                 
                 InputView(
@@ -77,7 +81,8 @@ struct SignUpView: View {
                     textFieldSetter: { _ in },
                     secureFieldGetter: { store.state.signUpState.passwordForMatchCheck },
                     secureFieldSetter: { store.dispatch(.signUpAction(.writePasswordForMatchCheck(passwordForMatchCheck: $0))) },
-                    rightButtonAction: {}
+                    rightButtonAction: {},
+                    isValid: store.state.signUpState.isPWForMatchCheckValid
                 )
                 
                 Spacer()

@@ -28,8 +28,8 @@ struct AppState {
             self.password = ""
             self.isEmailEmpty = true
             self.isPWEmpty = true
-            self.isEmailValid = true // TODO: - 가독성을 위해 초기값 false 일때로 변경 필요
-            self.isPWValid = true // TODO: - 가독성을 위해 초기값 false 일때로 변경 필요
+            self.isEmailValid = true
+            self.isPWValid = true
         }
     }
     
@@ -39,10 +39,17 @@ struct AppState {
         var phoneNumber: String = ""
         var password: String = ""
         var passwordForMatchCheck: String = ""
-        var isEmailValid: Bool = false
         var isEmailEmpty: Bool = true
         var isNicknameEmpty: Bool = true
         var isPWEmpty: Bool = true
         var isPWForMatchCheckEmpty: Bool = true
+        
+        var isEmailDoubleChecked: Bool = false
+        
+        var isEmailValid: Bool = true
+        var isNicknameValid: Bool = true
+        var isPhoneNumberValid: Bool = true
+        var isPWValid: Bool = true
+        var isPWForMatchCheckValid: Bool = true
     }
 }

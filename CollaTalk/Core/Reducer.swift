@@ -25,17 +25,17 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
         case .loginError(let errorMessage):
-            mutatingState.errorMessage = "에러가 발생했어요. 잠시 후 다시 시도해주세요."
+            mutatingState.errorMessage = ToastMessage.login(.failToLogin).message
             mutatingState.showToast = true
         case .isValid(let isEmailValid, let isPWValid):
             mutatingState.loginState.isEmailValid = isEmailValid
             mutatingState.loginState.isPWValid = isPWValid
-            if !isEmailValid && !isPWValid {
-                mutatingState.errorMessage = ValidationCheck.login(isValid: isEmailValid && isPWValid).validationMessage
-            } else if !isEmailValid {
-                mutatingState.errorMessage = ValidationCheck.email(input: state.loginState.email).validationMessage
+            if !isEmailValid {
+                mutatingState.errorMessage = ToastMessage.login(.emailValidationError).message
             } else if !isPWValid {
-                mutatingState.errorMessage = ValidationCheck.password(input: state.loginState.password).validationMessage
+                mutatingState.errorMessage = ToastMessage.login(.passwordValidationError).message
+            } else {
+                mutatingState.errorMessage = ToastMessage.login(.etc).message
             }
             
             mutatingState.showToast = !isEmailValid || !isPWValid
@@ -56,6 +56,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writeEmail(let email):
             mutatingState.signUpState.email = email
             mutatingState.signUpState.isEmailEmpty = email.isEmpty
+            mutatingState.signUpState.isEmailDoubleChecked = false
         case .writeNickname(let nickname):
             mutatingState.signUpState.nickname = nickname
             mutatingState.signUpState.isNicknameEmpty = nickname.isEmpty
@@ -68,11 +69,41 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.signUpState.passwordForMatchCheck = passwordForMatchCheck
             mutatingState.signUpState.isPWForMatchCheckEmpty = passwordForMatchCheck.isEmpty
         case .sendEmailValidation(let isValid):
-            mutatingState.signUpState.isEmailValid = isValid
-            mutatingState.errorMessage = ValidationCheck.email(input: state.signUpState.email).validationMessage
+            mutatingState.signUpState.isEmailDoubleChecked = isValid
+            mutatingState.errorMessage = isValid ? ToastMessage.signUp(.emailAvailable).message : ToastMessage.signUp(.emailNotConfirmed).message
+            
             mutatingState.showToast = true
+        case .isValid(
+            let isEmailValid,
+            let isNicknameValid,
+            let isPhoneNumberValid,
+            let isPWValid,
+            let isPWForMatchCheckValid):
+            
+            mutatingState.signUpState.isEmailValid = isEmailValid && mutatingState.signUpState.isEmailDoubleChecked
+            mutatingState.signUpState.isNicknameValid = isNicknameValid
+            mutatingState.signUpState.isPhoneNumberValid = isPhoneNumberValid
+            mutatingState.signUpState.isPWValid = isPWValid
+            mutatingState.signUpState.isPWForMatchCheckValid = isPWForMatchCheckValid
+            
+            if !isEmailValid || !mutatingState.signUpState.isEmailDoubleChecked {
+                mutatingState.errorMessage = ToastMessage.signUp(.emailNotConfirmed).message
+            } else if !isNicknameValid {
+                mutatingState.errorMessage = ToastMessage.signUp(.nicknameValidationError).message
+            } else if !isPhoneNumberValid {
+                mutatingState.errorMessage = ToastMessage.signUp(.phoneNumberValidationError).message
+            } else if !isPWValid {
+                mutatingState.errorMessage = ToastMessage.signUp(.passwordValidationError).message
+            } else if !isPWForMatchCheckValid {
+                mutatingState.errorMessage = ToastMessage.signUp(.passwordForMatchCheckValidationError).message
+            } else {
+                mutatingState.errorMessage = ToastMessage.signUp(.etc).message
+            }
+            
+            mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
         case .emailDoubleCheck, .join: break
         }
+        
     }
     
     return mutatingState
