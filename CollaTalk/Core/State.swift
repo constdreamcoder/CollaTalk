@@ -15,6 +15,7 @@ struct AppState {
     
     var loginState = LoginState()
     var signUpState = SignUpState()
+    var createWorkspaceState = CreateWorkspaceState()
    
     struct LoginState {
         var email: String = ""
@@ -52,5 +53,10 @@ struct AppState {
         var isPhoneNumberValid: Bool = true
         var isPWValid: Bool = true
         var isPWForMatchCheckValid: Bool = true
+    }
+    
+    struct CreateWorkspaceState {
+        var name: String = ""
+        var description: String = ""
     }
 }

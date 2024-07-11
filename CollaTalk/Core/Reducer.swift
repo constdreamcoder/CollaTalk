@@ -125,6 +125,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user = userInfo
         }
     
+    case .createWorkspaceAction(let createWorkspaceAction):
+        switch createWorkspaceAction {
+        case .writeName(let name):
+            mutatingState.createWorkspaceState.name = name
+        case .writeDescription(let description):
+            mutatingState.createWorkspaceState.description = description
+        }
     }
     
     return mutatingState

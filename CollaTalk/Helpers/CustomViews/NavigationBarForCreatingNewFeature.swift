@@ -13,6 +13,7 @@ struct NavigationBarForCreatingNewFeature: View {
         case signUp = "회원가입"
         case login = "로그인"
         case workspaceInit = "시작하기"
+        case createWorkspace = "워크스페이스 생성"
     }
     
     let title: Feature

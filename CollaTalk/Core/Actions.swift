@@ -10,6 +10,7 @@ import Foundation
 enum AppAction {
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
+    case createWorkspaceAction(CreateWorkspaceAction)
     case dismissToastMessage
     
     enum LoginAction {
@@ -34,5 +35,10 @@ enum AppAction {
         case isValid(isEmailValid: Bool, isNicknameValid: Bool, isPhoneNumberValid: Bool, isPWValid: Bool, isPWForMatchCheckValid: Bool)
         case joinError(Error)
         case moveToReadyToStartView(userInfo: UserInfo)
+    }
+    
+    enum CreateWorkspaceAction {
+        case writeName(name: String)
+        case writeDescription(description: String)
     }
 }

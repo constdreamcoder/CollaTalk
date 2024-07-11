@@ -135,6 +135,13 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         default: break
         }
+    case .createWorkspaceAction(let createWorkspaceAction):
+        switch createWorkspaceAction {
+        case .writeName(let name):
+            break
+        case .writeDescription(let description):
+            break
+        }
     }
     
     return Empty().eraseToAnyPublisher()

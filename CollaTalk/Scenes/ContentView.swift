@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var isBottomSheetPresented: Bool = false
     @State private var isLoginViewPresented: Bool = false
     @State private var isSignUpViewPresented: Bool = false
+    @State private var isCreateWorkspaceViewPresented: Bool = false
     
     var body: some View {
         NavigationStack(path: $navigationRouter.route) {
@@ -36,6 +37,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $isSignUpViewPresented) {
                 SignUpView(isPresented: $isSignUpViewPresented)
+            }
+            .sheet(isPresented: $isCreateWorkspaceViewPresented) {
+                CreateWorkspaceView()
             }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
