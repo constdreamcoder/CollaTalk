@@ -13,6 +13,7 @@ enum AppAction {
     case signUpAction(SignUpAction)
     case createWorkspaceAction(CreateWorkspaceAction)
     case dismissToastMessage
+    case initializeNetworkCallSuccessType
     
     enum NavigationAction {
         case presentBottomSheet(present: Bool)

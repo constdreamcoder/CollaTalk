@@ -35,11 +35,29 @@ final class WindowProvider: ObservableObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
             guard let self else { return }
-            dismissToast()
+            dismissView()
         }
     }
     
-    private func dismissToast() {
+    func showLoading() {
+        
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            window = UIWindow(windowScene: scene)
+            window?.windowLevel = .statusBar
+        }
+        
+        guard let window = window else { return }
+        
+        let hostingController = UIHostingController(rootView: LoadingView2())
+        hostingController.view.backgroundColor = .brandBlack.withAlphaComponent(0.4)
+        
+        window.rootViewController = hostingController
+        window.makeKeyAndVisible()
+        
+        window.frame = UIScreen.main.bounds
+    }
+    
+    func dismissView() {
         window?.isHidden = true
         window = nil
     }

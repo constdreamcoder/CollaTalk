@@ -12,6 +12,8 @@ struct AppState {
     var user: UserInfo? = nil
     var showToast: Bool = false
     var toastMessage: String = ""
+    var isLoading: Bool = false
+    var networkCallSuccessType: PathType = .none
     
     var navigationState = NavigationState()
     var loginState = LoginState()

@@ -15,6 +15,8 @@
 		00318EE52C3F7538003206CB /* WorspaceInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE42C3F7538003206CB /* WorspaceInitView.swift */; };
 		00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE62C3F8115003206CB /* NavigationRouter.swift */; };
 		00318EEB2C3F8EB6003206CB /* CreateWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* CreateWorkspaceView.swift */; };
+		00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEC2C3FA9A7003206CB /* LoadingView.swift */; };
+		00318EEF2C3FAA97003206CB /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEE2C3FAA97003206CB /* Test.swift */; };
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
@@ -62,6 +64,8 @@
 		00318EE42C3F7538003206CB /* WorspaceInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorspaceInitView.swift; sourceTree = "<group>"; };
 		00318EE62C3F8115003206CB /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		00318EEA2C3F8EB6003206CB /* CreateWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceView.swift; sourceTree = "<group>"; };
+		00318EEC2C3FA9A7003206CB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		00318EEE2C3FAA97003206CB /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				0086B5C02C38065600AD889C /* NavigationBarForCreatingNewFeature.swift */,
 				0086B5C42C38089F00AD889C /* InputView.swift */,
 				00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */,
+				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				0086B5A92C37DEB900AD889C /* Scenes */,
 				00F878CE2C2BEE5C002610A8 /* Assets.xcassets */,
 				00F878D02C2BEE5C002610A8 /* Preview Content */,
+				00318EEE2C3FAA97003206CB /* Test.swift */,
 			);
 			path = CollaTalk;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
+				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* CreateWorkspaceView.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
@@ -467,6 +474,7 @@
 				00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
+				00318EEF2C3FAA97003206CB /* Test.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
@@ -612,7 +620,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;
@@ -646,7 +654,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 59V6NJY3X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;

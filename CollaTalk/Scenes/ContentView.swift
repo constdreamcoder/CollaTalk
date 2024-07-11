@@ -53,17 +53,39 @@ struct ContentView: View {
             }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
-                case .homeView:
+                case .mainView:
                     WorspaceInitView()
+                case .none: Text("ddd")
+                    
                 }
             }
         }
         .environmentObject(navigationRouter)
+        .onReceive(Just(store.state.isLoading)) { isLoading in
+            if isLoading {
+                windowProvider.showLoading()
+            } else {
+                windowProvider.dismissView()
+            }
+        }
         .onReceive(Just(store.state.showToast)) { showToast in
             if showToast {
                 windowProvider.showToast(message: store.state.toastMessage)
                 store.dispatch(.dismissToastMessage)
             }
+        }
+        .onReceive(Just(store.state.networkCallSuccessType)) { networkCallSuccessType in
+            if !store.state.isLoading {
+                switch networkCallSuccessType {
+                case .mainView:
+                    navigationRouter.push(screen: .mainView)
+                    store.dispatch(.navigationAction(.presentSignUpView(present: false)))
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                   
+                case .none: break
+                }
+            }
+            
         }
     }
 }

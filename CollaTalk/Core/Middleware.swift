@@ -12,6 +12,8 @@ typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Ne
 let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
         
+    case .initializeNetworkCallSuccessType:
+        break
     case .navigationAction(let navigationAction):
         switch navigationAction {
         case .presentBottomSheet(let present):

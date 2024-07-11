@@ -10,7 +10,6 @@ import Combine
 
 struct LoginView: View {
     
-    @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var store: AppStore
         
     // TODO: - 유효성 검사 오류시 해당 TextField Focus되게 구현
@@ -59,9 +58,7 @@ struct LoginView: View {
                 
                 CustomButton {
                     print("로그인")
-//                    store.dispatch(.loginAction(.login))
-                    navigationRouter.push(screen: .homeView)
-                    store.dispatch(.navigationAction(.presentLoginView(present: false)))
+                    store.dispatch(.loginAction(.login))
                 } label: {
                     Text("로그인")
                 }

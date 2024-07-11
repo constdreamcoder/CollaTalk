@@ -13,6 +13,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     var mutatingState = state
     
     switch action {
+    case .initializeNetworkCallSuccessType:
+        mutatingState.networkCallSuccessType = .none
+        
+    case .dismissToastMessage:
+        mutatingState.showToast = false
+        
     case .navigationAction(let navigationAction):
         switch navigationAction {
         case .presentBottomSheet(let present):
@@ -39,7 +45,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.user = userInfo
             
+            mutatingState.isLoading = false
+            mutatingState.networkCallSuccessType = .mainView
+            
         case .loginError(let errorMessage):
+            mutatingState.isLoading = false
+            
             mutatingState.toastMessage = ToastMessage.login(.failToLogin).message
             mutatingState.showToast = true
         case .isValid(let isEmailValid, let isPWValid):
@@ -53,6 +64,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 mutatingState.toastMessage = ToastMessage.login(.etc).message
             }
             
+            mutatingState.isLoading = false
+            
             mutatingState.showToast = !isEmailValid || !isPWValid
         case .disappearView:
             mutatingState.showToast = false
@@ -61,11 +74,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.loginState.initializeAllStates()
             
         case .login:
-            break
+            mutatingState.isLoading = true
         }
         
-    case .dismissToastMessage:
-        mutatingState.showToast = false
     case .signUpAction(let signUpAction):
         switch signUpAction {
         case .writeEmail(let email):
@@ -115,8 +126,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 mutatingState.toastMessage = ToastMessage.signUp(.etc).message
             }
             
+            // TODO: - 토스트메세지와 겹처보이지는 앉는지 확인하기
+            mutatingState.isLoading = false
+            
             mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
-        case .emailDoubleCheck, .join: break
+        case .emailDoubleCheck: break
+        case .join:
+            mutatingState.isLoading = true
+            
         case .joinError(let error):
             
             if let error = error as? JoinError {
@@ -125,6 +142,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 } else if error == JoinError.badRequest {
                     mutatingState.toastMessage = ToastMessage.signUp(.etc).message
                 }
+                
+                // TODO: - 토스트 메세지와 겹처보이진 않는지 확인하기
+                mutatingState.isLoading = false
+                
                 mutatingState.showToast = true
             }
         case .moveToReadyToStartView(let userInfo):
@@ -135,6 +156,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.signUpState.passwordForMatchCheck = ""
             
             mutatingState.user = userInfo
+            
+            mutatingState.isLoading = false
         }
         
     case .createWorkspaceAction(let createWorkspaceAction):

@@ -8,7 +8,8 @@
 import SwiftUI
 
 enum PathType: Hashable {
-    case homeView
+    case mainView
+    case none
 }
 
 final class NavigationRouter: ObservableObject {
