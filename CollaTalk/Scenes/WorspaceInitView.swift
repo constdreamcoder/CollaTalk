@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WorspaceInitView: View {
+    
+    @EnvironmentObject private var store: AppStore
+    
     var body: some View {
         
         ZStack {
@@ -51,6 +54,7 @@ struct WorspaceInitView: View {
                     .frame(height: 24)
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

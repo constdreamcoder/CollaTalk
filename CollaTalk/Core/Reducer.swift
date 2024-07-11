@@ -28,23 +28,23 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user = userInfo
             
         case .loginError(let errorMessage):
-            mutatingState.errorMessage = ToastMessage.login(.failToLogin).message
+            mutatingState.toastMessage = ToastMessage.login(.failToLogin).message
             mutatingState.showToast = true
         case .isValid(let isEmailValid, let isPWValid):
             mutatingState.loginState.isEmailValid = isEmailValid
             mutatingState.loginState.isPWValid = isPWValid
             if !isEmailValid {
-                mutatingState.errorMessage = ToastMessage.login(.emailValidationError).message
+                mutatingState.toastMessage = ToastMessage.login(.emailValidationError).message
             } else if !isPWValid {
-                mutatingState.errorMessage = ToastMessage.login(.passwordValidationError).message
+                mutatingState.toastMessage = ToastMessage.login(.passwordValidationError).message
             } else {
-                mutatingState.errorMessage = ToastMessage.login(.etc).message
+                mutatingState.toastMessage = ToastMessage.login(.etc).message
             }
             
             mutatingState.showToast = !isEmailValid || !isPWValid
         case .disappearView:
             mutatingState.showToast = false
-            mutatingState.errorMessage = ""
+            mutatingState.toastMessage = ""
             
             mutatingState.loginState.initializeAllStates()
             
@@ -73,7 +73,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.signUpState.isPWForMatchCheckEmpty = passwordForMatchCheck.isEmpty
         case .sendEmailValidation(let isValid):
             mutatingState.signUpState.isEmailDoubleChecked = isValid
-            mutatingState.errorMessage = isValid ? ToastMessage.signUp(.emailAvailable).message : ToastMessage.signUp(.emailNotConfirmed).message
+            mutatingState.toastMessage = isValid ? ToastMessage.signUp(.emailAvailable).message : ToastMessage.signUp(.emailNotConfirmed).message
             
             mutatingState.showToast = true
         case .isValid(
@@ -90,17 +90,17 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.signUpState.isPWForMatchCheckValid = isPWForMatchCheckValid
             
             if !isEmailValid || !mutatingState.signUpState.isEmailDoubleChecked {
-                mutatingState.errorMessage = ToastMessage.signUp(.emailNotConfirmed).message
+                mutatingState.toastMessage = ToastMessage.signUp(.emailNotConfirmed).message
             } else if !isNicknameValid {
-                mutatingState.errorMessage = ToastMessage.signUp(.nicknameValidationError).message
+                mutatingState.toastMessage = ToastMessage.signUp(.nicknameValidationError).message
             } else if !isPhoneNumberValid {
-                mutatingState.errorMessage = ToastMessage.signUp(.phoneNumberValidationError).message
+                mutatingState.toastMessage = ToastMessage.signUp(.phoneNumberValidationError).message
             } else if !isPWValid {
-                mutatingState.errorMessage = ToastMessage.signUp(.passwordValidationError).message
+                mutatingState.toastMessage = ToastMessage.signUp(.passwordValidationError).message
             } else if !isPWForMatchCheckValid {
-                mutatingState.errorMessage = ToastMessage.signUp(.passwordForMatchCheckValidationError).message
+                mutatingState.toastMessage = ToastMessage.signUp(.passwordForMatchCheckValidationError).message
             } else {
-                mutatingState.errorMessage = ToastMessage.signUp(.etc).message
+                mutatingState.toastMessage = ToastMessage.signUp(.etc).message
             }
             
             mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
@@ -109,9 +109,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             if let error = error as? JoinError {
                 if error == JoinError.duplicatedData {
-                    mutatingState.errorMessage = ToastMessage.signUp(.joindAccount).message
+                    mutatingState.toastMessage = ToastMessage.signUp(.joindAccount).message
                 } else if error == JoinError.badRequest {
-                    mutatingState.errorMessage = ToastMessage.signUp(.etc).message
+                    mutatingState.toastMessage = ToastMessage.signUp(.etc).message
                 }
                 mutatingState.showToast = true
             }
@@ -124,7 +124,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.user = userInfo
         }
-        
+    
     }
     
     return mutatingState

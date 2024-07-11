@@ -11,7 +11,7 @@ struct AppState {
     
     var user: UserInfo? = nil
     var showToast: Bool = false
-    var errorMessage: String = ""
+    var toastMessage: String = ""
     
     var loginState = LoginState()
     var signUpState = SignUpState()
