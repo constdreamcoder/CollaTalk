@@ -45,6 +45,7 @@ struct WorspaceInitView: View {
                 
                 CustomButton {
                     print("워크 스페이스 생성")
+                    store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: true)))
                 } label: {
                     Text("워크 스페이스 생성")
                 }

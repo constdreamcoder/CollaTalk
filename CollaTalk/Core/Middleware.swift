@@ -11,6 +11,19 @@ typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Ne
 
 let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
+        
+    case .navigationAction(let navigationAction):
+        switch navigationAction {
+        case .presentBottomSheet(let present):
+            break
+        case .presentLoginView(let present):
+            break
+        case .presentSignUpView(let present):
+            break
+        case .presentCreateWorkspaceView(let present):
+            break
+        }
+        
     case .loginAction(let loginAction):
         switch loginAction {
             /// 로그인 버튼이 클릭된 경우

@@ -10,10 +10,9 @@ import Combine
 
 struct LoginView: View {
     
+    @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var store: AppStore
         
-    @Binding var isPresented: Bool
-
     // TODO: - 유효성 검사 오류시 해당 TextField Focus되게 구현
     var body: some View {
         ZStack {
@@ -23,7 +22,14 @@ struct LoginView: View {
             
             VStack(spacing: 24) {
                 
-                NavigationBarForCreatingNewFeature(title: .login, isPresented: $isPresented)
+                NavigationBarForCreatingNewFeature(
+                    title: .login,
+                    isPresented: Binding(
+                        get: { store.state.navigationState.isLoginViewPresented },
+                        set: { store.dispatch(.navigationAction(.presentLoginView(present: $0)))
+                        }
+                    )
+                )
                 
                 InputView(
                     title: "이메일",
@@ -53,7 +59,9 @@ struct LoginView: View {
                 
                 CustomButton {
                     print("로그인")
-                    store.dispatch(.loginAction(.login))
+//                    store.dispatch(.loginAction(.login))
+                    navigationRouter.push(screen: .homeView)
+                    store.dispatch(.navigationAction(.presentLoginView(present: false)))
                 } label: {
                     Text("로그인")
                 }
@@ -75,5 +83,5 @@ extension LoginView {
 }
 
 #Preview {
-    LoginView(isPresented: .constant(false))
+    LoginView()
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @Binding var isBottomSheetPresented: Bool
+    @EnvironmentObject private var store: AppStore
     
     var body: some View {
         VStack {
@@ -29,7 +29,7 @@ struct OnboardingView: View {
             
             CustomButton {
                 print("시작하기")
-                isBottomSheetPresented = true
+                store.dispatch(.navigationAction(.presentBottomSheet(present: true)))
             } label: {
                 Text("시작하기")
             }
@@ -42,5 +42,5 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView(isBottomSheetPresented: .constant(false))
+    OnboardingView()
 }

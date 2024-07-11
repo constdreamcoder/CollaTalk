@@ -8,10 +8,18 @@
 import Foundation
 
 enum AppAction {
+    case navigationAction(NavigationAction)
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
     case createWorkspaceAction(CreateWorkspaceAction)
     case dismissToastMessage
+    
+    enum NavigationAction {
+        case presentBottomSheet(present: Bool)
+        case presentLoginView(present: Bool)
+        case presentSignUpView(present: Bool)
+        case presentCreateWorkspaceView(present: Bool)
+    }
     
     enum LoginAction {
         case login

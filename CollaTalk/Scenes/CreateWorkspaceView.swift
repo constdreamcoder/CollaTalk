@@ -61,6 +61,7 @@ struct CreateWorkspaceView: View {
                 
                 CustomButton {
                     print("완료")
+                    store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: false)))
                 } label: {
                     Text("완료")
                 }

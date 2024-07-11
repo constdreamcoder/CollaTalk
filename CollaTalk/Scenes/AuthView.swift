@@ -9,13 +9,16 @@ import SwiftUI
 
 struct AuthView: View {
         
-    @Binding var isBottomSheetPresented: Bool
-    @Binding var isLoginViewPresented: Bool
-    @Binding var isSignUpViewPresented: Bool
+    @EnvironmentObject private var store: AppStore
     
     var body: some View {
-        if isBottomSheetPresented {
-            BottomSheetView($isBottomSheetPresented, height: 290) {
+        if store.state.navigationState.isBottomSheetPresented {
+            BottomSheetView(
+                Binding(get: { store.state.navigationState.isBottomSheetPresented },
+                        set: { store.dispatch(.navigationAction(.presentBottomSheet(present: $0)))
+                        }),
+                height: 290
+            ) {
                 VStack(spacing: 16) {
                     CustomButton {
                         print("Apple으로 계속하기")
@@ -40,7 +43,7 @@ struct AuthView: View {
                     
                     CustomButton {
                         print("이메일로 계속하기")
-                        isLoginViewPresented = true
+                        store.dispatch(.navigationAction(.presentLoginView(present: true)))
                     } label: {
                         HStack{
                             Image(.emailIcon)
@@ -51,7 +54,7 @@ struct AuthView: View {
                     
                     CustomButton {
                         print("또는 새롭게 회원가입 하기")
-                        isSignUpViewPresented = true
+                        store.dispatch(.navigationAction(.presentSignUpView(present: true)))
                     } label: {
                         HStack{
                             Text("또는")
@@ -68,9 +71,5 @@ struct AuthView: View {
 }
 
 #Preview {
-    AuthView(
-        isBottomSheetPresented: .constant(false),
-        isLoginViewPresented: .constant(false),
-        isSignUpViewPresented: .constant(false)
-    )
+    AuthView()
 }

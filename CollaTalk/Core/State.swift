@@ -13,9 +13,17 @@ struct AppState {
     var showToast: Bool = false
     var toastMessage: String = ""
     
+    var navigationState = NavigationState()
     var loginState = LoginState()
     var signUpState = SignUpState()
     var createWorkspaceState = CreateWorkspaceState()
+    
+    struct NavigationState {
+        var isBottomSheetPresented: Bool = false
+        var isLoginViewPresented: Bool = false
+        var isSignUpViewPresented: Bool = false
+        var isCreateWorkspaceViewPresented: Bool = false
+    }
    
     struct LoginState {
         var email: String = ""

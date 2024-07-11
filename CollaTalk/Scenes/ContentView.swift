@@ -15,30 +15,40 @@ struct ContentView: View {
     @StateObject private var windowProvider = WindowProvider()
     @StateObject private var navigationRouter = NavigationRouter()
     
-    @State private var isBottomSheetPresented: Bool = false
-    @State private var isLoginViewPresented: Bool = false
-    @State private var isSignUpViewPresented: Bool = false
-    @State private var isCreateWorkspaceViewPresented: Bool = false
     
     var body: some View {
         NavigationStack(path: $navigationRouter.route) {
             ZStack {
-                OnboardingView(isBottomSheetPresented: $isBottomSheetPresented)
+                OnboardingView()
                 
-                AuthView(
-                    isBottomSheetPresented: $isBottomSheetPresented,
-                    isLoginViewPresented: $isLoginViewPresented,
-                    isSignUpViewPresented: $isSignUpViewPresented
+                AuthView()
+            }
+            .animation(.interactiveSpring, value: store.state.navigationState.isBottomSheetPresented)
+            .sheet(
+                isPresented: Binding(
+                    get: { store.state.navigationState.isLoginViewPresented},
+                    set: { store.dispatch(.navigationAction(.presentLoginView(present: $0)))
+                    }
                 )
+            ) {
+                LoginView()
             }
-            .animation(.interactiveSpring, value: isBottomSheetPresented)
-            .sheet(isPresented: $isLoginViewPresented) {
-                LoginView(isPresented: $isLoginViewPresented)
+            .sheet(
+                isPresented: Binding(
+                    get: { store.state.navigationState.isSignUpViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentSignUpView(present: $0)))
+                    }
+                )
+            ) {
+                SignUpView()
             }
-            .sheet(isPresented: $isSignUpViewPresented) {
-                SignUpView(isPresented: $isSignUpViewPresented)
-            }
-            .sheet(isPresented: $isCreateWorkspaceViewPresented) {
+            .sheet(
+                isPresented: Binding(
+                    get: { store.state.navigationState.isCreateWorkspaceViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: $0)))
+                    }
+                )
+            ) {
                 CreateWorkspaceView()
             }
             .navigationDestination(for: PathType.self) { path in

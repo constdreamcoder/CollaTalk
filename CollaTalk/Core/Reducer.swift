@@ -13,6 +13,18 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     var mutatingState = state
     
     switch action {
+    case .navigationAction(let navigationAction):
+        switch navigationAction {
+        case .presentBottomSheet(let present):
+            mutatingState.navigationState.isBottomSheetPresented = present
+        case .presentLoginView(let present):
+            mutatingState.navigationState.isLoginViewPresented = present
+        case .presentSignUpView(let present):
+            mutatingState.navigationState.isSignUpViewPresented = present
+        case .presentCreateWorkspaceView(let present):
+            mutatingState.navigationState.isCreateWorkspaceViewPresented = present
+        }
+        
     case .loginAction(let loginAction):
         switch loginAction {
         case .writeEmail(let email):
@@ -124,7 +136,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.user = userInfo
         }
-    
+        
     case .createWorkspaceAction(let createWorkspaceAction):
         switch createWorkspaceAction {
         case .writeName(let name):
@@ -133,6 +145,5 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.createWorkspaceState.description = description
         }
     }
-    
     return mutatingState
 }

@@ -11,10 +11,6 @@ struct SignUpView: View {
     
     @EnvironmentObject private var store: AppStore
     
-    @Binding var isPresented: Bool
-    
-    @State private var text = ""
-    
     var body: some View {
         
         ZStack {
@@ -22,7 +18,14 @@ struct SignUpView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
-                NavigationBarForCreatingNewFeature(title: .signUp, isPresented: $isPresented)
+                NavigationBarForCreatingNewFeature(
+                    title: .signUp,
+                    isPresented: Binding(
+                        get: { store.state.navigationState.isSignUpViewPresented },
+                        set: { store.dispatch(.navigationAction(.presentSignUpView(present: $0)))
+                        }
+                    )
+                )
                 
                 InputView(
                     title: "이메일",
@@ -133,5 +136,5 @@ extension SignUpView {
 }
 
 #Preview {
-    SignUpView(isPresented: .constant(false))
+    SignUpView()
 }
