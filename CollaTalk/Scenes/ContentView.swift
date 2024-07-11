@@ -55,8 +55,10 @@ struct ContentView: View {
                 switch path {
                 case .mainView:
                     WorspaceInitView()
-                case .none: Text("ddd")
-                    
+                case .none:
+                    EmptyView()
+                        .background(.clear)
+                        .hidden()
                 }
             }
         }
