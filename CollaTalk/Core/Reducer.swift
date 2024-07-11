@@ -46,7 +46,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user = userInfo
             
             mutatingState.isLoading = false
-            mutatingState.networkCallSuccessType = .mainView
             
         case .loginError(let errorMessage):
             mutatingState.isLoading = false
@@ -130,7 +129,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             
             mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
-        case .emailDoubleCheck: break
+            
+        case .emailDoubleCheck:
+            break
         case .join:
             mutatingState.isLoading = true
             

@@ -67,7 +67,7 @@ struct ContentView: View {
             if isLoading {
                 windowProvider.showLoading()
             } else {
-                windowProvider.dismissView()
+                windowProvider.dismissLoading()
             }
         }
         .onReceive(Just(store.state.showToast)) { showToast in

@@ -9,6 +9,7 @@ import SwiftUI
 
 final class WindowProvider: ObservableObject {
     private var window: UIWindow?
+    private var loadingViewWindow: UIWindow?
     
     func showToast(message: String, duration: Double = 2.5) {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -35,30 +36,35 @@ final class WindowProvider: ObservableObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
             guard let self else { return }
-            dismissView()
+            dismissToast()
         }
     }
     
     func showLoading() {
         
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            window = UIWindow(windowScene: scene)
-            window?.windowLevel = .statusBar
+            loadingViewWindow = UIWindow(windowScene: scene)
+            loadingViewWindow?.windowLevel = .alert
         }
         
-        guard let window = window else { return }
+        guard let loadingViewWindow = loadingViewWindow else { return }
         
-        let hostingController = UIHostingController(rootView: LoadingView2())
+        let hostingController = UIHostingController(rootView: LoadingView())
         hostingController.view.backgroundColor = .brandBlack.withAlphaComponent(0.4)
         
-        window.rootViewController = hostingController
-        window.makeKeyAndVisible()
+        loadingViewWindow.rootViewController = hostingController
+        loadingViewWindow.makeKeyAndVisible()
         
-        window.frame = UIScreen.main.bounds
+        loadingViewWindow.frame = UIScreen.main.bounds
     }
     
-    func dismissView() {
+    private func dismissToast() {
         window?.isHidden = true
         window = nil
+    }
+    
+    func dismissLoading() {
+        loadingViewWindow?.isHidden = true
+        loadingViewWindow = nil
     }
 }
