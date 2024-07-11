@@ -98,6 +98,7 @@ struct SignUpView: View {
                 .bottomButtonShape(isSignUpButtonValid() ? .brandGreen : .brandInactive)
             }
         }
+        // TODO: - disappear 시 모든 값 초기화 구현
     }
 }
 

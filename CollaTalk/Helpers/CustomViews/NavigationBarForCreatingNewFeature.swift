@@ -12,6 +12,7 @@ struct NavigationBarForCreatingNewFeature: View {
     enum Feature: String {
         case signUp = "회원가입"
         case login = "로그인"
+        case workspaceInit = "시작하기"
     }
     
     let title: Feature
@@ -21,17 +22,21 @@ struct NavigationBarForCreatingNewFeature: View {
         VStack {
             ZStack {
                 VStack(spacing: 15) {
-                    BottomViewGrabber()
-                        .padding(.top, 6)
+                    if title != .workspaceInit {
+                        BottomViewGrabber()
+                            .padding(.top, 6)
+                    }
                     
                     Text(title.rawValue)
                         .font(.system(size: 17, weight: .bold))
                 }
                 
                 VStack(spacing: 15) {
-                    BottomViewGrabber()
-                        .padding(.top, 4)
-                        .hidden()
+                    if title != .workspaceInit {
+                        BottomViewGrabber()
+                            .padding(.top, 4)
+                            .hidden()
+                    }
                     
                     HStack {
                         Button {

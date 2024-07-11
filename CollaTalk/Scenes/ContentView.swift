@@ -37,7 +37,7 @@ struct ContentView: View {
         }
         .onReceive(Just(store.state.showToast)) { showToast in
             if showToast {
-                windowProvider.showToast(message: store.state.errorMessage ?? "")
+                windowProvider.showToast(message: store.state.errorMessage)
                 store.dispatch(.dismissToastMessage)
             }
         }
