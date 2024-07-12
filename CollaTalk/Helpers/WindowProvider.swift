@@ -44,7 +44,7 @@ final class WindowProvider: ObservableObject {
         
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             loadingViewWindow = UIWindow(windowScene: scene)
-            loadingViewWindow?.windowLevel = .alert
+            loadingViewWindow?.windowLevel = .statusBar
         }
         
         guard let loadingViewWindow = loadingViewWindow else { return }

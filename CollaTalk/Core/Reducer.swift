@@ -125,7 +125,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 mutatingState.toastMessage = ToastMessage.signUp(.etc).message
             }
             
-            // TODO: - 토스트메세지와 겹처보이지는 앉는지 확인하기
             mutatingState.isLoading = false
             
             mutatingState.showToast = isEmailValid || isNicknameValid || isPhoneNumberValid || isPWValid || isPWForMatchCheckValid
@@ -144,7 +143,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     mutatingState.toastMessage = ToastMessage.signUp(.etc).message
                 }
                 
-                // TODO: - 토스트 메세지와 겹처보이진 않는지 확인하기
                 mutatingState.isLoading = false
                 
                 mutatingState.showToast = true

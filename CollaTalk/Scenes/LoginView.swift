@@ -11,7 +11,6 @@ import Combine
 struct LoginView: View {
     
     @EnvironmentObject private var navigationRouter: NavigationRouter
-
     @EnvironmentObject private var store: AppStore
         
     // TODO: - 유효성 검사 오류시 해당 TextField Focus되게 구현
@@ -77,7 +76,8 @@ struct LoginView: View {
 
 extension LoginView {
     private func isLoginButtonValid() -> Bool {
-        !store.state.loginState.isEmailEmpty && !store.state.loginState.isPWEmpty
+        !store.state.loginState.isEmailEmpty 
+        && !store.state.loginState.isPWEmpty
     }
 }
 

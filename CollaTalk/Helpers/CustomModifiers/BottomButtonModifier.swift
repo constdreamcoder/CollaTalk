@@ -15,7 +15,7 @@ struct BottomButtonModifier: ViewModifier {
         content
             .background(color)
             .cornerRadius(8, corners: .allCorners)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 24)
     }
 }
 
