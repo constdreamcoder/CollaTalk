@@ -23,7 +23,7 @@ struct WorspaceStartView: View {
                 NavigationBarForCreatingNewFeature(
                     title: .workspaceInit,
                     isPresented: .constant(true),
-                    transitionAction: { navigationRouter.push(screen: .homeViewFromStartView)
+                    transitionAction: { navigationRouter.push(screen: .homeEmptyView)
                     }
                 )
                 
@@ -51,7 +51,7 @@ struct WorspaceStartView: View {
                 
                 CustomButton {
                     print("워크 스페이스 생성")
-                    store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: true)))
+                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
                 } label: {
                     Text("워크 스페이스 생성")
                 }

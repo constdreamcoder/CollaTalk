@@ -15,7 +15,6 @@ struct ContentView: View {
     @StateObject private var windowProvider = WindowProvider()
     @StateObject private var navigationRouter = NavigationRouter()
     
-    
     var body: some View {
         NavigationStack(path: $navigationRouter.route) {
             ZStack {
@@ -44,9 +43,8 @@ struct ContentView: View {
             }
             .sheet(
                 isPresented: Binding(
-                    get: { store.state.navigationState.isCreateWorkspaceViewPresented },
-                    set: { store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: $0)))
-                    }
+                    get: { store.state.navigationState.isAddWorkspaceViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentAddWorkspaceView(present: $0))) }
                 )
             ) {
                 AddWorkspaceView()
@@ -55,10 +53,10 @@ struct ContentView: View {
                 switch path {
                 case .startView:
                     WorspaceStartView()
-                case .homeViewFromStartView:
-                    HomeView()
-                case .homeView:
-                    HomeView()
+                case .homeEmptyView:
+                    HomeEmptyView()
+                case .homeDefaultView:
+                    MainTabView()
                 case .none:
                     EmptyView()
                         .background(.clear)
@@ -87,11 +85,15 @@ struct ContentView: View {
                     navigationRouter.push(screen: .startView)
                     store.dispatch(.navigationAction(.presentSignUpView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
-                case .homeView:
-                    navigationRouter.push(screen: .homeView)
+                case .homeDefaultView:
+                    navigationRouter.push(screen: .homeDefaultView)
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
-                case  .homeViewFromStartView, .none: break
+                case .homeEmptyView:
+                    navigationRouter.push(screen: .homeEmptyView)
+                    store.dispatch(.navigationAction(.presentLoginView(present: false)))
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .none: break
                 }
             }
             

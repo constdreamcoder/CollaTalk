@@ -95,10 +95,7 @@ struct SignUpView: View {
                 // TODO: - 키보드에 따라 버튼이 같이 올라가고 사라지는 기능 구현
                 CustomButton {
                     print("가입하기")
-//                    store.dispatch(.signUpAction(.join))
-                    navigationRouter.push(screen: .startView)
-                    store.dispatch(.navigationAction(.presentSignUpView(present: false)))
-                    store.dispatch(.initializeNetworkCallSuccessType)
+                    store.dispatch(.signUpAction(.join))
                 } label: {
                     Text("가입하기")
                 }

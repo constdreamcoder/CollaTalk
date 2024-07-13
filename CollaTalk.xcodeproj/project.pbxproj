@@ -22,9 +22,12 @@
 		0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */; };
 		0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC062C42D46900E9AF0A /* HomeEmptyView.swift */; };
 		0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC092C42D62D00E9AF0A /* HomeContentType.swift */; };
+		0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */; };
+		0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC112C42E12D00E9AF0A /* WorkspaceProvider.swift */; };
+		0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC142C42E1AB00E9AF0A /* Workspace.swift */; };
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
-		005327502C41381800977D31 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053274F2C41381800977D31 /* HomeView.swift */; };
+		005327502C41381800977D31 /* HomeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053274F2C41381800977D31 /* HomeDefaultView.swift */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
@@ -77,8 +80,11 @@
 		0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTab+ChildView.swift"; sourceTree = "<group>"; };
 		0037BC062C42D46900E9AF0A /* HomeEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyView.swift; sourceTree = "<group>"; };
 		0037BC092C42D62D00E9AF0A /* HomeContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentType.swift; sourceTree = "<group>"; };
+		0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceService.swift; sourceTree = "<group>"; };
+		0037BC112C42E12D00E9AF0A /* WorkspaceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceProvider.swift; sourceTree = "<group>"; };
+		0037BC142C42E1AB00E9AF0A /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
-		0053274F2C41381800977D31 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
@@ -178,7 +184,7 @@
 		0037BC0C2C42D66D00E9AF0A /* HomeDefault */ = {
 			isa = PBXGroup;
 			children = (
-				0053274F2C41381800977D31 /* HomeView.swift */,
+				0053274F2C41381800977D31 /* HomeDefaultView.swift */,
 				0037BC092C42D62D00E9AF0A /* HomeContentType.swift */,
 			);
 			path = HomeDefault;
@@ -192,6 +198,21 @@
 				0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		0037BC102C42E0D900E9AF0A /* Worspace */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Worspace;
+			sourceTree = "<group>";
+		};
+		0037BC132C42E18E00E9AF0A /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				0037BC142C42E1AB00E9AF0A /* Workspace.swift */,
+			);
+			path = Workspace;
 			sourceTree = "<group>";
 		};
 		0052C0FF2C3AD554003D08D3 /* Application */ = {
@@ -329,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				00F6F2C12C3C115100C1AFF1 /* UserService.swift */,
+				0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -356,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				00F6F2D22C3C203A00C1AFF1 /* User */,
+				0037BC102C42E0D900E9AF0A /* Worspace */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -364,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */,
+				0037BC112C42E12D00E9AF0A /* WorkspaceProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -373,6 +397,7 @@
 			children = (
 				00DFAF862C3C428300D25633 /* ErrorCode.swift */,
 				00F6F2D32C3C205900C1AFF1 /* User */,
+				0037BC132C42E18E00E9AF0A /* Workspace */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -513,10 +538,11 @@
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
+				0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */,
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
-				005327502C41381800977D31 /* HomeView.swift in Sources */,
+				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */,
@@ -533,6 +559,8 @@
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
+				0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */,
+				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,

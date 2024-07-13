@@ -11,7 +11,7 @@ extension MainTab {
     @ViewBuilder
     var view: some View {
         switch self {
-        case .home: HomeView()
+        case .home: HomeDefaultView()
         case .dm: placeholderView
         case .search: placeholderView
         case .setting: placeholderView

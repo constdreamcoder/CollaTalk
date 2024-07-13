@@ -21,7 +21,10 @@ struct AddWorkspaceView: View {
                 
                 NavigationBarForCreatingNewFeature(
                     title: .createWorkspace,
-                    isPresented: .constant(true),
+                    isPresented: Binding(
+                        get: { store.state.navigationState.isAddWorkspaceViewPresented },
+                        set: { store.dispatch(.navigationAction(.presentAddWorkspaceView(present: $0))) }
+                    ),
                     transitionAction: {})
                 
                 Image(.workspace)
@@ -41,8 +44,8 @@ struct AddWorkspaceView: View {
                 InputView(
                     title: "워크스페이스 이름",
                     placeholder: "워크스페이스 이름을 입력하세요 (필수)",
-                    textFieldGetter: { store.state.createWorkspaceState.name },
-                    textFieldSetter: { store.dispatch(.createWorkspaceAction(.writeName(name: $0))) },
+                    textFieldGetter: { store.state.addWorkspaceState.name },
+                    textFieldSetter: { store.dispatch(.addWorkspaceAction(.writeName(name: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -52,8 +55,8 @@ struct AddWorkspaceView: View {
                 InputView(
                     title: "워크스페이스 설명",
                     placeholder: "워크스페이스를 설명하세요 (옵션)",
-                    textFieldGetter: { store.state.createWorkspaceState.description },
-                    textFieldSetter: { store.dispatch(.createWorkspaceAction(.writeDescription(description: $0))) },
+                    textFieldGetter: { store.state.addWorkspaceState.description },
+                    textFieldSetter: { store.dispatch(.addWorkspaceAction(.writeDescription(description: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -64,7 +67,7 @@ struct AddWorkspaceView: View {
                 
                 CustomButton {
                     print("완료")
-                    store.dispatch(.navigationAction(.presentCreateWorkspaceView(present: false)))
+                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: false)))
                 } label: {
                     Text("완료")
                 }

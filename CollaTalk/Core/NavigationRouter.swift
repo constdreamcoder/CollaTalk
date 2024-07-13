@@ -9,8 +9,8 @@ import SwiftUI
 
 enum PathType: Hashable {
     case startView
-    case homeView
-    case homeViewFromStartView
+    case homeDefaultView
+    case homeEmptyView
     case none
 }
 

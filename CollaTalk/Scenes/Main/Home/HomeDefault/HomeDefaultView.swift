@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomeDefaultView.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/12/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct HomeView: View {
+struct HomeDefaultView: View {
     
     var body: some View {
         VStack {
@@ -31,7 +31,7 @@ struct HomeView: View {
 
 
 #Preview {
-    HomeView()
+    HomeDefaultView()
 }
 
 struct HomeNaigationBar: View {

@@ -27,8 +27,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isLoginViewPresented = present
         case .presentSignUpView(let present):
             mutatingState.navigationState.isSignUpViewPresented = present
-        case .presentCreateWorkspaceView(let present):
-            mutatingState.navigationState.isCreateWorkspaceViewPresented = present
+        case .presentAddWorkspaceView(let present):
+            mutatingState.navigationState.isAddWorkspaceViewPresented = present
         }
         
     case .loginAction(let loginAction):
@@ -46,7 +46,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user = userInfo
             
             mutatingState.isLoading = false
-            mutatingState.networkCallSuccessType = .startView
+            
+            mutatingState.networkCallSuccessType = .homeEmptyView
             
         case .loginError(let errorMessage):
             mutatingState.isLoading = false
@@ -162,13 +163,50 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .startView
         }
         
-    case .createWorkspaceAction(let createWorkspaceAction):
-        switch createWorkspaceAction {
+    case .addWorkspaceAction(let addWorkspaceAction):
+        switch addWorkspaceAction {
         case .writeName(let name):
-            mutatingState.createWorkspaceState.name = name
+            mutatingState.addWorkspaceState.name = name
         case .writeDescription(let description):
-            mutatingState.createWorkspaceState.description = description
+            mutatingState.addWorkspaceState.description = description
         }
+    case .workspaceAction(let workspaceAction):
+        switch workspaceAction {
+        case .fetchWorkspaces:
+            mutatingState.isLoading = true
+        case .workspaceError(let error):
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    break
+                case .unknownRouterRoute:
+                    break
+                case .expiredAccessToken:
+                    break
+                case .invalidToken:
+                    break
+                case .unknownUser:
+                    break
+                case .excesssiveCalls:
+                    break
+                case .serverError:
+                    break
+                }
+                
+                mutatingState.isLoading = false
+            }
+        }
+    case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
+        switch networkCallSuccessTypeAction {
+        case .setStartView: break
+        case .setHomeEmptyView:
+            mutatingState.networkCallSuccessType = .homeEmptyView
+        case .setHomeDefaultView(let workspaces):
+            mutatingState.networkCallSuccessType = .homeDefaultView
+            mutatingState.workspaceState.workspaces = workspaces
+        case .setNone: break
+        }
+        mutatingState.isLoading = false
     }
     return mutatingState
 }

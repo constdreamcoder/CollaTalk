@@ -18,13 +18,14 @@ struct AppState {
     var navigationState = NavigationState()
     var loginState = LoginState()
     var signUpState = SignUpState()
-    var createWorkspaceState = CreateWorkspaceState()
+    var addWorkspaceState = AddWorkspaceState()
+    var workspaceState = WorkspaceState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
         var isLoginViewPresented: Bool = false
         var isSignUpViewPresented: Bool = false
-        var isCreateWorkspaceViewPresented: Bool = false
+        var isAddWorkspaceViewPresented: Bool = false
     }
    
     struct LoginState {
@@ -65,8 +66,12 @@ struct AppState {
         var isPWForMatchCheckValid: Bool = true
     }
     
-    struct CreateWorkspaceState {
+    struct AddWorkspaceState {
         var name: String = ""
         var description: String = ""
+    }
+    
+    struct WorkspaceState {
+        var workspaces: [Workspace] = []
     }
 }

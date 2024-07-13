@@ -11,15 +11,24 @@ enum AppAction {
     case navigationAction(NavigationAction)
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
-    case createWorkspaceAction(CreateWorkspaceAction)
+    case addWorkspaceAction(AddWorkspaceAction)
+    case workspaceAction(WorkspaceAction)
+    case networkCallSuccessTypeAction(NetworkCallSuccessType)
     case dismissToastMessage
     case initializeNetworkCallSuccessType
+    
+    enum NetworkCallSuccessType {
+        case setStartView
+        case setHomeEmptyView
+        case setHomeDefaultView(workspaces: [Workspace])
+        case setNone
+    }
     
     enum NavigationAction {
         case presentBottomSheet(present: Bool)
         case presentLoginView(present: Bool)
         case presentSignUpView(present: Bool)
-        case presentCreateWorkspaceView(present: Bool)
+        case presentAddWorkspaceView(present: Bool)
     }
     
     enum LoginAction {
@@ -46,8 +55,13 @@ enum AppAction {
         case moveToStartView(userInfo: UserInfo)
     }
     
-    enum CreateWorkspaceAction {
+    enum AddWorkspaceAction {
         case writeName(name: String)
         case writeDescription(description: String)
+    }
+    
+    enum WorkspaceAction {
+        case fetchWorkspaces
+        case workspaceError(Error)
     }
 }

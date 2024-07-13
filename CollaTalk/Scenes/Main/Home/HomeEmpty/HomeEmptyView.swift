@@ -22,6 +22,9 @@ struct HomeEmptyView: View {
 }
 
 struct HomeEmptyViewContent: View {
+    
+    @EnvironmentObject private var store: AppStore
+    
     var body: some View {
         VStack {
             Spacer()
@@ -51,6 +54,7 @@ struct HomeEmptyViewContent: View {
             
             CustomButton {
                 print("워크스페이스 생성")
+                store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
             } label: {
                 Text("워크스페이스 생성")
             }

@@ -11,9 +11,11 @@ typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Ne
 
 let userMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
+    case .dismissToastMessage: break
         
     case .initializeNetworkCallSuccessType:
         break
+        
     case .navigationAction(let navigationAction):
         switch navigationAction {
         case .presentBottomSheet(let present):
@@ -22,7 +24,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentSignUpView(let present):
             break
-        case .presentCreateWorkspaceView(let present):
+        case .presentAddWorkspaceView(let present):
             break
         }
         
@@ -51,7 +53,8 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let userInfo else { return }
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
-                        promise(.success(.loginAction(.moveToHomeView(userInfo: userInfo))))
+//                        promise(.success(.loginAction(.moveToHomeView(userInfo: userInfo))))
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.loginAction(.loginError(errorMesssage: error.localizedDescription))))
                     }
@@ -59,7 +62,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         default: break
         }
-    case .dismissToastMessage: break
+        
     case .signUpAction(let signUpAction):
         switch signUpAction {
         case .writeEmail(let email):
@@ -150,12 +153,49 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         default: break
         }
-    case .createWorkspaceAction(let createWorkspaceAction):
-        switch createWorkspaceAction {
+        
+    case .addWorkspaceAction(let addWorkspaceAction):
+        switch addWorkspaceAction {
         case .writeName(let name):
             break
         case .writeDescription(let description):
             break
+        }
+        
+    case .workspaceAction(let workspaceAction):
+        switch workspaceAction {
+        case .fetchWorkspaces:
+            print("in")
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let workspaces = try await WorkspaceProvider.shared.fetchWorkspaces()
+                        guard let workspaces else { return }
+                        print("workspaces", workspaces)
+                        promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
+
+                        if workspaces.count == 0 {
+                            promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
+                        } else if workspaces.count == 1 {
+                            promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
+                        } else if workspaces.count > 1 {
+                            promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
+                        }
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .workspaceError(let error):
+            break
+        }
+        
+    case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
+        switch networkCallSuccessTypeAction {
+        case .setStartView: break
+        case .setHomeEmptyView: break
+        case .setHomeDefaultView(let workspaces): break
+        case .setNone: break
         }
     }
     
