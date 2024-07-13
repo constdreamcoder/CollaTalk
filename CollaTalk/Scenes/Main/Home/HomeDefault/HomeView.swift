@@ -9,33 +9,10 @@ import SwiftUI
 
 
 struct HomeView: View {
-    enum HomeContentType: CaseIterable {
-        case channel
-        case directMessage
-        
-        var title: String {
-            switch self {
-            case .channel:
-                return "채널"
-            case .directMessage:
-                return "다이렉트 메시지"
-            }
-        }
-        
-        enum AddType: String {
-            case channel = "채널 추가"
-            case directMessage = "새 메시지 시작"
-            case teamMember = "팀원 추가"
-        }
-    }
     
     var body: some View {
         VStack {
             HomeNaigationBar()
-            
-            
-            //                        HomeEmptyView()
-            
             
             ScrollView {
                 ForEach(HomeContentType.allCases, id: \.title) { contentType in
@@ -95,59 +72,19 @@ struct HomeNaigationBar: View {
     }
 }
 
-struct HomeEmptyView: View {
-    var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 35)
-            
-            Text("워크 스페이스를 찾을 수 없어요")
-            //                .font(.title1)
-                .padding(.horizontal, 24)
-            
-            
-            Spacer()
-                .frame(height: 24)
-            
-            Text("관리자에게 초대를 요청하거나, 다른 이메일로 시도하거나\n 새로운 워크스페이스를 생성해주세요.")
-            //                .font(.body)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
-            
-            Spacer()
-                .frame(height: 16)
-            
-            Image(.workspaceEmpty)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-            
-            Spacer()
-            
-            CustomButton {
-                print("워크스페이스 생성")
-            } label: {
-                Text("워크스페이스 생성")
-            }
-            .bottomButtonShape(.brandGreen)
-        }
-    }
-}
-
 struct CellHeader: View {
     @Binding var isExpanded: Bool
-    let homeContentType: HomeView.HomeContentType
+    let homeContentType: HomeContentType
     
     var body: some View {
         HStack {
             Text(homeContentType.title)
-            //                            .font(.title2)
-                .font(.system(size: 14, weight: .bold))
+                .font(.title2)
             
             Spacer()
             
             Image(systemName: isExpanded ? "chevron.down" : "chevron.forward")
-            //                            .font(.title2)
-                .font(.system(size: 14, weight: .bold))
+                .font(.title2)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         isExpanded.toggle()
@@ -160,7 +97,7 @@ struct CellHeader: View {
 
 struct CellContent: View {
     
-    let homeContentType: HomeView.HomeContentType
+    let homeContentType: HomeContentType
     
     var body: some View {
         HStack {
@@ -168,8 +105,7 @@ struct CellContent: View {
             CellFrontPart(homeContentType: homeContentType)
             
             Text("99")
-            //                            .font(.caption)
-                .font(.system(size: 12, weight: .regular))
+                .font(.caption)
                 .foregroundColor(.brandWhite)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 2)
@@ -182,7 +118,7 @@ struct CellContent: View {
 
 struct HomeCell: View {
     @State private var isExpanded: Bool = false
-    let homeContentType: HomeView.HomeContentType
+    let homeContentType: HomeContentType
     
     var body: some View {
         VStack(spacing: 0) {
@@ -214,7 +150,7 @@ struct HomeCell: View {
 
 struct AddNewCellView: View {
     
-    let contentType: HomeView.HomeContentType.AddType
+    let contentType: HomeContentType.AddType
     
     var body: some View {
         HStack {
@@ -226,8 +162,7 @@ struct AddNewCellView: View {
                 .frame(width: 16)
             
             Text(contentType.rawValue)
-            //                            .font(.body)
-                .font(.system(size: 13, weight: .regular))
+                .font(.body)
                 .foregroundStyle(.textSecondary)
                 .lineLimit(1)
             
@@ -240,7 +175,7 @@ struct AddNewCellView: View {
 
 struct CellFrontPart: View {
     
-    let homeContentType: HomeView.HomeContentType
+    let homeContentType: HomeContentType
     private let unreadNumber = 99
     
     var body: some View {
@@ -263,8 +198,7 @@ struct CellFrontPart: View {
                 .frame(width: 16)
             
             Text("일반")
-            //                            .font(.body)
-                .font(unreadNumber > 0 ? .bodyBold : .system(size: 13, weight: .regular))
+                .font(unreadNumber > 0 ? .bodyBold : .body)
                 .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
                 .lineLimit(1)
             
