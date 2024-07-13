@@ -51,7 +51,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let userInfo else { return }
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
-                        promise(.success(.loginAction(.moveToMainView(userInfo: userInfo))))
+                        promise(.success(.loginAction(.moveToHomeView(userInfo: userInfo))))
                     } catch {
                         promise(.success(.loginAction(.loginError(errorMesssage: error.localizedDescription))))
                     }
@@ -139,7 +139,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let userInfo else { return }
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
-                        promise(.success(.signUpAction(.moveToReadyToStartView(userInfo: userInfo))))
+                        promise(.success(.signUpAction(.moveToStartView(userInfo: userInfo))))
                     } catch {
                         promise(.success(.signUpAction(.joinError(error))))
                     }

@@ -49,12 +49,16 @@ struct ContentView: View {
                     }
                 )
             ) {
-                CreateWorkspaceView()
+                AddWorkspaceView()
             }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
-                case .mainView:
-                    WorspaceInitView()
+                case .startView:
+                    WorspaceStartView()
+                case .homeViewFromStartView:
+                    HomeView()
+                case .homeView:
+                    HomeView()
                 case .none:
                     EmptyView()
                         .background(.clear)
@@ -79,12 +83,15 @@ struct ContentView: View {
         .onReceive(Just(store.state.networkCallSuccessType)) { networkCallSuccessType in
             if !store.state.isLoading {
                 switch networkCallSuccessType {
-                case .mainView:
-                    navigationRouter.push(screen: .mainView)
+                case .startView:
+                    navigationRouter.push(screen: .startView)
                     store.dispatch(.navigationAction(.presentSignUpView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
-                   
-                case .none: break
+                case .homeView:
+                    navigationRouter.push(screen: .homeView)
+                    store.dispatch(.navigationAction(.presentLoginView(present: false)))
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case  .homeViewFromStartView, .none: break
                 }
             }
             

@@ -1,5 +1,5 @@
 //
-//  CreateWorkspaceView.swift
+//  AddWorkspaceView.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/11/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateWorkspaceView: View {
+struct AddWorkspaceView: View {
     
     @EnvironmentObject private var store: AppStore
     
@@ -19,7 +19,10 @@ struct CreateWorkspaceView: View {
             
             VStack(spacing: 24) {
                 
-                NavigationBarForCreatingNewFeature(title: .createWorkspace, isPresented: .constant(true))
+                NavigationBarForCreatingNewFeature(
+                    title: .createWorkspace,
+                    isPresented: .constant(true),
+                    transitionAction: {})
                 
                 Image(.workspace)
                     .resizable()
@@ -72,5 +75,5 @@ struct CreateWorkspaceView: View {
 }
 
 #Preview {
-    CreateWorkspaceView()
+    AddWorkspaceView()
 }

@@ -26,7 +26,7 @@ enum AppAction {
         case login
         case writeEmail(email: String)
         case writePassword(password: String)
-        case moveToMainView(userInfo: UserInfo)
+        case moveToHomeView(userInfo: UserInfo)
         case isValid(isEmailValid: Bool, isPWValid: Bool)
         case loginError(errorMesssage: String?)
         case disappearView
@@ -43,7 +43,7 @@ enum AppAction {
         case sendEmailValidation(isValid: Bool)
         case isValid(isEmailValid: Bool, isNicknameValid: Bool, isPhoneNumberValid: Bool, isPWValid: Bool, isPWForMatchCheckValid: Bool)
         case joinError(Error)
-        case moveToReadyToStartView(userInfo: UserInfo)
+        case moveToStartView(userInfo: UserInfo)
     }
     
     enum CreateWorkspaceAction {

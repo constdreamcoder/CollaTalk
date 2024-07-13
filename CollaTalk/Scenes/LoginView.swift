@@ -28,7 +28,8 @@ struct LoginView: View {
                         get: { store.state.navigationState.isLoginViewPresented },
                         set: { store.dispatch(.navigationAction(.presentLoginView(present: $0)))
                         }
-                    )
+                    ), 
+                    transitionAction: {}
                 )
                 
                 InputView(

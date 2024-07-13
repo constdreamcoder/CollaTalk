@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct WorspaceInitView: View {
+struct WorspaceStartView: View {
     
+    @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var store: AppStore
     
     var body: some View {
@@ -19,7 +20,12 @@ struct WorspaceInitView: View {
                 .ignoresSafeArea()
             
             VStack {
-                NavigationBarForCreatingNewFeature(title: .workspaceInit, isPresented: .constant(true))
+                NavigationBarForCreatingNewFeature(
+                    title: .workspaceInit,
+                    isPresented: .constant(true),
+                    transitionAction: { navigationRouter.push(screen: .homeViewFromStartView)
+                    }
+                )
                 
                 Spacer()
                     .frame(height: 35)
@@ -60,5 +66,5 @@ struct WorspaceInitView: View {
 }
 
 #Preview {
-    WorspaceInitView()
+    WorspaceStartView()
 }

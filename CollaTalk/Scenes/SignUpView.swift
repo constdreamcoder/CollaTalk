@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     
+    @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var store: AppStore
     
     var body: some View {
@@ -24,7 +25,8 @@ struct SignUpView: View {
                         get: { store.state.navigationState.isSignUpViewPresented },
                         set: { store.dispatch(.navigationAction(.presentSignUpView(present: $0)))
                         }
-                    )
+                    ), 
+                    transitionAction: {}
                 )
                 
                 InputView(
@@ -93,7 +95,10 @@ struct SignUpView: View {
                 // TODO: - 키보드에 따라 버튼이 같이 올라가고 사라지는 기능 구현
                 CustomButton {
                     print("가입하기")
-                    store.dispatch(.signUpAction(.join))
+//                    store.dispatch(.signUpAction(.join))
+                    navigationRouter.push(screen: .startView)
+                    store.dispatch(.navigationAction(.presentSignUpView(present: false)))
+                    store.dispatch(.initializeNetworkCallSuccessType)
                 } label: {
                     Text("가입하기")
                 }

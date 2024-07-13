@@ -18,6 +18,7 @@ struct NavigationBarForCreatingNewFeature: View {
     
     let title: Feature
     @Binding var isPresented: Bool
+    let transitionAction: () -> Void
     
     var body: some View {
         VStack {
@@ -41,8 +42,13 @@ struct NavigationBarForCreatingNewFeature: View {
                     
                     HStack {
                         Button {
-                            print("dismiss")
-                            isPresented = false
+                            if title == .workspaceInit {
+                                print("X 버튼 클릭")
+                                transitionAction()
+                            } else {
+                                print("dismiss")
+                                isPresented = false
+                            }
                         } label: {
                             Image(systemName: "xmark")
                                 .resizable()

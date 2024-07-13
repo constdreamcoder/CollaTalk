@@ -39,13 +39,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writePassword(let password):
             mutatingState.loginState.password = password
             mutatingState.loginState.isPWEmpty = password.isEmpty
-        case .moveToMainView(let userInfo):
+        case .moveToHomeView(let userInfo):
             mutatingState.loginState.email = ""
             mutatingState.loginState.password = ""
             
             mutatingState.user = userInfo
             
             mutatingState.isLoading = false
+            mutatingState.networkCallSuccessType = .startView
             
         case .loginError(let errorMessage):
             mutatingState.isLoading = false
@@ -147,7 +148,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 
                 mutatingState.showToast = true
             }
-        case .moveToReadyToStartView(let userInfo):
+        case .moveToStartView(let userInfo):
             mutatingState.signUpState.email = ""
             mutatingState.signUpState.nickname = ""
             mutatingState.signUpState.phoneNumber = ""
@@ -157,6 +158,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user = userInfo
             
             mutatingState.isLoading = false
+            
+            mutatingState.networkCallSuccessType = .startView
         }
         
     case .createWorkspaceAction(let createWorkspaceAction):
