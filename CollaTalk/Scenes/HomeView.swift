@@ -44,6 +44,7 @@ struct HomeView: View {
                 AddNewCellView(contentType: .teamMember)
             }
             .padding(.horizontal, 16)
+            .scrollIndicators(.hidden)
         }
         .overlay(alignment: .bottomTrailing) {
             NewMessageButton()
