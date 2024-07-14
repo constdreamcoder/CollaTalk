@@ -18,6 +18,8 @@ struct MainView: View {
             } else if store.state.workspaceState.workspaces.count >= 1 {
                 MainTabView()
             }
+            
+            SideBar()
         }
         
     }

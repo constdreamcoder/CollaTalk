@@ -16,7 +16,6 @@
 		00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE62C3F8115003206CB /* NavigationRouter.swift */; };
 		00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */; };
 		00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEC2C3FA9A7003206CB /* LoadingView.swift */; };
-		00318EF12C3FBB3A003206CB /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EF02C3FBB3A003206CB /* EmptyView.swift */; };
 		0037BBFF2C42C75C00E9AF0A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */; };
 		0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC002C42C77700E9AF0A /* MainTab.swift */; };
 		0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */; };
@@ -77,7 +76,6 @@
 		00318EE62C3F8115003206CB /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceView.swift; sourceTree = "<group>"; };
 		00318EEC2C3FA9A7003206CB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		00318EF02C3FBB3A003206CB /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0037BC002C42C77700E9AF0A /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 		0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTab+ChildView.swift"; sourceTree = "<group>"; };
@@ -165,6 +163,7 @@
 				00F1B6952C438BB000E7EA56 /* MainView.swift */,
 				0037BC0D2C42D6A700E9AF0A /* Tab */,
 				0037BC082C42D5F800E9AF0A /* Home */,
+				00F1B6982C438FC400E7EA56 /* SideBar */,
 				00F1B6972C438F2400E7EA56 /* Workspace */,
 			);
 			path = Main;
@@ -176,7 +175,6 @@
 				00F1B6912C43696900E7EA56 /* HomeNaigationBar.swift */,
 				0037BC0B2C42D66200E9AF0A /* HomeEmpty */,
 				0037BC0C2C42D66D00E9AF0A /* HomeDefault */,
-				00F1B6932C43759700E7EA56 /* SideBar.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -264,7 +262,6 @@
 				0086B5C42C38089F00AD889C /* InputView.swift */,
 				00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */,
 				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
-				00318EF02C3FBB3A003206CB /* EmptyView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -339,6 +336,14 @@
 				00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */,
 			);
 			path = Workspace;
+			sourceTree = "<group>";
+		};
+		00F1B6982C438FC400E7EA56 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				00F1B6932C43759700E7EA56 /* SideBar.swift */,
+			);
+			path = SideBar;
 			sourceTree = "<group>";
 		};
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
@@ -584,7 +589,6 @@
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
-				00318EF12C3FBB3A003206CB /* EmptyView.swift in Sources */,
 				00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */,
 				00F6F2CB2C3C13F700C1AFF1 /* LoginRequest.swift in Sources */,
 				0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */,
