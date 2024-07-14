@@ -11,6 +11,9 @@ struct AddWorkspaceView: View {
     
     @EnvironmentObject private var store: AppStore
     
+    @State private var image: UIImage =  UIImage()
+    @State private var showImagePicker: Bool = false
+    
     var body: some View {
         ZStack {
             
@@ -27,12 +30,11 @@ struct AddWorkspaceView: View {
                     ),
                     transitionAction: {})
                 
-                Image(.workspace)
+                Image(uiImage: image.pngData()?.count ?? 0 > 0 ? image : .workspace)
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fit)
-                    .frame(width: 60)
-                    .padding(10)
-                    .background(.brandWhite)
+                    .frame(width: 70)
+                    .background(.brandGreen)
                     .cornerRadius(8, corners: .allCorners)
                     .overlay(alignment: .bottomTrailing) {
                         Image(.camera)
@@ -41,7 +43,11 @@ struct AddWorkspaceView: View {
                             .frame(width: 24)
                             .offset(x: 5, y: 5)
                     }
-                    
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        showImagePicker = true
+                    }
+                
                 
                 InputView(
                     title: "워크스페이스 이름",
@@ -77,6 +83,9 @@ struct AddWorkspaceView: View {
                 .bottomButtonShape(addWorkspaceButtonValid ? .brandGreen : .brandInactive)
             }
         }
+        .fullScreenCover(isPresented: $showImagePicker, content: {
+            ImagePickerView(selectedImage: $image)
+        })
     }
 }
 
