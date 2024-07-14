@@ -47,7 +47,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.isLoading = false
             
-            mutatingState.networkCallSuccessType = .homeEmptyView
+            mutatingState.networkCallSuccessType = .homeView
             
         case .loginError(let errorMessage):
             mutatingState.isLoading = false
@@ -195,14 +195,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 
                 mutatingState.isLoading = false
             }
+        case .toggleSideBarAction:
+            mutatingState.navigationState.isSidebarVisible.toggle()
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {
         case .setStartView: break
         case .setHomeEmptyView:
-            mutatingState.networkCallSuccessType = .homeEmptyView
+            mutatingState.networkCallSuccessType = .homeView
         case .setHomeDefaultView(let workspaces):
-            mutatingState.networkCallSuccessType = .homeDefaultView
+            mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
         case .setNone: break
         }

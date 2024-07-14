@@ -34,44 +34,6 @@ struct HomeDefaultView: View {
     HomeDefaultView()
 }
 
-struct HomeNaigationBar: View {
-    var body: some View {
-        VStack {
-            HStack(spacing: 0) {
-                Image(.workspace)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .background(.brandGreen)
-                    .frame(width: 32)
-                    .cornerRadius(8, corners: .allCorners)
-                
-                Spacer()
-                    .frame(width: 8)
-                
-                Text("No Workspace")
-                    .font(.title1)
-                    .lineLimit(1)
-                
-                Spacer()
-                
-                Image(.workspace)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .background(.brandGreen)
-                    .frame(width: 32)
-                    .clipShape(Circle())
-                    .overlay (
-                        Circle().stroke(.black, lineWidth: 2)
-                    )
-                    .padding(.leading, 8)
-            }
-            .padding(.horizontal, 16)
-            
-            Divider()
-        }
-    }
-}
-
 struct CellHeader: View {
     @Binding var isExpanded: Bool
     let homeContentType: HomeContentType

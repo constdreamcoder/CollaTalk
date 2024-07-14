@@ -26,6 +26,7 @@ struct AppState {
         var isLoginViewPresented: Bool = false
         var isSignUpViewPresented: Bool = false
         var isAddWorkspaceViewPresented: Bool = false
+        var isSidebarVisible: Bool = false
     }
    
     struct LoginState {

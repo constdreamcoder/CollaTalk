@@ -9,12 +9,20 @@ import Combine
 
 typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
-let userMiddleware: Middleware<AppState, AppAction> = { state, action in
+let appMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
     case .dismissToastMessage: break
         
     case .initializeNetworkCallSuccessType:
         break
+        
+    case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
+        switch networkCallSuccessTypeAction {
+        case .setStartView: break
+        case .setHomeEmptyView: break
+        case .setHomeDefaultView(let workspaces): break
+        case .setNone: break
+        }
         
     case .navigationAction(let navigationAction):
         switch navigationAction {
@@ -53,7 +61,6 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let userInfo else { return }
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
-//                        promise(.success(.loginAction(.moveToHomeView(userInfo: userInfo))))
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.loginAction(.loginError(errorMesssage: error.localizedDescription))))
@@ -148,7 +155,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-                    
+            
         case .sendEmailValidation(let isValid):
             break
         default: break
@@ -172,8 +179,7 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
                         let workspaces = try await WorkspaceProvider.shared.fetchWorkspaces()
                         guard let workspaces else { return }
                         print("workspaces", workspaces)
-                        promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
-
+                        
                         if workspaces.count == 0 {
                             promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
                         } else if workspaces.count == 1 {
@@ -188,14 +194,8 @@ let userMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .workspaceError(let error):
             break
-        }
-        
-    case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
-        switch networkCallSuccessTypeAction {
-        case .setStartView: break
-        case .setHomeEmptyView: break
-        case .setHomeDefaultView(let workspaces): break
-        case .setNone: break
+        case .toggleSideBarAction:
+            break
         }
     }
     

@@ -63,5 +63,6 @@ enum AppAction {
     enum WorkspaceAction {
         case fetchWorkspaces
         case workspaceError(Error)
+        case toggleSideBarAction
     }
 }

@@ -13,7 +13,7 @@ struct CollaTalkApp: App {
     let store = AppStore(
         initial: AppState(),
         reducer: appReducer,
-        middlewares: [userMiddleware]
+        middlewares: [appMiddleware]
     )
     
     var body: some Scene {

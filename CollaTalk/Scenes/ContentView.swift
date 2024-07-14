@@ -20,7 +20,7 @@ struct ContentView: View {
             ZStack {
                 OnboardingView()
                 
-                AuthView()
+                AuthView()                
             }
             .animation(.interactiveSpring, value: store.state.navigationState.isBottomSheetPresented)
             .sheet(
@@ -53,10 +53,8 @@ struct ContentView: View {
                 switch path {
                 case .startView:
                     WorspaceStartView()
-                case .homeEmptyView:
-                    HomeEmptyView()
-                case .homeDefaultView:
-                    MainTabView()
+                case .homeView:
+                    MainView()
                 case .none:
                     EmptyView()
                         .background(.clear)
@@ -85,12 +83,8 @@ struct ContentView: View {
                     navigationRouter.push(screen: .startView)
                     store.dispatch(.navigationAction(.presentSignUpView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
-                case .homeDefaultView:
-                    navigationRouter.push(screen: .homeDefaultView)
-                    store.dispatch(.navigationAction(.presentLoginView(present: false)))
-                    store.dispatch(.initializeNetworkCallSuccessType)
-                case .homeEmptyView:
-                    navigationRouter.push(screen: .homeEmptyView)
+                case .homeView:
+                    navigationRouter.push(screen: .homeView)
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
