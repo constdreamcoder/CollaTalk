@@ -23,8 +23,7 @@ struct WorspaceStartView: View {
                 NavigationBarForCreatingNewFeature(
                     title: .workspaceInit,
                     isPresented: .constant(true),
-                    transitionAction: { navigationRouter.push(screen: .homeView)
-                    }
+                    transitionAction: { navigationRouter.push(screen: .homeView) }
                 )
                 
                 Spacer()

@@ -99,8 +99,8 @@ struct SignUpView: View {
                 } label: {
                     Text("가입하기")
                 }
-                .disabled(!isSignUpButtonValid())
-                .bottomButtonShape(isSignUpButtonValid() ? .brandGreen : .brandInactive)
+                .disabled(!isSignUpButtonValid)
+                .bottomButtonShape(isSignUpButtonValid ? .brandGreen : .brandInactive)
             }
         }
         // TODO: - disappear 시 모든 값 초기화 구현
@@ -108,6 +108,13 @@ struct SignUpView: View {
 }
 
 extension SignUpView {
+    
+    private var isSignUpButtonValid: Bool {
+        !store.state.signUpState.isEmailEmpty
+        && !store.state.signUpState.isNicknameEmpty
+        && !store.state.signUpState.isPWEmpty
+        && !store.state.signUpState.isPWForMatchCheckEmpty
+    }
     
     private func validateAndFormatPhoneNumber(_ phoneNumber: String) -> String {
         let cleanPhoneNumber = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
@@ -127,13 +134,6 @@ extension SignUpView {
         } else {
             return phoneNumber
         }
-    }
-    
-    private func isSignUpButtonValid() -> Bool {
-        !store.state.signUpState.isEmailEmpty
-        && !store.state.signUpState.isNicknameEmpty
-        && !store.state.signUpState.isPWEmpty
-        && !store.state.signUpState.isPWForMatchCheckEmpty
     }
 }
 

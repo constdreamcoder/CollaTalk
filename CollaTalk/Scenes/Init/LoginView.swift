@@ -64,8 +64,8 @@ struct LoginView: View {
                 } label: {
                     Text("로그인")
                 }
-                .disabled(!isLoginButtonValid())
-                .bottomButtonShape(isLoginButtonValid() ? .brandGreen : .brandInactive)
+                .disabled(!isLoginButtonValid)
+                .bottomButtonShape(isLoginButtonValid ? .brandGreen : .brandInactive)
             }
         }
         .onDisappear {
@@ -76,8 +76,8 @@ struct LoginView: View {
 }
 
 extension LoginView {
-    private func isLoginButtonValid() -> Bool {
-        !store.state.loginState.isEmailEmpty 
+    private var isLoginButtonValid: Bool {
+        !store.state.loginState.isEmailEmpty
         && !store.state.loginState.isPWEmpty
     }
 }

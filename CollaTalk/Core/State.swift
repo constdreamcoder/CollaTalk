@@ -70,6 +70,9 @@ struct AppState {
     struct AddWorkspaceState {
         var name: String = ""
         var description: String = ""
+        
+        var isNameEmpty: Bool = true
+        var isDescriptionEmpty: Bool = true
     }
     
     struct WorkspaceState {

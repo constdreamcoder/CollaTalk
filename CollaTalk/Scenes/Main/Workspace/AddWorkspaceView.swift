@@ -32,14 +32,16 @@ struct AddWorkspaceView: View {
                     .aspectRatio(1.0, contentMode: .fit)
                     .frame(width: 60)
                     .padding(10)
-                    .bottomButtonShape(.brandWhite)
+                    .background(.brandWhite)
+                    .cornerRadius(8, corners: .allCorners)
                     .overlay(alignment: .bottomTrailing) {
                         Image(.camera)
                             .resizable()
                             .aspectRatio(1.0, contentMode: .fit)
                             .frame(width: 24)
-                            .offset(x: -7, y: 5)
+                            .offset(x: 5, y: 5)
                     }
+                    
                 
                 InputView(
                     title: "워크스페이스 이름",
@@ -71,9 +73,16 @@ struct AddWorkspaceView: View {
                 } label: {
                     Text("완료")
                 }
-                .bottomButtonShape(.brandGreen)
+                .disabled(addWorkspaceButtonValid)
+                .bottomButtonShape(addWorkspaceButtonValid ? .brandGreen : .brandInactive)
             }
         }
+    }
+}
+
+extension AddWorkspaceView {
+    private var addWorkspaceButtonValid: Bool {
+        !store.state.addWorkspaceState.isNameEmpty
     }
 }
 

@@ -73,8 +73,7 @@ final class LoggerPlugin: PluginType {
                 let errorCode = try JSONDecoder().decode(ErrorCode.self, from: response.data)
                 if errorCode.errorCode == "E06" {
                     print("Refresh Token is Expired.")
-//                    KeychainManager.deleteAll()
-//                    NotificationCenter.default.post(name: .GoBackToOnboardingView, object: nil, userInfo: ["goBackToOnboardingViewTrigger": true])
+                    // TODO: - 리프레시 토큰 갱신 트리걸 구현
                 }
             } catch {
                 print("Decoding Error", error)

@@ -167,8 +167,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch addWorkspaceAction {
         case .writeName(let name):
             mutatingState.addWorkspaceState.name = name
+            mutatingState.addWorkspaceState.isNameEmpty = name.isEmpty
         case .writeDescription(let description):
             mutatingState.addWorkspaceState.description = description
+            mutatingState.addWorkspaceState.isDescriptionEmpty = description.isEmpty
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
