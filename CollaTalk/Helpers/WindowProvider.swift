@@ -8,6 +8,7 @@
 import SwiftUI
 
 final class WindowProvider: ObservableObject {
+    
     private var window: UIWindow?
     private var loadingViewWindow: UIWindow?
     

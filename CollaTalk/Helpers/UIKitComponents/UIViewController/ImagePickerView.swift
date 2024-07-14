@@ -10,12 +10,12 @@ import UIKit
 
 struct ImagePickerView: UIViewControllerRepresentable {
 
-    @Binding var selectedImage: UIImage //선택된 이미지를 bindging 형식으로 저장
+    @EnvironmentObject private var store: AppStore
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary    //이미지 소스 선택
-        imagePicker.allowsEditing = false    //이미지 편집기능 여부
+        imagePicker.sourceType = .photoLibrary //이미지 소스 선택
+        imagePicker.allowsEditing = false //이미지 편집기능 여부
         imagePicker.delegate = context.coordinator
 
         return imagePicker
@@ -37,11 +37,12 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                imagePickerView.selectedImage = image
+            if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                imagePickerView.store.dispatch(.addWorkspaceAction(.selectImage(image: selectedImage)))
             }
             
-            picker.dismiss(animated: true) //사진 라이브러리 해제
+            //사진 라이브러리 해제
+            imagePickerView.store.dispatch(.navigationAction(.showImagePickerView(show: false)))
         }
     }
 }

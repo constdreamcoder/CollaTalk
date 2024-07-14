@@ -29,6 +29,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isSignUpViewPresented = present
         case .presentAddWorkspaceView(let present):
             mutatingState.navigationState.isAddWorkspaceViewPresented = present
+        case .showImagePickerView(let show):
+            mutatingState.navigationState.showImagePicker = show
         }
         
     case .loginAction(let loginAction):
@@ -171,6 +173,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writeDescription(let description):
             mutatingState.addWorkspaceState.description = description
             mutatingState.addWorkspaceState.isDescriptionEmpty = description.isEmpty
+        case .selectImage(let imageData):
+            mutatingState.addWorkspaceState.selectedImage = imageData
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {

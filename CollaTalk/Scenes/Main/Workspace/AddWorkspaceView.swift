@@ -11,8 +11,7 @@ struct AddWorkspaceView: View {
     
     @EnvironmentObject private var store: AppStore
     
-    @State private var image: UIImage =  UIImage()
-    @State private var showImagePicker: Bool = false
+//    @State private var showImagePicker: Bool = false
     
     var body: some View {
         ZStack {
@@ -30,7 +29,7 @@ struct AddWorkspaceView: View {
                     ),
                     transitionAction: {})
                 
-                Image(uiImage: image.pngData()?.count ?? 0 > 0 ? image : .workspace)
+                Image(uiImage: store.state.addWorkspaceState.selectedImage)
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fit)
                     .frame(width: 70)
@@ -45,9 +44,8 @@ struct AddWorkspaceView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        showImagePicker = true
+                        store.dispatch(.navigationAction(.showImagePickerView(show: true)))
                     }
-                
                 
                 InputView(
                     title: "워크스페이스 이름",
@@ -83,9 +81,18 @@ struct AddWorkspaceView: View {
                 .bottomButtonShape(addWorkspaceButtonValid ? .brandGreen : .brandInactive)
             }
         }
-        .fullScreenCover(isPresented: $showImagePicker, content: {
-            ImagePickerView(selectedImage: $image)
-        })
+        .onDisappear {
+            // TODO: - 모든 값 초기화하기
+//            store.dispatch(.addWorkspaceAction(<#T##AppAction.AddWorkspaceAction#>))
+        }
+        .fullScreenCover(
+            isPresented: Binding(
+                get: { store.state.navigationState.showImagePicker },
+                set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0))) }
+            )
+        ) {
+            ImagePickerView()
+        }
     }
 }
 

@@ -5,7 +5,7 @@
 //  Created by SUCHAN CHANG on 7/8/24.
 //
 
-import Foundation
+import UIKit
 
 enum AppAction {
     case navigationAction(NavigationAction)
@@ -29,6 +29,7 @@ enum AppAction {
         case presentLoginView(present: Bool)
         case presentSignUpView(present: Bool)
         case presentAddWorkspaceView(present: Bool)
+        case showImagePickerView(show: Bool)
     }
     
     enum LoginAction {
@@ -56,6 +57,7 @@ enum AppAction {
     }
     
     enum AddWorkspaceAction {
+        case selectImage(image: UIImage)
         case writeName(name: String)
         case writeDescription(description: String)
     }

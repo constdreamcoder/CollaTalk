@@ -5,7 +5,7 @@
 //  Created by SUCHAN CHANG on 7/8/24.
 //
 
-import Foundation
+import UIKit
 
 struct AppState {
     
@@ -27,6 +27,7 @@ struct AppState {
         var isSignUpViewPresented: Bool = false
         var isAddWorkspaceViewPresented: Bool = false
         var isSidebarVisible: Bool = false
+        var showImagePicker: Bool = false
     }
    
     struct LoginState {
@@ -68,11 +69,13 @@ struct AppState {
     }
     
     struct AddWorkspaceState {
+        var selectedImage: UIImage = .workspace
         var name: String = ""
         var description: String = ""
-        
+
         var isNameEmpty: Bool = true
         var isDescriptionEmpty: Bool = true
+        
     }
     
     struct WorkspaceState {

@@ -34,6 +34,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentAddWorkspaceView(let present):
             break
+        case .showImagePickerView(let show):
+            break
         }
         
     case .loginAction(let loginAction):
@@ -166,6 +168,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeName(let name):
             break
         case .writeDescription(let description):
+            break
+        case .selectImage(let image):
             break
         }
         
