@@ -12,7 +12,7 @@ class BaseProvider<Target: TargetType> {
     private let provider: MoyaProvider<Target>
     
     init() {
-        provider = MoyaProvider<Target>()
+        provider = MoyaProvider<Target>(plugins: [LoggerPlugin()])
     }
     
     func request(_ target: Target) async throws -> Response {

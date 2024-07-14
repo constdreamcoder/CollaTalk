@@ -16,9 +16,6 @@ extension BaseService {
     }
     
     var headers: [String : String]? {
-        [
-            Headers.sesacKey.rawValue: APIKeys.sesacKey,
-            Headers.authorization.rawValue: UserDefaultsManager.getObject(forKey: .userInfo, as: UserInfo.self)?.token.accessToken ?? ""
-        ]
+        [Headers.sesacKey.rawValue: APIKeys.sesacKey]
     }
 }
