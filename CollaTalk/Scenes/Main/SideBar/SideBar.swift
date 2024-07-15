@@ -70,10 +70,10 @@ struct SideBarContentView: View {
             /// 워크스페이스 표시 영역
             Group {
                 /// 워크스페이스가 1개 이상일 때 뷰
-                if store.state.workspaceState.workspaces.count > 1 {
+                if store.state.workspaceState.workspaces.count > 0 {
                     List {
-                        ForEach(0..<100) { _ in
-                            workspaceCell
+                        ForEach(store.state.workspaceState.workspaces, id: \.workspaceId) { workspace in
+                            WorkspaceCell(workspace: workspace)
                                 .listRowInsets(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
                                 .listRowSeparator(.hidden)
                         }
@@ -107,7 +107,6 @@ struct SideBarContentView: View {
 
                         Spacer()
                     }
-                    
                 }
             }
                        
@@ -117,33 +116,6 @@ struct SideBarContentView: View {
                 .padding(.bottom, 40)
             
         }
-    }
-    
-    private var workspaceCell: some View {
-        HStack {
-            Image(.kakaoLogo)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .background(.brandGreen)
-                .frame(width: 44)
-                .cornerRadius(8, corners: .allCorners)
-            
-            VStack {
-                Text("SeSAC iOS Campus")
-                    .font(.bodyBold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .lineLimit(1)
-                
-                Text("24. 05. 08")
-                    .foregroundStyle(.textSecondary)
-                    .font(.body)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .lineLimit(1)
-            }
-        }
-        .padding(8)
-        .background(.brandGray)
-        .cornerRadius(8, corners: .allCorners)
     }
     
     private var bottom: some View {
@@ -177,5 +149,36 @@ struct SideBarContentView: View {
         .font(.body)
         .foregroundStyle(.textSecondary)
         .padding(.horizontal, 16)
+    }
+}
+
+struct WorkspaceCell: View {
+    let workspace: Workspace
+    
+    var body: some View {
+        HStack {
+            Image(.kakaoLogo)
+                .resizable()
+                .aspectRatio(1, contentMode: .fit)
+                .background(.brandGreen)
+                .frame(width: 44)
+                .cornerRadius(8, corners: .allCorners)
+            
+            VStack {
+                Text(workspace.name)
+                    .font(.bodyBold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .lineLimit(1)
+                
+                Text(workspace.createdAt.convertToWorkspaceCellDateFormat)
+                    .foregroundStyle(.textSecondary)
+                    .font(.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .lineLimit(1)
+            }
+        }
+        .padding(8)
+        .background(.brandGray)
+        .cornerRadius(8, corners: .allCorners)
     }
 }

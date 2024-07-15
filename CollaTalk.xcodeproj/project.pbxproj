@@ -18,6 +18,7 @@
 		00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEC2C3FA9A7003206CB /* LoadingView.swift */; };
 		0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */; };
 		0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */; };
+		0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC182C44E9870052EE0D /* String+Ext.swift */; };
 		0037BBFF2C42C75C00E9AF0A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */; };
 		0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC002C42C77700E9AF0A /* MainTab.swift */; };
 		0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */; };
@@ -83,7 +84,7 @@
 		00318EEC2C3FA9A7003206CB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceRequest.swift; sourceTree = "<group>"; };
 		0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceError.swift; sourceTree = "<group>"; };
-		0034AC172C44C28A0052EE0D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0034AC182C44E9870052EE0D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0037BC002C42C77700E9AF0A /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 		0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTab+ChildView.swift"; sourceTree = "<group>"; };
@@ -324,6 +325,7 @@
 				0086B5B62C37ED2800AD889C /* Fonts+Ext.swift */,
 				002066FC2C3EDC67007E76BD /* Error+Ext.swift */,
 				00436E982C43ED8D009FDB71 /* Data+Ext.swift */,
+				0034AC182C44E9870052EE0D /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -517,7 +519,6 @@
 				0086B5AE2C37E8F800AD889C /* Helpers */,
 				00F878CE2C2BEE5C002610A8 /* Assets.xcassets */,
 				00F878D02C2BEE5C002610A8 /* Preview Content */,
-				0034AC172C44C28A0052EE0D /* MyPlayground.playground */,
 			);
 			path = CollaTalk;
 			sourceTree = "<group>";
@@ -624,6 +625,7 @@
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
+				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
