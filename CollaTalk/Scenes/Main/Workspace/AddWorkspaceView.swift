@@ -10,9 +10,7 @@ import SwiftUI
 struct AddWorkspaceView: View {
     
     @EnvironmentObject private var store: AppStore
-    
-//    @State private var showImagePicker: Bool = false
-    
+        
     var body: some View {
         ZStack {
             
@@ -73,7 +71,7 @@ struct AddWorkspaceView: View {
                 
                 CustomButton {
                     print("완료")
-                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: false)))
+                    store.dispatch(.addWorkspaceAction(.addWorkspace))
                 } label: {
                     Text("완료")
                 }

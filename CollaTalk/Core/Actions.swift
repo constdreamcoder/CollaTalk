@@ -60,6 +60,8 @@ enum AppAction {
         case selectImage(image: UIImage)
         case writeName(name: String)
         case writeDescription(description: String)
+        case addWorkspace
+        case moveToHomeView(newWorkspace: Workspace)
     }
     
     enum WorkspaceAction {

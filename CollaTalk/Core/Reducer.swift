@@ -175,6 +175,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.addWorkspaceState.isDescriptionEmpty = description.isEmpty
         case .selectImage(let imageData):
             mutatingState.addWorkspaceState.selectedImage = imageData
+        case .addWorkspace:
+            mutatingState.isLoading = true
+        case .moveToHomeView(let newWorkspace):
+            mutatingState.workspaceState.workspaces.insert(newWorkspace, at: 0)
+            
+            mutatingState.isLoading = false
+            
+            mutatingState.networkCallSuccessType = .homeView
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
@@ -184,23 +192,32 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             if let error = error as? CommonError {
                 switch error {
                 case .invalidAccessAuthorization:
-                    break
+                    print(error.localizedDescription)
                 case .unknownRouterRoute:
-                    break
+                    print(error.localizedDescription)
                 case .expiredAccessToken:
-                    break
+                    print(error.localizedDescription)
                 case .invalidToken:
-                    break
+                    print(error.localizedDescription)
                 case .unknownUser:
-                    break
+                    print(error.localizedDescription)
                 case .excesssiveCalls:
-                    break
+                    print(error.localizedDescription)
                 case .serverError:
-                    break
+                    print(error.localizedDescription)
                 }
-                
-                mutatingState.isLoading = false
+            } else if let error = error as? CreateWorkspaceError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                case .lackOfCoins:
+                    print(error.localizedDescription)
+                }
             }
+            mutatingState.isLoading = false
+
         case .toggleSideBarAction:
             mutatingState.navigationState.isSidebarVisible.toggle()
         }

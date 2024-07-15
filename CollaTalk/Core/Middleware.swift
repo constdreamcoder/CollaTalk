@@ -5,6 +5,7 @@
 //  Created by SUCHAN CHANG on 7/8/24.
 //
 
+import Foundation
 import Combine
 
 typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
@@ -171,12 +172,36 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .selectImage(let image):
             break
+        case .addWorkspace:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let image = ImageFile(
+                            imageData: state.addWorkspaceState.selectedImage.pngData() ?? Data(),
+                            name: Date().timeIntervalSince1970.description,
+                            mimeType: .png
+                        )
+                        
+                        let newWorkspace = try await WorkspaceProvider.shared.createWorkspace(
+                            name: state.addWorkspaceState.name,
+                            description: state.addWorkspaceState.description,
+                            image: image
+                        )
+                        guard let newWorkspace else { return }
+                        print("workspace", newWorkspace)
+                        promise(.success(.addWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .moveToHomeView(let newWorkspace):
+            break
         }
         
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
         case .fetchWorkspaces:
-            print("in")
             return Future<AppAction, Never> { promise in
                 Task {
                     do {

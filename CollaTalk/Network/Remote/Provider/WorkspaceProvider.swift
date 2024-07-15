@@ -34,5 +34,28 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         return nil
     }
     
-   
+    func createWorkspace(name: String ,description: String?, image: ImageFile) async throws -> Workspace? {
+        let createWorkspaceRequest = CreateWorkspaceRequest(name: name, description: description, image: image)
+        do {
+            let response = try await request(.createWorkspace(request: createWorkspaceRequest))
+            switch response.statusCode {
+            case 200:
+                let newWorkspace = try decode(response.data, as: Workspace.self)
+                return newWorkspace
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } 
+                if let createWorkspaceError = CreateWorkspaceError(rawValue: errorCode.errorCode) {
+                    throw createWorkspaceError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }
