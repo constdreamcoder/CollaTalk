@@ -58,4 +58,29 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         
         return nil
     }
+    
+    func fetchMyChannels(workspaceID: String) async throws -> [Channel]? {
+        let fetchMyWorkspaceParams = FetchMyChannelsParams(workspaceID: workspaceID)
+        do {
+            let response = try await request(.fetchMyChannels(params: fetchMyWorkspaceParams))
+            switch response.statusCode {
+            case 200:
+                let myChannels = try decode(response.data, as: [Channel].self)
+                return myChannels
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+                if let fetchMyChannelsError = FetchMyChannelsError(rawValue: errorCode.errorCode) {
+                    throw fetchMyChannelsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

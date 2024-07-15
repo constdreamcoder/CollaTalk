@@ -178,7 +178,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             
             /// 워크스페이스명 유효성 검사
             let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.addWorkspaceState.name).validation
-
+            
             /// 워크스페이스 커버 이미지 유효성 검사
             let isWorkspaceCoverImageValid = ValidationCheck.workspaceCoverImage(input: imageData).validation
             
@@ -246,6 +246,21 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .toggleSideBarAction:
             break
+        case .fetchHomeDefaultViewDatas:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 로그인한 유저가 속한 채널 목록 조회
+                        guard let workspace = state.workspaceState.workspaces.last else { return }
+                        let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(workspaceID: workspace.workspaceId)
+                        
+                        guard let myChannels else { return }
+                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: myChannels))))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     }
     

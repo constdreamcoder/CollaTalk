@@ -178,7 +178,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .addWorkspace:
             mutatingState.isLoading = true
         case .moveToHomeView(let newWorkspace):
-            mutatingState.workspaceState.workspaces.insert(newWorkspace, at: 0)
+            mutatingState.workspaceState.workspaces.append(newWorkspace)
             
             mutatingState.isLoading = false
             
@@ -231,6 +231,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
 
         case .toggleSideBarAction:
             mutatingState.navigationState.isSidebarVisible.toggle()
+        case .fetchHomeDefaultViewDatas:
+            mutatingState.isLoading = true
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {

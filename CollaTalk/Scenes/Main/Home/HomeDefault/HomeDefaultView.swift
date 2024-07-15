@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-
 struct HomeDefaultView: View {
+    
+    @EnvironmentObject private var store: AppStore
     
     var body: some View {
         VStack {
@@ -25,6 +26,9 @@ struct HomeDefaultView: View {
         }
         .overlay(alignment: .bottomTrailing) {
             NewMessageButton()
+        }
+        .task {
+            store.dispatch(.workspaceAction(.fetchHomeDefaultViewDatas))
         }
     }
 }
@@ -57,6 +61,28 @@ struct CellHeader: View {
     }
 }
 
+struct MyChannelCellContent: View {
+    
+    let channel: Channel
+    
+    var body: some View {
+        HStack {
+            
+            
+            MyChennelCellFrontPart(name: channel.name)
+            
+            Text("99")
+                .font(.caption)
+                .foregroundColor(.brandWhite)
+                .padding(.horizontal, 4)
+                .padding(.vertical, 2)
+                .background(.brandGreen)
+                .cornerRadius(8, corners: .allCorners)
+        }
+        .frame(height: 41)
+    }
+}
+
 struct CellContent: View {
     
     let homeContentType: HomeContentType
@@ -79,6 +105,9 @@ struct CellContent: View {
 }
 
 struct HomeCell: View {
+    
+    @EnvironmentObject private var store: AppStore
+    
     @State private var isExpanded: Bool = false
     let homeContentType: HomeContentType
     
@@ -91,14 +120,20 @@ struct HomeCell: View {
             
             if isExpanded {
                 VStack {
-                    ForEach(0..<10) { _ in
-                        CellContent(homeContentType: homeContentType)
-                    }
+                    
+//                    ForEach(0..<10) { _ in
+//                        CellContent(homeContentType: homeContentType)
+//                    }
                     
                     switch homeContentType {
                     case .channel:
+                        
+//                        MyChannelCellContent(channel: <#T##Channel#>)
+                        
                         AddNewCellView(contentType: .channel)
                     case .directMessage:
+                        CellContent(homeContentType: homeContentType)
+                        
                         AddNewCellView(contentType: .directMessage)
                     }
                 }
@@ -132,6 +167,31 @@ struct AddNewCellView: View {
         }
         .frame(height: 41)
         
+    }
+}
+
+struct MyChennelCellFrontPart: View {
+    
+    let name: String
+    private let unreadNumber = 99
+    
+    var body: some View {
+        HStack {
+            
+            Image(systemName: "number")
+                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
+                .frame(width: 18)
+            
+            Spacer()
+                .frame(width: 16)
+            
+            Text(name)
+                .font(unreadNumber > 0 ? .bodyBold : .body)
+                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
+                .lineLimit(1)
+            
+            Spacer()
+        }
     }
 }
 

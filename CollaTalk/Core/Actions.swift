@@ -69,5 +69,7 @@ enum AppAction {
         case fetchWorkspaces
         case workspaceError(Error)
         case toggleSideBarAction
+        case fetchHomeDefaultViewDatas
+        case completeFetchHomeDefaultViewDatas(myChennels: [Channel])
     }
 }

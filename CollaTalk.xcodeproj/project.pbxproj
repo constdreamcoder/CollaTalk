@@ -19,6 +19,7 @@
 		0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */; };
 		0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */; };
 		0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC182C44E9870052EE0D /* String+Ext.swift */; };
+		0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */; };
 		0037BBFF2C42C75C00E9AF0A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */; };
 		0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC002C42C77700E9AF0A /* MainTab.swift */; };
 		0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */; };
@@ -33,6 +34,8 @@
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
 		005327502C41381800977D31 /* HomeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053274F2C41381800977D31 /* HomeDefaultView.swift */; };
+		006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */; };
+		006060BF2C45005E001D300F /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BE2C45005E001D300F /* Channel.swift */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
@@ -85,6 +88,7 @@
 		0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceRequest.swift; sourceTree = "<group>"; };
 		0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceError.swift; sourceTree = "<group>"; };
 		0034AC182C44E9870052EE0D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyChannelsParams.swift; sourceTree = "<group>"; };
 		0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0037BC002C42C77700E9AF0A /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
 		0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTab+ChildView.swift"; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
+		006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyChannelsError.swift; sourceTree = "<group>"; };
+		006060BE2C45005E001D300F /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
@@ -162,8 +168,25 @@
 			isa = PBXGroup;
 			children = (
 				0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */,
+				006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */,
 			);
 			path = Workspace;
+			sourceTree = "<group>";
+		};
+		0034AC1E2C44EDF20052EE0D /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
+		0034AC1F2C44EDF80052EE0D /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */,
+			);
+			path = Body;
 			sourceTree = "<group>";
 		};
 		0037BC042C42D1DB00E9AF0A /* Init */ = {
@@ -226,18 +249,20 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
-		0037BC102C42E0D900E9AF0A /* Worspace */ = {
+		0037BC102C42E0D900E9AF0A /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */,
+				0034AC1E2C44EDF20052EE0D /* Params */,
+				0034AC1F2C44EDF80052EE0D /* Body */,
 			);
-			path = Worspace;
+			path = Workspace;
 			sourceTree = "<group>";
 		};
 		0037BC132C42E18E00E9AF0A /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
 				0037BC142C42E1AB00E9AF0A /* Workspace.swift */,
+				006060BE2C45005E001D300F /* Channel.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -271,6 +296,23 @@
 				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		006060BA2C44FBE5001D300F /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */,
+				002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */,
+				002066FA2C3ED63D007E76BD /* JoinRequest.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		006060BB2C44FBED001D300F /* Paramas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Paramas;
 			sourceTree = "<group>";
 		};
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
@@ -450,7 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				00F6F2D22C3C203A00C1AFF1 /* User */,
-				0037BC102C42E0D900E9AF0A /* Worspace */,
+				0037BC102C42E0D900E9AF0A /* Workspace */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -477,9 +519,8 @@
 		00F6F2D22C3C203A00C1AFF1 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */,
-				002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */,
-				002066FA2C3ED63D007E76BD /* JoinRequest.swift */,
+				006060BB2C44FBED001D300F /* Paramas */,
+				006060BA2C44FBE5001D300F /* Body */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -614,6 +655,7 @@
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
+				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				00F1B6922C43696900E7EA56 /* HomeNaigationBar.swift in Sources */,
@@ -621,6 +663,7 @@
 				00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
+				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
@@ -629,6 +672,7 @@
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
+				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
