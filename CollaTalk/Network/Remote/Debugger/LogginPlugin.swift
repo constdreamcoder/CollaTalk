@@ -22,7 +22,6 @@ final class LoggerPlugin: PluginType {
     // Request를 보낼 때 호출
     func willSend(_ request: RequestType, target: TargetType) {
         guard let httpRequest = request.request else {
-            print("--> 유효하지 않은 요청")
             return
         }
         let url = httpRequest.description

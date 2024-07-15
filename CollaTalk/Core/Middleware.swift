@@ -254,13 +254,18 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let workspace = state.workspaceState.workspaces.last else { return }
                         let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(workspaceID: workspace.workspaceId)
                         
-                        guard let myChannels else { return }
-                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: myChannels))))
+                        /// DM방 목록 조회
+                        let dms = try await WorkspaceProvider.shared.fetchMyDMs(workspaceID: workspace.workspaceId)
+                        
+                        guard let myChannels, let dms else { return }
+                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: myChannels, dms: dms))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
+        case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
+            break
         }
     }
     

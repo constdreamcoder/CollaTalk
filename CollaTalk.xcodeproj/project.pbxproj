@@ -36,6 +36,9 @@
 		005327502C41381800977D31 /* HomeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053274F2C41381800977D31 /* HomeDefaultView.swift */; };
 		006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */; };
 		006060BF2C45005E001D300F /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BE2C45005E001D300F /* Channel.swift */; };
+		006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMsParams.swift */; };
+		006060C32C450C3D001D300F /* DM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C22C450C3D001D300F /* DM.swift */; };
+		006060C52C450D83001D300F /* FetchDMsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C42C450D83001D300F /* FetchDMsError.swift */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
@@ -104,6 +107,9 @@
 		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
 		006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyChannelsError.swift; sourceTree = "<group>"; };
 		006060BE2C45005E001D300F /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		006060C02C450BF5001D300F /* FetchDMsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsParams.swift; sourceTree = "<group>"; };
+		006060C22C450C3D001D300F /* DM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DM.swift; sourceTree = "<group>"; };
+		006060C42C450D83001D300F /* FetchDMsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsError.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 			children = (
 				0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */,
 				006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */,
+				006060C42C450D83001D300F /* FetchDMsError.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */,
+				006060C02C450BF5001D300F /* FetchDMsParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -263,6 +271,7 @@
 			children = (
 				0037BC142C42E1AB00E9AF0A /* Workspace.swift */,
 				006060BE2C45005E001D300F /* Channel.swift */,
+				006060C22C450C3D001D300F /* DM.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -649,6 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
+				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
 				0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */,
@@ -685,6 +695,7 @@
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				006060C52C450D83001D300F /* FetchDMsError.swift in Sources */,
 				00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */,
 				00F6F2CB2C3C13F700C1AFF1 /* LoginRequest.swift in Sources */,
 				0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */,
@@ -700,6 +711,7 @@
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
+				006060C32C450C3D001D300F /* DM.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */,
 				00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */,

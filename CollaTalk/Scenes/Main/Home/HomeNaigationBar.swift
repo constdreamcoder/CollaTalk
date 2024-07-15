@@ -49,7 +49,6 @@ struct HomeNaigationBar: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            print("터치되나?")
             store.dispatch(.workspaceAction(.toggleSideBarAction))
         }
     }

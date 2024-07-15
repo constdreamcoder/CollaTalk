@@ -80,5 +80,7 @@ struct AppState {
     
     struct WorkspaceState {
         var workspaces: [Workspace] = []
+        var myChannels: [Channel] = []
+        var dms: [DM] = []
     }
 }

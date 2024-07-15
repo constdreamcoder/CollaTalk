@@ -70,6 +70,6 @@ enum AppAction {
         case workspaceError(Error)
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
-        case completeFetchHomeDefaultViewDatas(myChennels: [Channel])
+        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DM])
     }
 }

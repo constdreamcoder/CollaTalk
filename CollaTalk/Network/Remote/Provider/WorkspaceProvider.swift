@@ -83,4 +83,29 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         
         return nil
     }
+    
+    func fetchMyDMs(workspaceID: String) async throws -> [DM]? {
+        let fetchDMsParams = FetchDMsParams(workspaceID: workspaceID)
+        do {
+            let response = try await request(.fetchDMs(params: fetchDMsParams))
+            switch response.statusCode {
+            case 200:
+                let dms = try decode(response.data, as: [DM].self)
+                return dms
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+                if let fetchDMsError = FetchDMsError(rawValue: errorCode.errorCode) {
+                    throw fetchDMsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

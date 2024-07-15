@@ -233,6 +233,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isSidebarVisible.toggle()
         case .fetchHomeDefaultViewDatas:
             mutatingState.isLoading = true
+        case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
+            mutatingState.workspaceState.myChannels = myChennels
+            mutatingState.workspaceState.dms = dms
+            
+            mutatingState.isLoading = false
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {

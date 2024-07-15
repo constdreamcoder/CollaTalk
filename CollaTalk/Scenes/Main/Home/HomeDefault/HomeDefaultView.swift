@@ -28,6 +28,7 @@ struct HomeDefaultView: View {
             NewMessageButton()
         }
         .task {
+            print("시작")
             store.dispatch(.workspaceAction(.fetchHomeDefaultViewDatas))
         }
     }
@@ -36,6 +37,45 @@ struct HomeDefaultView: View {
 
 #Preview {
     HomeDefaultView()
+}
+
+struct HomeCell: View {
+    
+    @EnvironmentObject private var store: AppStore
+    
+    @State private var isExpanded: Bool = false
+    let homeContentType: HomeContentType
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            CellHeader(
+                isExpanded: $isExpanded,
+                homeContentType: homeContentType
+            )
+            
+            if isExpanded {
+                VStack {
+                    switch homeContentType {
+                    case .channel:
+                        ForEach(store.state.workspaceState.myChannels, id: \.channelId) { channel in
+                            MyChannelCellContent(channel: channel)
+                        }
+                        
+                        AddNewCellView(contentType: .channel)
+                    case .directMessage:
+                        ForEach(store.state.workspaceState.dms, id: \.roomId) { dm in
+                            DMCellContent(dm: dm)
+                        }
+                        
+                        AddNewCellView(contentType: .directMessage)
+                    }
+                }
+                
+            }
+            
+            Divider()
+        }
+    }
 }
 
 struct CellHeader: View {
@@ -68,7 +108,6 @@ struct MyChannelCellContent: View {
     var body: some View {
         HStack {
             
-            
             MyChennelCellFrontPart(name: channel.name)
             
             Text("99")
@@ -83,14 +122,14 @@ struct MyChannelCellContent: View {
     }
 }
 
-struct CellContent: View {
+struct DMCellContent: View {
     
-    let homeContentType: HomeContentType
+    let dm: DM
     
     var body: some View {
         HStack {
             
-            CellFrontPart(homeContentType: homeContentType)
+            DMCellContent(dm: dm)
             
             Text("99")
                 .font(.caption)
@@ -101,47 +140,6 @@ struct CellContent: View {
                 .cornerRadius(8, corners: .allCorners)
         }
         .frame(height: 41)
-    }
-}
-
-struct HomeCell: View {
-    
-    @EnvironmentObject private var store: AppStore
-    
-    @State private var isExpanded: Bool = false
-    let homeContentType: HomeContentType
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            CellHeader(
-                isExpanded: $isExpanded,
-                homeContentType: homeContentType
-            )
-            
-            if isExpanded {
-                VStack {
-                    
-//                    ForEach(0..<10) { _ in
-//                        CellContent(homeContentType: homeContentType)
-//                    }
-                    
-                    switch homeContentType {
-                    case .channel:
-                        
-//                        MyChannelCellContent(channel: <#T##Channel#>)
-                        
-                        AddNewCellView(contentType: .channel)
-                    case .directMessage:
-                        CellContent(homeContentType: homeContentType)
-                        
-                        AddNewCellView(contentType: .directMessage)
-                    }
-                }
-                
-            }
-            
-            Divider()
-        }
     }
 }
 
@@ -195,31 +193,21 @@ struct MyChennelCellFrontPart: View {
     }
 }
 
-struct CellFrontPart: View {
-    
-    let homeContentType: HomeContentType
+struct DMCellFrontPart: View {
+
+    let user: DMUser
     private let unreadNumber = 99
     
     var body: some View {
         HStack {
-            switch homeContentType {
-            case .channel:
-                Image(systemName: "number")
-                    .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
-                    .frame(width: 18)
-            case .directMessage:
-                Image(.kakaoLogo)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 24)
-                    .cornerRadius(4, corners: .allCorners)
-            }
-            
+            Image(systemName: "number")
+                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
+                .frame(width: 18)
             
             Spacer()
                 .frame(width: 16)
             
-            Text("일반")
+            Text(user.nickname)
                 .font(unreadNumber > 0 ? .bodyBold : .body)
                 .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
                 .lineLimit(1)
