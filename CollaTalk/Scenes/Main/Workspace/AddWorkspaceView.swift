@@ -27,7 +27,7 @@ struct AddWorkspaceView: View {
                     ),
                     transitionAction: {})
                 
-                Image(uiImage: store.state.addWorkspaceState.selectedImage)
+                Image(uiImage: store.state.addWorkspaceState.selectedImage ?? .workspace)
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fit)
                     .frame(width: 70)
@@ -71,11 +71,12 @@ struct AddWorkspaceView: View {
                 
                 CustomButton {
                     print("완료")
+                    
                     store.dispatch(.addWorkspaceAction(.addWorkspace))
                 } label: {
                     Text("완료")
                 }
-                .disabled(addWorkspaceButtonValid)
+                .disabled(!addWorkspaceButtonValid)
                 .bottomButtonShape(addWorkspaceButtonValid ? .brandGreen : .brandInactive)
             }
         }

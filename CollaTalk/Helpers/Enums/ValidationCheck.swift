@@ -14,6 +14,8 @@ enum ValidationCheck {
     case login(isValid: Bool)
     case nickname(input: String)
     case phoneNumber(input: String)
+    case workspaceName(input: String)
+    case workspaceCoverImage(input: Data)
     
     var validation: Bool {
         switch self {
@@ -29,6 +31,10 @@ enum ValidationCheck {
             return isValidNickname(nickname)
         case .phoneNumber(let phoneNumber):
             return isValidPhoneNumber(phoneNumber)
+        case .workspaceName(let workspaceName):
+            return isWorkspaceNameValid(workspaceName)
+        case .workspaceCoverImage(let workspaceCoverImage):
+            return isWorkspaceCoverImageValid(workspaceCoverImage)
         }
     }
 
@@ -59,5 +65,13 @@ enum ValidationCheck {
     
     private func isValidPasswordForMatchCheck(_ input: String, with password: String) -> Bool {
         return input == password
+    }
+    
+    private func isWorkspaceNameValid(_ input: String) -> Bool {
+        return input.count >= 1 && input.count <= 30
+    }
+    
+    private func isWorkspaceCoverImageValid(_ input: Data) -> Bool {
+        return input.count > 0
     }
 }

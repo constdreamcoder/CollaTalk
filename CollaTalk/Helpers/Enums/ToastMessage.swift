@@ -14,6 +14,7 @@ protocol ToastMessageType {
 enum ToastMessage: ToastMessageType {
     case login(Login)
     case signUp(SignUp)
+    case addWorkspace(AddWorkspace)
     
     var message: String {
         switch self {
@@ -21,6 +22,8 @@ enum ToastMessage: ToastMessageType {
             return login.message
         case .signUp(let signUp):
             return signUp.message
+        case .addWorkspace(let addWorkspace):
+            return addWorkspace.message
         }
     }
     
@@ -80,5 +83,20 @@ enum ToastMessage: ToastMessageType {
                 return "에러가 발생했어요. 잠시 후 다시 시도해주세요."
             }
         }
+    }
+    
+    enum AddWorkspace: ToastMessageType {
+        case workspaceNameError
+        case noImage
+        
+        var message: String {
+            switch self {
+            case .workspaceNameError:
+                return "워크스페이스 이름은 1~30자로 설정해주세요."
+            case .noImage:
+                return "워크스페이스 이미지를 등록해주세요."
+            }
+        }
+        
     }
 }

@@ -173,11 +173,30 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .selectImage(let image):
             break
         case .addWorkspace:
+            
+            let imageData = state.addWorkspaceState.selectedImage?.pngData() ?? Data()
+            
+            /// 워크스페이스명 유효성 검사
+            let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.addWorkspaceState.name).validation
+
+            /// 워크스페이스 커버 이미지 유효성 검사
+            let isWorkspaceCoverImageValid = ValidationCheck.workspaceCoverImage(input: imageData).validation
+            
+            guard isWorkspaceNameValid && isWorkspaceCoverImageValid
+            else {
+                return Just(
+                    .addWorkspaceAction(
+                        .isValid(
+                            isWorkspaceNameValid: isWorkspaceNameValid,
+                            isWorkspaceCoverImageValid: isWorkspaceCoverImageValid)
+                    )).eraseToAnyPublisher()
+            }
+            
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
                         let image = ImageFile(
-                            imageData: state.addWorkspaceState.selectedImage.pngData() ?? Data(),
+                            imageData: imageData,
                             name: Date().timeIntervalSince1970.description,
                             mimeType: .png
                         )
@@ -196,6 +215,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .moveToHomeView(let newWorkspace):
+            break
+        case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
             break
         }
         

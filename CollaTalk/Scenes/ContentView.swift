@@ -86,6 +86,7 @@ struct ContentView: View {
                 case .homeView:
                     navigationRouter.push(screen: .homeView)
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
+                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

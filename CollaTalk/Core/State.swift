@@ -69,7 +69,7 @@ struct AppState {
     }
     
     struct AddWorkspaceState {
-        var selectedImage: UIImage = .workspace
+        var selectedImage: UIImage? = nil
         var name: String = ""
         var description: String = ""
 

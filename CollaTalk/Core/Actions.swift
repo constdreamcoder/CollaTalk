@@ -62,6 +62,7 @@ enum AppAction {
         case writeDescription(description: String)
         case addWorkspace
         case moveToHomeView(newWorkspace: Workspace)
+        case isValid(isWorkspaceNameValid: Bool, isWorkspaceCoverImageValid: Bool)
     }
     
     enum WorkspaceAction {

@@ -67,9 +67,9 @@ struct SideBarContentView: View {
             }
             .background(.backgroundPrimary)
             
-            // 워크스페이스 표시 영역
+            /// 워크스페이스 표시 영역
             Group {
-                // 워크스페이스가 1개 이상일 때 뷰
+                /// 워크스페이스가 1개 이상일 때 뷰
                 if store.state.workspaceState.workspaces.count > 1 {
                     List {
                         ForEach(0..<100) { _ in
@@ -82,7 +82,7 @@ struct SideBarContentView: View {
                     .listRowSpacing(12)
                     .scrollIndicators(.hidden)
                 } else {
-                    // 워크스페이스가 0개 이상일 때 뷰
+                    /// 워크스페이스가 0개 이상일 때 뷰
                     VStack {
                         
                         Spacer()
