@@ -74,7 +74,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.showToast = false
             mutatingState.toastMessage = ""
             
-            mutatingState.loginState.initializeAllStates()
+            mutatingState.loginState.email = ""
+            mutatingState.loginState.password = ""
+            mutatingState.loginState.isEmailEmpty = true
+            mutatingState.loginState.isPWEmpty = true
+            mutatingState.loginState.isEmailValid = true
+            mutatingState.loginState.isPWValid = true
             
         case .login:
             mutatingState.isLoading = true

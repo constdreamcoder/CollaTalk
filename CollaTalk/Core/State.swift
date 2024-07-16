@@ -37,15 +37,6 @@ struct AppState {
         var isPWEmpty: Bool = true
         var isEmailValid: Bool = true
         var isPWValid: Bool = true
-        
-        mutating func initializeAllStates() {
-            self.email = ""
-            self.password = ""
-            self.isEmailEmpty = true
-            self.isPWEmpty = true
-            self.isEmailValid = true
-            self.isPWValid = true
-        }
     }
     
     struct SignUpState {

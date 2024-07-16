@@ -131,6 +131,7 @@ struct SideBarContentView: View {
             .contentShape(Rectangle())
             .onTapGesture {
                 print("워크스페이스 추가")
+                store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
             }
             
             HStack {
@@ -157,13 +158,22 @@ struct WorkspaceCell: View {
     
     var body: some View {
         HStack {
-            Image(.kakaoLogo)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .background(.brandGreen)
-                .frame(width: 44)
-                .cornerRadius(8, corners: .allCorners)
-            
+            RemoteImage(path: workspace.coverImage) { image in
+                image
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+                    .background(.brandGreen)
+                    .frame(width: 44)
+                    .cornerRadius(8, corners: .allCorners)
+            } placeHolderView: {
+                Image(.kakaoLogo)
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+                    .background(.brandGreen)
+                    .frame(width: 44)
+                    .cornerRadius(8, corners: .allCorners)
+            }
+
             VStack {
                 Text(workspace.name)
                     .font(.bodyBold)

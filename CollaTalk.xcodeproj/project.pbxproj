@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
+		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
 		002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */; };
 		002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* JoinError.swift */; };
@@ -39,6 +41,10 @@
 		006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMsParams.swift */; };
 		006060C32C450C3D001D300F /* DM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C22C450C3D001D300F /* DM.swift */; };
 		006060C52C450D83001D300F /* FetchDMsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C42C450D83001D300F /* FetchDMsError.swift */; };
+		007441A52C465AEE00FA8727 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A42C465AEE00FA8727 /* ImageService.swift */; };
+		007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A62C465E8E00FA8727 /* ImageProvider.swift */; };
+		007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A82C465F9500FA8727 /* ImageCacheManager.swift */; };
+		007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441AA2C4666E500FA8727 /* RemoteImage.swift */; };
 		0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5AC2C37E83B00AD889C /* OnboardingView.swift */; };
 		0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B02C37E98C00AD889C /* CustomButton.swift */; };
 		0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */; };
@@ -57,7 +63,7 @@
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
 		00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF892C3C42DB00D25633 /* CommonError.swift */; };
 		00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */; };
-		00F1B6922C43696900E7EA56 /* HomeNaigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6912C43696900E7EA56 /* HomeNaigationBar.swift */; };
+		00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */; };
 		00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6932C43759700E7EA56 /* SideBar.swift */; };
 		00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6952C438BB000E7EA56 /* MainView.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
@@ -79,6 +85,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
+		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDoubleCheckRequest.swift; sourceTree = "<group>"; };
 		002066F72C3EC3E8007E76BD /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
@@ -110,6 +118,10 @@
 		006060C02C450BF5001D300F /* FetchDMsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsParams.swift; sourceTree = "<group>"; };
 		006060C22C450C3D001D300F /* DM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DM.swift; sourceTree = "<group>"; };
 		006060C42C450D83001D300F /* FetchDMsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsError.swift; sourceTree = "<group>"; };
+		007441A42C465AEE00FA8727 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		007441A62C465E8E00FA8727 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		007441A82C465F9500FA8727 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		007441AA2C4666E500FA8727 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		0086B5AC2C37E83B00AD889C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0086B5B02C37E98C00AD889C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0086B5B32C37EA1200AD889C /* BottomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonModifier.swift; sourceTree = "<group>"; };
@@ -128,7 +140,7 @@
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		00DFAF892C3C42DB00D25633 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
-		00F1B6912C43696900E7EA56 /* HomeNaigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNaigationBar.swift; sourceTree = "<group>"; };
+		00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNaigationBar.swift; sourceTree = "<group>"; };
 		00F1B6932C43759700E7EA56 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		00F1B6952C438BB000E7EA56 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -162,6 +174,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0018096B2C46A7B200F41D50 /* RemoteImage */ = {
+			isa = PBXGroup;
+			children = (
+				007441AA2C4666E500FA8727 /* RemoteImage.swift */,
+				0018096D2C46A82900F41D50 /* RemoteImageService.swift */,
+			);
+			path = RemoteImage;
+			sourceTree = "<group>";
+		};
+		0018096C2C46A7BE00F41D50 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0018096F2C46A8FD00F41D50 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				001809702C46A90D00F41D50 /* DownloadImageError.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		002066F92C3EC45C007E76BD /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +260,7 @@
 		0037BC082C42D5F800E9AF0A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				00F1B6912C43696900E7EA56 /* HomeNaigationBar.swift */,
+				00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */,
 				0037BC0B2C42D66200E9AF0A /* HomeEmpty */,
 				0037BC0C2C42D66D00E9AF0A /* HomeDefault */,
 			);
@@ -337,7 +374,8 @@
 		0086B5AE2C37E8F800AD889C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
+				0018096B2C46A7B200F41D50 /* RemoteImage */,
+				0018096C2C46A7BE00F41D50 /* Utils */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
 				0086B5B52C37ED0B00AD889C /* Extensions */,
@@ -426,6 +464,7 @@
 				00DFAF892C3C42DB00D25633 /* CommonError.swift */,
 				002066F92C3EC45C007E76BD /* User */,
 				0034AC142C44BE580052EE0D /* Workspace */,
+				0018096F2C46A8FD00F41D50 /* Image */,
 			);
 			path = ErrorHandler;
 			sourceTree = "<group>";
@@ -450,6 +489,7 @@
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				007441A82C465F9500FA8727 /* ImageCacheManager.swift */,
 				00318EE62C3F8115003206CB /* NavigationRouter.swift */,
 				00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */,
 				00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */,
@@ -474,6 +514,7 @@
 			children = (
 				00F6F2C12C3C115100C1AFF1 /* UserService.swift */,
 				0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */,
+				007441A42C465AEE00FA8727 /* ImageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -511,6 +552,7 @@
 			children = (
 				00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */,
 				0037BC112C42E12D00E9AF0A /* WorkspaceProvider.swift */,
+				007441A62C465E8E00FA8727 /* ImageProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -668,7 +710,7 @@
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
-				00F1B6922C43696900E7EA56 /* HomeNaigationBar.swift in Sources */,
+				00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
@@ -680,19 +722,24 @@
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
+				007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
+				007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
+				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
 				0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
+				007441A52C465AEE00FA8727 /* ImageService.swift in Sources */,
 				0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */,
 				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
+				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
 				006060C52C450D83001D300F /* FetchDMsError.swift in Sources */,
@@ -709,6 +756,7 @@
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
+				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				006060C32C450C3D001D300F /* DM.swift in Sources */,

@@ -13,7 +13,7 @@ struct HomeDefaultView: View {
     
     var body: some View {
         VStack {
-            HomeNaigationBar()
+            MainNaigationBar()
             
             ScrollView {
                 ForEach(HomeContentType.allCases, id: \.title) { contentType in
