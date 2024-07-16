@@ -28,7 +28,6 @@ struct HomeDefaultView: View {
             NewMessageButton()
         }
         .task {
-            print("시작")
             store.dispatch(.workspaceAction(.fetchHomeDefaultViewDatas))
         }
     }

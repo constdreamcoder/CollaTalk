@@ -228,7 +228,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     do {
                         let workspaces = try await WorkspaceProvider.shared.fetchWorkspaces()
                         guard let workspaces else { return }
-                        print("workspaces", workspaces)
                         
                         if workspaces.count == 0 {
                             promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
