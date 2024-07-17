@@ -32,7 +32,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .showImagePickerView(let show):
             mutatingState.navigationState.showImagePicker = show
         }
-        
+            
     case .loginAction(let loginAction):
         switch loginAction {
         case .writeEmail(let email):
@@ -41,16 +41,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writePassword(let password):
             mutatingState.loginState.password = password
             mutatingState.loginState.isPWEmpty = password.isEmpty
-        case .moveToHomeView(let userInfo):
-            mutatingState.loginState.email = ""
-            mutatingState.loginState.password = ""
-            
-            mutatingState.user = userInfo
-            
-            mutatingState.isLoading = false
-            
-            mutatingState.networkCallSuccessType = .homeView
-            
         case .loginError(let errorMessage):
             mutatingState.isLoading = false
             
@@ -183,7 +173,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .addWorkspace:
             mutatingState.isLoading = true
         case .moveToHomeView(let newWorkspace):
-            mutatingState.workspaceState.workspaces.append(newWorkspace)
+            mutatingState.workspaceState.workspaces.insert(newWorkspace, at: 0)
+            mutatingState.workspaceState.selectedWorkspace = newWorkspace
             
             mutatingState.isLoading = false
             
@@ -203,6 +194,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
         case .fetchWorkspaces:
+            mutatingState.user = UserDefaultsManager.getObject(forKey: .userInfo, as: UserInfo.self)
             mutatingState.isLoading = true
         case .workspaceError(let error):
             if let error = error as? CommonError {
@@ -252,6 +244,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .setHomeDefaultView(let workspaces):
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
+            mutatingState.workspaceState.selectedWorkspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) ?? workspaces.first
         case .setNone: break
         }
         mutatingState.isLoading = false

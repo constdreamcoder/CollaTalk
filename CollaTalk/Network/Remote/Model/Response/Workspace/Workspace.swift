@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Workspace: Decodable {
+struct Workspace: Codable {
     let workspaceId: String
     let name: String
     let description: String?

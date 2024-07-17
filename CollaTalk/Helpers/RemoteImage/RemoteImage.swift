@@ -45,19 +45,50 @@ struct RemoteImage<
     }
         
     var body: some View {
-        switch service.state {
-        case .error(let error):
-                errorView(error)
-            
-        case .image(let image):
-            imageView(Image(uiImage: image))
-            
-        case .loading:
-            placeHolderView()
-                .task {
-                    // 이미지 다운로드/캐시
+        /// iOS 17 이상에서 동작
+        if #available(iOS 17.0, *) {
+            Group {
+                switch service.state {
+                case .error(let error):
+                    errorView(error)
+                    
+                case .image(let image):
+                    imageView(Image(uiImage: image))
+                    
+                case .loading:
+                    placeHolderView()
+                }
+            }
+            .task {
+                await service.fetchImage(with: path)
+            }
+            .onChange(of: path, initial: false) {
+                Task {
                     await service.fetchImage(with: path)
                 }
+            }
+        /// iOS 17 이하에서 동작
+        } else {
+            Group {
+                switch service.state {
+                case .error(let error):
+                    errorView(error)
+                    
+                case .image(let image):
+                    imageView(Image(uiImage: image))
+                    
+                case .loading:
+                    placeHolderView()
+                }
+            }
+            .task {
+                await service.fetchImage(with: path)
+            }
+            .onChange(of: path) { newURL in
+                Task {
+                    await service.fetchImage(with: newURL)
+                }
+            }
         }
     }
 }

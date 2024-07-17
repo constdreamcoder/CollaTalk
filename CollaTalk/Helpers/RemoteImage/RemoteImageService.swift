@@ -10,7 +10,7 @@ import SwiftUI
 
 /// `RemoteImage` 를 위한 이미지 다운로드, 캐싱 Service
 final class RemoteImageService: ObservableObject {
-    
+
     enum RemoteImageServiceError: Error {
         case failToFetchImage
     }
@@ -21,7 +21,6 @@ final class RemoteImageService: ObservableObject {
     @Published var state: RemoteImageState = .loading
     
     func fetchImage(with path: String?) async {
-        
         guard let path else {
             state = .error(DownloadImageError.invalidURL)
             return
@@ -32,6 +31,7 @@ final class RemoteImageService: ObservableObject {
             state = .image(cachedImage)
             return
         }
+        
         do {
             let imageData = try await router.downloadImage(with: path)
             guard let imageData else { return }

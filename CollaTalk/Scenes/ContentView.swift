@@ -84,7 +84,9 @@ struct ContentView: View {
                     store.dispatch(.navigationAction(.presentSignUpView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .homeView:
-                    navigationRouter.push(screen: .homeView)
+                    if navigationRouter.route.last != .homeView {
+                        navigationRouter.push(screen: .homeView)
+                    }
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
                     store.dispatch(.navigationAction(.presentAddWorkspaceView(present: false)))
                     store.dispatch(.initializeNetworkCallSuccessType)

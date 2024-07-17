@@ -183,20 +183,20 @@
 			path = RemoteImage;
 			sourceTree = "<group>";
 		};
-		0018096C2C46A7BE00F41D50 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		0018096F2C46A8FD00F41D50 /* Image */ = {
 			isa = PBXGroup;
 			children = (
 				001809702C46A90D00F41D50 /* DownloadImageError.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		001809722C46DB8100F41D50 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				007441A82C465F9500FA8727 /* ImageCacheManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		002066F92C3EC45C007E76BD /* User */ = {
@@ -374,8 +374,9 @@
 		0086B5AE2C37E8F800AD889C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
 				0018096B2C46A7B200F41D50 /* RemoteImage */,
-				0018096C2C46A7BE00F41D50 /* Utils */,
+				001809722C46DB8100F41D50 /* Manager */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
 				0086B5B52C37ED0B00AD889C /* Extensions */,
@@ -489,7 +490,6 @@
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				007441A82C465F9500FA8727 /* ImageCacheManager.swift */,
 				00318EE62C3F8115003206CB /* NavigationRouter.swift */,
 				00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */,
 				00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */,

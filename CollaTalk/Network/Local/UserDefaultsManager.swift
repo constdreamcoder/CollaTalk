@@ -10,6 +10,7 @@ import Foundation
 struct UserDefaultsManager {
     enum Key: String {
         case userInfo = "userInfo"
+        case selectedWorkspace = "selectedWorkspace"
     }
     
     private static let standard = UserDefaults.standard

@@ -154,11 +154,16 @@ struct SideBarContentView: View {
 }
 
 struct WorkspaceCell: View {
+    
+    @EnvironmentObject private var store: AppStore
+
     let workspace: Workspace
     
     var body: some View {
         HStack {
-            RemoteImage(path: workspace.coverImage) { image in
+            RemoteImage(
+                path: workspace.coverImage
+            ) { image in
                 image
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
@@ -188,7 +193,7 @@ struct WorkspaceCell: View {
             }
         }
         .padding(8)
-        .background(.brandGray)
+        .background(store.state.workspaceState.selectedWorkspace?.name ?? "" == workspace.name ? .brandGray : .clear)
         .cornerRadius(8, corners: .allCorners)
     }
 }

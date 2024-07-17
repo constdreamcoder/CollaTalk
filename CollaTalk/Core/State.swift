@@ -70,6 +70,7 @@ struct AppState {
     }
     
     struct WorkspaceState {
+        var selectedWorkspace: Workspace? = nil
         var workspaces: [Workspace] = []
         var myChannels: [Channel] = []
         var dms: [DM] = []

@@ -208,6 +208,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let newWorkspace else { return }
                         print("workspace", newWorkspace)
+                        UserDefaultsManager.setObject(newWorkspace, forKey: .selectedWorkspace)
                         promise(.success(.addWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
@@ -231,9 +232,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         if workspaces.count == 0 {
                             promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
-                        } else if workspaces.count == 1 {
-                            promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
-                        } else if workspaces.count > 1 {
+                        } else if workspaces.count >= 1 {
                             promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
                         }
                     } catch {

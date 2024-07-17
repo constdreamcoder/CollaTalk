@@ -10,23 +10,34 @@ import SwiftUI
 struct MainNaigationBar: View {
     
     @EnvironmentObject private var store: AppStore
-    
-    private let path = UserDefaultsManager.getObject(forKey: .userInfo, as: UserInfo.self)?.profileImage
+    @StateObject private var service = RemoteImageService()
     
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Image(.workspace)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .background(.brandGreen)
-                    .frame(width: 32)
-                    .cornerRadius(8, corners: .allCorners)
+                
+                RemoteImage(
+                    path: store.state.workspaceState.selectedWorkspace?.coverImage ?? ""
+                ) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(.brandGreen)
+                        .frame(width: 32)
+                        .cornerRadius(8, corners: .allCorners)
+                } placeHolderView: {
+                    Image(.workspace)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(.brandGreen)
+                        .frame(width: 32)
+                        .cornerRadius(8, corners: .allCorners)
+                }
                 
                 Spacer()
                     .frame(width: 8)
                 
-                Text("No Workspace")
+                Text(store.state.workspaceState.selectedWorkspace?.name ?? "No Workspace")
                     .font(.title1)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -34,7 +45,9 @@ struct MainNaigationBar: View {
                 Spacer()
                     .frame(width: 16)
                 
-                RemoteImage(path: path) { image in
+                RemoteImage(
+                    path: store.state.user?.profileImage ?? ""
+                ) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
