@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD772C490788001F6085 /* EditWorkspaceParams.swift */; };
+		000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */; };
+		000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */; };
+		000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7E2C49082E001F6085 /* ImageFile.swift */; };
+		000CDD812C490947001F6085 /* EditeWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD802C490947001F6085 /* EditeWorkspaceError.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
@@ -14,9 +19,9 @@
 		002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* JoinError.swift */; };
 		002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066FA2C3ED63D007E76BD /* JoinRequest.swift */; };
 		002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066FC2C3EDC67007E76BD /* Error+Ext.swift */; };
-		00318EE52C3F7538003206CB /* WorspaceStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE42C3F7538003206CB /* WorspaceStartView.swift */; };
+		00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE42C3F7538003206CB /* WorkspaceStartView.swift */; };
 		00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE62C3F8115003206CB /* NavigationRouter.swift */; };
-		00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */; };
+		00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */; };
 		00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEC2C3FA9A7003206CB /* LoadingView.swift */; };
 		0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */; };
 		0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */; };
@@ -53,7 +58,7 @@
 		0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */; };
 		0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BC2C37F2AD00AD889C /* AuthView.swift */; };
 		0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5BE2C37F50500AD889C /* RoundedCorner.swift */; };
-		0086B5C12C38065600AD889C /* NavigationBarForCreatingNewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C02C38065600AD889C /* NavigationBarForCreatingNewFeature.swift */; };
+		0086B5C12C38065600AD889C /* SheetNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C02C38065600AD889C /* SheetNavigation.swift */; };
 		0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C22C3806B500AD889C /* SignUpView.swift */; };
 		0086B5C52C38089F00AD889C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C42C38089F00AD889C /* InputView.swift */; };
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
@@ -85,6 +90,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000CDD772C490788001F6085 /* EditWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceParams.swift; sourceTree = "<group>"; };
+		000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceRequest.swift; sourceTree = "<group>"; };
+		000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartFormKey.swift; sourceTree = "<group>"; };
+		000CDD7E2C49082E001F6085 /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
+		000CDD802C490947001F6085 /* EditeWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditeWorkspaceError.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -92,9 +102,9 @@
 		002066F72C3EC3E8007E76BD /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		002066FA2C3ED63D007E76BD /* JoinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequest.swift; sourceTree = "<group>"; };
 		002066FC2C3EDC67007E76BD /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
-		00318EE42C3F7538003206CB /* WorspaceStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorspaceStartView.swift; sourceTree = "<group>"; };
+		00318EE42C3F7538003206CB /* WorkspaceStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceStartView.swift; sourceTree = "<group>"; };
 		00318EE62C3F8115003206CB /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
-		00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceView.swift; sourceTree = "<group>"; };
+		00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWorkspaceView.swift; sourceTree = "<group>"; };
 		00318EEC2C3FA9A7003206CB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceRequest.swift; sourceTree = "<group>"; };
 		0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceError.swift; sourceTree = "<group>"; };
@@ -130,7 +140,7 @@
 		0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewGrabber.swift; sourceTree = "<group>"; };
 		0086B5BC2C37F2AD00AD889C /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		0086B5BE2C37F50500AD889C /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
-		0086B5C02C38065600AD889C /* NavigationBarForCreatingNewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarForCreatingNewFeature.swift; sourceTree = "<group>"; };
+		0086B5C02C38065600AD889C /* SheetNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNavigation.swift; sourceTree = "<group>"; };
 		0086B5C22C3806B500AD889C /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		0086B5C42C38089F00AD889C /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -174,6 +184,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000CDD7B2C49081B001F6085 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */,
+				000CDD7E2C49082E001F6085 /* ImageFile.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		0018096B2C46A7B200F41D50 /* RemoteImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +232,7 @@
 				0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */,
 				006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */,
 				006060C42C450D83001D300F /* FetchDMsError.swift */,
+				000CDD802C490947001F6085 /* EditeWorkspaceError.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -222,6 +242,7 @@
 			children = (
 				0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */,
 				006060C02C450BF5001D300F /* FetchDMsParams.swift */,
+				000CDD772C490788001F6085 /* EditWorkspaceParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -230,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */,
+				000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -392,7 +414,7 @@
 				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
 				0086B5B82C37F18E00AD889C /* BottomSheetView.swift */,
 				0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */,
-				0086B5C02C38065600AD889C /* NavigationBarForCreatingNewFeature.swift */,
+				0086B5C02C38065600AD889C /* SheetNavigation.swift */,
 				0086B5C42C38089F00AD889C /* InputView.swift */,
 				00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */,
 				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
@@ -473,8 +495,8 @@
 		00F1B6972C438F2400E7EA56 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				00318EE42C3F7538003206CB /* WorspaceStartView.swift */,
-				00318EEA2C3F8EB6003206CB /* AddWorkspaceView.swift */,
+				00318EE42C3F7538003206CB /* WorkspaceStartView.swift */,
+				00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -541,6 +563,7 @@
 		00F6F2C92C3C13E200C1AFF1 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				000CDD7B2C49081B001F6085 /* Common */,
 				00F6F2D22C3C203A00C1AFF1 /* User */,
 				0037BC102C42E0D900E9AF0A /* Workspace */,
 			);
@@ -702,6 +725,7 @@
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
+				000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */,
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
 				0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */,
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
@@ -712,7 +736,8 @@
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
-				00318EEB2C3F8EB6003206CB /* AddWorkspaceView.swift in Sources */,
+				00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */,
+				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
@@ -720,11 +745,13 @@
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
+				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */,
+				000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
@@ -763,12 +790,13 @@
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */,
 				00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */,
-				0086B5C12C38065600AD889C /* NavigationBarForCreatingNewFeature.swift in Sources */,
-				00318EE52C3F7538003206CB /* WorspaceStartView.swift in Sources */,
+				0086B5C12C38065600AD889C /* SheetNavigation.swift in Sources */,
+				00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */,
 				00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */,
 				002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */,
 				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,
 				0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */,
+				000CDD812C490947001F6085 /* EditeWorkspaceError.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 			);

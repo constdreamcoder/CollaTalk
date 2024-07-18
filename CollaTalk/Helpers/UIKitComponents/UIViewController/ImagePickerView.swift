@@ -38,7 +38,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                imagePickerView.store.dispatch(.addWorkspaceAction(.selectImage(image: selectedImage)))
+                imagePickerView.store.dispatch(.modifyWorkspaceAction(.selectImage(image: selectedImage)))
             }
             
             //사진 라이브러리 해제

@@ -18,14 +18,14 @@ struct AppState {
     var navigationState = NavigationState()
     var loginState = LoginState()
     var signUpState = SignUpState()
-    var addWorkspaceState = AddWorkspaceState()
+    var modifyWorkspaceState = ModifyWorkspaceState()
     var workspaceState = WorkspaceState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
         var isLoginViewPresented: Bool = false
         var isSignUpViewPresented: Bool = false
-        var isAddWorkspaceViewPresented: Bool = false
+        var isModifyWorkspaceViewPresented: Bool = false
         var isSidebarVisible: Bool = false
         var showImagePicker: Bool = false
     }
@@ -59,14 +59,15 @@ struct AppState {
         var isPWForMatchCheckValid: Bool = true
     }
     
-    struct AddWorkspaceState {
-        var selectedImage: UIImage? = nil
+    struct ModifyWorkspaceState {
+        var workspaceModificationType: WorkspaceModificationType = .create
+        var selectedImageFromGallery: UIImage? = nil
+        var existingWorkspace: Workspace? = nil
         var name: String = ""
         var description: String = ""
 
         var isNameEmpty: Bool = true
         var isDescriptionEmpty: Bool = true
-        
     }
     
     struct WorkspaceState {

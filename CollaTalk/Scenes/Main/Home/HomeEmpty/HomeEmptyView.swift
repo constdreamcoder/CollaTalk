@@ -54,7 +54,7 @@ struct HomeEmptyViewContent: View {
             
             CustomButton {
                 print("워크스페이스 생성")
-                store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
+                store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .create)))
             } label: {
                 Text("워크스페이스 생성")
             }

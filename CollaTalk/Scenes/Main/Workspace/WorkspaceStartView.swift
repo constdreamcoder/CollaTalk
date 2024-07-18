@@ -1,5 +1,5 @@
 //
-//  WorspaceInitView.swift
+//  WorkspaceStartView.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/11/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorspaceStartView: View {
+struct WorkspaceStartView: View {
     
     @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var store: AppStore
@@ -20,7 +20,7 @@ struct WorspaceStartView: View {
                 .ignoresSafeArea()
             
             VStack {
-                NavigationBarForCreatingNewFeature(
+                SheetNavigation(
                     title: .workspaceInit,
                     isPresented: .constant(true),
                     transitionAction: { navigationRouter.push(screen: .homeView) }
@@ -35,7 +35,7 @@ struct WorspaceStartView: View {
                 Spacer()
                     .frame(height: 24)
                 
-                Text("옹골찬 고래밥님의 조직을 위해 새로운 새싹톡 워크스페이스를 시작할 준비가 완료되었어요!")
+                Text("\(store.state.user?.nickname ?? "")님의 조직을 위해 새로운 새싹톡 워크스페이스를 시작할 준비가 완료되었어요!")
                     .multilineTextAlignment(.center)
                     .font(.body)
                 
@@ -49,10 +49,10 @@ struct WorspaceStartView: View {
                 Spacer()
                 
                 CustomButton {
-                    print("워크 스페이스 생성")
-                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
+                    print("워크스페이스 생성")
+                    store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .create)))
                 } label: {
-                    Text("워크 스페이스 생성")
+                    Text("워크스페이스 생성")
                 }
                 .bottomButtonShape(.brandGreen)
                 
@@ -65,5 +65,5 @@ struct WorspaceStartView: View {
 }
 
 #Preview {
-    WorspaceStartView()
+    WorkspaceStartView()
 }

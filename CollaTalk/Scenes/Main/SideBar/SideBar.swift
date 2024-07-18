@@ -32,7 +32,10 @@ struct SideBar: View {
         .edgesIgnoringSafeArea(.all)
         .confirmationDialog("워크스페이스 설정", isPresented: $isDialogPresented) {
             if dialogWorkspace?.ownerId == store.state.user?.userId {
-                Button("워크스페이스 편집") { print("워크스페이스 편집") }
+                Button("워크스페이스 편집") {
+                    print("워크스페이스 편집")
+                    store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .edit, selectedWorkspace: dialogWorkspace)))
+                }
                 Button("워크스페이스 나가기") { print("워크스페이스 나기기") }
                 Button("워크스페이스 관리자 변경") { print("워크스페이스 삭제") }
                 Button("워크스페이스 삭제", role: .destructive) { print("워크스페이스 삭제") }
@@ -122,7 +125,7 @@ struct SideBarContentView: View {
                         
                         CustomButton {
                             print("워크스페이스 생성")
-                            store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
+                            store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .create)))
                         } label: {
                             Text("워크스페이스 생성")
                         }
@@ -154,7 +157,7 @@ struct SideBarContentView: View {
             .contentShape(Rectangle())
             .onTapGesture {
                 print("워크스페이스 추가")
-                store.dispatch(.navigationAction(.presentAddWorkspaceView(present: true)))
+                store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .create)))
             }
             
             HStack {

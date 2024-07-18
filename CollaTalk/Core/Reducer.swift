@@ -27,8 +27,18 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isLoginViewPresented = present
         case .presentSignUpView(let present):
             mutatingState.navigationState.isSignUpViewPresented = present
-        case .presentAddWorkspaceView(let present):
-            mutatingState.navigationState.isAddWorkspaceViewPresented = present
+        case .presentModifyWorkspaceView(let present, let workspaceModificationType, let selectedWorkspace):
+            mutatingState.navigationState.isModifyWorkspaceViewPresented = present
+            mutatingState.modifyWorkspaceState.workspaceModificationType = workspaceModificationType
+            switch workspaceModificationType {
+            case .edit:
+                if selectedWorkspace != nil {
+                    mutatingState.modifyWorkspaceState.existingWorkspace = selectedWorkspace
+                    mutatingState.modifyWorkspaceState.name = selectedWorkspace?.name ?? ""
+                    mutatingState.modifyWorkspaceState.description = selectedWorkspace?.description ?? ""
+                }
+            default: break
+            }
         case .showImagePickerView(let show):
             mutatingState.navigationState.showImagePicker = show
         }
@@ -160,16 +170,17 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .startView
         }
         
-    case .addWorkspaceAction(let addWorkspaceAction):
+    case .modifyWorkspaceAction(let addWorkspaceAction):
         switch addWorkspaceAction {
         case .writeName(let name):
-            mutatingState.addWorkspaceState.name = name
-            mutatingState.addWorkspaceState.isNameEmpty = name.isEmpty
+            mutatingState.modifyWorkspaceState.name = name
+            mutatingState.modifyWorkspaceState.isNameEmpty = name.isEmpty
         case .writeDescription(let description):
-            mutatingState.addWorkspaceState.description = description
-            mutatingState.addWorkspaceState.isDescriptionEmpty = description.isEmpty
+            mutatingState.modifyWorkspaceState.description = description
+            mutatingState.modifyWorkspaceState.isDescriptionEmpty = description.isEmpty
         case .selectImage(let imageData):
-            mutatingState.addWorkspaceState.selectedImage = imageData
+            mutatingState.modifyWorkspaceState.selectedImageFromGallery = imageData
+            mutatingState.modifyWorkspaceState.existingWorkspace = nil
         case .addWorkspace:
             mutatingState.isLoading = true
         case .moveToHomeView(let newWorkspace):
@@ -190,6 +201,17 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
             
             mutatingState.showToast = true
+        case .editWorkspace:
+            mutatingState.isLoading = true
+        case .initializeAllElements:
+            mutatingState.modifyWorkspaceState.workspaceModificationType = .create
+            mutatingState.modifyWorkspaceState.selectedImageFromGallery = nil
+            mutatingState.modifyWorkspaceState.existingWorkspace = nil
+            mutatingState.modifyWorkspaceState.name = ""
+            mutatingState.modifyWorkspaceState.description = ""
+
+            mutatingState.modifyWorkspaceState.isNameEmpty = true
+            mutatingState.modifyWorkspaceState.isDescriptionEmpty = true
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {

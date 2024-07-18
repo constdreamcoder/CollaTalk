@@ -13,6 +13,7 @@ enum WorkspaceService {
     case createWorkspace(request: CreateWorkspaceRequest)
     case fetchMyChannels(params: FetchMyChannelsParams)
     case fetchDMs(params: FetchDMsParams)
+    case editWorkspace(params: EditWorkspaceParams, request: EditWorkspaceRequest)
 }
 
 extension WorkspaceService: BaseService {
@@ -25,6 +26,8 @@ extension WorkspaceService: BaseService {
             return "/workspaces/\(paramas.workspaceID)/my-channels"
         case .fetchDMs(let params):
             return "/workspaces/\(params.workspaceID)/dms"
+        case .editWorkspace(let params, _):
+            return "/workspaces/\(params.workspaceID)"
         }
     }
     
@@ -34,6 +37,8 @@ extension WorkspaceService: BaseService {
             return .get
         case .createWorkspace:
             return .post
+        case .editWorkspace:
+            return .put
         }
     }
     
@@ -42,6 +47,23 @@ extension WorkspaceService: BaseService {
         case .fetchWorkspaces, .fetchMyChannels, .fetchDMs:
             return .requestPlain
         case .createWorkspace(let request):
+            return .uploadMultipart([
+                MultipartFormData(
+                    provider: .data(request.name.data(using: .utf8) ?? Data()),
+                    name: MultiPartFormKey.name
+                ),
+                MultipartFormData(
+                    provider: .data(request.description?.data(using: .utf8) ?? Data()),
+                    name: MultiPartFormKey.description
+                ),
+                MultipartFormData(
+                    provider: .data(request.image.imageData),
+                    name: MultiPartFormKey.image,
+                    fileName: request.image.name,
+                    mimeType: request.image.mimeType.rawValue
+                )
+            ])
+        case .editWorkspace(_, let request):
             return .uploadMultipart([
                 MultipartFormData(
                     provider: .data(request.name.data(using: .utf8) ?? Data()),

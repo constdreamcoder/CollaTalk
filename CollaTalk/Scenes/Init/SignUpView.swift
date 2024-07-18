@@ -19,7 +19,7 @@ struct SignUpView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
-                NavigationBarForCreatingNewFeature(
+                SheetNavigation(
                     title: .signUp,
                     isPresented: Binding(
                         get: { store.state.navigationState.isSignUpViewPresented },

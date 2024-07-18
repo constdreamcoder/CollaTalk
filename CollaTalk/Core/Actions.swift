@@ -11,7 +11,7 @@ enum AppAction {
     case navigationAction(NavigationAction)
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
-    case addWorkspaceAction(AddWorkspaceAction)
+    case modifyWorkspaceAction(ModifyWorkspaceAction)
     case workspaceAction(WorkspaceAction)
     case networkCallSuccessTypeAction(NetworkCallSuccessType)
     case dismissToastMessage
@@ -28,7 +28,7 @@ enum AppAction {
         case presentBottomSheet(present: Bool)
         case presentLoginView(present: Bool)
         case presentSignUpView(present: Bool)
-        case presentAddWorkspaceView(present: Bool)
+        case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
     }
     
@@ -55,13 +55,15 @@ enum AppAction {
         case moveToStartView(userInfo: UserInfo)
     }
     
-    enum AddWorkspaceAction {
+    enum ModifyWorkspaceAction {
         case selectImage(image: UIImage)
         case writeName(name: String)
         case writeDescription(description: String)
         case addWorkspace
+        case editWorkspace
         case moveToHomeView(newWorkspace: Workspace)
         case isValid(isWorkspaceNameValid: Bool, isWorkspaceCoverImageValid: Bool)
+        case initializeAllElements
     }
     
     enum WorkspaceAction {

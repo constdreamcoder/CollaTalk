@@ -43,16 +43,19 @@ struct ContentView: View {
             }
             .sheet(
                 isPresented: Binding(
-                    get: { store.state.navigationState.isAddWorkspaceViewPresented },
-                    set: { store.dispatch(.navigationAction(.presentAddWorkspaceView(present: $0))) }
+                    get: { store.state.navigationState.isModifyWorkspaceViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentModifyWorkspaceView(
+                        present: $0,
+                        workspaceModificationType: store.state.modifyWorkspaceState.workspaceModificationType)))
+                    }
                 )
             ) {
-                AddWorkspaceView()
+                ModifyWorkspaceView()
             }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
                 case .startView:
-                    WorspaceStartView()
+                    WorkspaceStartView()
                 case .homeView:
                     MainView()
                 case .none:
@@ -88,7 +91,7 @@ struct ContentView: View {
                         navigationRouter.push(screen: .homeView)
                     }
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
-                    store.dispatch(.navigationAction(.presentAddWorkspaceView(present: false)))
+                    store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: false, workspaceModificationType: .create)))
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

@@ -1,13 +1,13 @@
 //
-//  CreateWorkspaceRequest.swift
+//  EditWorkspaceRequest.swift
 //  CollaTalk
 //
-//  Created by SUCHAN CHANG on 7/15/24.
+//  Created by SUCHAN CHANG on 7/18/24.
 //
 
 import Foundation
 
-struct CreateWorkspaceRequest: Encodable {
+struct EditWorkspaceRequest: Encodable {
     let name: String
     let description: String?
     let image: ImageFile

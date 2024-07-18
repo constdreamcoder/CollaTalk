@@ -46,8 +46,7 @@ final class UserProvider: BaseProvider<UserService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                }
-                if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
+                } else if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
                     throw emailValidationError
                 }
             default: break
@@ -70,8 +69,7 @@ final class UserProvider: BaseProvider<UserService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                }
-                if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
+                } else if let emailValidationError = JoinError(rawValue: errorCode.errorCode) {
                     throw emailValidationError
                 }
             default: break

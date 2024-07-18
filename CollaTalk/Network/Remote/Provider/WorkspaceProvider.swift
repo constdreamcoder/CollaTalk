@@ -46,8 +46,7 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                } 
-                if let createWorkspaceError = CreateWorkspaceError(rawValue: errorCode.errorCode) {
+                } else if let createWorkspaceError = CreateWorkspaceError(rawValue: errorCode.errorCode) {
                     throw createWorkspaceError
                 }
             default: break
@@ -71,8 +70,7 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                }
-                if let fetchMyChannelsError = FetchMyChannelsError(rawValue: errorCode.errorCode) {
+                } else if let fetchMyChannelsError = FetchMyChannelsError(rawValue: errorCode.errorCode) {
                     throw fetchMyChannelsError
                 }
             default: break
@@ -96,9 +94,33 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                }
-                if let fetchDMsError = FetchDMsError(rawValue: errorCode.errorCode) {
+                } else if let fetchDMsError = FetchDMsError(rawValue: errorCode.errorCode) {
                     throw fetchDMsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+    
+    func editeWorkspace(workspaceId: String, name: String ,description: String?, image: ImageFile) async throws -> Workspace? {
+        let editWorkspaceParams = EditWorkspaceParams(workspaceID: workspaceId)
+        let editWorkspaceRequest = EditWorkspaceRequest(name: name, description: description, image: image)
+        do {
+            let response = try await request(.editWorkspace(params: editWorkspaceParams, request: editWorkspaceRequest))
+            switch response.statusCode {
+            case 200:
+                let newWorkspace = try decode(response.data, as: Workspace.self)
+                return newWorkspace
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let editeWorkspaceError = EditeWorkspaceError(rawValue: errorCode.errorCode) {
+                    throw editeWorkspaceError
                 }
             default: break
             }

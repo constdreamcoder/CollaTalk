@@ -33,7 +33,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentSignUpView(let present):
             break
-        case .presentAddWorkspaceView(let present):
+        case .presentModifyWorkspaceView(let present, let workspaceModificationType, let selectedWorkspace):
             break
         case .showImagePickerView(let show):
             break
@@ -164,7 +164,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         default: break
         }
         
-    case .addWorkspaceAction(let addWorkspaceAction):
+    case .modifyWorkspaceAction(let addWorkspaceAction):
         switch addWorkspaceAction {
         case .writeName(let name):
             break
@@ -174,10 +174,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .addWorkspace:
             
-            let imageData = state.addWorkspaceState.selectedImage?.pngData() ?? Data()
+            let imageData = state.modifyWorkspaceState.selectedImageFromGallery?.pngData() ?? Data()
             
             /// 워크스페이스명 유효성 검사
-            let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.addWorkspaceState.name).validation
+            let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.modifyWorkspaceState.name).validation
             
             /// 워크스페이스 커버 이미지 유효성 검사
             let isWorkspaceCoverImageValid = ValidationCheck.workspaceCoverImage(input: imageData).validation
@@ -185,7 +185,65 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             guard isWorkspaceNameValid && isWorkspaceCoverImageValid
             else {
                 return Just(
-                    .addWorkspaceAction(
+                    .modifyWorkspaceAction(
+                        .isValid(
+                            isWorkspaceNameValid: isWorkspaceNameValid,
+                            isWorkspaceCoverImageValid: isWorkspaceCoverImageValid)
+                    )).eraseToAnyPublisher()
+            }
+            
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let image = ImageFile(
+                            imageData: imageData,
+                            name: Date().timeIntervalSince1970.description,
+                            mimeType: .png
+                        )
+                        
+                        let editedWorkspace = try await WorkspaceProvider.shared.editeWorkspace(
+                            workspaceId: state.modifyWorkspaceState.existingWorkspace?.workspaceId ?? "",
+                            name: state.modifyWorkspaceState.name,
+                            description: state.modifyWorkspaceState.description,
+                            image: image
+                        )
+                        guard let editedWorkspace else { return }
+                        print("editedWorkspace", editedWorkspace)
+                        UserDefaultsManager.setObject(editedWorkspace, forKey: .selectedWorkspace)
+//                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .moveToHomeView(let newWorkspace):
+            break
+        case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
+            break
+        case .editWorkspace:
+            
+            let imageData: Data
+            
+            if state.modifyWorkspaceState.selectedImageFromGallery != nil {
+                imageData = state.modifyWorkspaceState.selectedImageFromGallery?.pngData() ?? Data()
+            } else {
+                guard let existingImageURL = URL(string: "\(APIKeys.baseURL)\(state.modifyWorkspaceState.existingWorkspace?.coverImage ?? "")") else {
+                    return Empty().eraseToAnyPublisher()
+                }
+                imageData = ImageCacheManager.shared.get(for: existingImageURL)?.pngData() ?? Data()
+            }
+
+            /// 워크스페이스명 유효성 검사
+            let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.modifyWorkspaceState.name).validation
+            
+            /// 워크스페이스 커버 이미지 유효성 검사
+            let isWorkspaceCoverImageValid = ValidationCheck.workspaceCoverImage(input: imageData).validation
+            
+            guard isWorkspaceNameValid && isWorkspaceCoverImageValid
+            else {
+                return Just(
+                    .modifyWorkspaceAction(
                         .isValid(
                             isWorkspaceNameValid: isWorkspaceNameValid,
                             isWorkspaceCoverImageValid: isWorkspaceCoverImageValid)
@@ -202,22 +260,20 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         
                         let newWorkspace = try await WorkspaceProvider.shared.createWorkspace(
-                            name: state.addWorkspaceState.name,
-                            description: state.addWorkspaceState.description,
+                            name: state.modifyWorkspaceState.name,
+                            description: state.modifyWorkspaceState.description,
                             image: image
                         )
                         guard let newWorkspace else { return }
                         print("workspace", newWorkspace)
                         UserDefaultsManager.setObject(newWorkspace, forKey: .selectedWorkspace)
-                        promise(.success(.addWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
+                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
-        case .moveToHomeView(let newWorkspace):
-            break
-        case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
+        case .initializeAllElements:
             break
         }
         

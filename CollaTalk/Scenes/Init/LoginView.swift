@@ -22,7 +22,7 @@ struct LoginView: View {
             
             VStack(spacing: 24) {
                 
-                NavigationBarForCreatingNewFeature(
+                SheetNavigation(
                     title: .login,
                     isPresented: Binding(
                         get: { store.state.navigationState.isLoginViewPresented },
