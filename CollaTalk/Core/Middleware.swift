@@ -210,7 +210,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let editedWorkspace else { return }
                         print("editedWorkspace", editedWorkspace)
                         UserDefaultsManager.setObject(editedWorkspace, forKey: .selectedWorkspace)
-//                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))

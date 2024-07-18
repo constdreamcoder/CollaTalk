@@ -195,9 +195,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
 
             if !isWorkspaceNameValid {
-                mutatingState.toastMessage = ToastMessage.addWorkspace(.workspaceNameError).message
+                mutatingState.toastMessage = ToastMessage.modifyWorkspace(.workspaceNameError).message
             } else if !isWorkspaceCoverImageValid {
-                mutatingState.toastMessage = ToastMessage.addWorkspace(.noImage).message
+                mutatingState.toastMessage = ToastMessage.modifyWorkspace(.noImage).message
             }
             
             mutatingState.showToast = true
@@ -212,6 +212,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
 
             mutatingState.modifyWorkspaceState.isNameEmpty = true
             mutatingState.modifyWorkspaceState.isDescriptionEmpty = true
+            
+            mutatingState.toastMessage = ToastMessage.modifyWorkspace(.completeEditing).message
+            mutatingState.showToast = true
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
