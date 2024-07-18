@@ -248,15 +248,19 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
+                        
+                        guard let workspace = state.workspaceState.selectedWorkspace else { return }
+                        
                         /// 로그인한 유저가 속한 채널 목록 조회
-                        guard let workspace = state.workspaceState.workspaces.last else { return }
-                        let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(workspaceID: workspace.workspaceId)
-                        
+                        async let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(workspaceID: workspace.workspaceId)
                         /// DM방 목록 조회
-                        let dms = try await WorkspaceProvider.shared.fetchMyDMs(workspaceID: workspace.workspaceId)
+                        async let dms = try await WorkspaceProvider.shared.fetchMyDMs(workspaceID: workspace.workspaceId)
                         
-                        guard let myChannels, let dms else { return }
-                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: myChannels, dms: dms))))
+                        let channelsResult = try await myChannels
+                        let dmsResult = try await dms
+                        
+                        guard let channelsResult, let dmsResult else { return }
+                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dms: dmsResult))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }

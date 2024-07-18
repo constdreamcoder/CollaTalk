@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SideBar: View {
     @EnvironmentObject private var store: AppStore
+    @State private var isDialogPresented = false
+    @State private var dialogWorkspace: Workspace? = nil
     
     private var sideBarWidth = UIScreen.main.bounds.size.width * 0.8
     private var bgColor: Color = .brandWhite
@@ -28,6 +30,18 @@ struct SideBar: View {
             content
         }
         .edgesIgnoringSafeArea(.all)
+        .confirmationDialog("워크스페이스 설정", isPresented: $isDialogPresented) {
+            if dialogWorkspace?.ownerId == store.state.user?.userId {
+                Button("워크스페이스 편집") { print("워크스페이스 편집") }
+                Button("워크스페이스 나가기") { print("워크스페이스 나기기") }
+                Button("워크스페이스 관리자 변경") { print("워크스페이스 삭제") }
+                Button("워크스페이스 삭제", role: .destructive) { print("워크스페이스 삭제") }
+                Button("취소", role: .cancel) { print("취소") }
+            } else {
+                Button("워크스페이스 나가기") { print("워크스페이스 나기기") }
+                Button("취소", role: .cancel) { print("취소") }
+            }
+        }
     }
     
     private var content: some View {
@@ -35,7 +49,10 @@ struct SideBar: View {
             ZStack(alignment: .top) {
                 bgColor
                 
-                SideBarContentView()
+                SideBarContentView(
+                    isDialogPresented: $isDialogPresented,
+                    dialogWorkspace: $dialogWorkspace
+                )
             }
             .frame(width: sideBarWidth)
             .cornerRadius(25, corners: [.topRight, .bottomRight])
@@ -54,6 +71,8 @@ struct SideBar: View {
 struct SideBarContentView: View {
     
     @EnvironmentObject private var store: AppStore
+    @Binding var isDialogPresented: Bool
+    @Binding var dialogWorkspace: Workspace?
     
     var body: some View {
         VStack {
@@ -73,16 +92,20 @@ struct SideBarContentView: View {
                 if store.state.workspaceState.workspaces.count > 0 {
                     List {
                         ForEach(store.state.workspaceState.workspaces, id: \.workspaceId) { workspace in
-                            WorkspaceCell(workspace: workspace)
-                                .listRowInsets(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
-                                .listRowSeparator(.hidden)
+                            WorkspaceCell(
+                                isDialogPresented: $isDialogPresented, 
+                                dialogWorkspace: $dialogWorkspace,
+                                workspace: workspace
+                            )
+                            .listRowInsets(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
+                            .listRowSeparator(.hidden)
                         }
                     }
                     .listStyle(.plain)
                     .listRowSpacing(12)
                     .scrollIndicators(.hidden)
                 } else {
-                    /// 워크스페이스가 0개 이상일 때 뷰
+                    /// 워크스페이스가 0개일 때 뷰
                     VStack {
                         
                         Spacer()
@@ -156,6 +179,8 @@ struct SideBarContentView: View {
 struct WorkspaceCell: View {
     
     @EnvironmentObject private var store: AppStore
+    @Binding var isDialogPresented: Bool
+    @Binding var dialogWorkspace: Workspace?
 
     let workspace: Workspace
     
@@ -191,6 +216,18 @@ struct WorkspaceCell: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(1)
             }
+            
+            Image(systemName: "ellipsis")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20)
+                .padding(.vertical, 20)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    print(workspace.name)
+                    dialogWorkspace = workspace
+                    isDialogPresented = true
+                }
         }
         .padding(8)
         .background(store.state.workspaceState.selectedWorkspace?.name ?? "" == workspace.name ? .brandGray : .clear)

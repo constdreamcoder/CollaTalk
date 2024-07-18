@@ -9,6 +9,7 @@ import UIKit
 import SwiftUI
 
 /// `RemoteImage` 를 위한 이미지 다운로드, 캐싱 Service
+@MainActor
 final class RemoteImageService: ObservableObject {
 
     enum RemoteImageServiceError: Error {
@@ -28,22 +29,20 @@ final class RemoteImageService: ObservableObject {
         
         let url = URL(string: "\(APIKeys.baseURL)\(path)")!
         if let cachedImage = cacheManager.get(for: url) {
+            print("cachedImage", cachedImage)
             state = .image(cachedImage)
             return
         }
-        
+
         do {
             let imageData = try await router.downloadImage(with: path)
             guard let imageData else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                let image = UIImage(data: imageData)
-                if let image {
-                    cacheManager.store(image, for: url)
-                    state = .image(image)
-                } else {
-                    state = .error(RemoteImageServiceError.failToFetchImage)
-                }
+            let image = UIImage(data: imageData)
+            if let image {
+                cacheManager.store(image, for: url)
+                state = .image(image)
+            } else {
+                state = .error(RemoteImageServiceError.failToFetchImage)
             }
         } catch {
             print("Download Image Error", error)

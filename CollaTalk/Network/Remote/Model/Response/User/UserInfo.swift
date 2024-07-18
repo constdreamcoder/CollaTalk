@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserInfo: Codable {
-    let user_id: String
+    let userId: String
     let email: String
     let nickname: String
     let profileImage: String?
@@ -17,8 +17,8 @@ struct UserInfo: Codable {
     let createdAt: String
     let token: Token
     
-    enum CodingKeys: CodingKey {
-        case user_id
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
         case email
         case nickname
         case profileImage
@@ -30,7 +30,7 @@ struct UserInfo: Codable {
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.user_id = try container.decode(String.self, forKey: .user_id)
+        self.userId = try container.decode(String.self, forKey: .userId)
         self.email = try container.decode(String.self, forKey: .email)
         self.nickname = try container.decode(String.self, forKey: .nickname)
         self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage) ?? ""

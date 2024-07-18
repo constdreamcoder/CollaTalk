@@ -60,9 +60,11 @@ struct RemoteImage<
                 }
             }
             .task {
+                print("ios17 task")
                 await service.fetchImage(with: path)
             }
-            .onChange(of: path, initial: false) {
+            .onChange(of: path) {
+                print("ios17 onchange")
                 Task {
                     await service.fetchImage(with: path)
                 }
@@ -82,9 +84,11 @@ struct RemoteImage<
                 }
             }
             .task {
+                print("ios16 task")
                 await service.fetchImage(with: path)
             }
             .onChange(of: path) { newURL in
+                print("ios16 onchange")
                 Task {
                     await service.fetchImage(with: newURL)
                 }

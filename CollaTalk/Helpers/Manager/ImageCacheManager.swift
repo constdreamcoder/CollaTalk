@@ -10,8 +10,8 @@ import UIKit
 public final class ImageCacheManager {
         
     private enum Constants {
-        /// 초기 제약: 1메가바이트
-        static let initialByteLimit = 1 * megaByteUnit
+        /// 초기 제약: 500메가바이트
+        static let initialByteLimit = 500 * megaByteUnit
         static let kiloByteUnit = 1024
         static let megaByteUnit = 1024 * 1024
     }
