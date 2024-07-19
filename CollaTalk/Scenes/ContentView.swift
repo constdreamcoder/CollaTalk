@@ -11,8 +11,8 @@ import Combine
 struct ContentView: View {
     
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var windowProvider: WindowProvider
     
-    @StateObject private var windowProvider = WindowProvider()
     @StateObject private var navigationRouter = NavigationRouter()
     
     var body: some View {
@@ -77,6 +77,15 @@ struct ContentView: View {
             if showToast {
                 windowProvider.showToast(message: store.state.toastMessage)
                 store.dispatch(.dismissToastMessage)
+            }
+        }
+        .onReceive(Just(store.state.showAlert)) { alertType, confirmAction in
+            if alertType != .none {
+                windowProvider.showAlert(
+                    alertType: alertType,
+                    confirmAction: confirmAction
+                )
+                store.dispatch(.alertAction(.initializeAllAlertElements))
             }
         }
         .onReceive(Just(store.state.networkCallSuccessType)) { networkCallSuccessType in

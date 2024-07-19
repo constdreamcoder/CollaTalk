@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SideBar: View {
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var windowProvider: WindowProvider
+
     @State private var isDialogPresented = false
     @State private var dialogWorkspace: Workspace? = nil
     
@@ -36,7 +38,29 @@ struct SideBar: View {
                     print("워크스페이스 편집")
                     store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .edit, selectedWorkspace: dialogWorkspace)))
                 }
-                Button("워크스페이스 나가기") { print("워크스페이스 나기기") }
+                Button("워크스페이스 나가기") {
+                    print("워크스페이스 나가기")
+                    if store.state.user?.userId == store.state.workspaceState.selectedWorkspace?.ownerId {
+                        store.dispatch(
+                            .alertAction(
+                                .showAlert(
+                                    alertType: .leaveWorkspaceAsAnOwner,
+                                    confirmAction: { windowProvider.dismissAlert() }
+                                )
+                            )
+                        )
+                    } else {
+                        print("멤버 나가기")
+                        store.dispatch(
+                            .alertAction(
+                                .showAlert(
+                                    alertType: AlertType.leavetWorkspaceAsAMember,
+                                    confirmAction: { print("멤버로서 워크스페이스 나기기") }
+                                )
+                            )
+                        )
+                    }
+                }
                 Button("워크스페이스 관리자 변경") { print("워크스페이스 삭제") }
                 Button("워크스페이스 삭제", role: .destructive) { print("워크스페이스 삭제") }
                 Button("취소", role: .cancel) { print("취소") }

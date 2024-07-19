@@ -14,6 +14,14 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
     case .dismissToastMessage: break
         
+    case .alertAction(let alertAction):
+        switch alertAction {
+        case .showAlert(let alertType, let confirmAction):
+            break
+        case .initializeAllAlertElements:
+            break
+        }
+   
     case .initializeNetworkCallSuccessType:
         break
         

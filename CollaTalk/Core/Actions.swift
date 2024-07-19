@@ -14,6 +14,7 @@ enum AppAction {
     case modifyWorkspaceAction(ModifyWorkspaceAction)
     case workspaceAction(WorkspaceAction)
     case networkCallSuccessTypeAction(NetworkCallSuccessType)
+    case alertAction(AlertAction)
     case dismissToastMessage
     case initializeNetworkCallSuccessType
     
@@ -72,5 +73,10 @@ enum AppAction {
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
         case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DM])
+    }
+    
+    enum AlertAction {
+        case showAlert(alertType: AlertType, confirmAction: () -> Void)
+        case initializeAllAlertElements
     }
 }

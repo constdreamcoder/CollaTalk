@@ -151,7 +151,6 @@ struct ModifyWorkspaceView: View {
             }
         }
         .onDisappear {
-            // TODO: - 모든 값 초기화하기
             store.dispatch(.modifyWorkspaceAction(.initializeAllElements))
         }
         .fullScreenCover(

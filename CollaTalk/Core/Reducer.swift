@@ -16,6 +16,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
         
+    case .alertAction(let alertAction):
+        switch alertAction {
+        case .showAlert(let alertType, let confirmAction):
+            mutatingState.showAlert = (alertType, confirmAction)
+        case .initializeAllAlertElements:
+            mutatingState.showAlert = (.none, {})
+        }
+        
     case .dismissToastMessage:
         mutatingState.showToast = false
         

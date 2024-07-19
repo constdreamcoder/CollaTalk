@@ -46,6 +46,7 @@
 		006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMsParams.swift */; };
 		006060C32C450C3D001D300F /* DM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C22C450C3D001D300F /* DM.swift */; };
 		006060C52C450D83001D300F /* FetchDMsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C42C450D83001D300F /* FetchDMsError.swift */; };
+		0070E7132C4A01D4009058EA /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E7122C4A01D4009058EA /* AlertView.swift */; };
 		007441A52C465AEE00FA8727 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A42C465AEE00FA8727 /* ImageService.swift */; };
 		007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A62C465E8E00FA8727 /* ImageProvider.swift */; };
 		007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A82C465F9500FA8727 /* ImageCacheManager.swift */; };
@@ -128,6 +129,7 @@
 		006060C02C450BF5001D300F /* FetchDMsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsParams.swift; sourceTree = "<group>"; };
 		006060C22C450C3D001D300F /* DM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DM.swift; sourceTree = "<group>"; };
 		006060C42C450D83001D300F /* FetchDMsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsError.swift; sourceTree = "<group>"; };
+		0070E7122C4A01D4009058EA /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		007441A42C465AEE00FA8727 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		007441A62C465E8E00FA8727 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		007441A82C465F9500FA8727 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				0086B5C42C38089F00AD889C /* InputView.swift */,
 				00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */,
 				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
+				0070E7122C4A01D4009058EA /* AlertView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 			files = (
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
+				0070E7132C4A01D4009058EA /* AlertView.swift in Sources */,
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
 				000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */,
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,

@@ -13,6 +13,7 @@ struct AppState {
     var showToast: Bool = false
     var toastMessage: String = ""
     var isLoading: Bool = false
+    var showAlert: (alertType: AlertType, confirmAction: () -> Void) = (.none, {})
     var networkCallSuccessType: PathType = .none
     
     var navigationState = NavigationState()
