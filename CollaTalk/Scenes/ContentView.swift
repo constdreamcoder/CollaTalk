@@ -52,6 +52,14 @@ struct ContentView: View {
             ) {
                 ModifyWorkspaceView()
             }
+            .sheet(
+                isPresented: Binding(
+                    get: { store.state.navigationState.isChangeWorkspaceOwnerViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentChangeWorkspaceOwnerView(present: $0))) }
+                )
+            ) {
+               ChangeWorkspaceOwnerView()
+            }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
                 case .startView:

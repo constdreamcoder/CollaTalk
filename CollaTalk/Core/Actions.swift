@@ -31,6 +31,7 @@ enum AppAction {
         case presentSignUpView(present: Bool)
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
+        case presentChangeWorkspaceOwnerView(present: Bool)
     }
     
     enum LoginAction {

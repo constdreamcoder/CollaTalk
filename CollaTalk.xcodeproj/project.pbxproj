@@ -72,6 +72,7 @@
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
 		00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF892C3C42DB00D25633 /* CommonError.swift */; };
 		00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */; };
+		00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9DFC2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift */; };
 		00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */; };
 		00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6932C43759700E7EA56 /* SideBar.swift */; };
 		00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6952C438BB000E7EA56 /* MainView.swift */; };
@@ -158,6 +159,7 @@
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		00DFAF892C3C42DB00D25633 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
+		00ED9DFC2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWorkspaceOwnerView.swift; sourceTree = "<group>"; };
 		00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNaigationBar.swift; sourceTree = "<group>"; };
 		00F1B6932C43759700E7EA56 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		00F1B6952C438BB000E7EA56 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 			children = (
 				00318EE42C3F7538003206CB /* WorkspaceStartView.swift */,
 				00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */,
+				00ED9DFC2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
+				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,

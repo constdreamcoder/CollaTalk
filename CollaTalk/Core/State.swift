@@ -29,6 +29,7 @@ struct AppState {
         var isModifyWorkspaceViewPresented: Bool = false
         var isSidebarVisible: Bool = false
         var showImagePicker: Bool = false
+        var isChangeWorkspaceOwnerViewPresented: Bool = false
     }
    
     struct LoginState {

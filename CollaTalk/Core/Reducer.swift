@@ -50,6 +50,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
         case .showImagePickerView(let show):
             mutatingState.navigationState.showImagePicker = show
+        case .presentChangeWorkspaceOwnerView(let present):
+            mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
         }
             
     case .loginAction(let loginAction):

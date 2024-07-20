@@ -15,6 +15,7 @@ struct SheetNavigation: View {
         case workspaceInit = "시작하기"
         case createWorkspace = "워크스페이스 생성"
         case editWorkspace = "워크스페이스 편집"
+        case changeWorkspaceOwner = "워크스페이스 관리자 변경"
     }
     
     let title: Feature
@@ -64,7 +65,7 @@ struct SheetNavigation: View {
                 }
             }
             
-            Divider()
+            Divider()            
         }
         .background(.brandWhite)
     }

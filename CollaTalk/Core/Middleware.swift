@@ -48,6 +48,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .showImagePickerView(let show):
             break
+        case .presentChangeWorkspaceOwnerView(let present):
+            break
         }
         
     case .loginAction(let loginAction):
