@@ -13,9 +13,9 @@ struct AppState {
     var showToast: Bool = false
     var toastMessage: String = ""
     var isLoading: Bool = false
-    var showAlert: (alertType: AlertType, confirmAction: () -> Void) = (.none, {})
     var networkCallSuccessType: PathType = .none
     
+    var alertState = AlertState()
     var navigationState = NavigationState()
     var loginState = LoginState()
     var signUpState = SignUpState()
@@ -76,5 +76,10 @@ struct AppState {
         var workspaces: [Workspace] = []
         var myChannels: [Channel] = []
         var dms: [DM] = []
+    }
+    
+    struct AlertState {
+        var showAlert: (alertType: AlertType, confirmAction: () -> Void) = (.none, {})
+        var dismissAlert: Bool = false
     }
 }

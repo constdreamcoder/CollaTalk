@@ -19,6 +19,9 @@
 		002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* JoinError.swift */; };
 		002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066FA2C3ED63D007E76BD /* JoinRequest.swift */; };
 		002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066FC2C3EDC67007E76BD /* Error+Ext.swift */; };
+		0020887D2C4B6FD00094E3B6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020887C2C4B6FD00094E3B6 /* AlertType.swift */; };
+		002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */; };
+		002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */; };
 		00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE42C3F7538003206CB /* WorkspaceStartView.swift */; };
 		00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE62C3F8115003206CB /* NavigationRouter.swift */; };
 		00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */; };
@@ -103,6 +106,9 @@
 		002066F72C3EC3E8007E76BD /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		002066FA2C3ED63D007E76BD /* JoinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequest.swift; sourceTree = "<group>"; };
 		002066FC2C3EDC67007E76BD /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
+		0020887C2C4B6FD00094E3B6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteWorkspaceParams.swift; sourceTree = "<group>"; };
+		002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteWorkspaceError.swift; sourceTree = "<group>"; };
 		00318EE42C3F7538003206CB /* WorkspaceStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceStartView.swift; sourceTree = "<group>"; };
 		00318EE62C3F8115003206CB /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWorkspaceView.swift; sourceTree = "<group>"; };
@@ -228,6 +234,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		0020887E2C4B6FE20094E3B6 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				0070E7122C4A01D4009058EA /* AlertView.swift */,
+				0020887C2C4B6FD00094E3B6 /* AlertType.swift */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
 		0034AC142C44BE580052EE0D /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +250,7 @@
 				006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */,
 				006060C42C450D83001D300F /* FetchDMsError.swift */,
 				000CDD802C490947001F6085 /* EditeWorkspaceError.swift */,
+				002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -245,6 +261,7 @@
 				0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */,
 				006060C02C450BF5001D300F /* FetchDMsParams.swift */,
 				000CDD772C490788001F6085 /* EditWorkspaceParams.swift */,
+				0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -399,7 +416,6 @@
 			isa = PBXGroup;
 			children = (
 				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
-				0018096B2C46A7B200F41D50 /* RemoteImage */,
 				001809722C46DB8100F41D50 /* Manager */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
@@ -420,7 +436,8 @@
 				0086B5C42C38089F00AD889C /* InputView.swift */,
 				00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */,
 				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
-				0070E7122C4A01D4009058EA /* AlertView.swift */,
+				0020887E2C4B6FE20094E3B6 /* AlertView */,
+				0018096B2C46A7B200F41D50 /* RemoteImage */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -761,6 +778,7 @@
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
 				0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
+				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
@@ -773,6 +791,7 @@
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				0020887D2C4B6FD00094E3B6 /* AlertType.swift in Sources */,
 				006060C52C450D83001D300F /* FetchDMsError.swift in Sources */,
 				00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */,
 				00F6F2CB2C3C13F700C1AFF1 /* LoginRequest.swift in Sources */,
@@ -784,6 +803,7 @@
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
+				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,

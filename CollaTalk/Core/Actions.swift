@@ -73,6 +73,7 @@ enum AppAction {
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
         case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DM])
+        case deleteWorkspace(workspace: Workspace?)
     }
     
     enum AlertAction {

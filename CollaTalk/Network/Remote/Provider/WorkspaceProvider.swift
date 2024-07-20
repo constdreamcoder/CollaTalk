@@ -106,7 +106,7 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         return nil
     }
     
-    func editeWorkspace(workspaceId: String, name: String ,description: String?, image: ImageFile) async throws -> Workspace? {
+    func editWorkspace(workspaceId: String, name: String ,description: String?, image: ImageFile) async throws -> Workspace? {
         let editWorkspaceParams = EditWorkspaceParams(workspaceID: workspaceId)
         let editWorkspaceRequest = EditWorkspaceRequest(name: name, description: description, image: image)
         do {
@@ -129,5 +129,25 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         }
         
         return nil
+    }
+    
+    func deleteWorkspace(workspaceId: String) async throws {
+        let deleteWorkspaceParams = DeleteWorkspaceParams(workspaceID: workspaceId)
+        do {
+            let response = try await request(.deleteWorkspace(params: deleteWorkspaceParams))
+            switch response.statusCode {
+            case 200: print("워크스페이스 삭제 완료")
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let deleteWorkspaceError = DeleteWorkspaceError(rawValue: errorCode.errorCode) {
+                    throw deleteWorkspaceError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
     }
 }

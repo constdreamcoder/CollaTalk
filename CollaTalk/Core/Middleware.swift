@@ -209,15 +209,14 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             mimeType: .png
                         )
                         
-                        let editedWorkspace = try await WorkspaceProvider.shared.editeWorkspace(
-                            workspaceId: state.modifyWorkspaceState.existingWorkspace?.workspaceId ?? "",
+                        let newWorkspace = try await WorkspaceProvider.shared.createWorkspace(
                             name: state.modifyWorkspaceState.name,
                             description: state.modifyWorkspaceState.description,
                             image: image
                         )
-                        guard let editedWorkspace else { return }
-                        print("editedWorkspace", editedWorkspace)
-                        UserDefaultsManager.setObject(editedWorkspace, forKey: .selectedWorkspace)
+                        guard let newWorkspace else { return }
+                        print("newWorkspace", newWorkspace)
+                        UserDefaultsManager.setObject(newWorkspace, forKey: .selectedWorkspace)
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
@@ -266,15 +265,16 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             mimeType: .png
                         )
                         
-                        let newWorkspace = try await WorkspaceProvider.shared.createWorkspace(
+                        let updatedWorkspace = try await WorkspaceProvider.shared.editWorkspace(
+                            workspaceId: state.modifyWorkspaceState.existingWorkspace?.workspaceId ?? "",
                             name: state.modifyWorkspaceState.name,
                             description: state.modifyWorkspaceState.description,
                             image: image
                         )
-                        guard let newWorkspace else { return }
-                        print("workspace", newWorkspace)
-                        UserDefaultsManager.setObject(newWorkspace, forKey: .selectedWorkspace)
-                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: newWorkspace))))
+                        guard let updatedWorkspace else { return }
+                        print("updatedWorkspace", updatedWorkspace)
+                        UserDefaultsManager.setObject(updatedWorkspace, forKey: .selectedWorkspace)
+                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: updatedWorkspace))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }
@@ -294,8 +294,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let workspaces else { return }
                         
                         if workspaces.count == 0 {
+                            UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
                             promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
                         } else if workspaces.count >= 1 {
+                            if let selectedWorkspace = workspaces.first {
+                                UserDefaultsManager.setObject(selectedWorkspace, forKey: .selectedWorkspace)
+                            }
                             promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
                         }
                     } catch {
@@ -331,6 +335,22 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
             break
+        case .deleteWorkspace(let workspace):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 워크스페이스 삭제
+                        guard let workspace else { return }
+                        try await WorkspaceProvider.shared.deleteWorkspace(workspaceId: workspace.workspaceId)
+                        
+                        /// 이전 선택된 워크스페이스 UserDefaults에서 제거
+                        UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     }
     

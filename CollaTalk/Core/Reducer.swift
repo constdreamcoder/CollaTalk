@@ -19,9 +19,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .alertAction(let alertAction):
         switch alertAction {
         case .showAlert(let alertType, let confirmAction):
-            mutatingState.showAlert = (alertType, confirmAction)
+            mutatingState.alertState.showAlert = (alertType, confirmAction)
         case .initializeAllAlertElements:
-            mutatingState.showAlert = (.none, {})
+            mutatingState.alertState.showAlert = (.none, {})
+            mutatingState.alertState.dismissAlert = false
         }
         
     case .dismissToastMessage:
@@ -228,6 +229,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch workspaceAction {
         case .fetchWorkspaces:
             mutatingState.user = UserDefaultsManager.getObject(forKey: .userInfo, as: UserInfo.self)
+            
+            mutatingState.alertState.dismissAlert = true
+            
             mutatingState.isLoading = true
         case .workspaceError(let error):
             if let error = error as? CommonError {
@@ -256,7 +260,36 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .lackOfCoins:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? FetchMyChannelsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchDMsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? EditeWorkspaceError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                case .noAccess:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? DeleteWorkspaceError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                case .noAccess:
+                    print(error.localizedDescription)
+                }
             }
+            
             mutatingState.isLoading = false
 
         case .toggleSideBarAction:
@@ -266,18 +299,21 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
             mutatingState.workspaceState.myChannels = myChennels
             mutatingState.workspaceState.dms = dms
-            
+                        
             mutatingState.isLoading = false
+        case .deleteWorkspace(let workspace):
+            mutatingState.isLoading = true
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {
         case .setStartView: break
         case .setHomeEmptyView:
             mutatingState.networkCallSuccessType = .homeView
+            mutatingState.workspaceState.selectedWorkspace = nil
         case .setHomeDefaultView(let workspaces):
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
-            mutatingState.workspaceState.selectedWorkspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) ?? workspaces.first
+            mutatingState.workspaceState.selectedWorkspace = workspaces.first
         case .setNone: break
         }
         mutatingState.isLoading = false

@@ -30,4 +30,8 @@ struct UserDefaultsManager {
         let decoder = JSONDecoder()
         return try? decoder.decode(T.self, from: data)
     }
+    
+    static func removeObject(forKey key: Key) {
+        standard.removeObject(forKey: key.rawValue)
+    }
 }

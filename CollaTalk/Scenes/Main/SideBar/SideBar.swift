@@ -36,36 +36,54 @@ struct SideBar: View {
             if dialogWorkspace?.ownerId == store.state.user?.userId {
                 Button("워크스페이스 편집") {
                     print("워크스페이스 편집")
-                    store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: true, workspaceModificationType: .edit, selectedWorkspace: dialogWorkspace)))
+                    store.dispatch(
+                        .navigationAction(
+                            .presentModifyWorkspaceView(
+                                present: true,
+                                workspaceModificationType: .edit,
+                                selectedWorkspace: dialogWorkspace
+                            )
+                        )
+                    )
                 }
                 Button("워크스페이스 나가기") {
                     print("워크스페이스 나가기")
-                    if store.state.user?.userId == store.state.workspaceState.selectedWorkspace?.ownerId {
-                        store.dispatch(
-                            .alertAction(
-                                .showAlert(
-                                    alertType: .leaveWorkspaceAsAnOwner,
-                                    confirmAction: { windowProvider.dismissAlert() }
-                                )
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .leaveWorkspaceAsAnOwner,
+                                confirmAction: { windowProvider.dismissAlert() }
                             )
                         )
-                    } else {
-                        print("멤버 나가기")
-                        store.dispatch(
-                            .alertAction(
-                                .showAlert(
-                                    alertType: AlertType.leavetWorkspaceAsAMember,
-                                    confirmAction: { print("멤버로서 워크스페이스 나기기") }
-                                )
-                            )
-                        )
-                    }
+                    )
                 }
-                Button("워크스페이스 관리자 변경") { print("워크스페이스 삭제") }
-                Button("워크스페이스 삭제", role: .destructive) { print("워크스페이스 삭제") }
+                Button("워크스페이스 관리자 변경") { print("워크스페이스 관리자 변경") }
+                Button("워크스페이스 삭제", role: .destructive) {
+                    print("워크스페이스 삭제")
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .deleteWorkspace,
+                                confirmAction: {
+                                    store.dispatch(.workspaceAction(.deleteWorkspace(workspace: dialogWorkspace)))
+                                }
+                            )
+                        )
+                    )
+                }
                 Button("취소", role: .cancel) { print("취소") }
             } else {
-                Button("워크스페이스 나가기") { print("워크스페이스 나기기") }
+                Button("워크스페이스 나가기") {
+                    print("워크스페이스 나가기")
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .leavetWorkspaceAsAMember,
+                                confirmAction: { print("멤버로서 워크스페이스 나기기") }
+                            )
+                        )
+                    )
+                }
                 Button("취소", role: .cancel) { print("취소") }
             }
         }

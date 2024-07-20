@@ -79,7 +79,12 @@ struct ContentView: View {
                 store.dispatch(.dismissToastMessage)
             }
         }
-        .onReceive(Just(store.state.showAlert)) { alertType, confirmAction in
+        .onReceive(Just(store.state.alertState.dismissAlert)) { dismissAlert in
+            if dismissAlert {
+                windowProvider.dismissAlert()
+            }
+        }
+        .onReceive(Just(store.state.alertState.showAlert)) { alertType, confirmAction in
             if alertType != .none {
                 windowProvider.showAlert(
                     alertType: alertType,
