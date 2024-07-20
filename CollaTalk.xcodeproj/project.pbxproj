@@ -11,7 +11,7 @@
 		000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */; };
 		000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */; };
 		000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7E2C49082E001F6085 /* ImageFile.swift */; };
-		000CDD812C490947001F6085 /* EditeWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD802C490947001F6085 /* EditeWorkspaceError.swift */; };
+		000CDD812C490947001F6085 /* EditWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD802C490947001F6085 /* EditWorkspaceError.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
@@ -98,7 +98,7 @@
 		000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceRequest.swift; sourceTree = "<group>"; };
 		000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartFormKey.swift; sourceTree = "<group>"; };
 		000CDD7E2C49082E001F6085 /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
-		000CDD802C490947001F6085 /* EditeWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditeWorkspaceError.swift; sourceTree = "<group>"; };
+		000CDD802C490947001F6085 /* EditWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceError.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 				0034AC152C44BE740052EE0D /* CreateWorkspaceError.swift */,
 				006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */,
 				006060C42C450D83001D300F /* FetchDMsError.swift */,
-				000CDD802C490947001F6085 /* EditeWorkspaceError.swift */,
+				000CDD802C490947001F6085 /* EditWorkspaceError.swift */,
 				002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */,
 			);
 			path = Workspace;
@@ -820,7 +820,7 @@
 				002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */,
 				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,
 				0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */,
-				000CDD812C490947001F6085 /* EditeWorkspaceError.swift in Sources */,
+				000CDD812C490947001F6085 /* EditWorkspaceError.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 			);

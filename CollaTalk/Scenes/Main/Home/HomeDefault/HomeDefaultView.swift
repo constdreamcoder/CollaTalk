@@ -27,9 +27,6 @@ struct HomeDefaultView: View {
         .overlay(alignment: .bottomTrailing) {
             NewMessageButton()
         }
-        .task {
-            store.dispatch(.workspaceAction(.fetchHomeDefaultViewDatas))
-        }
     }
 }
 

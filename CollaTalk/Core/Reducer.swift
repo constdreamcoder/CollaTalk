@@ -189,16 +189,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.modifyWorkspaceState.isDescriptionEmpty = description.isEmpty
         case .selectImage(let imageData):
             mutatingState.modifyWorkspaceState.selectedImageFromGallery = imageData
-            mutatingState.modifyWorkspaceState.existingWorkspace = nil
+            mutatingState.modifyWorkspaceState.existingWorkspace?.coverImage = ""
         case .addWorkspace:
             mutatingState.isLoading = true
-        case .moveToHomeView(let newWorkspace):
-            mutatingState.workspaceState.workspaces.insert(newWorkspace, at: 0)
-            mutatingState.workspaceState.selectedWorkspace = newWorkspace
-            
-            mutatingState.isLoading = false
-            
-            mutatingState.networkCallSuccessType = .homeView
         case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
             
             mutatingState.isLoading = false
@@ -270,7 +263,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
-            } else if let error = error as? EditeWorkspaceError {
+            } else if let error = error as? EditWorkspaceError {
                 switch error {
                 case .badRequest:
                     print(error.localizedDescription)

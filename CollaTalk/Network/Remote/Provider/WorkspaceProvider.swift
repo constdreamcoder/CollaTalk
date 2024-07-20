@@ -119,7 +119,7 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                } else if let editeWorkspaceError = EditeWorkspaceError(rawValue: errorCode.errorCode) {
+                } else if let editeWorkspaceError = EditWorkspaceError(rawValue: errorCode.errorCode) {
                     throw editeWorkspaceError
                 }
             default: break

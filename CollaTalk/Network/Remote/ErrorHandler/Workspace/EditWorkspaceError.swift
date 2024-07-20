@@ -1,5 +1,5 @@
 //
-//  EditeWorkspaceError.swift
+//  EditWorkspaceError.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/18/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EditeWorkspaceError: String, LocalizedError {
+enum EditWorkspaceError: String, LocalizedError {
     case badRequest = "E11"
     case duplicatedData = "E12"
     case noData = "E13"

@@ -45,7 +45,7 @@ struct ModifyWorkspaceView: View {
                     transitionAction: {})
                 
                 // TODO: - 추후 리팩토링
-                if store.state.modifyWorkspaceState.existingWorkspace == nil {
+                if store.state.modifyWorkspaceState.existingWorkspace?.coverImage == "" {
                     Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
                         .resizable()
                         .aspectRatio(1.0, contentMode: .fit)

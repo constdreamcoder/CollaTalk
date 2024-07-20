@@ -62,7 +62,6 @@ enum AppAction {
         case writeDescription(description: String)
         case addWorkspace
         case editWorkspace
-        case moveToHomeView(newWorkspace: Workspace)
         case isValid(isWorkspaceNameValid: Bool, isWorkspaceCoverImageValid: Bool)
         case initializeAllElements
     }

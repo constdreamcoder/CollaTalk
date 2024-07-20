@@ -29,7 +29,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         switch networkCallSuccessTypeAction {
         case .setStartView: break
         case .setHomeEmptyView: break
-        case .setHomeDefaultView(let workspaces): break
+        case .setHomeDefaultView(let workspaces):
+            if workspaces.count > 0 {
+                return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
+            }
         case .setNone: break
         }
         
@@ -223,8 +226,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-        case .moveToHomeView(let newWorkspace):
-            break
         case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
             break
         case .editWorkspace:
@@ -274,7 +275,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let updatedWorkspace else { return }
                         print("updatedWorkspace", updatedWorkspace)
                         UserDefaultsManager.setObject(updatedWorkspace, forKey: .selectedWorkspace)
-                        promise(.success(.modifyWorkspaceAction(.moveToHomeView(newWorkspace: updatedWorkspace))))
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }

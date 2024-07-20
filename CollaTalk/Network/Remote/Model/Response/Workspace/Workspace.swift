@@ -11,7 +11,7 @@ struct Workspace: Codable {
     let workspaceId: String
     let name: String
     let description: String?
-    let coverImage: String
+    var coverImage: String
     let ownerId: String
     let createdAt: String
     
