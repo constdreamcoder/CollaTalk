@@ -171,6 +171,30 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         } catch {
             throw error
         }
+        return nil
+    }
+    
+    func transferWorkspaceOnwnership(workspaceID: String, memberID: String) async throws -> Workspace? {
+        let transferWorkspaceOwnershipParams = TransferWorkspaceOwnershipParams(workspaceID: workspaceID)
+        let transferWorkspaceOwnershipRequest = TransferWorkspaceOwnershipRequest(owner_id: memberID)
+        do {
+            let response = try await request(.transferWorkspaceOwnership(params: transferWorkspaceOwnershipParams, request: transferWorkspaceOwnershipRequest))
+            switch response.statusCode {
+            case 200:
+                let updateWorkspace = try decode(response.data, as: Workspace.self)
+                return updateWorkspace
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let transferWorkspaceOwnershipError = TransferWorkspaceOwnershipError(rawValue: errorCode.errorCode) {
+                    throw transferWorkspaceOwnershipError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
         
         return nil
     }

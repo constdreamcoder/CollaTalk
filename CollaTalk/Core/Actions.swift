@@ -84,7 +84,11 @@ enum AppAction {
     
     enum ChangeWorkspaceOwnerAction {
         case fetchWorkspaceMember(workspace: Workspace?)
-        case configureChangeWorkspaceOwnerView(workspaceMembers: [WorkspaceMember])
+        case showToChangeWorkspaceOwnerView(workspaceMembers: [WorkspaceMember])
         case changeWorkspaceOwnerError(Error)
+        case changeWorkspaceOwnerShip(member: WorkspaceMember)
+        case fetchWorkspaceAfterUpdatingWorkspaceOwnership
+        case returnToSideBar(updatedWorkspaces: [Workspace])
+        case initializeAllElements
     }
 }

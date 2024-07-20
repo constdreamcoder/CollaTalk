@@ -15,6 +15,7 @@ enum ToastMessage: ToastMessageType {
     case login(Login)
     case signUp(SignUp)
     case modifyWorkspace(ModifyWorkspace)
+    case changeWorkspaceOwner(ChangeWorkspaceOwner)
     
     var message: String {
         switch self {
@@ -24,6 +25,8 @@ enum ToastMessage: ToastMessageType {
             return signUp.message
         case .modifyWorkspace(let modifyWorkspace):
             return modifyWorkspace.message
+        case .changeWorkspaceOwner(let changeWorkspaceOwner):
+            return changeWorkspaceOwner.message
         }
     }
     
@@ -100,6 +103,16 @@ enum ToastMessage: ToastMessageType {
                 return "워크스페이스가 편집되었습니다."
             }
         }
+    }
+    
+    enum ChangeWorkspaceOwner: ToastMessageType {
+        case completeOwnershipTransfer
         
+        var message: String {
+            switch self {
+            case .completeOwnershipTransfer:
+                return "워크스페이스 관리자가 변경되었습니다."
+            }
+        }
     }
 }

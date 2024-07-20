@@ -76,6 +76,9 @@
 		00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9DFE2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift */; };
 		00ED9E012C4BC07400DF5AE7 /* WorkspaceMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9E002C4BC07400DF5AE7 /* WorkspaceMember.swift */; };
 		00ED9E032C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9E022C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift */; };
+		00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9E042C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift */; };
+		00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9E062C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift */; };
+		00ED9E092C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED9E082C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift */; };
 		00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */; };
 		00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6932C43759700E7EA56 /* SideBar.swift */; };
 		00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6952C438BB000E7EA56 /* MainView.swift */; };
@@ -166,6 +169,9 @@
 		00ED9DFE2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchWorkspaceMembersParams.swift; sourceTree = "<group>"; };
 		00ED9E002C4BC07400DF5AE7 /* WorkspaceMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceMember.swift; sourceTree = "<group>"; };
 		00ED9E022C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchWorkspaceMembersError.swift; sourceTree = "<group>"; };
+		00ED9E042C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferWorkspaceOwnershipParams.swift; sourceTree = "<group>"; };
+		00ED9E062C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferWorkspaceOwnershipRequest.swift; sourceTree = "<group>"; };
+		00ED9E082C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferWorkspaceOwnershipError.swift; sourceTree = "<group>"; };
 		00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNaigationBar.swift; sourceTree = "<group>"; };
 		00F1B6932C43759700E7EA56 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		00F1B6952C438BB000E7EA56 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 				000CDD802C490947001F6085 /* EditWorkspaceError.swift */,
 				002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */,
 				00ED9E022C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift */,
+				00ED9E082C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 				000CDD772C490788001F6085 /* EditWorkspaceParams.swift */,
 				0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */,
 				00ED9DFE2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift */,
+				00ED9E042C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -281,6 +289,7 @@
 			children = (
 				0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */,
 				000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */,
+				00ED9E062C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -756,6 +765,7 @@
 			files = (
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
+				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
 				0070E7132C4A01D4009058EA /* AlertView.swift in Sources */,
 				00ED9E012C4BC07400DF5AE7 /* WorkspaceMember.swift in Sources */,
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
@@ -806,6 +816,7 @@
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				00ED9E092C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift in Sources */,
 				0020887D2C4B6FD00094E3B6 /* AlertType.swift in Sources */,
 				006060C52C450D83001D300F /* FetchDMsError.swift in Sources */,
 				00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */,
@@ -824,6 +835,7 @@
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
+				00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				006060C32C450C3D001D300F /* DM.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,

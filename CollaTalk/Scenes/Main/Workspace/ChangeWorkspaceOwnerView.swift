@@ -38,6 +38,25 @@ struct ChangeWorkspaceOwnerView: View {
                                 .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    store.dispatch(
+                                        .alertAction(
+                                            .showAlert(
+                                                alertType: .changeWorkspaceOwner(newOwner: workspaceMember.nickname),
+                                                confirmAction: { 
+                                                    store.dispatch(
+                                                        .changeWorkspaceOwnerAction(
+                                                            .changeWorkspaceOwnerShip(
+                                                                member: workspaceMember
+                                                            )
+                                                        )
+                                                    )
+                                                }
+                                            )
+                                        )
+                                    )
+                                }
                         }
                     }
                 }
@@ -46,6 +65,9 @@ struct ChangeWorkspaceOwnerView: View {
                 
                 Spacer()
             }
+        }
+        .onDisappear {
+            store.dispatch(.changeWorkspaceOwnerAction(.initializeAllElements))
         }
         /// iOS 17이상  대응
         .onChange(of: store.state.changeWorkspaceOwnerState.workspaceMembers) {
@@ -62,20 +84,21 @@ struct ChangeWorkspaceOwnerView: View {
                     )
                 }
         }
+        // TODO: - iOS 17이하 버전 대응
         /// iOS 17이하 대응
-        .onChange(of: store.state.changeWorkspaceOwnerState.workspaceMembers) { workspaceMembers in
-            /// 관리자를 제외한 워크스페이스 멤버 수가 없을 때
-            if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
-                store.dispatch(
-                    .alertAction(
-                        .showAlert(
-                            alertType: .unableToChangeWorkspaceOwner,
-                            confirmAction: { windowProvider.dismissAlert() }
-                        )
-                    )
-                )
-            }
-        }
+//        .onChange(of: store.state.changeWorkspaceOwnerState.workspaceMembers) { workspaceMembers in
+//            /// 관리자를 제외한 워크스페이스 멤버 수가 없을 때
+//            if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
+//                store.dispatch(
+//                    .alertAction(
+//                        .showAlert(
+//                            alertType: .unableToChangeWorkspaceOwner,
+//                            confirmAction: { windowProvider.dismissAlert() }
+//                        )
+//                    )
+//                )
+//            }
+//        }
     }
 }
 

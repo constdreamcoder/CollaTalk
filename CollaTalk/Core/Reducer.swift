@@ -315,8 +315,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
         switch changeWorkspaceOwnerAction {
         case .fetchWorkspaceMember(let workspace):
+            mutatingState.changeWorkspaceOwnerState.selectedWorkspace = workspace
             mutatingState.isLoading = true
-        case .configureChangeWorkspaceOwnerView(let workspaceMembers):
+        case .showToChangeWorkspaceOwnerView(let workspaceMembers):
             mutatingState.changeWorkspaceOwnerState.workspaceMembers = workspaceMembers
             
             mutatingState.isLoading = false
@@ -347,6 +348,22 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.isLoading = false
 
+        case .changeWorkspaceOwnerShip(let member):
+            mutatingState.isLoading = true
+        case .fetchWorkspaceAfterUpdatingWorkspaceOwnership:
+            mutatingState.isLoading = true
+            break
+        case .returnToSideBar(let updatedWorkspaces):
+            mutatingState.workspaceState.workspaces = updatedWorkspaces
+            mutatingState.isLoading = false
+            mutatingState.alertState.dismissAlert = true
+            mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = false
+            
+            mutatingState.toastMessage = ToastMessage.changeWorkspaceOwner(.completeOwnershipTransfer).message
+            mutatingState.showToast = true
+        case .initializeAllElements:
+            mutatingState.changeWorkspaceOwnerState.selectedWorkspace = nil
+            mutatingState.changeWorkspaceOwnerState.workspaceMembers = []
         }
     }
     return mutatingState

@@ -86,6 +86,7 @@ struct AppState {
     }
     
     struct ChangeWorkspaceOwnerState {
+        var selectedWorkspace: Workspace? = nil
         var workspaceMembers: [WorkspaceMember] = []
     }
 }

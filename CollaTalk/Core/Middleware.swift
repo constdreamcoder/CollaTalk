@@ -363,21 +363,57 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
-                        
                         /// 워크스페이스 멤버 조회
                         guard let workspace else { return }
                         let workspaceMemebers = try await WorkspaceProvider.shared.fetchWorkspaceMembers(workspaceID: workspace.workspaceId)
                         
                         guard let workspaceMemebers else { return }
-                        promise(.success(.changeWorkspaceOwnerAction(.configureChangeWorkspaceOwnerView(workspaceMembers: workspaceMemebers))))
+                        promise(.success(.changeWorkspaceOwnerAction(.showToChangeWorkspaceOwnerView(workspaceMembers: workspaceMemebers))))
                     } catch {
                         promise(.success(.changeWorkspaceOwnerAction(.changeWorkspaceOwnerError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
-        case .configureChangeWorkspaceOwnerView(let workspaceMembers):
+        case .showToChangeWorkspaceOwnerView(let workspaceMembers):
             break
         case .changeWorkspaceOwnerError(let error):
+            break
+        case .changeWorkspaceOwnerShip(let member):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 워크스페이스 관리자 변경
+                        guard let workspace = state.changeWorkspaceOwnerState.selectedWorkspace else { return }
+                        let updatedWorkspace = try await WorkspaceProvider.shared.transferWorkspaceOnwnership(
+                            workspaceID: workspace.workspaceId,
+                            memberID: member.userId
+                        )
+                        
+                        guard let updatedWorkspace else { return }
+                        promise(.success(.changeWorkspaceOwnerAction(.fetchWorkspaceAfterUpdatingWorkspaceOwnership)))
+                    } catch {
+                        promise(.success(.changeWorkspaceOwnerAction(.changeWorkspaceOwnerError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .fetchWorkspaceAfterUpdatingWorkspaceOwnership:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 워크스페이스 관리자 변경 후, 업데이트된 워크스페이스 목록 조회
+                        let updatedWorkspaces = try await WorkspaceProvider.shared.fetchWorkspaces()
+                        guard let updatedWorkspaces else { return }
+                        
+                        promise(.success(.changeWorkspaceOwnerAction(.returnToSideBar(updatedWorkspaces: updatedWorkspaces))))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+            
+        case .returnToSideBar(let updatedWorkspaces):
+            break
+        case .initializeAllElements:
             break
         }
     }
