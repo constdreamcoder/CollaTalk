@@ -296,8 +296,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.dms = dms
                         
             mutatingState.isLoading = false
+            
+            mutatingState.navigationState.isSidebarVisible = false
+            
         case .deleteWorkspace(let workspace):
             mutatingState.isLoading = true
+        case .selectWorkspace(let workspace):
+            mutatingState.workspaceState.selectedWorkspace = workspace
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {

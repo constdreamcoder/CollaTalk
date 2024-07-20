@@ -356,6 +356,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
+        case .selectWorkspace(let workspace):
+            return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
         }
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
         switch changeWorkspaceOwnerAction {

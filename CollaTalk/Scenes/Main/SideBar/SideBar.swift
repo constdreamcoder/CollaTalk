@@ -147,6 +147,10 @@ struct SideBarContentView: View {
                             )
                             .listRowInsets(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
                             .listRowSeparator(.hidden)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                store.dispatch(.workspaceAction(.selectWorkspace(workspace: workspace)))
+                            }
                         }
                     }
                     .listStyle(.plain)

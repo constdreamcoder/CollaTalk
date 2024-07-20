@@ -75,6 +75,7 @@ enum AppAction {
         case fetchHomeDefaultViewDatas
         case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DM])
         case deleteWorkspace(workspace: Workspace?)
+        case selectWorkspace(workspace: Workspace?)
     }
     
     enum AlertAction {
