@@ -15,6 +15,7 @@ enum WorkspaceService {
     case fetchDMs(params: FetchDMsParams)
     case editWorkspace(params: EditWorkspaceParams, request: EditWorkspaceRequest)
     case deleteWorkspace(params: DeleteWorkspaceParams)
+    case fetchWorkspaceMembers(params: FetchWorkspaceMembersParams)
 }
 
 extension WorkspaceService: BaseService {
@@ -31,12 +32,14 @@ extension WorkspaceService: BaseService {
             return "/workspaces/\(params.workspaceID)"
         case .deleteWorkspace(let params):
             return "/workspaces/\(params.workspaceID)"
+        case .fetchWorkspaceMembers(let params):
+            return "/workspaces/\(params.workspaceID)/members"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchWorkspaces, .fetchMyChannels, .fetchDMs:
+        case .fetchWorkspaces, .fetchMyChannels, .fetchDMs, .fetchWorkspaceMembers:
             return .get
         case .createWorkspace:
             return .post
@@ -49,7 +52,7 @@ extension WorkspaceService: BaseService {
     
     var task: Moya.Task {
         switch self {
-        case .fetchWorkspaces, .fetchMyChannels, .fetchDMs, .deleteWorkspace:
+        case .fetchWorkspaces, .fetchMyChannels, .fetchDMs, .deleteWorkspace, .fetchWorkspaceMembers:
             return .requestPlain
         case .createWorkspace(let request):
             return .uploadMultipart([

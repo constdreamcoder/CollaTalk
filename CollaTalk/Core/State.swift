@@ -21,6 +21,7 @@ struct AppState {
     var signUpState = SignUpState()
     var modifyWorkspaceState = ModifyWorkspaceState()
     var workspaceState = WorkspaceState()
+    var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -82,5 +83,9 @@ struct AppState {
     struct AlertState {
         var showAlert: (alertType: AlertType, confirmAction: () -> Void) = (.none, {})
         var dismissAlert: Bool = false
+    }
+    
+    struct ChangeWorkspaceOwnerState {
+        var workspaceMembers: [WorkspaceMember] = []
     }
 }

@@ -150,4 +150,28 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
             throw error
         }
     }
+    
+    func fetchWorkspaceMembers(workspaceID: String) async throws -> [WorkspaceMember]? {
+        let fetchWorkspaceMembersParams = FetchWorkspaceMembersParams(workspaceID: workspaceID)
+        do {
+            let response = try await request(.fetchWorkspaceMembers(params: fetchWorkspaceMembersParams))
+            switch response.statusCode {
+            case 200:
+                let myChannels = try decode(response.data, as: [WorkspaceMember].self)
+                return myChannels
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let fetchWorkspaceMembersError = FetchWorkspaceMembersError(rawValue: errorCode.errorCode) {
+                    throw fetchWorkspaceMembersError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

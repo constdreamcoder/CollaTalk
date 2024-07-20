@@ -48,8 +48,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .showImagePickerView(let show):
             break
-        case .presentChangeWorkspaceOwnerView(let present):
-            break
+        case .presentChangeWorkspaceOwnerView(let present, let workspace):
+            if present {
+                return Just(.changeWorkspaceOwnerAction(.fetchWorkspaceMember(workspace: workspace))).eraseToAnyPublisher()
+            }
         }
         
     case .loginAction(let loginAction):
@@ -354,6 +356,29 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
+        }
+    case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
+        switch changeWorkspaceOwnerAction {
+        case .fetchWorkspaceMember(let workspace):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        
+                        /// 워크스페이스 멤버 조회
+                        guard let workspace else { return }
+                        let workspaceMemebers = try await WorkspaceProvider.shared.fetchWorkspaceMembers(workspaceID: workspace.workspaceId)
+                        
+                        guard let workspaceMemebers else { return }
+                        promise(.success(.changeWorkspaceOwnerAction(.configureChangeWorkspaceOwnerView(workspaceMembers: workspaceMemebers))))
+                    } catch {
+                        promise(.success(.changeWorkspaceOwnerAction(.changeWorkspaceOwnerError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .configureChangeWorkspaceOwnerView(let workspaceMembers):
+            break
+        case .changeWorkspaceOwnerError(let error):
+            break
         }
     }
     

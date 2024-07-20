@@ -15,6 +15,7 @@ enum AppAction {
     case workspaceAction(WorkspaceAction)
     case networkCallSuccessTypeAction(NetworkCallSuccessType)
     case alertAction(AlertAction)
+    case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case dismissToastMessage
     case initializeNetworkCallSuccessType
     
@@ -31,7 +32,7 @@ enum AppAction {
         case presentSignUpView(present: Bool)
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
-        case presentChangeWorkspaceOwnerView(present: Bool)
+        case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
     }
     
     enum LoginAction {
@@ -79,5 +80,11 @@ enum AppAction {
     enum AlertAction {
         case showAlert(alertType: AlertType, confirmAction: () -> Void)
         case initializeAllAlertElements
+    }
+    
+    enum ChangeWorkspaceOwnerAction {
+        case fetchWorkspaceMember(workspace: Workspace?)
+        case configureChangeWorkspaceOwnerView(workspaceMembers: [WorkspaceMember])
+        case changeWorkspaceOwnerError(Error)
     }
 }

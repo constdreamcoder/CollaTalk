@@ -59,7 +59,7 @@ struct SideBar: View {
                 }
                 Button("워크스페이스 관리자 변경") {
                     print("워크스페이스 관리자 변경")
-                    store.dispatch(.navigationAction(.presentChangeWorkspaceOwnerView(present: true)))
+                    store.dispatch(.navigationAction(.presentChangeWorkspaceOwnerView(present: true, workspace: dialogWorkspace)))
                 }
                 Button("워크스페이스 삭제", role: .destructive) {
                     print("워크스페이스 삭제")

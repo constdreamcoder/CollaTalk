@@ -50,7 +50,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
         case .showImagePickerView(let show):
             mutatingState.navigationState.showImagePicker = show
-        case .presentChangeWorkspaceOwnerView(let present):
+        case .presentChangeWorkspaceOwnerView(let present, let workspace):
             mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
         }
             
@@ -312,6 +312,42 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .setNone: break
         }
         mutatingState.isLoading = false
+    case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
+        switch changeWorkspaceOwnerAction {
+        case .fetchWorkspaceMember(let workspace):
+            mutatingState.isLoading = true
+        case .configureChangeWorkspaceOwnerView(let workspaceMembers):
+            mutatingState.changeWorkspaceOwnerState.workspaceMembers = workspaceMembers
+            
+            mutatingState.isLoading = false
+        case .changeWorkspaceOwnerError(let error):
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchWorkspaceMembersError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
+            
+            mutatingState.isLoading = false
+
+        }
     }
     return mutatingState
 }

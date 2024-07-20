@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChangeWorkspaceOwnerView: View {
     
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var windowProvider: WindowProvider
     
     var body: some View {
         ZStack {
@@ -29,19 +31,49 @@ struct ChangeWorkspaceOwnerView: View {
                     transitionAction: {}
                 )
                 
-                
                 List {
-                    ForEach(0..<5) { _ in
-                        ChangeWorkspaceOwnerViewCell()
-                        .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
+                    ForEach(store.state.changeWorkspaceOwnerState.workspaceMembers, id: \.userId) { workspaceMember in
+                        if workspaceMember.userId != store.state.user?.userId ?? ""  {
+                            ChangeWorkspaceOwnerViewCell(workspaceMember: workspaceMember)
+                                .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color.clear)
+                        }
                     }
                 }
                 .listStyle(.plain)
                 .scrollIndicators(.hidden)
-
+                
                 Spacer()
+            }
+        }
+        /// iOS 17이상  대응
+        .onChange(of: store.state.changeWorkspaceOwnerState.workspaceMembers) {
+            workspaceMembers in
+                /// 관리자를 제외한 워크스페이스 멤버 수가 없을 때
+                if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .unableToChangeWorkspaceOwner,
+                                confirmAction: { windowProvider.dismissAlert() }
+                            )
+                        )
+                    )
+                }
+        }
+        /// iOS 17이하 대응
+        .onChange(of: store.state.changeWorkspaceOwnerState.workspaceMembers) { workspaceMembers in
+            /// 관리자를 제외한 워크스페이스 멤버 수가 없을 때
+            if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
+                store.dispatch(
+                    .alertAction(
+                        .showAlert(
+                            alertType: .unableToChangeWorkspaceOwner,
+                            confirmAction: { windowProvider.dismissAlert() }
+                        )
+                    )
+                )
             }
         }
     }
@@ -52,25 +84,42 @@ struct ChangeWorkspaceOwnerView: View {
 }
 
 struct ChangeWorkspaceOwnerViewCell: View {
+    
+    let workspaceMember: WorkspaceMember
+    
     var body: some View {
         HStack(spacing: 8) {
-            Image(.kakaoLogo)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 44)
-                .background(.brandGreen)
-                .cornerRadius(8, corners: .allCorners)
+            
+            RemoteImage(
+                path: workspaceMember.profileImage,
+                imageView: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 44)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                },
+                placeHolderView: {
+                    Image(.kakaoLogo)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 44)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                }
+            )
             
             VStack {
-                Text("Courtney Henry")
+                Text(workspaceMember.nickname)
                     .font(.bodyBold)
                     .foregroundStyle(.textPrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(1)
                 
-                Text("alma.lawson@example.com")
+                Text(workspaceMember.email)
                     .font(.body)
-                    .tint(.textSecondary)
+                    .foregroundStyle(.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(1)
             }
