@@ -31,6 +31,7 @@ struct AlertView: View {
                 Spacer()
                 
                 Alert(
+                    alertType: alertType, 
                     title: alertType.title,
                     message: alertType.message,
                     confirmButtonTitle: alertType.confirmButtonTitle,
@@ -74,13 +75,22 @@ struct AlertButton: View {
 
 struct Alert: View {
     
+    let alertType: AlertType
     let title: String
     let message: String
     let confirmButtonTitle: String
     let confirmAction: () -> Void
     let cancelAction: (() -> Void)?
     
-    init(title: String, message: String, confirmButtonTitle: String, confirmAction: @escaping () -> Void, cancelAction: (() -> Void)? = nil) {
+    init(
+        alertType: AlertType,
+        title: String,
+        message: String,
+        confirmButtonTitle: String, 
+        confirmAction: @escaping () -> Void,
+        cancelAction: (() -> Void)? = nil
+    ) {
+        self.alertType = alertType
         self.title = title
         self.message = message
         self.confirmButtonTitle = confirmButtonTitle
@@ -94,10 +104,18 @@ struct Alert: View {
                 .font(.title2)
                 .foregroundStyle(.textPrimary)
             
-            Text(message)
-                .font(.body)
-                .foregroundStyle(.textSecondary)
-                .multilineTextAlignment(.center)
+            switch alertType {
+            case .changeWorkspaceOwner:
+                Text(message)
+                    .font(.body)
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.leading)
+            default:
+                Text(message)
+                    .font(.body)
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
             
             HStack {
                 if let cancelAction {
