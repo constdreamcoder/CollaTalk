@@ -60,8 +60,10 @@ enum AppAction {
     
     enum ModifyWorkspaceAction {
         case selectImage(image: UIImage)
+        case dismissGallery(selectedImage: UIImage)
         case writeName(name: String)
         case writeDescription(description: String)
+        case showToastMessageForImageDataLimit
         case addWorkspace
         case editWorkspace
         case fetchUpdatedWorkspaces

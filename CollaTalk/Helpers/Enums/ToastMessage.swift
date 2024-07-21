@@ -92,6 +92,7 @@ enum ToastMessage: ToastMessageType {
         case workspaceNameError
         case noImage
         case completeEditing
+        case imageDataLimit
         
         var message: String {
             switch self {
@@ -101,6 +102,8 @@ enum ToastMessage: ToastMessageType {
                 return "워크스페이스 이미지를 등록해주세요."
             case .completeEditing:
                 return "워크스페이스가 편집되었습니다."
+            case .imageDataLimit:
+                return "이미지 최대 크기는 1MB입니다."
             }
         }
     }

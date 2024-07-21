@@ -186,7 +186,15 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeDescription(let description):
             break
         case .selectImage(let image):
-            break
+            guard let imageData = image.pngData() else {
+                return Empty().eraseToAnyPublisher()
+            }
+            
+            if imageData.count > 0 && imageData.count <= 1 * 1024 * 1024 {
+                return Just(.modifyWorkspaceAction(.dismissGallery(selectedImage: image))).eraseToAnyPublisher()
+            } else {
+                return Just(.modifyWorkspaceAction(.showToastMessageForImageDataLimit)).eraseToAnyPublisher()
+            }
         case .addWorkspace:
             
             let imageData = state.modifyWorkspaceState.selectedImageFromGallery?.pngData() ?? Data()
@@ -299,6 +307,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .returnToSideBar(let updatedWorkspaces):
+            break
+        case .dismissGallery(let selectedImage):
+            break
+        case .showToastMessageForImageDataLimit:
             break
         }
         

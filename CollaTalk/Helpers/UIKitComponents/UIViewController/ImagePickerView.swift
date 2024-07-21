@@ -40,9 +40,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
             if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 imagePickerView.store.dispatch(.modifyWorkspaceAction(.selectImage(image: selectedImage)))
             }
-            
-            //사진 라이브러리 해제
-            imagePickerView.store.dispatch(.navigationAction(.showImagePickerView(show: false)))
         }
     }
 }

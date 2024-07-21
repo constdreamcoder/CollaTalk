@@ -189,9 +189,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writeDescription(let description):
             mutatingState.modifyWorkspaceState.description = description
             mutatingState.modifyWorkspaceState.isDescriptionEmpty = description.isEmpty
-        case .selectImage(let imageData):
-            mutatingState.modifyWorkspaceState.selectedImageFromGallery = imageData
-            mutatingState.modifyWorkspaceState.existingWorkspace?.coverImage = ""
+        case .selectImage(let image):
+            break
         case .addWorkspace:
             mutatingState.isLoading = true
         case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
@@ -226,6 +225,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                         
             mutatingState.toastMessage = ToastMessage.modifyWorkspace(.completeEditing).message
             mutatingState.showToast = true
+        case .dismissGallery(let selectedImage):
+            mutatingState.modifyWorkspaceState.selectedImageFromGallery = selectedImage
+            mutatingState.modifyWorkspaceState.existingWorkspace?.coverImage = ""
+            
+            mutatingState.navigationState.showImagePicker = false
+        case .showToastMessageForImageDataLimit:
+            mutatingState.showToast = true
+            mutatingState.toastMessage = ToastMessage.modifyWorkspace(.imageDataLimit).message
         }
     case .workspaceAction(let workspaceAction):
         switch workspaceAction {
