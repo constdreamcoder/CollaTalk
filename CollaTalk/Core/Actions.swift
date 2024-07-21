@@ -64,6 +64,8 @@ enum AppAction {
         case writeDescription(description: String)
         case addWorkspace
         case editWorkspace
+        case fetchUpdatedWorkspaces
+        case returnToSideBar(updatedWorkspaces: [Workspace])
         case isValid(isWorkspaceNameValid: Bool, isWorkspaceCoverImageValid: Bool)
         case initializeAllElements
     }

@@ -235,7 +235,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .editWorkspace:
             
             let imageData: Data
-            
             if state.modifyWorkspaceState.selectedImageFromGallery != nil {
                 imageData = state.modifyWorkspaceState.selectedImageFromGallery?.pngData() ?? Data()
             } else {
@@ -279,13 +278,27 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let updatedWorkspace else { return }
                         print("updatedWorkspace", updatedWorkspace)
                         UserDefaultsManager.setObject(updatedWorkspace, forKey: .selectedWorkspace)
-                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                        promise(.success(.modifyWorkspaceAction(.fetchUpdatedWorkspaces)))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
         case .initializeAllElements:
+            break
+        case .fetchUpdatedWorkspaces:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let updatedWorkspaces = try await WorkspaceProvider.shared.fetchWorkspaces()
+                        guard let updatedWorkspaces else { return }
+                        promise(.success(.modifyWorkspaceAction(.returnToSideBar(updatedWorkspaces: updatedWorkspaces))))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .returnToSideBar(let updatedWorkspaces):
             break
         }
         

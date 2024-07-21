@@ -216,7 +216,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
 
             mutatingState.modifyWorkspaceState.isNameEmpty = true
             mutatingState.modifyWorkspaceState.isDescriptionEmpty = true
+        case .fetchUpdatedWorkspaces:
+            mutatingState.isLoading = true
+        case .returnToSideBar(let updatedWorkspaces):
+            mutatingState.isLoading = false
+            mutatingState.workspaceState.workspaces = updatedWorkspaces
             
+            mutatingState.navigationState.isModifyWorkspaceViewPresented = false
+                        
             mutatingState.toastMessage = ToastMessage.modifyWorkspace(.completeEditing).message
             mutatingState.showToast = true
         }

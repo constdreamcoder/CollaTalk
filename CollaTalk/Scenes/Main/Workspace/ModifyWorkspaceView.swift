@@ -24,7 +24,7 @@ enum WorkspaceModificationType {
 struct ModifyWorkspaceView: View {
     
     @EnvironmentObject private var store: AppStore
-        
+    
     var body: some View {
         ZStack {
             
@@ -45,8 +45,7 @@ struct ModifyWorkspaceView: View {
                     transitionAction: {})
                 
                 // TODO: - 추후 리팩토링
-                // TODO: - 분기점 수정 필요
-                if store.state.modifyWorkspaceState.existingWorkspace?.coverImage == nil {
+                if store.state.modifyWorkspaceState.existingWorkspace == nil {
                     Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
                         .resizable()
                         .aspectRatio(1.0, contentMode: .fit)
@@ -65,25 +64,8 @@ struct ModifyWorkspaceView: View {
                             store.dispatch(.navigationAction(.showImagePickerView(show: true)))
                         }
                 } else {
-                    RemoteImage(path: store.state.modifyWorkspaceState.existingWorkspace?.coverImage) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(1.0, contentMode: .fit)
-                            .frame(width: 70)
-                            .background(.brandGreen)
-                            .cornerRadius(8, corners: .allCorners)
-                            .overlay(alignment: .bottomTrailing) {
-                                Image(.camera)
-                                    .resizable()
-                                    .aspectRatio(1.0, contentMode: .fit)
-                                    .frame(width: 24)
-                                    .offset(x: 5, y: 5)
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
-                            }
-                    } placeHolderView: {
+                    
+                    if store.state.modifyWorkspaceState.existingWorkspace?.coverImage == "" {
                         Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
                             .resizable()
                             .aspectRatio(1.0, contentMode: .fit)
@@ -101,8 +83,46 @@ struct ModifyWorkspaceView: View {
                             .onTapGesture {
                                 store.dispatch(.navigationAction(.showImagePickerView(show: true)))
                             }
+                    } else {
+                        RemoteImage(path: store.state.modifyWorkspaceState.existingWorkspace?.coverImage) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .frame(width: 70)
+                                .background(.brandGreen)
+                                .cornerRadius(8, corners: .allCorners)
+                                .overlay(alignment: .bottomTrailing) {
+                                    Image(.camera)
+                                        .resizable()
+                                        .aspectRatio(1.0, contentMode: .fit)
+                                        .frame(width: 24)
+                                        .offset(x: 5, y: 5)
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+                                }
+                        } placeHolderView: {
+                            Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .frame(width: 70)
+                                .background(.brandGreen)
+                                .cornerRadius(8, corners: .allCorners)
+                                .overlay(alignment: .bottomTrailing) {
+                                    Image(.camera)
+                                        .resizable()
+                                        .aspectRatio(1.0, contentMode: .fit)
+                                        .frame(width: 24)
+                                        .offset(x: 5, y: 5)
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+                                }
+                        }
                     }
-
+                    
                 }
                 
                 
