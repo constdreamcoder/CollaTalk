@@ -12,20 +12,26 @@ struct HomeDefaultView: View {
     @EnvironmentObject private var store: AppStore
     
     var body: some View {
-        VStack {
-            MainNaigationBar()
-            
-            ScrollView {
-                ForEach(HomeContentType.allCases, id: \.title) { contentType in
-                    HomeCell(homeContentType: contentType)
-                }
-                AddNewCellView(contentType: .teamMember)
+        ScrollView {
+            ForEach(HomeContentType.allCases, id: \.title) { contentType in
+                HomeCell(homeContentType: contentType)
             }
-            .padding(.horizontal, 16)
-            .scrollIndicators(.hidden)
+            AddNewCellView(contentType: .teamMember)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if store.state.user?.userId == store.state.workspaceState.selectedWorkspace?.ownerId {
+                        print("팀원 초대")
+                        store.dispatch(.navigationAction(.presentInviteMemeberView(present: true)))
+                    } else {
+                        print("팀원 초대 불가")
+                        store.dispatch(.inviteMemeberAction(.showToastMessageForNoRightToInviteMember))
+                    }
+                }
         }
+        .padding(.horizontal, 16)
+        .scrollIndicators(.hidden)
         .overlay(alignment: .bottomTrailing) {
-            InviteMemberButton()
+            NewMessageButton()
         }
     }
 }
@@ -38,6 +44,7 @@ struct HomeDefaultView: View {
 struct HomeCell: View {
     
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var tabViewProvider: TabViewProvider
     
     @State private var isExpanded: Bool = false
     let homeContentType: HomeContentType
@@ -64,6 +71,10 @@ struct HomeCell: View {
                         }
                         
                         AddNewCellView(contentType: .directMessage)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                tabViewProvider.selectedTab = .dm
+                            }
                     }
                 }
                 
@@ -213,19 +224,14 @@ struct DMCellFrontPart: View {
     }
 }
 
-struct InviteMemberButton: View {
-    @EnvironmentObject private var store: AppStore
+struct NewMessageButton: View {
     
+    @EnvironmentObject private var tabViewProvider: TabViewProvider
+
     var body: some View {
         Button {
-            if store.state.user?.userId == store.state.workspaceState.selectedWorkspace?.ownerId {
-                print("팀원 초대")
-                store.dispatch(.navigationAction(.presentInviteMemeberView(present: true)))
-            } else {
-                print("팀원 초대 불가")
-                store.dispatch(.inviteMemeberAction(.showToastMessageForNoRightToInviteMember))
-            }
-            
+           print("새 메세지 생성")
+            tabViewProvider.selectedTab = .dm
         } label: {
             Image(.newMessage)
                 .resizable()

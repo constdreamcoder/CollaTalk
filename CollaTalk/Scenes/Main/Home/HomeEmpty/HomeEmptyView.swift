@@ -9,11 +9,7 @@ import SwiftUI
 
 struct HomeEmptyView: View {
     var body: some View {
-        VStack {
-            MainNaigationBar()
-            
-            HomeEmptyViewContent()
-        }
+        HomeEmptyViewContent()
     }
 }
 

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    @State private var selectedTabIndex = MainTab.home.rawValue
+    @StateObject private var tabViewProvider = TabViewProvider()
     
     var body: some View {
-        TabView(selection: $selectedTabIndex) {
+        TabView(selection: $tabViewProvider.selectedTab) {
             ForEach(MainTab.allCases, id: \.self) { tab in
                 tab.view
                     .tabItem {
@@ -22,6 +22,7 @@ struct MainTabView: View {
                     .tag(tab.rawValue)
             }
         }
+        .environmentObject(tabViewProvider)
     }
 }
 

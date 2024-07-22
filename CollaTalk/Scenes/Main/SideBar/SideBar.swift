@@ -33,6 +33,7 @@ struct SideBar: View {
         }
         .edgesIgnoringSafeArea(.all)
         .confirmationDialog("워크스페이스 설정", isPresented: $isDialogPresented) {
+            /// 워크스페이스 관리자일 경우
             if dialogWorkspace?.ownerId == store.state.user?.userId {
                 Button("워크스페이스 편집") {
                     print("워크스페이스 편집")
@@ -75,6 +76,7 @@ struct SideBar: View {
                     )
                 }
                 Button("취소", role: .cancel) { print("취소") }
+            /// 워크스페이스 멤버일 경우
             } else {
                 Button("워크스페이스 나가기") {
                     print("워크스페이스 나가기")
@@ -82,7 +84,9 @@ struct SideBar: View {
                         .alertAction(
                             .showAlert(
                                 alertType: .leavetWorkspaceAsAMember,
-                                confirmAction: { print("멤버로서 워크스페이스 나기기") }
+                                confirmAction: {
+                                    print("멤버로서 워크스페이스 나기기")
+                                }
                             )
                         )
                     )

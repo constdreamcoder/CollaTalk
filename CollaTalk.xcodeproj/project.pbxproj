@@ -32,7 +32,6 @@
 		0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */; };
 		0037BBFF2C42C75C00E9AF0A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */; };
 		0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC002C42C77700E9AF0A /* MainTab.swift */; };
-		0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */; };
 		0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC062C42D46900E9AF0A /* HomeEmptyView.swift */; };
 		0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC092C42D62D00E9AF0A /* HomeContentType.swift */; };
 		0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */; };
@@ -86,6 +85,8 @@
 		00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */; };
 		00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */; };
 		00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */; };
+		00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */; };
+		00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
 		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
@@ -130,7 +131,6 @@
 		0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyChannelsParams.swift; sourceTree = "<group>"; };
 		0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0037BC002C42C77700E9AF0A /* MainTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTab.swift; sourceTree = "<group>"; };
-		0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTab+ChildView.swift"; sourceTree = "<group>"; };
 		0037BC062C42D46900E9AF0A /* HomeEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyView.swift; sourceTree = "<group>"; };
 		0037BC092C42D62D00E9AF0A /* HomeContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentType.swift; sourceTree = "<group>"; };
 		0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceService.swift; sourceTree = "<group>"; };
@@ -183,6 +183,8 @@
 		00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberParams.swift; sourceTree = "<group>"; };
 		00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberRequest.swift; sourceTree = "<group>"; };
 		00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberError.swift; sourceTree = "<group>"; };
+		00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewProvider.swift; sourceTree = "<group>"; };
+		00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMEmptyView.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				0037BC082C42D5F800E9AF0A /* Home */,
 				00F1B6982C438FC400E7EA56 /* SideBar */,
 				00F1B6972C438F2400E7EA56 /* Workspace */,
+				00F47A3E2C4E415A0095EB4E /* DM */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -358,9 +361,9 @@
 		0037BC0D2C42D6A700E9AF0A /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */,
 				0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */,
 				0037BC002C42C77700E9AF0A /* MainTab.swift */,
-				0037BC022C42C78F00E9AF0A /* MainTab+ChildView.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -560,6 +563,14 @@
 				00F1B6932C43759700E7EA56 /* SideBar.swift */,
 			);
 			path = SideBar;
+			sourceTree = "<group>";
+		};
+		00F47A3E2C4E415A0095EB4E /* DM */ = {
+			isa = PBXGroup;
+			children = (
+				00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */,
+			);
+			path = DM;
 			sourceTree = "<group>";
 		};
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
@@ -797,6 +808,7 @@
 				00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */,
 				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
+				00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
@@ -804,6 +816,7 @@
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
 				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
+				00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
@@ -815,7 +828,6 @@
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
-				0037BC032C42C78F00E9AF0A /* MainTab+ChildView.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,

@@ -13,12 +13,16 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            if store.state.workspaceState.workspaces.count == 0 {
-                HomeEmptyView()
-            } else if store.state.workspaceState.workspaces.count >= 1 {
-                MainTabView()
+            VStack {
+                MainNaigationBar()
+
+                if store.state.workspaceState.workspaces.count == 0 {
+                    HomeEmptyView()
+                } else if store.state.workspaceState.workspaces.count >= 1 {
+                    MainTabView()
+                }
             }
-            
+        
             SideBar()
         }
         
