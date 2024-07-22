@@ -87,6 +87,7 @@
 		00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */; };
 		00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */; };
 		00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */; };
+		00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A412C4E4B4D0095EB4E /* DMListView.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
 		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
@@ -185,6 +186,7 @@
 		00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberError.swift; sourceTree = "<group>"; };
 		00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewProvider.swift; sourceTree = "<group>"; };
 		00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMEmptyView.swift; sourceTree = "<group>"; };
+		00F47A412C4E4B4D0095EB4E /* DMListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMListView.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 		00F47A3E2C4E415A0095EB4E /* DM */ = {
 			isa = PBXGroup;
 			children = (
+				00F47A412C4E4B4D0095EB4E /* DMListView.swift */,
 				00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */,
 			);
 			path = DM;
@@ -839,6 +842,7 @@
 				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
+				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */,

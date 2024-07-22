@@ -38,7 +38,7 @@ extension MainTab {
     var view: some View {
         switch self {
         case .home: HomeDefaultView()
-        case .dm: DMEmptyView()
+        case .dm: DMListView()
         case .search: placeholderView
         case .setting: placeholderView
         }
