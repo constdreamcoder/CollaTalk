@@ -198,4 +198,29 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         
         return nil
     }
+    
+    func inviteMember(workspaceID: String, email: String) async throws -> WorkspaceMember? {
+        let inviteMemberParams = InviteMemberParams(workspaceID: workspaceID)
+        let inviteMemberRequest = InviteMemberRequest(email: email)
+        do {
+            let response = try await request(.inviteMember(params: inviteMemberParams, request: inviteMemberRequest))
+            switch response.statusCode {
+            case 200:
+                let newWorkspaceMember = try decode(response.data, as: WorkspaceMember.self)
+                return newWorkspaceMember
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let inviteMemberError = InviteMemberError(rawValue: errorCode.errorCode) {
+                    throw inviteMemberError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

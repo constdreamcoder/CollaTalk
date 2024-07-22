@@ -22,6 +22,7 @@ struct AppState {
     var modifyWorkspaceState = ModifyWorkspaceState()
     var workspaceState = WorkspaceState()
     var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
+    var inviteMemberState = InviteMemberState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -31,6 +32,7 @@ struct AppState {
         var isSidebarVisible: Bool = false
         var showImagePicker: Bool = false
         var isChangeWorkspaceOwnerViewPresented: Bool = false
+        var isInviteMemeberViewPresented: Bool = false
     }
    
     struct LoginState {
@@ -88,5 +90,10 @@ struct AppState {
     struct ChangeWorkspaceOwnerState {
         var selectedWorkspace: Workspace? = nil
         var workspaceMembers: [WorkspaceMember] = []
+    }
+    
+    struct InviteMemberState {
+        var email: String = ""
+        var isEmailEmpty: Bool = true
     }
 }

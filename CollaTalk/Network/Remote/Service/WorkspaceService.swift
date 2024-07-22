@@ -17,6 +17,7 @@ enum WorkspaceService {
     case deleteWorkspace(params: DeleteWorkspaceParams)
     case fetchWorkspaceMembers(params: FetchWorkspaceMembersParams)
     case transferWorkspaceOwnership(params: TransferWorkspaceOwnershipParams, request: TransferWorkspaceOwnershipRequest)
+    case inviteMember(params: InviteMemberParams, request: InviteMemberRequest)
 }
 
 extension WorkspaceService: BaseService {
@@ -37,6 +38,8 @@ extension WorkspaceService: BaseService {
             return "/workspaces/\(params.workspaceID)/members"
         case .transferWorkspaceOwnership(let params, _):
             return "/workspaces/\(params.workspaceID)/transfer/ownership"
+        case .inviteMember(let params, _):
+            return "/workspaces/\(params.workspaceID)/members"
         }
     }
     
@@ -44,7 +47,7 @@ extension WorkspaceService: BaseService {
         switch self {
         case .fetchWorkspaces, .fetchMyChannels, .fetchDMs, .fetchWorkspaceMembers:
             return .get
-        case .createWorkspace:
+        case .createWorkspace, .inviteMember:
             return .post
         case .editWorkspace, .transferWorkspaceOwnership:
             return .put
@@ -92,6 +95,8 @@ extension WorkspaceService: BaseService {
                 )
             ])
         case .transferWorkspaceOwnership(_, let request):
+            return .requestJSONEncodable(request)
+        case .inviteMember(_, let request):
             return .requestJSONEncodable(request)
         }
     }

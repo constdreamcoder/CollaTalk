@@ -52,6 +52,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.showImagePicker = show
         case .presentChangeWorkspaceOwnerView(let present, let workspace):
             mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
+        case .presentInviteMemeberView(let present):
+            mutatingState.navigationState.isInviteMemeberViewPresented = present
         }
             
     case .loginAction(let loginAction):
@@ -383,6 +385,70 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .initializeAllElements:
             mutatingState.changeWorkspaceOwnerState.selectedWorkspace = nil
             mutatingState.changeWorkspaceOwnerState.workspaceMembers = []
+        }
+    case .inviteMemeberAction(let inviteMemberAction):
+        switch inviteMemberAction {
+        case .writeEmail(let email):
+            mutatingState.inviteMemberState.email = email
+            mutatingState.inviteMemberState.isEmailEmpty = email.isEmpty
+        case .inviteMember:
+            mutatingState.isLoading = true
+        case .returnToHomeView(let newWorkspaceMember):
+            
+            mutatingState.isLoading = false
+            
+            mutatingState.navigationState.isInviteMemeberViewPresented = false
+            
+            mutatingState.toastMessage = ToastMessage.inviteMemeber(.completeMemberInvitation).message
+            mutatingState.showToast = true
+        case .inviteMemberError(let error):
+            mutatingState.isLoading = false
+
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.inviteMemeber(.cannotFindUserInfo).message
+                    mutatingState.showToast = true
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? InviteMemberError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.inviteMemeber(.alreadyInvitedMember).message
+                    mutatingState.showToast = true
+                case .noData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.inviteMemeber(.cannotFindUserInfo).message
+                    mutatingState.showToast = true
+                case .noAccess:
+                    print(error.localizedDescription)
+                }
+            }
+        case .isValid(let isEmailValid):
+            mutatingState.isLoading = false
+            
+            if !isEmailValid {
+                mutatingState.toastMessage = ToastMessage.inviteMemeber(.invalidEmail).message
+                mutatingState.showToast = true
+            }
+        case .showToastMessageForNoRightToInviteMember:
+            mutatingState.toastMessage = ToastMessage.inviteMemeber(.noRightToInviteMember).message
+            mutatingState.showToast = true
         }
     }
     return mutatingState

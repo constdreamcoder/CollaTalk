@@ -60,6 +60,14 @@ struct ContentView: View {
             ) {
                ChangeWorkspaceOwnerView()
             }
+            .sheet(
+                isPresented:Binding(
+                    get: { store.state.navigationState.isInviteMemeberViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentInviteMemeberView(present: $0))) }
+                )
+            ) {
+                    InviteMemberView()
+            }
             .navigationDestination(for: PathType.self) { path in
                 switch path {
                 case .startView:

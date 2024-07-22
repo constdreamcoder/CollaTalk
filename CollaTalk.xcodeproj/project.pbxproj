@@ -82,6 +82,10 @@
 		00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */; };
 		00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6932C43759700E7EA56 /* SideBar.swift */; };
 		00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F1B6952C438BB000E7EA56 /* MainView.swift */; };
+		00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A342C4E15020095EB4E /* InviteMemberView.swift */; };
+		00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */; };
+		00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */; };
+		00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */; };
 		00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B52C3BE9A000C1AFF1 /* Store.swift */; };
 		00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B72C3BE9F700C1AFF1 /* State.swift */; };
 		00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */; };
@@ -175,6 +179,10 @@
 		00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNaigationBar.swift; sourceTree = "<group>"; };
 		00F1B6932C43759700E7EA56 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		00F1B6952C438BB000E7EA56 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		00F47A342C4E15020095EB4E /* InviteMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberView.swift; sourceTree = "<group>"; };
+		00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberParams.swift; sourceTree = "<group>"; };
+		00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberRequest.swift; sourceTree = "<group>"; };
+		00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberError.swift; sourceTree = "<group>"; };
 		00F6F2B52C3BE9A000C1AFF1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		00F6F2B72C3BE9F700C1AFF1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
@@ -267,6 +275,7 @@
 				002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */,
 				00ED9E022C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift */,
 				00ED9E082C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift */,
+				00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -280,6 +289,7 @@
 				0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */,
 				00ED9DFE2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift */,
 				00ED9E042C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift */,
+				00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -290,6 +300,7 @@
 				0034AC122C44B8640052EE0D /* CreateWorkspaceRequest.swift */,
 				000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */,
 				00ED9E062C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift */,
+				00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -538,6 +549,7 @@
 				00318EE42C3F7538003206CB /* WorkspaceStartView.swift */,
 				00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */,
 				00ED9DFC2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift */,
+				00F47A342C4E15020095EB4E /* InviteMemberView.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -778,9 +790,11 @@
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
+				00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */,
 				00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */,
+				00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */,
 				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
@@ -788,6 +802,7 @@
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
+				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
@@ -831,6 +846,7 @@
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
+				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,

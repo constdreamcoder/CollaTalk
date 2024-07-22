@@ -52,6 +52,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             if present {
                 return Just(.changeWorkspaceOwnerAction(.fetchWorkspaceMember(workspace: workspace))).eraseToAnyPublisher()
             }
+        case .presentInviteMemeberView(let present):
+            break
         }
         
     case .loginAction(let loginAction):
@@ -441,6 +443,46 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .returnToSideBar(let updatedWorkspaces):
             break
         case .initializeAllElements:
+            break
+        }
+    case .inviteMemeberAction(let inviteMemberAction):
+        switch inviteMemberAction {
+        case .writeEmail(let email):
+            break
+        case .inviteMember:
+            
+            /// 이메일 유효성 검사
+            let isEmailValid = ValidationCheck.email(input: state.inviteMemberState.email).validation
+            
+            guard isEmailValid else {
+                return Just(.inviteMemeberAction(.isValid(isEmailValid: isEmailValid))).eraseToAnyPublisher()
+            }
+            
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 현재 홈 화면에 보이는 워크스페이스
+                        guard let selectedWorkspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                        
+                        /// 워크스페이스에 멤버 초대
+                        let newWorkspaceMember = try await WorkspaceProvider.shared.inviteMember(
+                            workspaceID: selectedWorkspace.workspaceId,
+                            email: state.inviteMemberState.email
+                        )
+                        guard let newWorkspaceMember else { return }
+                        promise(.success(.inviteMemeberAction(.returnToHomeView(newWorkspaceMember: newWorkspaceMember))))
+                    } catch {
+                        promise(.success(.inviteMemeberAction(.inviteMemberError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .returnToHomeView(let newWorkspaceMember):
+            break
+        case .inviteMemberError(let error):
+            break
+        case .isValid(let isEmailValid):
+            break
+        case .showToastMessageForNoRightToInviteMember:
             break
         }
     }

@@ -8,6 +8,10 @@
 import UIKit
 
 enum AppAction {
+    
+    case dismissToastMessage
+    case initializeNetworkCallSuccessType
+    
     case navigationAction(NavigationAction)
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
@@ -16,8 +20,7 @@ enum AppAction {
     case networkCallSuccessTypeAction(NetworkCallSuccessType)
     case alertAction(AlertAction)
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
-    case dismissToastMessage
-    case initializeNetworkCallSuccessType
+    case inviteMemeberAction(InviteMemeberAction)
     
     enum NetworkCallSuccessType {
         case setStartView
@@ -33,6 +36,7 @@ enum AppAction {
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
+        case presentInviteMemeberView(present: Bool)
     }
     
     enum LoginAction {
@@ -95,5 +99,14 @@ enum AppAction {
         case fetchWorkspaceAfterUpdatingWorkspaceOwnership
         case returnToSideBar(updatedWorkspaces: [Workspace])
         case initializeAllElements
+    }
+    
+    enum InviteMemeberAction {
+        case writeEmail(email: String)
+        case inviteMember
+        case returnToHomeView(newWorkspaceMember: WorkspaceMember)
+        case inviteMemberError(Error)
+        case isValid(isEmailValid: Bool)
+        case showToastMessageForNoRightToInviteMember
     }
 }

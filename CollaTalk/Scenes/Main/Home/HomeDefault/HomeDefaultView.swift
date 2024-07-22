@@ -25,7 +25,7 @@ struct HomeDefaultView: View {
             .scrollIndicators(.hidden)
         }
         .overlay(alignment: .bottomTrailing) {
-            NewMessageButton()
+            InviteMemberButton()
         }
     }
 }
@@ -213,10 +213,19 @@ struct DMCellFrontPart: View {
     }
 }
 
-struct NewMessageButton: View {
+struct InviteMemberButton: View {
+    @EnvironmentObject private var store: AppStore
+    
     var body: some View {
         Button {
-            print("새 메시지 생성")
+            if store.state.user?.userId == store.state.workspaceState.selectedWorkspace?.ownerId {
+                print("팀원 초대")
+                store.dispatch(.navigationAction(.presentInviteMemeberView(present: true)))
+            } else {
+                print("팀원 초대 불가")
+                store.dispatch(.inviteMemeberAction(.showToastMessageForNoRightToInviteMember))
+            }
+            
         } label: {
             Image(.newMessage)
                 .resizable()

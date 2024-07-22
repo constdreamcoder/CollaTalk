@@ -16,6 +16,7 @@ enum ToastMessage: ToastMessageType {
     case signUp(SignUp)
     case modifyWorkspace(ModifyWorkspace)
     case changeWorkspaceOwner(ChangeWorkspaceOwner)
+    case inviteMemeber(InviteMember)
     
     var message: String {
         switch self {
@@ -27,6 +28,8 @@ enum ToastMessage: ToastMessageType {
             return modifyWorkspace.message
         case .changeWorkspaceOwner(let changeWorkspaceOwner):
             return changeWorkspaceOwner.message
+        case .inviteMemeber(let inviteMember):
+            return inviteMember.message
         }
     }
     
@@ -115,6 +118,29 @@ enum ToastMessage: ToastMessageType {
             switch self {
             case .completeOwnershipTransfer:
                 return "워크스페이스 관리자가 변경되었습니다."
+            }
+        }
+    }
+    
+    enum InviteMember: ToastMessageType {
+        case completeMemberInvitation
+        case alreadyInvitedMember
+        case cannotFindUserInfo
+        case invalidEmail
+        case noRightToInviteMember
+        
+        var message: String {
+            switch self {
+            case .completeMemberInvitation:
+                return "멤버를 성공적으로 초대했습니다."
+            case .alreadyInvitedMember:
+                return "이미 워크스페이스에 소속된 팀원이에요."
+            case .cannotFindUserInfo:
+                return "회원 정보를 찾을 수 없습니다."
+            case .invalidEmail:
+                return "올바른 이메일을 입력해주세요."
+            case .noRightToInviteMember:
+                return "워크스페이스 관리자만 팀원을 초대할 수 있어요.\n관리자에게 요청을 해보세요."
             }
         }
     }

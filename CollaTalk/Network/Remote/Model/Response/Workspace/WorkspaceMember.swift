@@ -11,7 +11,7 @@ struct WorkspaceMember: Decodable {
     let userId: String
     let email: String
     let nickname: String
-    let profileImage: String
+    let profileImage: String?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -25,7 +25,7 @@ struct WorkspaceMember: Decodable {
         self.userId = try container.decode(String.self, forKey: .userId)
         self.email = try container.decode(String.self, forKey: .email)
         self.nickname = try container.decode(String.self, forKey: .nickname)
-        self.profileImage = try container.decode(String.self, forKey: .profileImage)
+        self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage) ?? ""
     }
 }
 
