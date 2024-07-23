@@ -10,7 +10,6 @@ import SwiftUI
 struct MainNaigationBar: View {
     
     @EnvironmentObject private var store: AppStore
-    @StateObject private var service = RemoteImageService()
     
     var body: some View {
         VStack {

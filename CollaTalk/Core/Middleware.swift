@@ -485,6 +485,30 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .showToastMessageForNoRightToInviteMember:
             break
         }
+    case .dmAction(let dmAction):
+        switch dmAction {
+        case .configureView:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self)
+                        
+                        guard let workspace else { return }
+                        
+                        let workspaceMembers = try await WorkspaceProvider.shared.fetchWorkspaceMembers(workspaceID: workspace.workspaceId)
+                        
+                        guard let workspaceMembers else { return }
+                        promise(.success(.dmAction(.completeConfigration(workspaceMembers: workspaceMembers))))
+                    } catch {
+                        promise(.success(.dmAction(.DMError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .completeConfigration:
+            break
+        case .DMError(let error):
+            break
+        }
     }
     
     return Empty().eraseToAnyPublisher()

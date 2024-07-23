@@ -69,16 +69,21 @@ struct ContentView: View {
                     InviteMemberView()
             }
             .navigationDestination(for: PathType.self) { path in
-                switch path {
-                case .startView:
-                    WorkspaceStartView()
-                case .homeView:
-                    MainView()
-                case .none:
-                    EmptyView()
-                        .background(.clear)
-                        .hidden()
+                Group {
+                    switch path {
+                    case .startView:
+                        WorkspaceStartView()
+                    case .homeView:
+                        MainView()
+                    case .chatView:
+                        ChatView()
+                    case .none:
+                        EmptyView()
+                            .background(.clear)
+                            .hidden()
+                    }
                 }
+                .navigationBarBackButtonHidden()
             }
         }
         .environmentObject(navigationRouter)
@@ -123,6 +128,8 @@ struct ContentView: View {
                     store.dispatch(.navigationAction(.presentLoginView(present: false)))
                     store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: false, workspaceModificationType: .create)))
                     store.dispatch(.initializeNetworkCallSuccessType)
+                case .chatView:
+                    break
                 case .none: break
                 }
             }

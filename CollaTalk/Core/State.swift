@@ -23,6 +23,7 @@ struct AppState {
     var workspaceState = WorkspaceState()
     var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
     var inviteMemberState = InviteMemberState()
+    var dmState = DMState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -95,5 +96,9 @@ struct AppState {
     struct InviteMemberState {
         var email: String = ""
         var isEmailEmpty: Bool = true
+    }
+    
+    struct DMState {
+        var workspaceMembers: [WorkspaceMember] = []
     }
 }

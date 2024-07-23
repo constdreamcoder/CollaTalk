@@ -21,6 +21,7 @@ enum AppAction {
     case alertAction(AlertAction)
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case inviteMemeberAction(InviteMemeberAction)
+    case dmAction(DMAction)
     
     enum NetworkCallSuccessType {
         case setStartView
@@ -108,5 +109,11 @@ enum AppAction {
         case inviteMemberError(Error)
         case isValid(isEmailValid: Bool)
         case showToastMessageForNoRightToInviteMember
+    }
+    
+    enum DMAction {
+        case configureView
+        case completeConfigration(workspaceMembers: [WorkspaceMember])
+        case DMError(Error)
     }
 }

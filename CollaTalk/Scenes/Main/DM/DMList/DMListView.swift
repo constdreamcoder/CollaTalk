@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DMListView: View {
+    
     var body: some View {
         VStack {
             DMMemberListView()
             
             Divider()
             
-            DMListContent()
+            DMRoomListView()
         }
     }
 }
@@ -24,22 +25,21 @@ struct DMListView: View {
 }
 
 struct DMMemberListView: View {
+    
+    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var navigationRouter: NavigationRouter
+    
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                ForEach(0..<20) { _  in
-                    VStack(spacing: 4) {
-                        Image(.kakaoLogo)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 44)
-                            .background(.brandGreen)
-                            .cornerRadius(8, corners: .allCorners)
-                        
-                        Text("뚜비두밥")
-                            .font(.body)
+                ForEach(store.state.dmState.workspaceMembers, id: \.userId) { workspaceMember  in
+                    if store.state.user?.userId != workspaceMember.userId {
+                        DMMemberCell(member: workspaceMember)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                navigationRouter.push(screen: .chatView)
+                            }
                     }
-                    .padding(16)
                 }
             }
         }
@@ -48,10 +48,52 @@ struct DMMemberListView: View {
     }
 }
 
-struct DMListContent:View {
+struct DMMemberCell: View {
+    
+    var member: WorkspaceMember
+    
+    var body: some View {
+        VStack(spacing: 4) {
+            
+            RemoteImage(
+                path: member.profileImage,
+                imageView: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 44)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                },
+                placeHolderView: {
+                    Image(.kakaoLogo)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 44)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                },
+                errorView: { _ in
+                    Image(.kakaoLogo)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 44)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                }
+            )
+            
+            Text(member.nickname)
+                .font(.body)
+        }
+        .padding(16)
+    }
+}
+
+struct DMRoomListView:View {
     var body: some View {
         List {
-            ForEach(0..<5) { _ in
+            ForEach(0..<4) { _ in
                 HStack(alignment: .top) {
                     Image(.kakaoLogo)
                         .resizable()
@@ -73,7 +115,7 @@ struct DMListContent:View {
                                 .lineLimit(1)
                                 .multilineTextAlignment(.trailing)
                         }
-                       
+                        
                         HStack(alignment: .top) {
                             Text("Cause I know what you like boy You're my chemical hype boy 내 지난날들은 눈 뜨면 잊는 꿈 Hype boy 너만원호호호홓")
                                 .font(.caption2)

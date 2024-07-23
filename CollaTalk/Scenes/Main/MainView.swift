@@ -25,7 +25,6 @@ struct MainView: View {
         
             SideBar()
         }
-        
     }
 }
 

@@ -450,6 +450,41 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.toastMessage = ToastMessage.inviteMemeber(.noRightToInviteMember).message
             mutatingState.showToast = true
         }
+    case .dmAction(let dmAction):
+        switch dmAction {
+        case .configureView:
+            mutatingState.isLoading = true
+        case .completeConfigration(let workspaceMembers):
+            mutatingState.isLoading = false
+            
+            mutatingState.dmState.workspaceMembers = workspaceMembers
+        case .DMError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchWorkspaceMembersError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     return mutatingState
 }
