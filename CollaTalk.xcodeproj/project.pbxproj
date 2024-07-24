@@ -70,6 +70,8 @@
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
+		00DA64D52C512F42005BC393 /* CustomPhotosPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */; };
+		00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D82C515E98005BC393 /* OnChangeModifier.swift */; };
 		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
 		00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF892C3C42DB00D25633 /* CommonError.swift */; };
@@ -174,6 +176,8 @@
 		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
+		00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotosPicker.swift; sourceTree = "<group>"; };
+		00DA64D82C515E98005BC393 /* OnChangeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeModifier.swift; sourceTree = "<group>"; };
 		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		00DFAF892C3C42DB00D25633 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -477,6 +481,7 @@
 		0086B5AF2C37E90600AD889C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */,
 				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
 				0086B5B82C37F18E00AD889C /* BottomSheetView.swift */,
 				0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */,
@@ -497,6 +502,7 @@
 				0086B5BE2C37F50500AD889C /* RoundedCorner.swift */,
 				005278862C4EBA2500A85AA5 /* HiddenModifier.swift */,
 				00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */,
+				00DA64D82C515E98005BC393 /* OnChangeModifier.swift */,
 			);
 			path = CustomModifiers;
 			sourceTree = "<group>";
@@ -510,13 +516,6 @@
 				0034AC182C44E9870052EE0D /* String+Ext.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		00A7E4152C500C5200E9091B /* Test */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Test;
 			sourceTree = "<group>";
 		};
 		00C4F9B02C3CE5F90027B2D6 /* Enums */ = {
@@ -739,7 +738,6 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
-				00A7E4152C500C5200E9091B /* Test */,
 				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
 				0052C0FF2C3AD554003D08D3 /* Application */,
 				00F6F2BF2C3C105300C1AFF1 /* Network */,
@@ -912,6 +910,7 @@
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
+				00DA64D52C512F42005BC393 /* CustomPhotosPicker.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
@@ -921,6 +920,7 @@
 				00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				006060C32C450C3D001D300F /* DM.swift in Sources */,
+				00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */,
 				00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */,

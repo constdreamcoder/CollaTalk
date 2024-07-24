@@ -13,16 +13,17 @@ struct ChatView: View {
         case channel
     }
     
+    @State private var selectedImages: [UIImage] = []
+    
     @State private var text: String = ""
     @State private var textViewHeight: CGFloat = 30
     private let textViewPadding: CGFloat = 8 // 고정값
-    private let inputViewVStackSpacing: CGFloat = 8 // 0 or 8
-    private let selectedImageHeight: CGFloat = 50 // 0 or 50
-//    
-//    private let inputViewVStackSpacing: CGFloat = 0 // 0 or 8
-//    private let selectedImageHeight: CGFloat = 0 // 0 or 50
     
+    @State private var inputViewVStackSpacing: CGFloat = 0
+    @State private var selectedImageHeight: CGFloat = 0
+        
     var body: some View {
+        
         VStack {
             ChatViewNavigationBar(chatViewType: .dm)
             
@@ -42,36 +43,38 @@ struct ChatView: View {
             }
             .listStyle(.plain)
         }
-        .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight) {
-            Group {
+        .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight)  {
+            VStack {
                 HStack(alignment: .bottom) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(height: 22)
-                        .foregroundStyle(.textSecondary)
-                        .padding(.bottom, 12)
-                        .onTapGesture {
-                            print("갤러리로 이동")
-                        }
+                    
+                    CustomPhotosPicker(selectedImages: $selectedImages) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(height: 22)
+                            .foregroundStyle(.textSecondary)
+                            .padding(.bottom, 12)
+                    }
+                    
                     
                     VStack(spacing: inputViewVStackSpacing) {
                         ResizableTextView(
                             text: $text,
                             height: $textViewHeight,
-                            maxHeight: 80,
+                            maxHeight: 48,
                             textFont: .systemFont(ofSize: 13),
                             placeholder: "메세지를 입력하세요"
                         )
                         .frame(minHeight: textViewHeight)
                         
                         LazyHStack {
-                            ForEach(0..<5) { _ in
-                                ChatSelectedImage()
+                            ForEach(selectedImages, id: \.self) { selectedImage in
+                                ChatSelectedImage {
+                                    selectedImages.removeAll { $0 == selectedImage }
+                                }
                             }
                         }
                         .frame(height: selectedImageHeight)
-
                     }
                     .padding(.vertical, textViewPadding)
                     
@@ -82,6 +85,7 @@ struct ChatView: View {
                         .padding(.bottom, 12)
                         .onTapGesture {
                             print("사진 보내기")
+                            
                         }
                 }
                 .padding(.horizontal, 12)
@@ -90,6 +94,17 @@ struct ChatView: View {
             }
             .padding(.horizontal, 16)
         }
+        .onChange(of: selectedImages, action: { newValue in
+            print(newValue.count)
+            
+            if newValue.count > 0 {
+                inputViewVStackSpacing = 8
+                selectedImageHeight = 50
+            } else {
+                inputViewVStackSpacing  = 0
+                selectedImageHeight = 0
+            }
+        })
     }
 }
 
@@ -214,10 +229,7 @@ struct ChatItem: View {
                     .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)
-            } else {
-                
             }
-            
         }
         .padding(.vertical, 6)
     }
@@ -243,6 +255,9 @@ struct ChatHeader: View {
 }
 
 struct ChatSelectedImage: View {
+    
+    let tapAction: () -> Void
+    
     var body: some View {
         Image(.kakaoLogo)
             .resizable()
@@ -260,6 +275,7 @@ struct ChatSelectedImage: View {
                     .offset(x: 4.0, y: -4.0)
                     .onTapGesture {
                         print("삭제")
+                        tapAction()
                     }
             }
     }

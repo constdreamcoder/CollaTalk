@@ -20,7 +20,7 @@ struct CollaTalkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ChatView()
+            ContentView()
                 .environmentObject(store)
                 .environmentObject(windowProvider)
         }

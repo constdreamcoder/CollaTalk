@@ -33,7 +33,7 @@ struct ResizableTextView: UIViewRepresentable {
         
         textView.font = textFont
         textView.textContainerInset = textContainerInset
-//        textView.backgroundColor = .clear
+        textView.backgroundColor = .clear
         textView.delegate = context.coordinator
         textView.becomeFirstResponder()
         

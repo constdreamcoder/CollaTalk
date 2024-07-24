@@ -45,54 +45,27 @@ struct RemoteImage<
     }
         
     var body: some View {
-        /// iOS 17 이상에서 동작
-        if #available(iOS 17.0, *) {
-            Group {
-                switch service.state {
-                case .error(let error):
-                    errorView(error)
-                    
-                case .image(let image):
-                    imageView(Image(uiImage: image))
-                    
-                case .loading:
-                    placeHolderView()
-                }
-            }
-            .task {
-                print("ios17 task")
-                await service.fetchImage(with: path)
-            }
-            .onChange(of: path) {
-                print("ios17 onchange")
-                Task {
-                    await service.fetchImage(with: path)
-                }
-            }
-        /// iOS 17 이하에서 동작
-        } else {
-            Group {
-                switch service.state {
-                case .error(let error):
-                    errorView(error)
-                    
-                case .image(let image):
-                    imageView(Image(uiImage: image))
-                    
-                case .loading:
-                    placeHolderView()
-                }
-            }
-            .task {
-                print("ios16 task")
-                await service.fetchImage(with: path)
-            }
-            .onChange(of: path) { newURL in
-                print("ios16 onchange")
-                Task {
-                    await service.fetchImage(with: newURL)
-                }
+        Group {
+            switch service.state {
+            case .error(let error):
+                errorView(error)
+                
+            case .image(let image):
+                imageView(Image(uiImage: image))
+                
+            case .loading:
+                placeHolderView()
             }
         }
+        .task {
+            print("ios17 task")
+            await service.fetchImage(with: path)
+        }
+        .onChange(of: path, action: { _ in
+            print("ios17 onchange")
+            Task {
+                await service.fetchImage(with: path)
+            }
+        })
     }
 }

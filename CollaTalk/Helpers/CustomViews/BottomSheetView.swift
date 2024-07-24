@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BottomSheetView<Content>: View where Content: View {
+struct BottomSheetView<Content: View>: View {
     
     @Binding var isPresented: Bool
     private var height: CGFloat
@@ -38,10 +38,10 @@ struct BottomSheetView<Content>: View where Content: View {
                         BottomViewGrabber()
                     )
                 
-                self.content
-                    .frame(height: self.height)
+                content
+                    .frame(height: height)
             }
-            .frame(height: self.height+30)
+            .frame(height: height + 30)
             .background(
                 Rectangle()
                     .fill(.white)

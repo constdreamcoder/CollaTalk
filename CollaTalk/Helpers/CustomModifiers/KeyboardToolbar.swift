@@ -11,6 +11,7 @@ struct KeyboardToolbar<ToolBarView: View>: ViewModifier {
     
     private let height: CGFloat
     private let toolbarView: ToolBarView
+    private let toolbarViewPadding: CGFloat = 10
     
     init(height: CGFloat, @ViewBuilder toolbarView: () -> ToolBarView) {
         self.height = height
@@ -21,12 +22,12 @@ struct KeyboardToolbar<ToolBarView: View>: ViewModifier {
         ZStack(alignment: .bottom) {
             GeometryReader { proxy in
                 content
-                    .frame(width: proxy.size.width, height: proxy.size.height - height)
+                    .frame(width: proxy.size.width, height: proxy.size.height - height - toolbarViewPadding)
             }
             
             toolbarView
                 .frame(height: height)
-                .padding(.vertical, 10) // 키보드와 간격 추가
+                .padding(.vertical, toolbarViewPadding) // 키보드와 간격 추가
         }
     }
 }
