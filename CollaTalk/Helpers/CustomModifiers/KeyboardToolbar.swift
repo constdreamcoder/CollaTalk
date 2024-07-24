@@ -26,6 +26,7 @@ struct KeyboardToolbar<ToolBarView: View>: ViewModifier {
             
             toolbarView
                 .frame(height: height)
+                .padding(.vertical, 10) // 키보드와 간격 추가
         }
     }
 }

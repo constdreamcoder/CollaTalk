@@ -14,12 +14,19 @@ struct ChatView: View {
     }
     
     @State private var text: String = ""
+    @State private var textViewHeight: CGFloat = 30
+    private let textViewPadding: CGFloat = 8 // 고정값
+    private let inputViewVStackSpacing: CGFloat = 8 // 0 or 8
+    private let selectedImageHeight: CGFloat = 50 // 0 or 50
+//    
+//    private let inputViewVStackSpacing: CGFloat = 0 // 0 or 8
+//    private let selectedImageHeight: CGFloat = 0 // 0 or 50
     
     var body: some View {
         VStack {
             ChatViewNavigationBar(chatViewType: .dm)
             
-            ScrollView {
+            List {
                 Section(
                     content: {
                         ChatItem(chatDirection: .left)
@@ -35,36 +42,52 @@ struct ChatView: View {
             }
             .listStyle(.plain)
         }
-        .keyboardToolbar(height: 60) {
-            HStack {
-//                Spacer()
-//                    .frame(width: 12)
-                
-                Image(systemName: "plus")
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 22)
-                    .foregroundStyle(.textSecondary)
-                    .onTapGesture {
-                        print("갤러리로 이동")
+        .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight) {
+            Group {
+                HStack(alignment: .bottom) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(height: 22)
+                        .foregroundStyle(.textSecondary)
+                        .padding(.bottom, 12)
+                        .onTapGesture {
+                            print("갤러리로 이동")
+                        }
+                    
+                    VStack(spacing: inputViewVStackSpacing) {
+                        ResizableTextView(
+                            text: $text,
+                            height: $textViewHeight,
+                            maxHeight: 80,
+                            textFont: .systemFont(ofSize: 13),
+                            placeholder: "메세지를 입력하세요"
+                        )
+                        .frame(minHeight: textViewHeight)
+                        
+                        LazyHStack {
+                            ForEach(0..<5) { _ in
+                                ChatSelectedImage()
+                            }
+                        }
+                        .frame(height: selectedImageHeight)
+
                     }
-                    .padding(.leading, 8)
-                    .padding(.trailing, 4)
-                
-                TextField("메세지를 입력하세요", text: $text, axis: .vertical)
-                
-                Image(.messageSendIcon)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 24)
-                    .onTapGesture {
-                        print("사진 보내기")
-                    }
-                    .padding(.horizontal, 8)
+                    .padding(.vertical, textViewPadding)
+                    
+                    Image(.messageSendIcon)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(height: 24)
+                        .padding(.bottom, 12)
+                        .onTapGesture {
+                            print("사진 보내기")
+                        }
+                }
+                .padding(.horizontal, 12)
+                .background(.backgroundPrimary)
+                .cornerRadius(8, corners: .allCorners)
             }
-            .frame(height: 40)
-            .background(.backgroundPrimary)
-            .cornerRadius(8, corners: .allCorners)
             .padding(.horizontal, 16)
         }
     }
@@ -149,7 +172,7 @@ struct ChatItem: View {
                 Spacer()
                 
                 Text("08:16 오전")
-                //                .font(.caption2)
+                    .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
@@ -159,12 +182,12 @@ struct ChatItem: View {
                 
                 if chatDirection == .left {
                     Text("뚜비두밥")
-                    //                    .font(.caption)
+                        .font(.caption)
                         .foregroundStyle(.textPrimary)
                 }
                 
                 Text("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
-                //                    .font(.body)
+                    .font(.body)
                     .foregroundStyle(.textPrimary)
                     .padding(8)
                     .cornerRadius(8, corners: .allCorners)
@@ -188,7 +211,7 @@ struct ChatItem: View {
             
             if chatDirection == .left {
                 Text("08:16 오전")
-                //                .font(.caption2)
+                    .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)
             } else {
@@ -196,6 +219,7 @@ struct ChatItem: View {
             }
             
         }
+        .padding(.vertical, 6)
     }
 }
 
@@ -203,7 +227,7 @@ struct ChatHeader: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("2024.07.23 금")
-            //                .font(.caption)
+                .font(.caption)
                 .foregroundStyle(.textPrimary)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
@@ -215,5 +239,28 @@ struct ChatHeader: View {
                 )
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+struct ChatSelectedImage: View {
+    var body: some View {
+        Image(.kakaoLogo)
+            .resizable()
+            .aspectRatio(1, contentMode: .fit)
+            .frame(width: 44)
+            .background(.brandGreen)
+            .cornerRadius(8, corners: .allCorners)
+            .overlay(alignment: .topTrailing) {
+                Image(.removeImageIcon)
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(width: 20)
+                    .background(.backgroundSecondary)
+                    .clipShape(Circle())
+                    .offset(x: 4.0, y: -4.0)
+                    .onTapGesture {
+                        print("삭제")
+                    }
+            }
     }
 }

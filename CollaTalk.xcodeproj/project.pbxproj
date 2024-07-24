@@ -67,6 +67,7 @@
 		0086B5C52C38089F00AD889C /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C42C38089F00AD889C /* InputView.swift */; };
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
 		00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */; };
+		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
 		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
@@ -170,6 +171,7 @@
 		0086B5C42C38089F00AD889C /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
+		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
 		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		00436E9F2C441E39009FDB71 /* UIVIew */ = {
 			isa = PBXGroup;
 			children = (
+				00A7E41C2C5015E100E9091B /* ResizableTextView.swift */,
 			);
 			path = UIVIew;
 			sourceTree = "<group>";
@@ -507,6 +510,13 @@
 				0034AC182C44E9870052EE0D /* String+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00A7E4152C500C5200E9091B /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		00C4F9B02C3CE5F90027B2D6 /* Enums */ = {
@@ -729,6 +739,7 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				00A7E4152C500C5200E9091B /* Test */,
 				0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */,
 				0052C0FF2C3AD554003D08D3 /* Application */,
 				00F6F2BF2C3C105300C1AFF1 /* Network */,
@@ -825,6 +836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */,
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
 				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
