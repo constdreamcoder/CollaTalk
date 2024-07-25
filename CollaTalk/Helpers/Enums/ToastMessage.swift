@@ -17,6 +17,7 @@ enum ToastMessage: ToastMessageType {
     case modifyWorkspace(ModifyWorkspace)
     case changeWorkspaceOwner(ChangeWorkspaceOwner)
     case inviteMemeber(InviteMember)
+    case downloadImage(DownloadImage)
     
     var message: String {
         switch self {
@@ -30,6 +31,8 @@ enum ToastMessage: ToastMessageType {
             return changeWorkspaceOwner.message
         case .inviteMemeber(let inviteMember):
             return inviteMember.message
+        case .downloadImage(let downloadImage):
+            return downloadImage.message
         }
     }
     
@@ -141,6 +144,24 @@ enum ToastMessage: ToastMessageType {
                 return "올바른 이메일을 입력해주세요."
             case .noRightToInviteMember:
                 return "워크스페이스 관리자만 팀원을 초대할 수 있어요.\n관리자에게 요청을 해보세요."
+            }
+        }
+    }
+    
+    enum DownloadImage: ToastMessageType {
+        
+        case duplicatedData
+        case unstableNetworkConnection
+        case imageCapacityLimit
+        
+        var message: String {
+            switch self {
+            case .duplicatedData:
+                return "중복된 이미지가 존재합니다."
+            case .unstableNetworkConnection:
+                return "네트워크가 불안정합니다."
+            case .imageCapacityLimit:
+                return "이미지 크기가 1MB이상입니다."
             }
         }
     }

@@ -76,7 +76,7 @@
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
-		00DA64D52C512F42005BC393 /* CustomPhotosPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */; };
+		00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* SelectPhotosView.swift */; };
 		00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D82C515E98005BC393 /* OnChangeModifier.swift */; };
 		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
@@ -188,7 +188,7 @@
 		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
-		00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotosPicker.swift; sourceTree = "<group>"; };
+		00DA64D42C512F42005BC393 /* SelectPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotosView.swift; sourceTree = "<group>"; };
 		00DA64D82C515E98005BC393 /* OnChangeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeModifier.swift; sourceTree = "<group>"; };
 		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
@@ -518,7 +518,6 @@
 		0086B5AF2C37E90600AD889C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				00DA64D42C512F42005BC393 /* CustomPhotosPicker.swift */,
 				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
 				0086B5B82C37F18E00AD889C /* BottomSheetView.swift */,
 				0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */,
@@ -655,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				00F47A4D2C4E9F8D0095EB4E /* ChatView.swift */,
+				00DA64D42C512F42005BC393 /* SelectPhotosView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -956,7 +956,7 @@
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
-				00DA64D52C512F42005BC393 /* CustomPhotosPicker.swift in Sources */,
+				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,

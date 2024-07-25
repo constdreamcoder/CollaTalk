@@ -106,5 +106,8 @@ struct AppState {
     struct ChatState {
         var opponents: [WorkspaceMember] = []
         var chatRoom: ChatRoom? = nil
+        var message: String = ""
+        var isMessageEmpty: Bool = false
+        var selectedImages: [UIImage] = []
     }
 }

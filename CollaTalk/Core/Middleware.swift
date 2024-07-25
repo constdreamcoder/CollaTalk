@@ -7,11 +7,13 @@
 
 import Foundation
 import Combine
+import UIKit
 
 typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
 let appMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
+
     case .dismissToastMessage: break
         
     case .alertAction(let alertAction):
@@ -33,6 +35,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             if workspaces.count > 0 {
                 return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
             }
+        case .setChatView: break
         case .setNone: break
         }
         
@@ -520,18 +523,58 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         let chatRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
                         guard let chatRoom else { return }
                         
-                        promise(.success(.dmAction(.navigateToChatView(chatRoom: chatRoom))))
+                        promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: chatRoom))))
                     } catch {
                         promise(.success(.dmAction(.dmError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
-        case .navigateToChatView:
-            break
         }
     case .chatAction(let chatAction):
         switch chatAction {
         case .chatError(let error):
+            break
+        case .initializeAllElements:
+            break
+        case .sendMessage:
+            // TODO: - 메시지 전송 API 구현
+            break
+        case .writeMessage(let message):
+            break
+        case .removeSelectedImage(let image):
+            break
+        case .handleSelectedPhotos(let newPhotos):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    var newImages: [UIImage] = []
+                    for newPhoto in newPhotos {
+                        do {
+                            if
+                                let data = try await newPhoto.loadTransferable(type: Data.self),
+                                let newImage = UIImage(data: data) {
+                                
+                                if data.count >= 1 * 1024 * 1024 {
+                                    promise(.success(.chatAction(.chatError(DownloadImageError.imageCapacityLimit))))
+                                }
+                                
+                                if !state.chatState.selectedImages.contains(where: { $0.pngData() == newImage.pngData() }) {
+                                    newImages.append(newImage)
+                                } else {
+                                    promise(.success(.chatAction(.chatError(DownloadImageError.duplicatedData))))
+                                }
+                            }
+                        } catch {
+                            print("Image Fetching Error From Gallery", error)
+                            promise(.success(.chatAction(.chatError(DownloadImageError.unstableNetworkConnection))))
+                        }
+                    }
+                    
+                    guard newImages.count > 0 else { return }
+                    promise(.success(.chatAction(.appendNewImages(newImages: newImages))))
+                }
+                
+            }.eraseToAnyPublisher()
+        case .appendNewImages(let newImages):
             break
         }
     }

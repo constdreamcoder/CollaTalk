@@ -13,9 +13,8 @@ struct ChatView: View {
         case channel
     }
     
-    @State private var selectedImages: [UIImage] = []
-    
-    @State private var text: String = ""
+    @EnvironmentObject private var store: AppStore
+        
     @State private var textViewHeight: CGFloat = 30
     private let textViewPadding: CGFloat = 8 // 고정값
     
@@ -46,8 +45,7 @@ struct ChatView: View {
         .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight)  {
             VStack {
                 HStack(alignment: .bottom) {
-                    
-                    CustomPhotosPicker(selectedImages: $selectedImages) {
+                    SelectPhotosView {
                         Image(systemName: "plus")
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
@@ -56,10 +54,11 @@ struct ChatView: View {
                             .padding(.bottom, 12)
                     }
                     
-                    
                     VStack(spacing: inputViewVStackSpacing) {
                         ResizableTextView(
-                            text: $text,
+                            text: Binding(
+                                get: { store.state.chatState.message },
+                                set: { store.dispatch(.chatAction(.writeMessage(message: $0))) }),
                             height: $textViewHeight,
                             maxHeight: 48,
                             textFont: .systemFont(ofSize: 13),
@@ -68,9 +67,10 @@ struct ChatView: View {
                         .frame(minHeight: textViewHeight)
                         
                         LazyHStack {
-                            ForEach(selectedImages, id: \.self) { selectedImage in
+                            ForEach(store.state.chatState.selectedImages, id: \.self) { selectedImage in
                                 ChatSelectedImage {
-                                    selectedImages.removeAll { $0 == selectedImage }
+                                    print("선택된 이미지 제거")
+                                    store.dispatch(.chatAction(.removeSelectedImage(image: selectedImage)))
                                 }
                             }
                         }
@@ -84,8 +84,8 @@ struct ChatView: View {
                         .frame(height: 24)
                         .padding(.bottom, 12)
                         .onTapGesture {
-                            print("사진 보내기")
-                            
+                            print("메세지 전송")
+                            store.dispatch(.chatAction(.sendMessage))
                         }
                 }
                 .padding(.horizontal, 12)
@@ -94,9 +94,9 @@ struct ChatView: View {
             }
             .padding(.horizontal, 16)
         }
-        .onChange(of: selectedImages, action: { newValue in
+        .onChange(of: store.state.chatState.selectedImages, action: { newValue in
             print(newValue.count)
-            
+                        
             if newValue.count > 0 {
                 inputViewVStackSpacing = 8
                 selectedImageHeight = 50
@@ -105,6 +105,9 @@ struct ChatView: View {
                 selectedImageHeight = 0
             }
         })
+        .onDisappear {
+            store.dispatch(.chatAction(.initializeAllElements))
+        }
     }
 }
 

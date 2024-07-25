@@ -30,7 +30,10 @@ struct OnChangeModifier<Value: Equatable>: ViewModifier {
 }
 
 extension View {
-    func onChange<Value: Equatable>(of value: Value, action: @escaping (Value) -> Void) -> some View {
+    func onChange<Value: Equatable>(
+        of value: Value,
+        action: @escaping (Value) -> Void
+    ) -> some View {
         modifier(OnChangeModifier(value: value, action: action))
     }
 }

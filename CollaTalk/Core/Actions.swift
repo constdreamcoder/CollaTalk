@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import _PhotosUI_SwiftUI
 
 enum AppAction {
     
@@ -24,10 +25,15 @@ enum AppAction {
     case dmAction(DMAction)
     case chatAction(ChatAction)
     
+    enum LoadingAction {
+        case isLoadingDisplayed(isLoading: Bool)
+    }
+    
     enum NetworkCallSuccessType {
         case setStartView
         case setHomeEmptyView
         case setHomeDefaultView(workspaces: [Workspace])
+        case setChatView(chatRoom: ChatRoom)
         case setNone
     }
     
@@ -117,10 +123,15 @@ enum AppAction {
         case completeConfigration(workspaceMembers: [WorkspaceMember])
         case dmError(Error)
         case createOrFetchChatRoom(opponent: WorkspaceMember)
-        case navigateToChatView(chatRoom: ChatRoom)
     }
     
     enum ChatAction {
         case chatError(Error)
+        case initializeAllElements
+        case sendMessage
+        case writeMessage(message: String)
+        case appendNewImages(newImages: [UIImage])
+        case removeSelectedImage(image: UIImage)
+        case handleSelectedPhotos(newPhotos: [PhotosPickerItem])
     }
 }

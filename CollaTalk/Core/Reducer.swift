@@ -13,6 +13,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     var mutatingState = state
     
     switch action {
+        
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
         
@@ -55,7 +56,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .presentInviteMemeberView(let present):
             mutatingState.navigationState.isInviteMemeberViewPresented = present
         }
-            
+        
     case .loginAction(let loginAction):
         switch loginAction {
         case .writeEmail(let email):
@@ -198,7 +199,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .isValid(let isWorkspaceNameValid, let isWorkspaceCoverImageValid):
             
             mutatingState.isLoading = false
-
+            
             if !isWorkspaceNameValid {
                 mutatingState.toastMessage = ToastMessage.modifyWorkspace(.workspaceNameError).message
             } else if !isWorkspaceCoverImageValid {
@@ -214,7 +215,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.modifyWorkspaceState.existingWorkspace = nil
             mutatingState.modifyWorkspaceState.name = ""
             mutatingState.modifyWorkspaceState.description = ""
-
+            
             mutatingState.modifyWorkspaceState.isNameEmpty = true
             mutatingState.modifyWorkspaceState.isDescriptionEmpty = true
         case .fetchUpdatedWorkspaces:
@@ -224,7 +225,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.workspaces = updatedWorkspaces
             
             mutatingState.navigationState.isModifyWorkspaceViewPresented = false
-                        
+            
             mutatingState.toastMessage = ToastMessage.modifyWorkspace(.completeEditing).message
             mutatingState.showToast = true
         case .dismissGallery(let selectedImage):
@@ -302,7 +303,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
             
             mutatingState.isLoading = false
-
+            
         case .toggleSideBarAction:
             mutatingState.navigationState.isSidebarVisible.toggle()
         case .fetchHomeDefaultViewDatas:
@@ -310,7 +311,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
             mutatingState.workspaceState.myChannels = myChennels
             mutatingState.workspaceState.dms = dms
-                        
+            
             mutatingState.isLoading = false
             
             mutatingState.navigationState.isSidebarVisible = false
@@ -330,6 +331,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
             mutatingState.workspaceState.selectedWorkspace = workspaces.first
+        case .setChatView(let chatRoom):
+            mutatingState.isLoading = false
+            
+            mutatingState.chatState.chatRoom = chatRoom
+            
+            mutatingState.networkCallSuccessType = .chatView
         case .setNone: break
         }
         mutatingState.isLoading = false
@@ -368,7 +375,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
             
             mutatingState.isLoading = false
-
+            
         case .changeWorkspaceOwnerShip(let member):
             mutatingState.isLoading = true
         case .fetchWorkspaceAfterUpdatingWorkspaceOwnership:
@@ -403,7 +410,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.showToast = true
         case .inviteMemberError(let error):
             mutatingState.isLoading = false
-
+            
             if let error = error as? CommonError {
                 switch error {
                 case .invalidAccessAuthorization:
@@ -495,12 +502,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = true
             
             mutatingState.chatState.opponents.append(opponent)
-        case .navigateToChatView(let chatRoom):
-            mutatingState.isLoading = false
-            
-            mutatingState.chatState.chatRoom = chatRoom
-                
-            mutatingState.networkCallSuccessType = .chatView
         }
     case .chatAction(let chatAction):
         switch chatAction {
@@ -524,7 +525,40 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .serverError:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? DownloadImageError {
+                switch error {
+                case .invalidURL:
+                    print(error.localizedDescription)
+                case .unstableNetworkConnection:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.downloadImage(.unstableNetworkConnection).message
+                    mutatingState.showToast = true
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.downloadImage(.duplicatedData).message
+                    mutatingState.showToast = true
+                case .imageCapacityLimit:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.downloadImage(.imageCapacityLimit).message
+                    mutatingState.showToast = true
+                }
             }
+        case .initializeAllElements:
+            mutatingState.chatState.chatRoom = nil
+            mutatingState.chatState.opponents.removeAll()
+        case .sendMessage:
+            mutatingState.isLoading = true
+        case .writeMessage(let message):
+            mutatingState.chatState.message = message
+            mutatingState.chatState.isMessageEmpty = message.isEmpty
+
+        case .removeSelectedImage(let image):
+            mutatingState.chatState.selectedImages.removeAll(where: { $0 == image })
+        case .handleSelectedPhotos(let newPhotos):
+            mutatingState.isLoading = true
+        case .appendNewImages(let newImages):
+            mutatingState.chatState.selectedImages.append(contentsOf: newImages)
+            mutatingState.isLoading = false
         }
     }
     return mutatingState
