@@ -458,7 +458,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             
             mutatingState.dmState.workspaceMembers = workspaceMembers
-        case .DMError(let error):
+        case .dmError(let error):
             mutatingState.isLoading = false
             
             if let error = error as? CommonError {
@@ -481,6 +481,47 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             } else if let error = error as? FetchWorkspaceMembersError {
                 switch error {
                 case .noData:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? CreateOrFetchChatRoomError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
+        case .createOrFetchChatRoom(let opponent):
+            mutatingState.isLoading = true
+            
+            mutatingState.chatState.opponents.append(opponent)
+        case .navigateToChatView(let chatRoom):
+            mutatingState.isLoading = false
+            
+            mutatingState.chatState.chatRoom = chatRoom
+                
+            mutatingState.networkCallSuccessType = .chatView
+        }
+    case .chatAction(let chatAction):
+        switch chatAction {
+        case .chatError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
                     print(error.localizedDescription)
                 }
             }

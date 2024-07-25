@@ -49,6 +49,12 @@
 		006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMsParams.swift */; };
 		006060C32C450C3D001D300F /* DM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C22C450C3D001D300F /* DM.swift */; };
 		006060C52C450D83001D300F /* FetchDMsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C42C450D83001D300F /* FetchDMsError.swift */; };
+		006064342C51DB8C00A6E060 /* DMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064332C51DB8C00A6E060 /* DMService.swift */; };
+		006064372C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */; };
+		0060643A2C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */; };
+		0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060643B2C51DD4400A6E060 /* DMProvider.swift */; };
+		0060643E2C51DDEC00A6E060 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060643D2C51DDEC00A6E060 /* ChatRoom.swift */; };
+		006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */; };
 		0070E7132C4A01D4009058EA /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E7122C4A01D4009058EA /* AlertView.swift */; };
 		007441A52C465AEE00FA8727 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A42C465AEE00FA8727 /* ImageService.swift */; };
 		007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A62C465E8E00FA8727 /* ImageProvider.swift */; };
@@ -155,6 +161,12 @@
 		006060C02C450BF5001D300F /* FetchDMsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsParams.swift; sourceTree = "<group>"; };
 		006060C22C450C3D001D300F /* DM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DM.swift; sourceTree = "<group>"; };
 		006060C42C450D83001D300F /* FetchDMsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsError.swift; sourceTree = "<group>"; };
+		006064332C51DB8C00A6E060 /* DMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMService.swift; sourceTree = "<group>"; };
+		006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomParams.swift; sourceTree = "<group>"; };
+		006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomRequest.swift; sourceTree = "<group>"; };
+		0060643B2C51DD4400A6E060 /* DMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMProvider.swift; sourceTree = "<group>"; };
+		0060643D2C51DDEC00A6E060 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomError.swift; sourceTree = "<group>"; };
 		0070E7122C4A01D4009058EA /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		007441A42C465AEE00FA8727 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		007441A62C465E8E00FA8727 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
@@ -454,6 +466,31 @@
 			path = Paramas;
 			sourceTree = "<group>";
 		};
+		006064352C51DC7200A6E060 /* DM */ = {
+			isa = PBXGroup;
+			children = (
+				006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */,
+			);
+			path = DM;
+			sourceTree = "<group>";
+		};
+		006064382C51DC8E00A6E060 /* DM */ = {
+			isa = PBXGroup;
+			children = (
+				006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */,
+				0060643D2C51DDEC00A6E060 /* ChatRoom.swift */,
+			);
+			path = DM;
+			sourceTree = "<group>";
+		};
+		0060643F2C51DED300A6E060 /* DM */ = {
+			isa = PBXGroup;
+			children = (
+				006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */,
+			);
+			path = DM;
+			sourceTree = "<group>";
+		};
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +601,7 @@
 				002066F92C3EC45C007E76BD /* User */,
 				0034AC142C44BE580052EE0D /* Workspace */,
 				0018096F2C46A8FD00F41D50 /* Image */,
+				0060643F2C51DED300A6E060 /* DM */,
 			);
 			path = ErrorHandler;
 			sourceTree = "<group>";
@@ -649,6 +687,7 @@
 				00F6F2C12C3C115100C1AFF1 /* UserService.swift */,
 				0037BC0E2C42E04900E9AF0A /* WorkspaceService.swift */,
 				007441A42C465AEE00FA8727 /* ImageService.swift */,
+				006064332C51DB8C00A6E060 /* DMService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -678,6 +717,7 @@
 				000CDD7B2C49081B001F6085 /* Common */,
 				00F6F2D22C3C203A00C1AFF1 /* User */,
 				0037BC102C42E0D900E9AF0A /* Workspace */,
+				006064352C51DC7200A6E060 /* DM */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -688,6 +728,7 @@
 				00F6F2CF2C3C185000C1AFF1 /* UserProvider.swift */,
 				0037BC112C42E12D00E9AF0A /* WorkspaceProvider.swift */,
 				007441A62C465E8E00FA8727 /* ImageProvider.swift */,
+				0060643B2C51DD4400A6E060 /* DMProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -698,6 +739,7 @@
 				00DFAF862C3C428300D25633 /* ErrorCode.swift */,
 				00F6F2D32C3C205900C1AFF1 /* User */,
 				0037BC132C42E18E00E9AF0A /* Workspace */,
+				006064382C51DC8E00A6E060 /* DM */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -860,6 +902,7 @@
 				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
 				00F6F2B62C3BE9A000C1AFF1 /* Store.swift in Sources */,
 				00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */,
+				0060643A2C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
@@ -868,6 +911,7 @@
 				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
 				00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */,
+				006064342C51DB8C00A6E060 /* DMService.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
@@ -881,6 +925,7 @@
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
+				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
@@ -890,6 +935,7 @@
 				0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */,
 				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
+				006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
@@ -915,6 +961,7 @@
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
+				0060643E2C51DDEC00A6E060 /* ChatRoom.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
 				00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */,
@@ -931,6 +978,7 @@
 				002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */,
 				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,
 				0034AC162C44BE740052EE0D /* CreateWorkspaceError.swift in Sources */,
+				006064372C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift in Sources */,
 				000CDD812C490947001F6085 /* EditWorkspaceError.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,

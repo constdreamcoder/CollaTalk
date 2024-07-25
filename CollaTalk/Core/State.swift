@@ -24,6 +24,7 @@ struct AppState {
     var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
     var inviteMemberState = InviteMemberState()
     var dmState = DMState()
+    var chatState = ChatState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -100,5 +101,10 @@ struct AppState {
     
     struct DMState {
         var workspaceMembers: [WorkspaceMember] = []
+    }
+    
+    struct ChatState {
+        var opponents: [WorkspaceMember] = []
+        var chatRoom: ChatRoom? = nil
     }
 }

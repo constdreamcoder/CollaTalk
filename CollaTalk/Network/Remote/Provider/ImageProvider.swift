@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 final class ImageProvider: BaseProvider<ImageService> {
     
     static let shared = ImageProvider()

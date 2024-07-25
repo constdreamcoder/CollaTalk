@@ -37,7 +37,7 @@ struct DMMemberListView: View {
                         DMMemberCell(member: workspaceMember)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                navigationRouter.push(screen: .chatView)
+                                store.dispatch(.dmAction(.createOrFetchChatRoom(opponent: workspaceMember)))
                             }
                     }
                 }

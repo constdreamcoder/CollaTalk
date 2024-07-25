@@ -129,7 +129,8 @@ struct ContentView: View {
                     store.dispatch(.navigationAction(.presentModifyWorkspaceView(present: false, workspaceModificationType: .create)))
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .chatView:
-                    break
+                    navigationRouter.push(screen: .chatView)
+                    store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }
             }

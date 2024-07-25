@@ -500,13 +500,38 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let workspaceMembers else { return }
                         promise(.success(.dmAction(.completeConfigration(workspaceMembers: workspaceMembers))))
                     } catch {
-                        promise(.success(.dmAction(.DMError(error))))
+                        promise(.success(.dmAction(.dmError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
         case .completeConfigration:
             break
-        case .DMError(let error):
+        case .dmError(let error):
+            break
+        case .createOrFetchChatRoom(let opponent):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        
+                        let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self)
+                        guard let workspace else { return }
+                        
+                        /// 채팅방 생성 혹은 기존 채팅방 조회
+                        let chatRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
+                        guard let chatRoom else { return }
+                        
+                        promise(.success(.dmAction(.navigateToChatView(chatRoom: chatRoom))))
+                    } catch {
+                        promise(.success(.dmAction(.dmError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .navigateToChatView:
+            break
+        }
+    case .chatAction(let chatAction):
+        switch chatAction {
+        case .chatError(let error):
             break
         }
     }

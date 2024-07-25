@@ -22,6 +22,7 @@ enum AppAction {
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case inviteMemeberAction(InviteMemeberAction)
     case dmAction(DMAction)
+    case chatAction(ChatAction)
     
     enum NetworkCallSuccessType {
         case setStartView
@@ -114,6 +115,12 @@ enum AppAction {
     enum DMAction {
         case configureView
         case completeConfigration(workspaceMembers: [WorkspaceMember])
-        case DMError(Error)
+        case dmError(Error)
+        case createOrFetchChatRoom(opponent: WorkspaceMember)
+        case navigateToChatView(chatRoom: ChatRoom)
+    }
+    
+    enum ChatAction {
+        case chatError(Error)
     }
 }
