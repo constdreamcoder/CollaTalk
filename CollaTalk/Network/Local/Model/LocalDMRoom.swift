@@ -13,19 +13,21 @@ final class LocalDMRoom: Object {
     @Persisted var createdAt: String
     @Persisted var opponent: LocalWorkspaceMemeber?
     @Persisted var lastDM: LocalDirectMessage?
+    @Persisted var unreadDMCount: Int
     
     convenience init(
         roomId: String,
         createdAt: String,
-        opponent: LocalWorkspaceMemeber? = nil
+        opponent: LocalWorkspaceMemeber? = nil,
+        lastDM: LocalDirectMessage? = nil,
+        unreadDMCount: Int = 0
     ) {
         self.init()
         
         self.roomId = roomId
         self.createdAt = createdAt
         self.opponent = opponent
-        
-        let lastDM = LocalDirectMessageRepository.shared.findLastestDM(roomId)
         self.lastDM = lastDM
+        self.unreadDMCount = unreadDMCount
     }
 }

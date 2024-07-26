@@ -11,6 +11,8 @@ import Moya
 enum DMService {
     case createOrFetchChatRoom(params: CreateOrFetchChatRoomParams, request: CreateOrFetchChatRoomRequest)
     case sendDirectMessage(params: SendDirectMessageParams, request: SendDirectMessageRequest)
+    case fetchDMHistory(params: FetchDMHistoryParams, query: FetchDMHistoryQuery)
+    case fetchUnreadDMCount(params: FetchUnreadDMCountParams, query: FetchUnreadDMCountQuery)
 }
 
 extension DMService: BaseService {
@@ -20,6 +22,10 @@ extension DMService: BaseService {
             return "/workspaces/\(params.workspaceID)/dms"
         case .sendDirectMessage(let params, _):
             return "/workspaces/\(params.workspaceID)/dms/\(params.roomID)/chats"
+        case .fetchDMHistory(let params, _):
+            return "/workspaces/\(params.workspaceID)/dms/\(params.roomID)/chats"
+        case .fetchUnreadDMCount(let params, _):
+            return "/workspaces/\(params.workspaceID)/dms/\(params.roomID)/unreads"
         }
     }
     
@@ -27,6 +33,8 @@ extension DMService: BaseService {
         switch self {
         case .createOrFetchChatRoom, .sendDirectMessage:
             return .post
+        case .fetchDMHistory, .fetchUnreadDMCount:
+            return .get
         }
     }
     
@@ -54,6 +62,16 @@ extension DMService: BaseService {
             
             multipartList = multipartList + imageFilesMultipart
             return .uploadMultipart(multipartList)
+        case .fetchDMHistory(_, let queries):
+            return .requestParameters(
+                parameters: [QueryKey.cursorDate: queries.cursorDate ?? ""],
+                encoding: URLEncoding.queryString
+            )
+        case .fetchUnreadDMCount(_, let queries):
+            return .requestParameters(
+                parameters: [QueryKey.after: queries.after ?? ""],
+                encoding: URLEncoding.queryString
+            )
         }
     }
 }

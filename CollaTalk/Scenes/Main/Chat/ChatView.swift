@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+enum ChatRoomType {
+    case dm
+    case channel
+}
+
 struct ChatView: View {
-    enum ChatViewType {
-        case dm
-        case channel
-    }
     
+    let chatRoomType: ChatRoomType
+   
     @EnvironmentObject private var store: AppStore
         
     @State private var textViewHeight: CGFloat = 30
@@ -20,11 +23,11 @@ struct ChatView: View {
     
     @State private var inputViewVStackSpacing: CGFloat = 0
     @State private var selectedImageHeight: CGFloat = 0
-        
+    
     var body: some View {
         
         VStack {
-            ChatViewNavigationBar(chatViewType: .dm)
+            ChatViewNavigationBar(chatRoomType: chatRoomType)
             
             List {
                 Section(
@@ -97,7 +100,6 @@ struct ChatView: View {
         .onChange(of: store.state.chatState.selectedImages, action: { newValue in
             print(newValue.count)
                
-            store.dispatch(.chatAction(.sendDirectMessage))
             if newValue.count > 0 {
                 inputViewVStackSpacing = 8
                 selectedImageHeight = 50
@@ -113,14 +115,14 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView()
+    ChatView(chatRoomType: .dm)
 }
 
 struct ChatViewNavigationBar: View {
     
     @EnvironmentObject private var navigationRouter: NavigationRouter
     
-    let chatViewType: ChatView.ChatViewType
+    let chatRoomType: ChatRoomType
     
     var body: some View {
         VStack {
@@ -156,7 +158,7 @@ struct ChatViewNavigationBar: View {
                     }
                 )
                 .padding(.trailing, 15)
-                .hidden(chatViewType == .dm)
+                .hidden(chatRoomType == .dm)
             }
             .foregroundStyle(.brandBlack)
             

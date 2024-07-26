@@ -14,13 +14,14 @@ struct DMView: View {
     var body: some View {
         
         Group {
-            if store.state.dmState.workspaceMembers.count > 0 {
+            if store.state.workspaceState.workspaceMembers.count > 0 {
                 DMListView()
             } else {
                 DMEmptyView()
             }
         }
         .task {
+            print("Realm URL, \(LocalDMRoomRepository.shared.getLocationOfDefaultRealm())")
             store.dispatch(.dmAction(.configureView))
         }
     }

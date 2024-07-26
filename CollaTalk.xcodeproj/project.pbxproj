@@ -46,7 +46,7 @@
 		005327502C41381800977D31 /* HomeDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053274F2C41381800977D31 /* HomeDefaultView.swift */; };
 		006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */; };
 		006060BF2C45005E001D300F /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060BE2C45005E001D300F /* Channel.swift */; };
-		006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMsParams.swift */; };
+		006060C12C450BF5001D300F /* FetchDMRoomsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C02C450BF5001D300F /* FetchDMRoomsParams.swift */; };
 		006060C32C450C3D001D300F /* DM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C22C450C3D001D300F /* DM.swift */; };
 		006060C52C450D83001D300F /* FetchDMsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006060C42C450D83001D300F /* FetchDMsError.swift */; };
 		006064342C51DB8C00A6E060 /* DMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064332C51DB8C00A6E060 /* DMService.swift */; };
@@ -64,6 +64,14 @@
 		006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */; };
 		006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */; };
 		006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32EB2C535DF20084C4E2 /* BaseRepository.swift */; };
+		006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32ED2C5385830084C4E2 /* FetchDMHistoryParams.swift */; };
+		006C32F12C5385B00084C4E2 /* FetchDMHistoryQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32F02C5385B00084C4E2 /* FetchDMHistoryQuery.swift */; };
+		006C32F32C5387530084C4E2 /* QueryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32F22C5387530084C4E2 /* QueryKey.swift */; };
+		006C32F72C5389A10084C4E2 /* FetchDMHistoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32F62C5389A10084C4E2 /* FetchDMHistoryError.swift */; };
+		006C32F92C53DFAF0084C4E2 /* FetchUnreadDMCountParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32F82C53DFAF0084C4E2 /* FetchUnreadDMCountParams.swift */; };
+		006C32FB2C53DFD40084C4E2 /* FetchUnreadDMCountQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32FA2C53DFD40084C4E2 /* FetchUnreadDMCountQuery.swift */; };
+		006C32FD2C53E06C0084C4E2 /* UnreadDMCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32FC2C53E06C0084C4E2 /* UnreadDMCount.swift */; };
+		006C32FF2C53E1240084C4E2 /* FetchUnreadDMCountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32FE2C53E1240084C4E2 /* FetchUnreadDMCountError.swift */; };
 		0070E7132C4A01D4009058EA /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E7122C4A01D4009058EA /* AlertView.swift */; };
 		007441A52C465AEE00FA8727 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A42C465AEE00FA8727 /* ImageService.swift */; };
 		007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A62C465E8E00FA8727 /* ImageProvider.swift */; };
@@ -186,7 +194,7 @@
 		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
 		006060BC2C44FC5D001D300F /* FetchMyChannelsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyChannelsError.swift; sourceTree = "<group>"; };
 		006060BE2C45005E001D300F /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		006060C02C450BF5001D300F /* FetchDMsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsParams.swift; sourceTree = "<group>"; };
+		006060C02C450BF5001D300F /* FetchDMRoomsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMRoomsParams.swift; sourceTree = "<group>"; };
 		006060C22C450C3D001D300F /* DM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DM.swift; sourceTree = "<group>"; };
 		006060C42C450D83001D300F /* FetchDMsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMsError.swift; sourceTree = "<group>"; };
 		006064332C51DB8C00A6E060 /* DMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMService.swift; sourceTree = "<group>"; };
@@ -202,6 +210,14 @@
 		006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoomRepository.swift; sourceTree = "<group>"; };
 		006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemeberRepository.swift; sourceTree = "<group>"; };
 		006C32EB2C535DF20084C4E2 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		006C32ED2C5385830084C4E2 /* FetchDMHistoryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMHistoryParams.swift; sourceTree = "<group>"; };
+		006C32F02C5385B00084C4E2 /* FetchDMHistoryQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMHistoryQuery.swift; sourceTree = "<group>"; };
+		006C32F22C5387530084C4E2 /* QueryKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryKey.swift; sourceTree = "<group>"; };
+		006C32F62C5389A10084C4E2 /* FetchDMHistoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMHistoryError.swift; sourceTree = "<group>"; };
+		006C32F82C53DFAF0084C4E2 /* FetchUnreadDMCountParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadDMCountParams.swift; sourceTree = "<group>"; };
+		006C32FA2C53DFD40084C4E2 /* FetchUnreadDMCountQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadDMCountQuery.swift; sourceTree = "<group>"; };
+		006C32FC2C53E06C0084C4E2 /* UnreadDMCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadDMCount.swift; sourceTree = "<group>"; };
+		006C32FE2C53E1240084C4E2 /* FetchUnreadDMCountError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadDMCountError.swift; sourceTree = "<group>"; };
 		0070E7122C4A01D4009058EA /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		007441A42C465AEE00FA8727 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		007441A62C465E8E00FA8727 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
@@ -290,6 +306,7 @@
 			children = (
 				000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */,
 				000CDD7E2C49082E001F6085 /* ImageFile.swift */,
+				006C32F22C5387530084C4E2 /* QueryKey.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -347,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				0034AC1A2C44EC170052EE0D /* FetchMyChannelsParams.swift */,
-				006060C02C450BF5001D300F /* FetchDMsParams.swift */,
+				006060C02C450BF5001D300F /* FetchDMRoomsParams.swift */,
 				000CDD772C490788001F6085 /* EditWorkspaceParams.swift */,
 				0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */,
 				00ED9DFE2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift */,
@@ -442,6 +459,7 @@
 		0037BC132C42E18E00E9AF0A /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				0060643D2C51DDEC00A6E060 /* DMRoom.swift */,
 				0037BC142C42E1AB00E9AF0A /* Workspace.swift */,
 				006060BE2C45005E001D300F /* Channel.swift */,
 				006060C22C450C3D001D300F /* DM.swift */,
@@ -503,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				006064462C522EF400A6E060 /* Params */,
+				006C32EF2C5385A60084C4E2 /* Query */,
 				006064472C522EFB00A6E060 /* Body */,
 			);
 			path = DM;
@@ -511,8 +530,8 @@
 		006064382C51DC8E00A6E060 /* DM */ = {
 			isa = PBXGroup;
 			children = (
-				0060643D2C51DDEC00A6E060 /* DMRoom.swift */,
 				0060644A2C52337400A6E060 /* DirectMessage.swift */,
+				006C32FC2C53E06C0084C4E2 /* UnreadDMCount.swift */,
 			);
 			path = DM;
 			sourceTree = "<group>";
@@ -522,6 +541,8 @@
 			children = (
 				006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */,
 				0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */,
+				006C32F62C5389A10084C4E2 /* FetchDMHistoryError.swift */,
+				006C32FE2C53E1240084C4E2 /* FetchUnreadDMCountError.swift */,
 			);
 			path = DM;
 			sourceTree = "<group>";
@@ -531,6 +552,8 @@
 			children = (
 				006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */,
 				006064442C522EBC00A6E060 /* SendDirectMessageParams.swift */,
+				006C32ED2C5385830084C4E2 /* FetchDMHistoryParams.swift */,
+				006C32F82C53DFAF0084C4E2 /* FetchUnreadDMCountParams.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -560,6 +583,23 @@
 				00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		006C32EF2C5385A60084C4E2 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				006C32F02C5385B00084C4E2 /* FetchDMHistoryQuery.swift */,
+				006C32FA2C53DFD40084C4E2 /* FetchUnreadDMCountQuery.swift */,
+			);
+			path = Query;
+			sourceTree = "<group>";
+		};
+		006C32F52C5388A00084C4E2 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				00DFAF862C3C428300D25633 /* ErrorCode.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
@@ -809,10 +849,10 @@
 		00F6F2D12C3C202F00C1AFF1 /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				00DFAF862C3C428300D25633 /* ErrorCode.swift */,
 				00F6F2D32C3C205900C1AFF1 /* User */,
 				0037BC132C42E18E00E9AF0A /* Workspace */,
 				006064382C51DC8E00A6E060 /* DM */,
+				006C32F52C5388A00084C4E2 /* Error */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -974,7 +1014,7 @@
 			files = (
 				00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */,
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
-				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
+				006060C12C450BF5001D300F /* FetchDMRoomsParams.swift in Sources */,
 				00FF60E62C52B0C600A4970E /* LocalWorkspaceMemeber.swift in Sources */,
 				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
 				0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */,
@@ -992,6 +1032,7 @@
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				0060644B2C52337400A6E060 /* DirectMessage.swift in Sources */,
+				006C32F32C5387530084C4E2 /* QueryKey.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */,
 				006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */,
@@ -1009,6 +1050,7 @@
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
 				00FF60E02C52A9F700A4970E /* RepositoryType.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
+				006C32FB2C53DFD40084C4E2 /* FetchUnreadDMCountQuery.swift in Sources */,
 				00FF60EA2C52BABD00A4970E /* LocalDirectMessageRepository.swift in Sources */,
 				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
@@ -1021,6 +1063,8 @@
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */,
 				006064452C522EBC00A6E060 /* SendDirectMessageParams.swift in Sources */,
+				006C32F92C53DFAF0084C4E2 /* FetchUnreadDMCountParams.swift in Sources */,
+				006C32FF2C53E1240084C4E2 /* FetchUnreadDMCountError.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */,
 				000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */,
@@ -1063,6 +1107,7 @@
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
+				006C32F12C5385B00084C4E2 /* FetchDMHistoryQuery.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */,
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
@@ -1070,6 +1115,7 @@
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				0060643E2C51DDEC00A6E060 /* DMRoom.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
+				006C32F72C5389A10084C4E2 /* FetchDMHistoryError.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
 				00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
@@ -1091,6 +1137,8 @@
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 				00ED9E032C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift in Sources */,
+				006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */,
+				006C32FD2C53E06C0084C4E2 /* UnreadDMCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

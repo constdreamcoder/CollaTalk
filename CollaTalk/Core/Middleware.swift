@@ -13,7 +13,7 @@ typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Ne
 
 let appMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
-
+        
     case .dismissToastMessage: break
         
     case .alertAction(let alertAction):
@@ -23,7 +23,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .initializeAllAlertElements:
             break
         }
-   
+        
     case .initializeNetworkCallSuccessType:
         break
         
@@ -256,7 +256,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
                 imageData = ImageCacheManager.shared.get(for: existingImageURL)?.pngData() ?? Data()
             }
-
+            
             /// 워크스페이스명 유효성 검사
             let isWorkspaceNameValid = ValidationCheck.workspaceName(input: state.modifyWorkspaceState.name).validation
             
@@ -350,13 +350,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
-                        
                         guard let workspace = state.workspaceState.selectedWorkspace else { return }
                         
                         /// 로그인한 유저가 속한 채널 목록 조회
                         async let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(workspaceID: workspace.workspaceId)
                         /// DM방 목록 조회
-                        async let dms = try await WorkspaceProvider.shared.fetchMyDMs(workspaceID: workspace.workspaceId)
+                        async let dms = try await WorkspaceProvider.shared.fetchMyDMRooms(workspaceID: workspace.workspaceId)
                         
                         let channelsResult = try await myChannels
                         let dmsResult = try await dms
@@ -498,10 +497,104 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         guard let workspace else { return }
                         
-                        let workspaceMembers = try await WorkspaceProvider.shared.fetchWorkspaceMembers(workspaceID: workspace.workspaceId)
+                        /// 워크스페이스 멤버 목록 조회
+                        async let workspaceMembers = try await WorkspaceProvider.shared.fetchWorkspaceMembers(workspaceID: workspace.workspaceId)
+                        /// DM방 목록 조회
+                        async let dmRooms = try await WorkspaceProvider.shared.fetchMyDMRooms(workspaceID: workspace.workspaceId)
                         
-                        guard let workspaceMembers else { return }
-                        promise(.success(.dmAction(.completeConfigration(workspaceMembers: workspaceMembers))))
+                        let workspaceMembersResult = try await workspaceMembers
+                        let dmRoomsResult = try await dmRooms
+                        
+                        guard let workspaceMembersResult, let dmRoomsResult else { return }
+                                                
+                        guard dmRoomsResult.count > 0
+                        else {
+                            promise(.success(.dmAction(.completeConfigration(workspaceMembers: workspaceMembersResult, dmRooms: []))))
+                            return
+                        }
+                        
+                        dmRoomsResult.forEach {
+                            if !LocalDMRoomRepository.shared.isExist($0.roomId) {
+                                LocalDMRoomRepository.shared.write($0)
+                            }
+                        }
+                                                
+                       let fetchLastDMTasks = dmRoomsResult.map { dmRoom in
+                            Task {
+                                do {
+                                    let lastDMInLocal = LocalDirectMessageRepository.shared.findLastestDM(dmRoom.roomId)
+                                    
+                                    /// 각 DM 방 채팅내역 조회
+                                    let dmList = try await DMProvider.shared.fetchDMHistory(
+                                        workspaceID: workspace.workspaceId,
+                                        roomID: dmRoom.roomId,
+                                        cursorDate: lastDMInLocal?.createdAt
+                                    )
+                                    
+                                    guard let count = dmList?.count, count > 0 else { return }
+                                    guard let lastDMFromRemote = dmList?.last else { return }
+                                    
+                                    let lastSender: LocalWorkspaceMemeber?
+                                    if LocalWorkspaceMemeberRepository.shared.isExist(lastDMFromRemote.user.userId) {
+                                        lastSender = LocalWorkspaceMemeberRepository.shared.findOne(lastDMFromRemote.user.userId)
+                                    } else {
+                                        lastSender = .init(
+                                            userId: lastDMFromRemote.user.userId,
+                                            email: lastDMFromRemote.user.email,
+                                            nickname: lastDMFromRemote.user.nickname,
+                                            profileImage: lastDMFromRemote.user.profileImage
+                                        )
+                                    }
+                                    
+                                    /// 마지막 DM 업데이트
+                                    LocalDMRoomRepository.shared.updateLastDM(lastDMFromRemote, lastSender: lastSender)
+                                } catch {
+                                    promise(.success(.dmAction(.dmError(error))))
+                                }
+                            }
+                        }
+                        
+                        let fetchUnreadDMCountsTasks = dmRoomsResult.map { dmRoom in
+                            Task {
+                                do {
+                                    let lastDMInLocal = LocalDirectMessageRepository.shared.findLastestDM(dmRoom.roomId)
+                                    
+                                    /// 각 DM 방 읽지 않은 채팅 개수 조회
+                                    let unreadDMCount = try await DMProvider.shared.fetchUnreadDMCount(
+                                        workspaceID: workspace.workspaceId,
+                                        roomID: dmRoom.roomId,
+                                        after: lastDMInLocal?.createdAt
+                                    )
+                                    
+                                    guard let unreadDMCount, unreadDMCount.count > 0 else { return }
+                                    
+                                    /// 읽지 않은 DM 채팅 개수 업데이트
+                                    LocalDMRoomRepository.shared.updateUnreadDMCount(unreadDMCount)
+                                } catch {
+                                    promise(.success(.dmAction(.dmError(error))))
+                                }
+                            }
+                        }
+                                                
+                        await withTaskGroup(of: Void.self) { group in
+                            for task in fetchLastDMTasks {
+                                group.addTask {
+                                    await task.value
+                                }
+                            }
+                        }
+                        
+                        await withTaskGroup(of: Void.self) { group in
+                            for task in fetchUnreadDMCountsTasks {
+                                await task.value
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            let updatedDmRooms: [LocalDMRoom] = LocalDMRoomRepository.shared.localDMRoomsSortedByDescending
+                            
+                            promise(.success(.dmAction(.completeConfigration(workspaceMembers: workspaceMembersResult, dmRooms: updatedDmRooms))))
+                        }
                     } catch {
                         promise(.success(.dmAction(.dmError(error))))
                     }
@@ -511,33 +604,38 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .dmError(let error):
             break
-        case .createOrFetchChatRoom(let opponent):
-            return Future<AppAction, Never> { promise in
-                Task {
-                    do {
-                        
-                        let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self)
-                        guard let workspace else { return }
-                        
-                        /// 채팅방 생성 혹은 기존 채팅방 조회
-                        let dmRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
-                        guard let dmRoom else { return }
-                        
-                        /// 기존 채팅방 존재 여부 판별
-                        if LocalDMRoomRepository.shared.isExist(dmRoom) {
-                            print("이미 존재하는 채팅방입니다.")
-                        } else {
-                            /// 로컬 DB(Realm)에 저장
-                            LocalDMRoomRepository.shared.write(dmRoom)
+        case .createOrFetchChatRoom(let chatRoomType, let opponent):
+            if chatRoomType == .dm {
+                return Future<AppAction, Never> { promise in
+                    Task {
+                        do {
+                            let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self)
+                            guard let workspace else { return }
+                            
+                            /// 채팅방 생성 혹은 기존 채팅방 조회
+                            let dmRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
+                            guard let dmRoom else { return }
+                            
+                            /// 기존 채팅방 존재 여부 판별
+                            if LocalDMRoomRepository.shared.isExist(dmRoom.roomId) {
+                                print("이미 존재하는 채팅방입니다.")
+                            } else {
+                                /// 로컬 DB(Realm)에 저장
+                                LocalDMRoomRepository.shared.write(dmRoom)
+                            }
+                            
+                            /// 채팅화면으로 이동
+                            promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom))))
+                        } catch {
+                            promise(.success(.dmAction(.dmError(error))))
                         }
-                        
-                        /// 채팅화면으로 이동
-                        promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom))))
-                    } catch {
-                        promise(.success(.dmAction(.dmError(error))))
                     }
-                }
-            }.eraseToAnyPublisher()
+                }.eraseToAnyPublisher()
+            } else {
+                
+                // TODO: - 채널 채팅방 생성 기능 구현
+                break
+            }
         }
     case .chatAction(let chatAction):
         switch chatAction {
@@ -563,7 +661,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         /// DM 전송
                         let newDirectMessage = try await DMProvider.shared.sendDirectMessage(
                             workspaceID: workspace.workspaceId,
-                            roomID: state.chatState.chatRoom?.roomId ?? "",
+                            roomID: state.dmState.dmRoom?.roomId ?? "",
                             message: state.chatState.message,
                             files: imageFiles
                         )
@@ -577,14 +675,11 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             newDirectMessage: newDirectMessage,
                             sender: sender
                         )
-                        
-                        // TODO: - DB 저장
-                        print("newDirectMessage", newDirectMessage)
                     } catch {
                         print("error", error)
                     }
                 }
-
+                
             }.eraseToAnyPublisher()
         case .writeMessage(let message):
             break
@@ -598,8 +693,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         do {
                             if
                                 let data = try await newPhoto.loadTransferable(type: Data.self),
-                                let newImage = UIImage(data: data) {
-                                
+                                let newImage = UIImage(data: data)
+                            {
                                 /// 이미지 파일 크기 제한 10MB 여부 확인
                                 if data.count >= 10 * 1024 * 1024 {
                                     promise(.success(.chatAction(.chatError(DownloadImageError.imageCapacityLimit))))

@@ -12,7 +12,7 @@ enum WorkspaceService {
     case fetchWorkspaces
     case createWorkspace(request: CreateWorkspaceRequest)
     case fetchMyChannels(params: FetchMyChannelsParams)
-    case fetchDMs(params: FetchDMsParams)
+    case fetchDMs(params: FetchDMRoomsParams)
     case editWorkspace(params: EditWorkspaceParams, request: EditWorkspaceRequest)
     case deleteWorkspace(params: DeleteWorkspaceParams)
     case fetchWorkspaceMembers(params: FetchWorkspaceMembersParams)

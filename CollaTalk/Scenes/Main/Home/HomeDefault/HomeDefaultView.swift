@@ -66,8 +66,8 @@ struct HomeCell: View {
                         
                         AddNewCellView(contentType: .channel)
                     case .directMessage:
-                        ForEach(store.state.workspaceState.dms, id: \.roomId) { dm in
-                            DMCellContent(dm: dm)
+                        ForEach(store.state.workspaceState.dmRooms, id: \.roomId) { dmRooms in
+                            DMRoomCellContent(dmRooms: dmRooms)
                         }
                         
                         AddNewCellView(contentType: .directMessage)
@@ -129,14 +129,14 @@ struct MyChannelCellContent: View {
     }
 }
 
-struct DMCellContent: View {
+struct DMRoomCellContent: View {
     
-    let dm: DM
+    let dmRooms: DMRoom
     
     var body: some View {
         HStack {
             
-            DMCellContent(dm: dm)
+            DMCellFrontPart(user: dmRooms.user)
             
             Text("99")
                 .font(.caption)
@@ -202,7 +202,7 @@ struct MyChennelCellFrontPart: View {
 
 struct DMCellFrontPart: View {
 
-    let user: DMUser
+    let user: WorkspaceMember
     private let unreadNumber = 99
     
     var body: some View {

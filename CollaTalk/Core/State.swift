@@ -81,7 +81,8 @@ struct AppState {
         var selectedWorkspace: Workspace? = nil
         var workspaces: [Workspace] = []
         var myChannels: [Channel] = []
-        var dms: [DM] = []
+        var dmRooms: [DMRoom] = []
+        var workspaceMembers: [WorkspaceMember] = []
     }
     
     struct AlertState {
@@ -100,12 +101,13 @@ struct AppState {
     }
     
     struct DMState {
-        var workspaceMembers: [WorkspaceMember] = []
+        var dmRooms: [LocalDMRoom] = []
+        var opponent: WorkspaceMember? = nil
+        var dmRoom: DMRoom? = nil
     }
     
     struct ChatState {
-        var opponents: [WorkspaceMember] = []
-        var chatRoom: DMRoom? = nil
+        var chatRoomType: ChatRoomType = .dm
         var message: String = ""
         var isMessageEmpty: Bool = false
         var selectedImages: [UIImage] = []

@@ -89,7 +89,7 @@ enum AppAction {
         case workspaceError(Error)
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
-        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DM])
+        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DMRoom])
         case deleteWorkspace(workspace: Workspace?)
         case selectWorkspace(workspace: Workspace?)
     }
@@ -120,9 +120,9 @@ enum AppAction {
     
     enum DMAction {
         case configureView
-        case completeConfigration(workspaceMembers: [WorkspaceMember])
+        case completeConfigration(workspaceMembers: [WorkspaceMember], dmRooms: [LocalDMRoom])
         case dmError(Error)
-        case createOrFetchChatRoom(opponent: WorkspaceMember)
+        case createOrFetchChatRoom(chatRoomType: ChatRoomType, opponent: WorkspaceMember)
     }
     
     enum ChatAction {

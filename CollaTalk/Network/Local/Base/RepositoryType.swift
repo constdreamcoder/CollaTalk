@@ -10,9 +10,7 @@ import RealmSwift
 
 protocol RepositoryType {
     associatedtype T: Object
-    
-    var realm: Realm { get }
-    
+        
     func getLocationOfDefaultRealm()
     func read() -> Results<T>
     func write(_ object: T)

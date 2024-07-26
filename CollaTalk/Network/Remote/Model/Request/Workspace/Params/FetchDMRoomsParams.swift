@@ -1,5 +1,5 @@
 //
-//  FetchDMsParams.swift
+//  FetchDMRoomsParams.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/15/24.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct FetchDMsParams {
+struct FetchDMRoomsParams {
     let workspaceID: String
 }

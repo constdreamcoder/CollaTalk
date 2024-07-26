@@ -308,9 +308,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isSidebarVisible.toggle()
         case .fetchHomeDefaultViewDatas:
             mutatingState.isLoading = true
-        case .completeFetchHomeDefaultViewDatas(let myChennels, let dms):
+        case .completeFetchHomeDefaultViewDatas(let myChennels, let dmRooms):
             mutatingState.workspaceState.myChannels = myChennels
-            mutatingState.workspaceState.dms = dms
+            mutatingState.workspaceState.dmRooms = dmRooms
             
             mutatingState.isLoading = false
             
@@ -334,7 +334,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .setChatView(let chatRoom):
             mutatingState.isLoading = false
             
-            mutatingState.chatState.chatRoom = chatRoom
+            mutatingState.dmState.dmRoom = chatRoom
             
             mutatingState.networkCallSuccessType = .chatView
         case .setNone: break
@@ -461,10 +461,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch dmAction {
         case .configureView:
             mutatingState.isLoading = true
-        case .completeConfigration(let workspaceMembers):
+        case .completeConfigration(let workspaceMembers, let dmRooms):
             mutatingState.isLoading = false
             
-            mutatingState.dmState.workspaceMembers = workspaceMembers
+            mutatingState.workspaceState.workspaceMembers = workspaceMembers
+            mutatingState.dmState.dmRooms = dmRooms
+            
         case .dmError(let error):
             mutatingState.isLoading = false
             
@@ -497,11 +499,19 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? FetchDMHistoryError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            } else {
+                print(error.localizedDescription)
             }
-        case .createOrFetchChatRoom(let opponent):
+        case .createOrFetchChatRoom(let chatRoomType, let opponent):
             mutatingState.isLoading = true
             
-            mutatingState.chatState.opponents.append(opponent)
+            mutatingState.chatState.chatRoomType = chatRoomType
+            mutatingState.dmState.opponent = opponent
         }
     case .chatAction(let chatAction):
         switch chatAction {
@@ -544,8 +554,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 }
             }
         case .initializeAllElements:
-            mutatingState.chatState.chatRoom = nil
-            mutatingState.chatState.opponents.removeAll()
+            mutatingState.dmState.dmRoom = nil
+            mutatingState.dmState.opponent = nil
+            
+            mutatingState.chatState.chatRoomType = .dm
+            mutatingState.chatState.message = ""
+            mutatingState.chatState.isMessageEmpty = false
+            mutatingState.chatState.selectedImages = []
         case .sendDirectMessage:
             mutatingState.isLoading = true
         case .writeMessage(let message):

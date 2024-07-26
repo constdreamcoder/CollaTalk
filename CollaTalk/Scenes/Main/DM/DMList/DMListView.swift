@@ -32,12 +32,12 @@ struct DMMemberListView: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                ForEach(store.state.dmState.workspaceMembers, id: \.userId) { workspaceMember  in
+                ForEach(store.state.workspaceState.workspaceMembers, id: \.userId) { workspaceMember  in
                     if store.state.user?.userId != workspaceMember.userId {
                         DMMemberCell(member: workspaceMember)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                store.dispatch(.dmAction(.createOrFetchChatRoom(opponent: workspaceMember)))
+                                store.dispatch(.dmAction(.createOrFetchChatRoom(chatRoomType: .dm, opponent: workspaceMember)))
                             }
                     }
                 }
@@ -91,52 +91,87 @@ struct DMMemberCell: View {
 }
 
 struct DMRoomListView:View {
+    
+    @EnvironmentObject private var store: AppStore
+    
     var body: some View {
         List {
-            ForEach(0..<4) { _ in
-                HStack(alignment: .top) {
+            ForEach(store.state.dmState.dmRooms, id: \.roomId) { dmRoom in
+                DMRoomListCell(dmRoom: dmRoom)
+                .listRowSeparator(.hidden)
+            }
+        }
+        .listStyle(.plain)
+        .scrollIndicators(.hidden)
+    }
+}
+
+struct DMRoomListCell: View {
+    
+    let dmRoom: LocalDMRoom
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            RemoteImage(
+                path: dmRoom.lastDM?.user?.profileImage,
+                imageView: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 34)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                },
+                placeHolderView: {
                     Image(.kakaoLogo)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .frame(width: 34)
                         .background(.brandGreen)
                         .cornerRadius(8, corners: .allCorners)
-                    
-                    VStack {
-                        HStack {
-                            Text("옹골찬 고래밥")
-                                .font(.caption)
-                                .lineLimit(1)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text("PM 11:23")
-                                .font(.caption2)
-                                .foregroundStyle(.textSecondary)
-                                .lineLimit(1)
-                                .multilineTextAlignment(.trailing)
-                        }
-                        
-                        HStack(alignment: .top) {
-                            Text("Cause I know what you like boy You're my chemical hype boy 내 지난날들은 눈 뜨면 잊는 꿈 Hype boy 너만원호호호홓")
-                                .font(.caption2)
-                                .foregroundStyle(.textSecondary)
-                                .lineLimit(2)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text("99")
-                                .font(.caption)
-                                .foregroundColor(.brandWhite)
-                                .padding(.horizontal, 4)
-                                .padding(.vertical, 2)
-                                .background(.brandGreen)
-                                .cornerRadius(8, corners: .allCorners)
-                        }
-                    }
+                },
+                errorView: { error in
+                    Image(.kakaoLogo)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 34)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
                 }
-                .listRowSeparator(.hidden)
+            )
+            
+            VStack {
+                HStack {
+                    Text(dmRoom.lastDM?.user?.nickname ?? "")
+                        .font(.caption)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("PM 11:23")
+                        .font(.caption2)
+                        .foregroundStyle(.textSecondary)
+                        .lineLimit(1)
+                        .multilineTextAlignment(.trailing)
+                }
+                
+                HStack(alignment: .top) {
+                    Text(dmRoom.lastDM?.content ?? "")
+                        .font(.caption2)
+                        .foregroundStyle(.textSecondary)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("\(dmRoom.unreadDMCount)")
+                        .font(.caption)
+                        .foregroundColor(.brandWhite)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 2)
+                        .background(.brandGreen)
+                        .cornerRadius(8, corners: .allCorners)
+                        .hidden(dmRoom.unreadDMCount <= 0)
+                    
+                }
             }
         }
-        .listStyle(.plain)
-        .scrollIndicators(.hidden)
     }
 }

@@ -76,7 +76,7 @@ struct ContentView: View {
                     case .homeView:
                         MainView()
                     case .chatView:
-                        ChatView()
+                        ChatView(chatRoomType: .dm)
                     case .none:
                         EmptyView()
                             .background(.clear)
