@@ -546,7 +546,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .initializeAllElements:
             mutatingState.chatState.chatRoom = nil
             mutatingState.chatState.opponents.removeAll()
-        case .sendMessage:
+        case .sendDirectMessage:
             mutatingState.isLoading = true
         case .writeMessage(let message):
             mutatingState.chatState.message = message

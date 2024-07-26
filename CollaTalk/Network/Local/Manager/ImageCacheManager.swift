@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class ImageCacheManager {
+final class ImageCacheManager {
         
     private enum Constants {
         /// 초기 제약: 500메가바이트

@@ -520,10 +520,19 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let workspace else { return }
                         
                         /// 채팅방 생성 혹은 기존 채팅방 조회
-                        let chatRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
-                        guard let chatRoom else { return }
+                        let dmRoom = try await DMProvider.shared.createOrFetchChatRoom(workspaceID: workspace.workspaceId, opponentID: opponent.userId)
+                        guard let dmRoom else { return }
                         
-                        promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: chatRoom))))
+                        /// 기존 채팅방 존재 여부 판별
+                        if LocalDMRoomRepository.shared.isExist(dmRoom) {
+                            print("이미 존재하는 채팅방입니다.")
+                        } else {
+                            /// 로컬 DB(Realm)에 저장
+                            LocalDMRoomRepository.shared.write(dmRoom)
+                        }
+                        
+                        /// 채팅화면으로 이동
+                        promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom))))
                     } catch {
                         promise(.success(.dmAction(.dmError(error))))
                     }
@@ -536,9 +545,47 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .initializeAllElements:
             break
-        case .sendMessage:
-            // TODO: - 메시지 전송 API 구현
-            break
+        case .sendDirectMessage:
+            return Future<AppAction, Never> { promise in
+                
+                guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                
+                let imageFiles = state.chatState.selectedImages.map { image in
+                    return ImageFile(
+                        imageData: image.pngData() ?? Data(),
+                        name: Date().timeIntervalSince1970.description,
+                        mimeType: .png
+                    )
+                }
+                
+                Task {
+                    do {
+                        /// DM 전송
+                        let newDirectMessage = try await DMProvider.shared.sendDirectMessage(
+                            workspaceID: workspace.workspaceId,
+                            roomID: state.chatState.chatRoom?.roomId ?? "",
+                            message: state.chatState.message,
+                            files: imageFiles
+                        )
+                        guard let newDirectMessage else { return }
+                        
+                        /// 기존 DM 작성자가 있는지 여부 확인
+                        let sender = LocalWorkspaceMemeberRepository.shared.createSender(newDirectMessage)
+                        
+                        /// 로컬 DB(Realm)에 새로운 DM 저장
+                        LocalDirectMessageRepository.shared.write(
+                            newDirectMessage: newDirectMessage,
+                            sender: sender
+                        )
+                        
+                        // TODO: - DB 저장
+                        print("newDirectMessage", newDirectMessage)
+                    } catch {
+                        print("error", error)
+                    }
+                }
+
+            }.eraseToAnyPublisher()
         case .writeMessage(let message):
             break
         case .removeSelectedImage(let image):
@@ -553,10 +600,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 let data = try await newPhoto.loadTransferable(type: Data.self),
                                 let newImage = UIImage(data: data) {
                                 
-                                if data.count >= 1 * 1024 * 1024 {
+                                /// 이미지 파일 크기 제한 10MB 여부 확인
+                                if data.count >= 10 * 1024 * 1024 {
                                     promise(.success(.chatAction(.chatError(DownloadImageError.imageCapacityLimit))))
                                 }
                                 
+                                /// 중복된 이미지가 있는지 화인
                                 if !state.chatState.selectedImages.contains(where: { $0.pngData() == newImage.pngData() }) {
                                     newImages.append(newImage)
                                 } else {

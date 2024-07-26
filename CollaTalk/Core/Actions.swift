@@ -33,7 +33,7 @@ enum AppAction {
         case setStartView
         case setHomeEmptyView
         case setHomeDefaultView(workspaces: [Workspace])
-        case setChatView(chatRoom: ChatRoom)
+        case setChatView(chatRoom: DMRoom)
         case setNone
     }
     
@@ -128,7 +128,7 @@ enum AppAction {
     enum ChatAction {
         case chatError(Error)
         case initializeAllElements
-        case sendMessage
+        case sendDirectMessage
         case writeMessage(message: String)
         case appendNewImages(newImages: [UIImage])
         case removeSelectedImage(image: UIImage)

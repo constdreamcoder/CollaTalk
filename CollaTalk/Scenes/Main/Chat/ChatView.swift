@@ -85,7 +85,7 @@ struct ChatView: View {
                         .padding(.bottom, 12)
                         .onTapGesture {
                             print("메세지 전송")
-                            store.dispatch(.chatAction(.sendMessage))
+                            store.dispatch(.chatAction(.sendDirectMessage))
                         }
                 }
                 .padding(.horizontal, 12)
@@ -96,7 +96,8 @@ struct ChatView: View {
         }
         .onChange(of: store.state.chatState.selectedImages, action: { newValue in
             print(newValue.count)
-                        
+               
+            store.dispatch(.chatAction(.sendDirectMessage))
             if newValue.count > 0 {
                 inputViewVStackSpacing = 8
                 selectedImageHeight = 50

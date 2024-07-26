@@ -53,8 +53,17 @@
 		006064372C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */; };
 		0060643A2C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */; };
 		0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060643B2C51DD4400A6E060 /* DMProvider.swift */; };
-		0060643E2C51DDEC00A6E060 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060643D2C51DDEC00A6E060 /* ChatRoom.swift */; };
+		0060643E2C51DDEC00A6E060 /* DMRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060643D2C51DDEC00A6E060 /* DMRoom.swift */; };
 		006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */; };
+		006064452C522EBC00A6E060 /* SendDirectMessageParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064442C522EBC00A6E060 /* SendDirectMessageParams.swift */; };
+		006064492C522F0100A6E060 /* SendDirectMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006064482C522F0100A6E060 /* SendDirectMessageRequest.swift */; };
+		0060644B2C52337400A6E060 /* DirectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060644A2C52337400A6E060 /* DirectMessage.swift */; };
+		0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */; };
+		006064532C523A1A00A6E060 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; };
+		006064542C523A5F00A6E060 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */; };
+		006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */; };
+		006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32EB2C535DF20084C4E2 /* BaseRepository.swift */; };
 		0070E7132C4A01D4009058EA /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E7122C4A01D4009058EA /* AlertView.swift */; };
 		007441A52C465AEE00FA8727 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A42C465AEE00FA8727 /* ImageService.swift */; };
 		007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007441A62C465E8E00FA8727 /* ImageProvider.swift */; };
@@ -117,7 +126,26 @@
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
 		00F878D22C2BEE5C002610A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878D12C2BEE5C002610A8 /* Preview Assets.xcassets */; };
+		00FF60E02C52A9F700A4970E /* RepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60DF2C52A9F700A4970E /* RepositoryType.swift */; };
+		00FF60E42C52ACB900A4970E /* LocalDMRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E32C52ACB900A4970E /* LocalDMRoom.swift */; };
+		00FF60E62C52B0C600A4970E /* LocalWorkspaceMemeber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E52C52B0C600A4970E /* LocalWorkspaceMemeber.swift */; };
+		00FF60E82C52B3AA00A4970E /* LocalDirectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E72C52B3AA00A4970E /* LocalDirectMessage.swift */; };
+		00FF60EA2C52BABD00A4970E /* LocalDirectMessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E92C52BABD00A4970E /* LocalDirectMessageRepository.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		006064552C523A5F00A6E060 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				006064542C523A5F00A6E060 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		000CDD772C490788001F6085 /* EditWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceParams.swift; sourceTree = "<group>"; };
@@ -165,8 +193,15 @@
 		006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomParams.swift; sourceTree = "<group>"; };
 		006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomRequest.swift; sourceTree = "<group>"; };
 		0060643B2C51DD4400A6E060 /* DMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMProvider.swift; sourceTree = "<group>"; };
-		0060643D2C51DDEC00A6E060 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		0060643D2C51DDEC00A6E060 /* DMRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRoom.swift; sourceTree = "<group>"; };
 		006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrFetchChatRoomError.swift; sourceTree = "<group>"; };
+		006064442C522EBC00A6E060 /* SendDirectMessageParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageParams.swift; sourceTree = "<group>"; };
+		006064482C522F0100A6E060 /* SendDirectMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageRequest.swift; sourceTree = "<group>"; };
+		0060644A2C52337400A6E060 /* DirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessage.swift; sourceTree = "<group>"; };
+		0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageError.swift; sourceTree = "<group>"; };
+		006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoomRepository.swift; sourceTree = "<group>"; };
+		006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemeberRepository.swift; sourceTree = "<group>"; };
+		006C32EB2C535DF20084C4E2 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		0070E7122C4A01D4009058EA /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		007441A42C465AEE00FA8727 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		007441A62C465E8E00FA8727 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
@@ -230,6 +265,11 @@
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		00F878CE2C2BEE5C002610A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00F878D12C2BEE5C002610A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		00FF60DF2C52A9F700A4970E /* RepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryType.swift; sourceTree = "<group>"; };
+		00FF60E32C52ACB900A4970E /* LocalDMRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoom.swift; sourceTree = "<group>"; };
+		00FF60E52C52B0C600A4970E /* LocalWorkspaceMemeber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemeber.swift; sourceTree = "<group>"; };
+		00FF60E72C52B3AA00A4970E /* LocalDirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectMessage.swift; sourceTree = "<group>"; };
+		00FF60E92C52BABD00A4970E /* LocalDirectMessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectMessageRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				006064532C523A1A00A6E060 /* RealmSwift in Frameworks */,
 				0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,14 +309,6 @@
 				001809702C46A90D00F41D50 /* DownloadImageError.swift */,
 			);
 			path = Image;
-			sourceTree = "<group>";
-		};
-		001809722C46DB8100F41D50 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				007441A82C465F9500FA8727 /* ImageCacheManager.swift */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		002066F92C3EC45C007E76BD /* User */ = {
@@ -469,7 +502,8 @@
 		006064352C51DC7200A6E060 /* DM */ = {
 			isa = PBXGroup;
 			children = (
-				006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */,
+				006064462C522EF400A6E060 /* Params */,
+				006064472C522EFB00A6E060 /* Body */,
 			);
 			path = DM;
 			sourceTree = "<group>";
@@ -477,8 +511,8 @@
 		006064382C51DC8E00A6E060 /* DM */ = {
 			isa = PBXGroup;
 			children = (
-				006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */,
-				0060643D2C51DDEC00A6E060 /* ChatRoom.swift */,
+				0060643D2C51DDEC00A6E060 /* DMRoom.swift */,
+				0060644A2C52337400A6E060 /* DirectMessage.swift */,
 			);
 			path = DM;
 			sourceTree = "<group>";
@@ -487,8 +521,45 @@
 			isa = PBXGroup;
 			children = (
 				006064402C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift */,
+				0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */,
 			);
 			path = DM;
+			sourceTree = "<group>";
+		};
+		006064462C522EF400A6E060 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				006064362C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift */,
+				006064442C522EBC00A6E060 /* SendDirectMessageParams.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
+		006064472C522EFB00A6E060 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				006064392C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift */,
+				006064482C522F0100A6E060 /* SendDirectMessageRequest.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		006064562C523C3B00A6E060 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				00FF60DF2C52A9F700A4970E /* RepositoryType.swift */,
+				006C32EB2C535DF20084C4E2 /* BaseRepository.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		006064572C523C4500A6E060 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				007441A82C465F9500FA8727 /* ImageCacheManager.swift */,
+				00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
@@ -505,7 +576,6 @@
 			isa = PBXGroup;
 			children = (
 				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
-				001809722C46DB8100F41D50 /* Manager */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
 				0086B5B52C37ED0B00AD889C /* Extensions */,
@@ -580,7 +650,7 @@
 				00F6F2C02C3C114600C1AFF1 /* Service */,
 				00F6F2C82C3C13DB00C1AFF1 /* Model */,
 				00F6F2CE2C3C184600C1AFF1 /* Provider */,
-				00DFAF882C3C42C100D25633 /* ErrorHandler */,
+				00DFAF882C3C42C100D25633 /* Error */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -588,12 +658,15 @@
 		00DFAF832C3C389300D25633 /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */,
+				006064562C523C3B00A6E060 /* Base */,
+				00FF60E12C52AA1A00A4970E /* Repository */,
+				00FF60E22C52AC9C00A4970E /* Model */,
+				006064572C523C4500A6E060 /* Manager */,
 			);
 			path = Local;
 			sourceTree = "<group>";
 		};
-		00DFAF882C3C42C100D25633 /* ErrorHandler */ = {
+		00DFAF882C3C42C100D25633 /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				00DFAF892C3C42DB00D25633 /* CommonError.swift */,
@@ -602,7 +675,7 @@
 				0018096F2C46A8FD00F41D50 /* Image */,
 				0060643F2C51DED300A6E060 /* DM */,
 			);
-			path = ErrorHandler;
+			path = Error;
 			sourceTree = "<group>";
 		};
 		00F1B6972C438F2400E7EA56 /* Workspace */ = {
@@ -800,6 +873,26 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		00FF60E12C52AA1A00A4970E /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				00FF60E92C52BABD00A4970E /* LocalDirectMessageRepository.swift */,
+				006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */,
+				006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		00FF60E22C52AC9C00A4970E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00FF60E32C52ACB900A4970E /* LocalDMRoom.swift */,
+				00FF60E52C52B0C600A4970E /* LocalWorkspaceMemeber.swift */,
+				00FF60E72C52B3AA00A4970E /* LocalDirectMessage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -810,6 +903,7 @@
 				00F878C32C2BEE5B002610A8 /* Sources */,
 				00F878C42C2BEE5B002610A8 /* Frameworks */,
 				00F878C52C2BEE5B002610A8 /* Resources */,
+				006064552C523A5F00A6E060 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -818,6 +912,7 @@
 			name = CollaTalk;
 			packageProductDependencies = (
 				0052C1392C3AFB4D003D08D3 /* CombineMoya */,
+				006064522C523A1A00A6E060 /* RealmSwift */,
 			);
 			productName = CollaTalk;
 			productReference = 00F878C72C2BEE5B002610A8 /* CollaTalk.app */;
@@ -849,6 +944,7 @@
 			mainGroup = 00F878BE2C2BEE5B002610A8;
 			packageReferences = (
 				0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */,
+				006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 00F878C82C2BEE5B002610A8 /* Products */;
 			projectDirPath = "";
@@ -879,7 +975,9 @@
 				00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */,
 				0086B5C52C38089F00AD889C /* InputView.swift in Sources */,
 				006060C12C450BF5001D300F /* FetchDMsParams.swift in Sources */,
+				00FF60E62C52B0C600A4970E /* LocalWorkspaceMemeber.swift in Sources */,
 				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
+				0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */,
 				0070E7132C4A01D4009058EA /* AlertView.swift in Sources */,
 				00F47A4E2C4E9F8D0095EB4E /* ChatView.swift in Sources */,
 				00ED9E012C4BC07400DF5AE7 /* WorkspaceMember.swift in Sources */,
@@ -893,8 +991,10 @@
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
+				0060644B2C52337400A6E060 /* DirectMessage.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
 				00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */,
+				006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */,
 				00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */,
@@ -907,22 +1007,27 @@
 				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
+				00FF60E02C52A9F700A4970E /* RepositoryType.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,
+				00FF60EA2C52BABD00A4970E /* LocalDirectMessageRepository.swift in Sources */,
 				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
 				00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */,
 				006064342C51DB8C00A6E060 /* DMService.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
+				006064492C522F0100A6E060 /* SendDirectMessageRequest.swift in Sources */,
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
 				007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */,
+				006064452C522EBC00A6E060 /* SendDirectMessageParams.swift in Sources */,
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */,
 				000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
+				006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
@@ -935,6 +1040,7 @@
 				0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */,
 				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
+				00FF60E42C52ACB900A4970E /* LocalDMRoom.swift in Sources */,
 				006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
@@ -958,10 +1064,11 @@
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
+				006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */,
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
-				0060643E2C51DDEC00A6E060 /* ChatRoom.swift in Sources */,
+				0060643E2C51DDEC00A6E060 /* DMRoom.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
 				0037BC0A2C42D62D00E9AF0A /* HomeContentType.swift in Sources */,
 				00ED9E072C4BECF800DF5AE7 /* TransferWorkspaceOwnershipRequest.swift in Sources */,
@@ -974,6 +1081,7 @@
 				0086B5C12C38065600AD889C /* SheetNavigation.swift in Sources */,
 				00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */,
 				00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */,
+				00FF60E82C52B3AA00A4970E /* LocalDirectMessage.swift in Sources */,
 				00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */,
 				002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */,
 				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,
@@ -1208,6 +1316,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.52.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1215,6 +1331,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = CombineMoya;
+		};
+		006064522C523A1A00A6E060 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
