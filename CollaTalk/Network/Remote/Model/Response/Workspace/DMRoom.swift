@@ -25,3 +25,13 @@ struct DMRoom: Decodable {
         self.user = try container.decode(WorkspaceMember.self, forKey: .user)
     }
 }
+
+extension DMRoom {
+    var convertToLocalDMRoom: LocalDMRoom {
+        LocalDMRoom(
+            roomId: self.roomId,
+            createdAt: self.createdAt,
+            opponent: self.user.convertToLocalWorkspaceMember
+        )
+    }
+}

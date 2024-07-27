@@ -39,3 +39,4 @@ final class LocalDirectMessage: Object {
         self.user = user
     }
 }
+

@@ -266,7 +266,7 @@ struct WorkspaceCell: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(1)
                 
-                Text(workspace.createdAt.convertToWorkspaceCellDateFormat)
+                Text(workspace.createdAt.toWorkspaceCellDateFormat)
                     .foregroundStyle(.textSecondary)
                     .font(.body)
                     .frame(maxWidth: .infinity, alignment: .leading)

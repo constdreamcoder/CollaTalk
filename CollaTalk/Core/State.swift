@@ -81,7 +81,7 @@ struct AppState {
         var selectedWorkspace: Workspace? = nil
         var workspaces: [Workspace] = []
         var myChannels: [Channel] = []
-        var dmRooms: [DMRoom] = []
+        var dmRooms: [DMRoom] = [] // Home 화면 DM 방 목록, TODO: 타입을 LocalDMRoom 으로 변환
         var workspaceMembers: [WorkspaceMember] = []
     }
     
@@ -99,11 +99,12 @@ struct AppState {
         var email: String = ""
         var isEmailEmpty: Bool = true
     }
-    
+    /// DM 화면 데이터
     struct DMState {
-        var dmRooms: [LocalDMRoom] = []
+        var dmRooms: [LocalDMRoom] = [] // DM 화면 DM 방 목록, TODO: 추후 WorkspaceState로 통합
         var opponent: WorkspaceMember? = nil
         var dmRoom: DMRoom? = nil
+        var dms: [LocalDirectMessage] = []
     }
     
     struct ChatState {

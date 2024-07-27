@@ -30,18 +30,22 @@ struct ChatView: View {
             ChatViewNavigationBar(chatRoomType: chatRoomType)
             
             List {
-                Section(
-                    content: {
-                        ChatItem(chatDirection: .left)
-                            .listRowSeparator(.hidden)
-                        ChatItem(chatDirection: .right)
-                            .listRowSeparator(.hidden)
-                    },
-                    header: {
-                        ChatHeader()
-                    }
-                )
-                
+                ForEach(store.state.dmState.dms, id: \.dmId) { dm in
+                    Section(
+                        content: {
+                            if dm.user?.userId == store.state.user?.userId {
+                                ChatItem(dm: dm, chatDirection: .right)
+                                    .listRowSeparator(.hidden)
+                            } else {
+                                ChatItem(dm: dm, chatDirection: .left)
+                                    .listRowSeparator(.hidden)
+                            }
+                        },
+                        header: {
+//                            ChatHeader()
+                        }
+                    )
+                }
             }
             .listStyle(.plain)
         }
@@ -174,6 +178,7 @@ enum ChatDirection {
 
 struct ChatItem: View {
     
+    let dm: LocalDirectMessage
     let chatDirection: ChatDirection
     
     private let screenWidth = UIScreen.main.bounds.width
@@ -182,17 +187,39 @@ struct ChatItem: View {
         HStack(alignment: .top) {
             
             if chatDirection == .left {
-                Image(.kakaoLogo)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 34)
-                    .background(.brandGreen)
-                    .cornerRadius(8, corners: .allCorners)
+                RemoteImage(
+                    path: dm.user?.profileImage,
+                    imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 34)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    placeHolderView: {
+                        Image(.kakaoLogo)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 34)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    errorView: { error in
+                        Image(.kakaoLogo)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 34)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    }
+                )
+                
             } else {
                 
                 Spacer()
                 
-                Text("08:16 오전")
+                Text(dm.createdAt.toChatTime)
                     .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)
@@ -202,36 +229,59 @@ struct ChatItem: View {
             VStack(alignment: chatDirection == .left ? .leading : .trailing) {
                 
                 if chatDirection == .left {
-                    Text("뚜비두밥")
+                    Text(dm.user?.nickname ?? "")
                         .font(.caption)
                         .foregroundStyle(.textPrimary)
                 }
                 
-                Text("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")
-                    .font(.body)
-                    .foregroundStyle(.textPrimary)
-                    .padding(8)
-                    .cornerRadius(8, corners: .allCorners)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(.brandBlack, lineWidth: 1)
-                    )
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(chatDirection == .left ? .leading : .trailing)
-                
-                Group {
-                    Image(.kakaoLogo)
-                        .resizable()
-                        .aspectRatio(244/162,contentMode: .fit)
-                        .frame(maxWidth: .infinity, maxHeight: 162)
-                        .background(.brandGreen)
+                if let content = dm.content {
+                    Text(content)
+                        .font(.body)
+                        .foregroundStyle(.textPrimary)
+                        .padding(8)
+                        .cornerRadius(8, corners: .allCorners)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(.brandBlack, lineWidth: 1)
+                        )
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(chatDirection == .left ? .leading : .trailing)
                 }
-                .cornerRadius(16, corners: .allCorners)
+                
+                if dm.files.count > 0 {
+                    Group {
+                        RemoteImage(
+                            path: dm.files[0],
+                            imageView: { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(244/162,contentMode: .fit)
+                                    .frame(maxWidth: .infinity, maxHeight: 162)
+                                    .background(.brandGreen)
+                            },
+                            placeHolderView: {
+                                Image(.kakaoLogo)
+                                    .resizable()
+                                    .aspectRatio(244/162,contentMode: .fit)
+                                    .frame(maxWidth: .infinity, maxHeight: 162)
+                                    .background(.brandGreen)
+                            },
+                            errorView: { error in
+                                Image(.kakaoLogo)
+                                    .resizable()
+                                    .aspectRatio(244/162,contentMode: .fit)
+                                    .frame(maxWidth: .infinity, maxHeight: 162)
+                                    .background(.brandGreen)
+                            }
+                        )
+                    }
+                    .cornerRadius(16, corners: .allCorners)
+                }
             }
             .frame(width: screenWidth * 0.57)
             
             if chatDirection == .left {
-                Text("08:16 오전")
+                Text(dm.createdAt.toChatTime)
                     .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)

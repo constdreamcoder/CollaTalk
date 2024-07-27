@@ -39,6 +39,18 @@ extension BaseRepository {
         }
     }
     
+    func write(_ object: [T]) {
+        do {
+            try realm.write {
+                realm.add(object)
+                print("\([T].self) 객체가 추가되었습니다.")
+                getLocationOfDefaultRealm()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func update(_ object: T) {
         do {
             try realm.write {

@@ -27,6 +27,19 @@ struct WorkspaceMember: Decodable {
         self.nickname = try container.decode(String.self, forKey: .nickname)
         self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage) ?? ""
     }
+    
+    init(
+        userId: String,
+        email: String,
+        nickname: String,
+        profileImage: String?
+    ) {
+        self.userId = userId
+        self.email = email
+        self.nickname = nickname
+        self.profileImage = profileImage
+    }
+    
 }
 
 extension WorkspaceMember: Equatable {
@@ -34,5 +47,11 @@ extension WorkspaceMember: Equatable {
         return lhs.userId == rhs.userId
         && lhs.nickname == rhs.nickname
         && lhs.email == rhs.email
+    }
+}
+
+extension WorkspaceMember {
+    var convertToLocalWorkspaceMember: LocalWorkspaceMemeber {
+        LocalWorkspaceMemeber(userId: self.userId, email: self.email, nickname: self.nickname, profileImage: self.profileImage)
     }
 }

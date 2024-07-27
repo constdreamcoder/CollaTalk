@@ -1,5 +1,5 @@
 //
-//  LocalWorkspaceMemeberRepository.swift
+//  LocalWorkspaceMemberRepository.swift
 //  CollaTalk
 //
 //  Created by SUCHAN CHANG on 7/26/24.
@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-final class LocalWorkspaceMemeberRepository: BaseRepository<LocalWorkspaceMemeber> {
+final class LocalWorkspaceMemberRepository: BaseRepository<LocalWorkspaceMemeber> {
     
-    static let shared = LocalWorkspaceMemeberRepository()
+    static let shared = LocalWorkspaceMemberRepository()
     
     private override init() { super.init() }
 }
 
-extension LocalWorkspaceMemeberRepository {
+extension LocalWorkspaceMemberRepository {
     
     /// 워크스페이스 멤버 존재 여부 확인
     func isExist(_ userId: String) -> Bool {
@@ -33,7 +33,7 @@ extension LocalWorkspaceMemeberRepository {
         
         var localWorkspaceMemeber: LocalWorkspaceMemeber?
         if isExist(userId) {
-            localWorkspaceMemeber = LocalWorkspaceMemeberRepository.shared.findOne(userId)
+            localWorkspaceMemeber = LocalWorkspaceMemberRepository.shared.findOne(userId)
         } else {
             localWorkspaceMemeber = LocalWorkspaceMemeber(
                 userId: userId,
@@ -54,6 +54,6 @@ extension LocalWorkspaceMemeberRepository {
             profileImage: workspaceMember.profileImage
         )
         
-        LocalWorkspaceMemeberRepository.shared.write(localWorkspaceMemeber)
+        LocalWorkspaceMemberRepository.shared.write(localWorkspaceMemeber)
     }
 }

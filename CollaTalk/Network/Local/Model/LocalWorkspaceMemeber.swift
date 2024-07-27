@@ -29,3 +29,8 @@ final class LocalWorkspaceMemeber: Object {
     }
 }
 
+extension LocalWorkspaceMemeber {
+    var convertToWorkspaceMember: WorkspaceMember {
+        WorkspaceMember(userId: self.userId, email: self.email, nickname: self.nickname, profileImage: self.profileImage)
+    }
+}

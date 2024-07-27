@@ -62,7 +62,7 @@
 		006064532C523A1A00A6E060 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; };
 		006064542C523A5F00A6E060 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */; };
-		006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */; };
+		006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E92C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift */; };
 		006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32EB2C535DF20084C4E2 /* BaseRepository.swift */; };
 		006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32ED2C5385830084C4E2 /* FetchDMHistoryParams.swift */; };
 		006C32F12C5385B00084C4E2 /* FetchDMHistoryQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32F02C5385B00084C4E2 /* FetchDMHistoryQuery.swift */; };
@@ -95,6 +95,8 @@
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
 		00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* SelectPhotosView.swift */; };
 		00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D82C515E98005BC393 /* OnChangeModifier.swift */; };
+		00DF69AC2C54BE25001EE608 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 00DF69AB2C54BE25001EE608 /* SocketIO */; };
+		00DF69AF2C54BE93001EE608 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DF69AE2C54BE93001EE608 /* SocketIOManager.swift */; };
 		00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */; };
 		00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF862C3C428300D25633 /* ErrorCode.swift */; };
 		00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DFAF892C3C42DB00D25633 /* CommonError.swift */; };
@@ -208,7 +210,7 @@
 		0060644A2C52337400A6E060 /* DirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessage.swift; sourceTree = "<group>"; };
 		0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageError.swift; sourceTree = "<group>"; };
 		006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoomRepository.swift; sourceTree = "<group>"; };
-		006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemeberRepository.swift; sourceTree = "<group>"; };
+		006C32E92C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemberRepository.swift; sourceTree = "<group>"; };
 		006C32EB2C535DF20084C4E2 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		006C32ED2C5385830084C4E2 /* FetchDMHistoryParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMHistoryParams.swift; sourceTree = "<group>"; };
 		006C32F02C5385B00084C4E2 /* FetchDMHistoryQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDMHistoryQuery.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
 		00DA64D42C512F42005BC393 /* SelectPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotosView.swift; sourceTree = "<group>"; };
 		00DA64D82C515E98005BC393 /* OnChangeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeModifier.swift; sourceTree = "<group>"; };
+		00DF69AE2C54BE93001EE608 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		00DFAF842C3C38A000D25633 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		00DFAF862C3C428300D25633 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		00DFAF892C3C42DB00D25633 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -295,6 +298,7 @@
 			files = (
 				006064532C523A1A00A6E060 /* RealmSwift in Frameworks */,
 				0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */,
+				00DF69AC2C54BE25001EE608 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,11 +686,20 @@
 			path = UIKitComponents;
 			sourceTree = "<group>";
 		};
+		00DF69AD2C54BE7E001EE608 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				00DF69AE2C54BE93001EE608 /* SocketIOManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		00DFAF822C3C388F00D25633 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				00436E952C43ED06009FDB71 /* Debugger */,
 				00F6F2C52C3C124500C1AFF1 /* Base */,
+				00436E952C43ED06009FDB71 /* Debugger */,
+				00DF69AD2C54BE7E001EE608 /* Manager */,
 				00F6F2C02C3C114600C1AFF1 /* Service */,
 				00F6F2C82C3C13DB00C1AFF1 /* Model */,
 				00F6F2CE2C3C184600C1AFF1 /* Provider */,
@@ -918,7 +931,7 @@
 			children = (
 				00FF60E92C52BABD00A4970E /* LocalDirectMessageRepository.swift */,
 				006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */,
-				006C32E92C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift */,
+				006C32E92C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -953,6 +966,7 @@
 			packageProductDependencies = (
 				0052C1392C3AFB4D003D08D3 /* CombineMoya */,
 				006064522C523A1A00A6E060 /* RealmSwift */,
+				00DF69AB2C54BE25001EE608 /* SocketIO */,
 			);
 			productName = CollaTalk;
 			productReference = 00F878C72C2BEE5B002610A8 /* CollaTalk.app */;
@@ -985,6 +999,7 @@
 			packageReferences = (
 				0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */,
 				006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 00F878C82C2BEE5B002610A8 /* Products */;
 			projectDirPath = "";
@@ -1030,6 +1045,7 @@
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
+				00DF69AF2C54BE93001EE608 /* SocketIOManager.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				0060644B2C52337400A6E060 /* DirectMessage.swift in Sources */,
 				006C32F32C5387530084C4E2 /* QueryKey.swift in Sources */,
@@ -1071,7 +1087,7 @@
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
-				006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemeberRepository.swift in Sources */,
+				006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
@@ -1372,6 +1388,14 @@
 				minimumVersion = 10.52.2;
 			};
 		};
+		00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 16.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1384,6 +1408,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		00DF69AB2C54BE25001EE608 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

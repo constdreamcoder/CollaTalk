@@ -361,6 +361,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         let dmsResult = try await dms
                         
                         guard let channelsResult, let dmsResult else { return }
+                        
                         promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dms: dmsResult))))
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
@@ -518,7 +519,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 LocalDMRoomRepository.shared.write($0)
                             }
                         }
-                                                
+                             
+                        /// 각 DM 방 채팅내역 조회 병렬 처리
                        let fetchLastDMTasks = dmRoomsResult.map { dmRoom in
                             Task {
                                 do {
@@ -531,12 +533,30 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                         cursorDate: lastDMInLocal?.createdAt
                                     )
                                     
-                                    guard let count = dmList?.count, count > 0 else { return }
-                                    guard let lastDMFromRemote = dmList?.last else { return }
+                                    guard let dmList = dmList, dmList.count > 0 else {
+                                        guard let lastDMFromRemote = LocalDirectMessageRepository.shared.findLastestDM(dmRoom.roomId) else { return }
+                                        
+                                        /// 마지막 DM 업데이트
+                                        LocalDMRoomRepository.shared.updateLastDM(lastDMFromRemote)
+                                        return
+                                    }
+                                    
+                                    /// 새로운 DM 로컬 DB(Realm)에 기록
+                                    let latestDmList = dmList.map { $0.convertToLocalDirectMessage }
+                                    latestDmList.forEach { localDirectMessage in
+                                        if let workspaceMemeber = LocalWorkspaceMemberRepository.shared.findOne(localDirectMessage.user?.userId ?? "") {
+                                            LocalWorkspaceMemberRepository.shared.delete(workspaceMemeber)
+                                        }
+                                                                        
+                                        /// 최근 추가된 DM 기록을 로컬 DB(Realm)에 추가
+                                        LocalDirectMessageRepository.shared.write(localDirectMessage)
+                                    }
+                                    
+                                    guard let lastDMFromRemote = dmList.last else { return }
                                     
                                     let lastSender: LocalWorkspaceMemeber?
-                                    if LocalWorkspaceMemeberRepository.shared.isExist(lastDMFromRemote.user.userId) {
-                                        lastSender = LocalWorkspaceMemeberRepository.shared.findOne(lastDMFromRemote.user.userId)
+                                    if LocalWorkspaceMemberRepository.shared.isExist(lastDMFromRemote.user.userId) {
+                                        lastSender = LocalWorkspaceMemberRepository.shared.findOne(lastDMFromRemote.user.userId)
                                     } else {
                                         lastSender = .init(
                                             userId: lastDMFromRemote.user.userId,
@@ -554,6 +574,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             }
                         }
                         
+                        /// 각 DM 방 읽지 않은 채팅 개수 조회 병렬 처리
                         let fetchUnreadDMCountsTasks = dmRoomsResult.map { dmRoom in
                             Task {
                                 do {
@@ -566,7 +587,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                         after: lastDMInLocal?.createdAt
                                     )
                                     
-                                    guard let unreadDMCount, unreadDMCount.count > 0 else { return }
+                                    guard let unreadDMCount else { return }
                                     
                                     /// 읽지 않은 DM 채팅 개수 업데이트
                                     LocalDMRoomRepository.shared.updateUnreadDMCount(unreadDMCount)
@@ -624,8 +645,51 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 LocalDMRoomRepository.shared.write(dmRoom)
                             }
                             
+                            /// 로컬 DB에서 가장 마지막 DM 채팅 기록 조회
+                            let lastestDMInLocal = LocalDirectMessageRepository.shared.findLastestDM(dmRoom.roomId)
+                            
+                            /// 최근 추가된 DM 채팅 기록 조회
+                            let dmList = try await DMProvider.shared.fetchDMHistory(
+                                workspaceID: workspace.workspaceId,
+                                roomID: dmRoom.roomId,
+                                cursorDate: lastestDMInLocal?.createdAt
+                            )
+                            
+                            guard let dmList = dmList, dmList.count > 0 else {
+                                DispatchQueue.main.async {
+                                    /// 기존 DM 기록 조회
+                                    let existingLocalDirectMessage: [LocalDirectMessage] =
+                                    LocalDirectMessageRepository.shared.read().filter { $0.roomId == dmRoom.roomId }
+                                    
+                                    /// 소켓 연결
+                                    SocketIOManager.shared.setupSocketEventListeners(dmRoom.roomId)
+                                    SocketIOManager.shared.establishConnection()
+                                    
+                                    promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom, dms: existingLocalDirectMessage))))
+                                }
+                                return
+                            }
+                            
+                            /// 새로 추가된 DM 로컬 DB(Realm)에 추가
+                            let latestDmList: [LocalDirectMessage] = dmList.map { $0.convertToLocalDirectMessage }
+                            latestDmList.forEach { localDirectMessage in
+                                if let workspaceMemeber = LocalWorkspaceMemberRepository.shared.findOne(localDirectMessage.user?.userId ?? "") {
+                                    LocalWorkspaceMemberRepository.shared.delete(workspaceMemeber)
+                                }
+                                                                
+                                /// 최근 추가된 DM 기록을 로컬 DB(Realm)에 추가
+                                LocalDirectMessageRepository.shared.write(localDirectMessage)
+                            }
+                            
+                            /// 최신 DM 기록 조회
+                            let updatedLocalDirectMessage: [LocalDirectMessage] = LocalDirectMessageRepository.shared.read().filter { $0.roomId == dmRoom.roomId }
+                            
+                            /// 소켓 연결
+                            SocketIOManager.shared.setupSocketEventListeners(dmRoom.roomId)
+                            SocketIOManager.shared.establishConnection()
+                            
                             /// 채팅화면으로 이동
-                            promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom))))
+                            promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom, dms: updatedLocalDirectMessage))))
                         } catch {
                             promise(.success(.dmAction(.dmError(error))))
                         }
@@ -642,7 +706,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .chatError(let error):
             break
         case .initializeAllElements:
-            break
+            SocketIOManager.shared.leaveConnection()
+            SocketIOManager.shared.removeAllEventHandlers()
         case .sendDirectMessage:
             return Future<AppAction, Never> { promise in
                 
@@ -668,7 +733,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let newDirectMessage else { return }
                         
                         /// 기존 DM 작성자가 있는지 여부 확인
-                        let sender = LocalWorkspaceMemeberRepository.shared.createSender(newDirectMessage)
+                        let sender = LocalWorkspaceMemberRepository.shared.createSender(newDirectMessage)
                         
                         /// 로컬 DB(Realm)에 새로운 DM 저장
                         LocalDirectMessageRepository.shared.write(

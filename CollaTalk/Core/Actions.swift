@@ -33,7 +33,7 @@ enum AppAction {
         case setStartView
         case setHomeEmptyView
         case setHomeDefaultView(workspaces: [Workspace])
-        case setChatView(chatRoom: DMRoom)
+        case setChatView(chatRoom: DMRoom, dms: [LocalDirectMessage])
         case setNone
     }
     

@@ -33,4 +33,33 @@ struct DirectMessage: Decodable {
         self.files = try container.decode([String].self, forKey: .files)
         self.user = try container.decode(WorkspaceMember.self, forKey: .user)
     }
+    
+    init(
+        dmId: String,
+        roomId: String,
+        content: String?,
+        createdAt: String,
+        files: [String],
+        user: WorkspaceMember
+    ) {
+        self.dmId = dmId
+        self.roomId = roomId
+        self.content = content
+        self.createdAt = createdAt
+        self.files = files
+        self.user = user
+    }
+}
+
+extension DirectMessage {
+    var convertToLocalDirectMessage: LocalDirectMessage {
+        LocalDirectMessage(
+            dmId: self.dmId,
+            roomId: self.roomId,
+            content: self.content,
+            createdAt: self.createdAt,
+            files: self.files,
+            user: self.user.convertToLocalWorkspaceMember
+        )
+    }
 }

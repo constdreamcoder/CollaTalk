@@ -99,6 +99,11 @@ struct DMRoomListView:View {
             ForEach(store.state.dmState.dmRooms, id: \.roomId) { dmRoom in
                 DMRoomListCell(dmRoom: dmRoom)
                 .listRowSeparator(.hidden)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard let opponent = dmRoom.opponent?.convertToWorkspaceMember else { return }
+                    store.dispatch(.dmAction(.createOrFetchChatRoom(chatRoomType: .dm, opponent: opponent)))
+                }
             }
         }
         .listStyle(.plain)

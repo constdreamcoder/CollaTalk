@@ -331,10 +331,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
             mutatingState.workspaceState.selectedWorkspace = workspaces.first
-        case .setChatView(let chatRoom):
+        case .setChatView(let chatRoom, let dms):
             mutatingState.isLoading = false
             
             mutatingState.dmState.dmRoom = chatRoom
+            mutatingState.dmState.dms = dms
             
             mutatingState.networkCallSuccessType = .chatView
         case .setNone: break

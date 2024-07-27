@@ -21,7 +21,7 @@ extension LocalDirectMessageRepository {
     func findLastestDM(_ roomId: String) -> LocalDirectMessage? {
         // TODO: - 날짜별 Sorting 확인
         let dms: [LocalDirectMessage] = super.read().sorted(by: \.createdAt, ascending: true).map { $0 }
-//        print("dhdhdhdhdhdhhdhd", dms)
+        print("DM 채팅 기록 날짜 오름차순", dms)
         return super.read().sorted(by: \.createdAt, ascending: true).last(where: { $0.roomId == roomId })
     }
     

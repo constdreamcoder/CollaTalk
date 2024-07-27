@@ -71,6 +71,19 @@ extension LocalDMRoomRepository {
         super.update(updatedLocalDMRoom)
     }
     
+    func updateLastDM(_ lastDMFromRemote: LocalDirectMessage) {
+        guard let existingDMRoom = findOne(lastDMFromRemote.roomId) else { return }
+        
+        let updatedLocalDMRoom = LocalDMRoom(
+            roomId: existingDMRoom.roomId,
+            createdAt: existingDMRoom.createdAt,
+            opponent: existingDMRoom.opponent,
+            lastDM: lastDMFromRemote
+        )
+        
+        super.update(updatedLocalDMRoom)
+    }
+    
     func updateUnreadDMCount(_ unreadDMCount: UnreadDMCount) {
         guard let existingDMRoom = findOne(unreadDMCount.roomId) else { return }
 
