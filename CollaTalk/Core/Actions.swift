@@ -129,9 +129,11 @@ enum AppAction {
         case chatError(Error)
         case initializeAllElements
         case sendDirectMessage
+        case completeSendDMAction
         case writeMessage(message: String)
         case appendNewImages(newImages: [UIImage])
         case removeSelectedImage(image: UIImage)
         case handleSelectedPhotos(newPhotos: [PhotosPickerItem])
+        case receiveNewDirectMessage(receivedDM: DirectMessage)
     }
 }

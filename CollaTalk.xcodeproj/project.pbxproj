@@ -91,6 +91,7 @@
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
 		00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */; };
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
+		00BF3E402C552D7600B1ED18 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BF3E3F2C552D7600B1ED18 /* TestView.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
 		00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* SelectPhotosView.swift */; };
@@ -239,6 +240,7 @@
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
+		00BF3E3F2C552D7600B1ED18 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
 		00DA64D42C512F42005BC393 /* SelectPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotosView.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				00F878CA2C2BEE5B002610A8 /* CollaTalkApp.swift */,
+				00BF3E3F2C552D7600B1ED18 /* TestView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
 				00FF60E42C52ACB900A4970E /* LocalDMRoom.swift in Sources */,
 				006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */,
+				00BF3E402C552D7600B1ED18 /* TestView.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,

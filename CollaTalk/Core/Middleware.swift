@@ -730,18 +730,11 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             message: state.chatState.message,
                             files: imageFiles
                         )
-                        guard let newDirectMessage else { return }
                         
-                        /// 기존 DM 작성자가 있는지 여부 확인
-                        let sender = LocalWorkspaceMemberRepository.shared.createSender(newDirectMessage)
+                        promise(.success(.chatAction(.completeSendDMAction)))
                         
-                        /// 로컬 DB(Realm)에 새로운 DM 저장
-                        LocalDirectMessageRepository.shared.write(
-                            newDirectMessage: newDirectMessage,
-                            sender: sender
-                        )
                     } catch {
-                        print("error", error)
+                        promise(.success(.chatAction(.chatError(error))))
                     }
                 }
                 
@@ -784,6 +777,17 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 
             }.eraseToAnyPublisher()
         case .appendNewImages(let newImages):
+            break
+        case .receiveNewDirectMessage(let receivedDM):
+            /// 기존 DM 작성자가 있는지 여부 확인
+            let sender = LocalWorkspaceMemberRepository.shared.createSender(receivedDM)
+            
+            /// 로컬 DB(Realm)에 새로운 DM 저장
+            LocalDirectMessageRepository.shared.write(
+                newDirectMessage: receivedDM,
+                sender: sender
+            )
+        case .completeSendDMAction:
             break
         }
     }

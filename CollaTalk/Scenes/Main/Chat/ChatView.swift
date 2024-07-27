@@ -15,24 +15,27 @@ enum ChatRoomType {
 struct ChatView: View {
     
     let chatRoomType: ChatRoomType
-   
+    
     @EnvironmentObject private var store: AppStore
-        
+    @StateObject private var socket = SocketIOManager.shared
+    
     @State private var textViewHeight: CGFloat = 30
     private let textViewPadding: CGFloat = 8 // 고정값
     
     @State private var inputViewVStackSpacing: CGFloat = 0
     @State private var selectedImageHeight: CGFloat = 0
     
+    @Namespace private var bottomID
+    
     var body: some View {
         
         VStack {
-            ChatViewNavigationBar(chatRoomType: chatRoomType)
-            
-            List {
-                ForEach(store.state.dmState.dms, id: \.dmId) { dm in
-                    Section(
-                        content: {
+            ScrollViewReader { proxy in
+                ChatViewNavigationBar(chatRoomType: chatRoomType)
+                
+                List {
+                    ForEach(store.state.dmState.dms, id: \.dmId) { dm in
+                        Group {
                             if dm.user?.userId == store.state.user?.userId {
                                 ChatItem(dm: dm, chatDirection: .right)
                                     .listRowSeparator(.hidden)
@@ -40,14 +43,24 @@ struct ChatView: View {
                                 ChatItem(dm: dm, chatDirection: .left)
                                     .listRowSeparator(.hidden)
                             }
-                        },
-                        header: {
-//                            ChatHeader()
                         }
-                    )
+                    }
+                    Rectangle()
+                        .frame(height: 0)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .background(.clear)
+                        .id(bottomID)
                 }
+                .environment(\.defaultMinListRowHeight, 1)
+                .listStyle(.plain)
+                .onChange(of: store.state.dmState.dms, action: { newValue in
+                    withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
+                })
+                .onAppear(perform: {
+                    proxy.scrollTo(bottomID, anchor: .bottom)
+                })
             }
-            .listStyle(.plain)
         }
         .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight)  {
             VStack {
@@ -103,7 +116,7 @@ struct ChatView: View {
         }
         .onChange(of: store.state.chatState.selectedImages, action: { newValue in
             print(newValue.count)
-               
+            
             if newValue.count > 0 {
                 inputViewVStackSpacing = 8
                 selectedImageHeight = 50
@@ -112,6 +125,9 @@ struct ChatView: View {
                 selectedImageHeight = 0
             }
         })
+        .onReceive(socket.receivedDMSubject) { receivedDM in
+            store.dispatch(.chatAction(.receiveNewDirectMessage(receivedDM: receivedDM)))
+        }
         .onDisappear {
             store.dispatch(.chatAction(.initializeAllElements))
         }

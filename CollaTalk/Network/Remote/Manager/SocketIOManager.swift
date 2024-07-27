@@ -9,14 +9,14 @@ import Foundation
 import SocketIO
 import Combine
 
-final class SocketIOManager {
+final class SocketIOManager: ObservableObject {
     
     static let shared = SocketIOManager()
     
     private var manager: SocketManager?
     private var socket: SocketIOClient?
     
-    let receivedChatDataSubject = PassthroughSubject<DirectMessage, Never>()
+    @Published var receivedDMSubject = PassthroughSubject<DirectMessage, Never>()
     
     private init() {
         guard let url = URL(string: APIKeys.baseURL) else { return }
@@ -36,16 +36,16 @@ final class SocketIOManager {
             print("SOCKET IS DISCONNECTED", data, ack)
         }
         
-        socket.on("chat") { [weak self] dataArray, ack in
+        socket.on("dm") { [weak self] dataArray, ack in
             guard let self else { return }
-            print("chat received")
+            print("dm received")
             
             if let data = dataArray.first {
                 
                 do {
                     let result = try JSONSerialization.data(withJSONObject: data)
-                    let decodedData = try JSONDecoder().decode(DirectMessage.self, from: result)
-                    receivedChatDataSubject.send(decodedData)
+                    let decodedDMData = try JSONDecoder().decode(DirectMessage.self, from: result)
+                    receivedDMSubject.send(decodedDMData)
                 } catch {
                     print("Chatting Recevied Parsing Error", error.localizedDescription)
                 }

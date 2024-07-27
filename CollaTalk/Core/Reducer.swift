@@ -553,6 +553,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     mutatingState.toastMessage = ToastMessage.downloadImage(.imageCapacityLimit).message
                     mutatingState.showToast = true
                 }
+            } else if let error = error as? SendDirectMessageError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                }
             }
         case .initializeAllElements:
             mutatingState.dmState.dmRoom = nil
@@ -574,6 +581,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = true
         case .appendNewImages(let newImages):
             mutatingState.chatState.selectedImages.append(contentsOf: newImages)
+            mutatingState.isLoading = false
+        case .receiveNewDirectMessage(let receivedDM):
+            mutatingState.dmState.dms.append(receivedDM.convertToLocalDirectMessage)
+        case .completeSendDMAction:
             mutatingState.isLoading = false
         }
     }
