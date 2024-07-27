@@ -31,16 +31,21 @@ struct ChatView: View {
         
         VStack {
             ScrollViewReader { proxy in
-                ChatViewNavigationBar(chatRoomType: chatRoomType)
+                ChatViewNavigationBar(
+                    chatRoomType: chatRoomType,
+                    title: store.state.dmState.opponent?.nickname ?? ""
+                )
                 
                 List {
                     ForEach(store.state.dmState.dms, id: \.dmId) { dm in
                         Group {
                             if dm.user?.userId == store.state.user?.userId {
                                 ChatItem(dm: dm, chatDirection: .right)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                                     .listRowSeparator(.hidden)
                             } else {
                                 ChatItem(dm: dm, chatDirection: .left)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                                     .listRowSeparator(.hidden)
                             }
                         }
@@ -54,6 +59,7 @@ struct ChatView: View {
                 }
                 .environment(\.defaultMinListRowHeight, 1)
                 .listStyle(.plain)
+                .listRowSpacing(6)
                 .onChange(of: store.state.dmState.dms, action: { newValue in
                     withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
                 })
@@ -143,6 +149,7 @@ struct ChatViewNavigationBar: View {
     @EnvironmentObject private var navigationRouter: NavigationRouter
     
     let chatRoomType: ChatRoomType
+    let title: String
     
     var body: some View {
         VStack {
@@ -161,7 +168,7 @@ struct ChatViewNavigationBar: View {
                 
                 Spacer()
                 
-                Text("뚜미두밥")
+                Text(title)
                     .font(.title1)
                     .lineLimit(1)
                 
@@ -193,6 +200,8 @@ enum ChatDirection {
 }
 
 struct ChatItem: View {
+    
+    @EnvironmentObject private var store: AppStore
     
     let dm: LocalDirectMessage
     let chatDirection: ChatDirection
@@ -241,7 +250,6 @@ struct ChatItem: View {
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
             
-            
             VStack(alignment: chatDirection == .left ? .leading : .trailing) {
                 
                 if chatDirection == .left {
@@ -250,7 +258,7 @@ struct ChatItem: View {
                         .foregroundStyle(.textPrimary)
                 }
                 
-                if let content = dm.content {
+                if let content = dm.content, !(content.isEmpty && dm.files.count > 0) {
                     Text(content)
                         .font(.body)
                         .foregroundStyle(.textPrimary)
@@ -260,10 +268,11 @@ struct ChatItem: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(.brandBlack, lineWidth: 1)
                         )
-                        .frame(maxWidth: .infinity)
                         .multilineTextAlignment(chatDirection == .left ? .leading : .trailing)
+                        .background(dm.user?.userId == store.state.user?.userId ? .yellow.opacity(0.4) : .backgroundSecondary)
                 }
                 
+                // TODO: - 개수별 이미지 표시 레이아웃 구성
                 if dm.files.count > 0 {
                     Group {
                         RemoteImage(
@@ -271,30 +280,24 @@ struct ChatItem: View {
                             imageView: { image in
                                 image
                                     .resizable()
-                                    .aspectRatio(244/162,contentMode: .fit)
-                                    .frame(maxWidth: .infinity, maxHeight: 162)
-                                    .background(.brandGreen)
+                                    .aspectRatio(244/162, contentMode: .fit)
                             },
                             placeHolderView: {
                                 Image(.kakaoLogo)
                                     .resizable()
-                                    .aspectRatio(244/162,contentMode: .fit)
-                                    .frame(maxWidth: .infinity, maxHeight: 162)
-                                    .background(.brandGreen)
+                                    .aspectRatio(244/162, contentMode: .fit)
                             },
                             errorView: { error in
                                 Image(.kakaoLogo)
                                     .resizable()
-                                    .aspectRatio(244/162,contentMode: .fit)
-                                    .frame(maxWidth: .infinity, maxHeight: 162)
-                                    .background(.brandGreen)
+                                    .aspectRatio(244/162, contentMode: .fit)
                             }
                         )
                     }
                     .cornerRadius(16, corners: .allCorners)
+                    .frame(maxWidth: screenWidth * 0.57, maxHeight: 162, alignment: .top)
                 }
             }
-            .frame(width: screenWidth * 0.57)
             
             if chatDirection == .left {
                 Text(dm.createdAt.toChatTime)

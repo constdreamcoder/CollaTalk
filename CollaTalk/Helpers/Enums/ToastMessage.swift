@@ -161,7 +161,7 @@ enum ToastMessage: ToastMessageType {
             case .unstableNetworkConnection:
                 return "네트워크가 불안정합니다."
             case .imageCapacityLimit:
-                return "이미지 크기가 1MB이상입니다."
+                return "크키가 1MB이하인 이미지만 업로드 가능합니다."
             }
         }
     }

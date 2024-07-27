@@ -753,8 +753,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 let data = try await newPhoto.loadTransferable(type: Data.self),
                                 let newImage = UIImage(data: data)
                             {
-                                /// 이미지 파일 크기 제한 10MB 여부 확인
-                                if data.count >= 10 * 1024 * 1024 {
+                                /// 이미지 파일 크기 제한 1MB 여부 확인
+                                if data.count >= 1 * 1024 * 1024 {
                                     promise(.success(.chatAction(.chatError(DownloadImageError.imageCapacityLimit))))
                                 }
                                 
