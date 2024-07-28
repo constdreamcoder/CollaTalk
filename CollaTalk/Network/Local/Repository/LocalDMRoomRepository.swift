@@ -49,8 +49,21 @@ extension LocalDMRoomRepository {
         super.write(localDMRoom)
     }
     
+    /// DM 방 목록 생성 및 업데이트
+    func updateDMRoomList(_ dmRooms: [LocalDMRoom]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(dmRooms, update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// DM 방 마지막 DM 업데이트
     func updateLastDM(_ lastDMFromRemote: DirectMessage, lastSender: LocalWorkspaceMemeber?) {
-        let lastestDM = LocalDirectMessage(
+        let lastestDM = LastLocalDirectMessage(
             dmId: lastDMFromRemote.dmId,
             roomId: lastDMFromRemote.roomId,
             content: lastDMFromRemote.content,
@@ -61,41 +74,57 @@ extension LocalDMRoomRepository {
         
         guard let existingDMRoom = findOne(lastDMFromRemote.roomId) else { return }
         
-        let updatedLocalDMRoom = LocalDMRoom(
-            roomId: existingDMRoom.roomId,
-            createdAt: existingDMRoom.createdAt,
-            opponent: existingDMRoom.opponent,
-            lastDM: lastestDM
-        )
-        
-        super.update(updatedLocalDMRoom)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingDMRoom.lastDM = lastestDM
+            }
+        } catch {
+            print(error)
+        }
     }
     
-    func updateLastDM(_ lastDMFromRemote: LocalDirectMessage) {
-        guard let existingDMRoom = findOne(lastDMFromRemote.roomId) else { return }
+    /// DM 방 마지막 DM 업데이트
+    func updateLastDM(_ lastDMFromLocal: LastLocalDirectMessage) {
+        guard let existingDMRoom = findOne(lastDMFromLocal.roomId) else { return }
         
-        let updatedLocalDMRoom = LocalDMRoom(
-            roomId: existingDMRoom.roomId,
-            createdAt: existingDMRoom.createdAt,
-            opponent: existingDMRoom.opponent,
-            lastDM: lastDMFromRemote
-        )
-        
-        super.update(updatedLocalDMRoom)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingDMRoom.lastDM = lastDMFromLocal
+            }
+        } catch {
+            print(error)
+        }
     }
     
+    /// 읽지 않은 DM 개수
     func updateUnreadDMCount(_ unreadDMCount: UnreadDMCount) {
         guard let existingDMRoom = findOne(unreadDMCount.roomId) else { return }
-
-        let updatedLocalDMRoom = LocalDMRoom(
-            roomId: existingDMRoom.roomId,
-            createdAt: existingDMRoom.createdAt,
-            opponent: existingDMRoom.opponent,
-            lastDM: existingDMRoom.lastDM,
-            unreadDMCount: unreadDMCount.count
-        )
         
-        LocalDMRoomRepository.shared.update(updatedLocalDMRoom)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingDMRoom.unreadDMCount = unreadDMCount.count
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// 새로운 DM 목록 업데이트
+    func updateDMs(_ dmList: [LocalDirectMessage], roomId: String) {
+        guard let dmRoom = findOne(roomId) else { return }
+                
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                dmRoom.dms.append(objectsIn: dmList)
+            }
+        } catch {
+            print(error)
+        }
     }
 }
 

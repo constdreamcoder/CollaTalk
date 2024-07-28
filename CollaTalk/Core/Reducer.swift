@@ -10,6 +10,7 @@ import Foundation
 typealias Reducer<State, Action> = (State, Action) -> State
 
 let appReducer: Reducer<AppState, AppAction> = { state, action in
+
     var mutatingState = state
     
     switch action {

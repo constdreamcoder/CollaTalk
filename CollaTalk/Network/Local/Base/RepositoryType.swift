@@ -14,7 +14,6 @@ protocol RepositoryType {
     func getLocationOfDefaultRealm()
     func read() -> Results<T>
     func write(_ object: T)
-    func update(_ object: T)
     func delete(_ object: T)
     func deleteAll()
 }
