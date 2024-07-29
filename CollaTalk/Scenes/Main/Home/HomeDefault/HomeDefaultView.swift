@@ -44,7 +44,6 @@ struct HomeDefaultView: View {
 struct HomeCell: View {
     
     @EnvironmentObject private var store: AppStore
-    @EnvironmentObject private var tabViewProvider: TabViewProvider
     
     @State private var isExpanded: Bool = false
     let homeContentType: HomeContentType
@@ -73,7 +72,7 @@ struct HomeCell: View {
                         AddNewCellView(contentType: .directMessage)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                tabViewProvider.selectedTab = .dm
+                                store.dispatch(.tabAction(.moveToDMTab))
                             }
                     }
                 }
@@ -226,12 +225,12 @@ struct DMCellFrontPart: View {
 
 struct NewMessageButton: View {
     
-    @EnvironmentObject private var tabViewProvider: TabViewProvider
+    @EnvironmentObject private var store: AppStore
 
     var body: some View {
         Button {
            print("새 메세지 생성")
-            tabViewProvider.selectedTab = .dm
+            store.dispatch(.tabAction(.moveToDMTab))
         } label: {
             Image(.newMessage)
                 .resizable()

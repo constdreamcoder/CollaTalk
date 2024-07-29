@@ -15,6 +15,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     
     switch action {
         
+    case .homeAction(let homeAction):
+        switch homeAction {
+        
+        }
+    case .tabAction(let tabAction):
+        switch tabAction {
+        case .moveToDMTab:
+            mutatingState.isLoading = true
+            break
+        }
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
         
@@ -337,6 +347,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.dmState.dmRoom = chatRoom
             mutatingState.dmState.dms = dms
+            mutatingState.dmState.dmCount = dms.count
             
             mutatingState.networkCallSuccessType = .chatView
         case .setNone: break
@@ -461,14 +472,15 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         }
     case .dmAction(let dmAction):
         switch dmAction {
-        case .configureView:
-            mutatingState.isLoading = true
-        case .completeConfigration(let workspaceMembers, let dmRooms):
+        case .completeConfigrationDMView(let workspaceMembers, let dmRooms):
             mutatingState.isLoading = false
             
             mutatingState.workspaceState.workspaceMembers = workspaceMembers
             mutatingState.dmState.dmRooms = dmRooms
             
+            if mutatingState.tabState.currentTab != .dm {
+                mutatingState.tabState.currentTab = .dm
+            }
         case .dmError(let error):
             mutatingState.isLoading = false
             
@@ -514,6 +526,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.chatState.chatRoomType = chatRoomType
             mutatingState.dmState.opponent = opponent
+        case .refresh:
+            mutatingState.isLoading = true
         }
     case .chatAction(let chatAction):
         switch chatAction {
@@ -584,9 +598,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.chatState.selectedImages.append(contentsOf: newImages)
             mutatingState.isLoading = false
         case .receiveNewDirectMessage(let receivedDM):
-            mutatingState.dmState.dms.append(receivedDM.convertToLocalDirectMessage)
+            break
         case .completeSendDMAction:
             mutatingState.isLoading = false
+        case .updateDirectMessages(let dms):
+            mutatingState.dmState.dms = dms
+            mutatingState.dmState.dmCount += 1
         }
     }
     return mutatingState

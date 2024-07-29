@@ -20,10 +20,6 @@ struct DMView: View {
                 DMEmptyView()
             }
         }
-        .task {
-            print("Realm URL, \(LocalDMRoomRepository.shared.getLocationOfDefaultRealm())")
-            store.dispatch(.dmAction(.configureView))
-        }
     }
 }
 

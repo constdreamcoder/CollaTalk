@@ -15,6 +15,7 @@ struct AppState {
     var isLoading: Bool = false
     var networkCallSuccessType: PathType = .none
     
+    var tabState = TabState()
     var alertState = AlertState()
     var navigationState = NavigationState()
     var loginState = LoginState()
@@ -85,6 +86,10 @@ struct AppState {
         var workspaceMembers: [WorkspaceMember] = []
     }
     
+    struct TabState {
+        var currentTab: MainTab = .home
+    }
+    
     struct AlertState {
         var showAlert: (alertType: AlertType, confirmAction: () -> Void) = (.none, {})
         var dismissAlert: Bool = false
@@ -104,7 +109,8 @@ struct AppState {
         var dmRooms: [LocalDMRoom] = [] // DM 화면 DM 방 목록, TODO: 추후 WorkspaceState로 통합
         var opponent: WorkspaceMember? = nil
         var dmRoom: DMRoom? = nil
-        var dms: [LocalDirectMessage] = []
+        var dms: groupdDMsType = []
+        var dmCount: Int = 0
     }
     
     struct ChatState {

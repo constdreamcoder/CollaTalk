@@ -33,4 +33,17 @@ extension String {
         outputDateFormatter.dateFormat = "hh:mm a"
         return outputDateFormatter.string(from: date)
     }
+    
+    var toChatDate: String {
+        let inputDateFormatter = ISO8601DateFormatter()
+        inputDateFormatter.timeZone = .current
+        inputDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = inputDateFormatter.date(from: self) else { return "" }
+        
+        let outputDateFormatter = DateFormatter()
+        outputDateFormatter.locale = Locale(identifier: "ko_KR")
+        outputDateFormatter.dateFormat = "yyyy.MM.dd E"
+        return outputDateFormatter.string(from: date)
+    }
 }

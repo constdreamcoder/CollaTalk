@@ -65,12 +65,12 @@ extension DMService: BaseService {
         case .fetchDMHistory(_, let queries):
             return .requestParameters(
                 parameters: [QueryKey.cursorDate: queries.cursorDate ?? ""],
-                encoding: URLEncoding.queryString
+                encoding: URLEncoding.default
             )
         case .fetchUnreadDMCount(_, let queries):
             return .requestParameters(
                 parameters: [QueryKey.after: queries.after ?? ""],
-                encoding: URLEncoding.queryString
+                encoding: URLEncoding.default
             )
         }
     }

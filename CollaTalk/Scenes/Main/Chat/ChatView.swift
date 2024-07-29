@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 enum ChatRoomType {
     case dm
@@ -27,6 +28,7 @@ struct ChatView: View {
     
     @Namespace private var bottomID
     
+    
     var body: some View {
         
         VStack {
@@ -35,32 +37,35 @@ struct ChatView: View {
                     chatRoomType: chatRoomType,
                     title: store.state.dmState.opponent?.nickname ?? ""
                 )
-                
-                List {
-                    ForEach(store.state.dmState.dms, id: \.dmId) { dm in
-                        Group {
-                            if dm.user?.userId == store.state.user?.userId {
-                                ChatItem(dm: dm, chatDirection: .right)
-                                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                                    .listRowSeparator(.hidden)
-                            } else {
-                                ChatItem(dm: dm, chatDirection: .left)
-                                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                                    .listRowSeparator(.hidden)
-                            }
+                ScrollView {
+                    LazyVStack(pinnedViews: .sectionHeaders) {
+                        ForEach(store.state.dmState.dms, id: \.chatDate) { chatDate, dms in
+                            Section(
+                                content: {
+                                    ForEach(dms, id: \.dmId) { dm in
+                                        if dm.user?.userId == store.state.user?.userId {
+                                            ChatItem(dm: dm, chatDirection: .right)
+                                        } else {
+                                            ChatItem(dm: dm, chatDirection: .left)
+                                        }
+                                    }
+                                },
+                                header: {
+                                    ChatHeader(chateDate: chatDate)
+                                        .padding(.top, 0.5)
+                                }
+                            )
+                            
                         }
                     }
+                    .padding(.horizontal, 16)
+                    
                     Rectangle()
                         .frame(height: 0)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                         .background(.clear)
                         .id(bottomID)
                 }
-                .environment(\.defaultMinListRowHeight, 1)
-                .listStyle(.plain)
-                .listRowSpacing(6)
-                .onChange(of: store.state.dmState.dms, action: { newValue in
+                .onChange(of: store.state.dmState.dmCount, action: { _ in
                     withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
                 })
                 .onAppear(perform: {
@@ -94,10 +99,20 @@ struct ChatView: View {
                         
                         LazyHStack {
                             ForEach(store.state.chatState.selectedImages, id: \.self) { selectedImage in
-                                ChatSelectedImage {
-                                    print("선택된 이미지 제거")
-                                    store.dispatch(.chatAction(.removeSelectedImage(image: selectedImage)))
-                                }
+                                ChatSelectedImage(image: selectedImage)
+                                    .overlay(alignment: .topTrailing) {
+                                        Image(.removeImageIcon)
+                                            .resizable()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .frame(width: 20)
+                                            .background(.backgroundSecondary)
+                                            .clipShape(Circle())
+                                            .offset(x: 4.0, y: -4.0)
+                                            .onTapGesture {
+                                                print("선택된 이미지 제거")
+                                                store.dispatch(.chatAction(.removeSelectedImage(image: selectedImage)))
+                                            }
+                                    }
                             }
                         }
                         .frame(height: selectedImageHeight)
@@ -147,6 +162,7 @@ struct ChatView: View {
 struct ChatViewNavigationBar: View {
     
     @EnvironmentObject private var navigationRouter: NavigationRouter
+    @EnvironmentObject private var store: AppStore
     
     let chatRoomType: ChatRoomType
     let title: String
@@ -158,6 +174,7 @@ struct ChatViewNavigationBar: View {
                     action: {
                         print("뒤로가기")
                         navigationRouter.pop()
+                        store.dispatch(.dmAction(.refresh))
                     }, label: {
                         Image(systemName: "chevron.left")
                             .font(.title1)
@@ -210,7 +227,6 @@ struct ChatItem: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            
             if chatDirection == .left {
                 RemoteImage(
                     path: dm.user?.profileImage,
@@ -263,13 +279,13 @@ struct ChatItem: View {
                         .font(.body)
                         .foregroundStyle(.textPrimary)
                         .padding(8)
+                        .background(dm.user?.userId == store.state.user?.userId ? .yellow.opacity(0.4) : .backgroundSecondary)
                         .cornerRadius(8, corners: .allCorners)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(.brandBlack, lineWidth: 1)
                         )
                         .multilineTextAlignment(chatDirection == .left ? .leading : .trailing)
-                        .background(dm.user?.userId == store.state.user?.userId ? .yellow.opacity(0.4) : .backgroundSecondary)
                 }
                 
                 // TODO: - 개수별 이미지 표시 레이아웃 구성
@@ -307,51 +323,40 @@ struct ChatItem: View {
             }
         }
         .padding(.vertical, 6)
+        .frame(maxWidth: .infinity, alignment: chatDirection == .left ? .leading : .trailing)
     }
 }
 
 struct ChatHeader: View {
+    
+    let chateDate: String
+    
     var body: some View {
-        VStack(alignment: .center) {
-            Text("2024.07.23 금")
-                .font(.caption)
-                .foregroundStyle(.textPrimary)
-                .padding(.vertical, 6)
-                .padding(.horizontal, 8)
-                .background(.backgroundPrimary)
-                .cornerRadius(16, corners: .allCorners)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.brandBlack, lineWidth: 1)
-                )
-        }
-        .frame(maxWidth: .infinity)
+        Text(chateDate)
+            .font(.caption)
+            .foregroundStyle(.textPrimary)
+            .padding(.vertical, 6)
+            .padding(.horizontal, 8)
+            .background(.backgroundPrimary)
+            .cornerRadius(16, corners: .allCorners)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.brandBlack, lineWidth: 1)
+            )
+            .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 
 struct ChatSelectedImage: View {
     
-    let tapAction: () -> Void
+    let image: UIImage
     
     var body: some View {
-        Image(.kakaoLogo)
+        Image(uiImage: image)
             .resizable()
             .aspectRatio(1, contentMode: .fit)
             .frame(width: 44)
             .background(.brandGreen)
             .cornerRadius(8, corners: .allCorners)
-            .overlay(alignment: .topTrailing) {
-                Image(.removeImageIcon)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 20)
-                    .background(.backgroundSecondary)
-                    .clipShape(Circle())
-                    .offset(x: 4.0, y: -4.0)
-                    .onTapGesture {
-                        print("삭제")
-                        tapAction()
-                    }
-            }
     }
 }

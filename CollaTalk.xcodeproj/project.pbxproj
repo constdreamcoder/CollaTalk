@@ -22,6 +22,7 @@
 		0020887D2C4B6FD00094E3B6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020887C2C4B6FD00094E3B6 /* AlertType.swift */; };
 		002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */; };
 		002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */; };
+		00292E5C2C57579700D19AB5 /* GeneralType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00292E5B2C57579700D19AB5 /* GeneralType.swift */; };
 		00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE42C3F7538003206CB /* WorkspaceStartView.swift */; };
 		00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EE62C3F8115003206CB /* NavigationRouter.swift */; };
 		00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */; };
@@ -116,7 +117,6 @@
 		00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */; };
 		00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */; };
 		00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */; };
-		00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */; };
 		00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */; };
 		00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A412C4E4B4D0095EB4E /* DMListView.swift */; };
 		00F47A442C4E5C870095EB4E /* DMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F47A432C4E5C870095EB4E /* DMView.swift */; };
@@ -174,6 +174,7 @@
 		0020887C2C4B6FD00094E3B6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		0020887F2C4B720A0094E3B6 /* DeleteWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteWorkspaceParams.swift; sourceTree = "<group>"; };
 		002088812C4B72EA0094E3B6 /* DeleteWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteWorkspaceError.swift; sourceTree = "<group>"; };
+		00292E5B2C57579700D19AB5 /* GeneralType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralType.swift; sourceTree = "<group>"; };
 		00318EE42C3F7538003206CB /* WorkspaceStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceStartView.swift; sourceTree = "<group>"; };
 		00318EE62C3F8115003206CB /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		00318EEA2C3F8EB6003206CB /* ModifyWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWorkspaceView.swift; sourceTree = "<group>"; };
@@ -264,7 +265,6 @@
 		00F47A362C4E1BFD0095EB4E /* InviteMemberParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberParams.swift; sourceTree = "<group>"; };
 		00F47A382C4E1C100095EB4E /* InviteMemberRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberRequest.swift; sourceTree = "<group>"; };
 		00F47A3A2C4E1D980095EB4E /* InviteMemberError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberError.swift; sourceTree = "<group>"; };
-		00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewProvider.swift; sourceTree = "<group>"; };
 		00F47A3F2C4E42580095EB4E /* DMEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMEmptyView.swift; sourceTree = "<group>"; };
 		00F47A412C4E4B4D0095EB4E /* DMListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMListView.swift; sourceTree = "<group>"; };
 		00F47A432C4E5C870095EB4E /* DMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMView.swift; sourceTree = "<group>"; };
@@ -446,7 +446,6 @@
 		0037BC0D2C42D6A700E9AF0A /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				00F47A3C2C4E33340095EB4E /* TabViewProvider.swift */,
 				0037BBFE2C42C75C00E9AF0A /* MainTabView.swift */,
 				0037BC002C42C77700E9AF0A /* MainTab.swift */,
 			);
@@ -622,6 +621,7 @@
 		0086B5AE2C37E8F800AD889C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				00292E5B2C57579700D19AB5 /* GeneralType.swift */,
 				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
@@ -1073,7 +1073,6 @@
 				00FF60EA2C52BABD00A4970E /* LocalDirectMessageRepository.swift in Sources */,
 				00F47A372C4E1BFD0095EB4E /* InviteMemberParams.swift in Sources */,
 				00F1B6942C43759700E7EA56 /* SideBar.swift in Sources */,
-				00F47A3D2C4E33340095EB4E /* TabViewProvider.swift in Sources */,
 				006064342C51DB8C00A6E060 /* DMService.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
 				006064492C522F0100A6E060 /* SendDirectMessageRequest.swift in Sources */,
@@ -1091,6 +1090,7 @@
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,
 				006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift in Sources */,
+				00292E5C2C57579700D19AB5 /* GeneralType.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,

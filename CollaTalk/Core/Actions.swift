@@ -16,6 +16,8 @@ enum AppAction {
     case navigationAction(NavigationAction)
     case loginAction(LoginAction)
     case signUpAction(SignUpAction)
+    case homeAction(HomeAction)
+    case tabAction(TabAction)
     case modifyWorkspaceAction(ModifyWorkspaceAction)
     case workspaceAction(WorkspaceAction)
     case networkCallSuccessTypeAction(NetworkCallSuccessType)
@@ -33,7 +35,7 @@ enum AppAction {
         case setStartView
         case setHomeEmptyView
         case setHomeDefaultView(workspaces: [Workspace])
-        case setChatView(chatRoom: DMRoom, dms: [LocalDirectMessage])
+        case setChatView(chatRoom: DMRoom, dms: groupdDMsType)
         case setNone
     }
     
@@ -68,6 +70,13 @@ enum AppAction {
         case isValid(isEmailValid: Bool, isNicknameValid: Bool, isPhoneNumberValid: Bool, isPWValid: Bool, isPWForMatchCheckValid: Bool)
         case joinError(Error)
         case moveToStartView(userInfo: UserInfo)
+    }
+    
+    enum HomeAction {
+    }
+    
+    enum TabAction {
+        case moveToDMTab
     }
     
     enum ModifyWorkspaceAction {
@@ -119,8 +128,8 @@ enum AppAction {
     }
     
     enum DMAction {
-        case configureView
-        case completeConfigration(workspaceMembers: [WorkspaceMember], dmRooms: [LocalDMRoom])
+        case refresh
+        case completeConfigrationDMView(workspaceMembers: [WorkspaceMember], dmRooms: [LocalDMRoom])
         case dmError(Error)
         case createOrFetchChatRoom(chatRoomType: ChatRoomType, opponent: WorkspaceMember)
     }
@@ -135,5 +144,6 @@ enum AppAction {
         case removeSelectedImage(image: UIImage)
         case handleSelectedPhotos(newPhotos: [PhotosPickerItem])
         case receiveNewDirectMessage(receivedDM: DirectMessage)
+        case updateDirectMessages(dms: groupdDMsType)
     }
 }
