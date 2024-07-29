@@ -18,12 +18,13 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         
     case .homeAction(let homeAction):
         switch homeAction {
-       
+        case .refresh:
+            return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
         }
         
     case .tabAction(let tabAction):
         switch tabAction {
-        case .moveToDMTab:
+        case .moveToDMTabWithNetowrkCall:
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
@@ -74,7 +75,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                     guard let dmList = dmList, dmList.count > 0 else { return }
                                     guard let lastDMFromRemote = dmList.last else { return }
                                     
-                                    let lastSender: LocalWorkspaceMemeber?
+                                    let lastSender: LocalWorkspaceMember?
                                     if LocalWorkspaceMemberRepository.shared.isExist(lastDMFromRemote.user.userId) {
                                         lastSender = LocalWorkspaceMemberRepository.shared.findOne(lastDMFromRemote.user.userId)
                                     } else {
@@ -142,6 +143,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
             
+        case .moveToDMTab:
+            break
         }
         
     case .alertAction(let alertAction):
@@ -486,11 +489,60 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         async let dms = try await WorkspaceProvider.shared.fetchMyDMRooms(workspaceID: workspace.workspaceId)
                         
                         let channelsResult = try await myChannels
-                        let dmsResult = try await dms
+                        let dmRoomsResult = try await dms
                         
-                        guard let channelsResult, let dmsResult else { return }
+                        guard let channelsResult, let dmRoomsResult else { return }
                         
-                        promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dms: dmsResult))))
+                        guard dmRoomsResult.count > 0
+                        else {
+                            promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dmRooms: []))))
+                            return
+                        }
+                        
+                        /// 각 DM 방 로컬 DB(Realm)에 저장
+                        let convertedDMRooms = dmRoomsResult.map {
+                            if let existingDMRoom = LocalDMRoomRepository.shared.findOne($0.roomId) {
+                                return existingDMRoom
+                            } else {
+                                return $0.convertToLocalDMRoom
+                            }
+                        }
+                        LocalDMRoomRepository.shared.updateDMRoomList(convertedDMRooms)
+                        
+                        /// 각 DM 방 읽지 않은 채팅 개수 조회 병렬 처리
+                        let fetchUnreadDMCountsTasks = dmRoomsResult.map { dmRoom in
+                            Task {
+                                do {
+                                    let lastDMInLocal = LocalDMRoomRepository.shared.findOne(dmRoom.roomId)?.lastDM
+                                    
+                                    /// 각 DM 방 읽지 않은 채팅 개수 조회
+                                    let unreadDMCount = try await DMProvider.shared.fetchUnreadDMCount(
+                                        workspaceID: workspace.workspaceId,
+                                        roomID: dmRoom.roomId,
+                                        after: lastDMInLocal?.createdAt
+                                    )
+                                    
+                                    guard let unreadDMCount else { return }
+                                    
+                                    /// 읽지 않은 DM 채팅 개수 업데이트
+                                    LocalDMRoomRepository.shared.updateUnreadDMCount(unreadDMCount)
+                                } catch {
+                                    promise(.success(.dmAction(.dmError(error))))
+                                }
+                            }
+                        }
+                        
+                        await withTaskGroup(of: Void.self) { group in
+                            for task in fetchUnreadDMCountsTasks {
+                                await task.value
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            let updatedDmRooms: [LocalDMRoom] = LocalDMRoomRepository.shared.localDMRoomsSortedByDescending
+                            
+                            promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dmRooms: updatedDmRooms))))
+                        }
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
                     }
@@ -673,6 +725,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 }
                                 return
                             }
+                            
                             DispatchQueue.main.async {
                                 /// 새로 추가된 DM 로컬 DB(Realm)에 추가
                                 let latestDmList: [LocalDirectMessage] = dmList.map {
@@ -710,7 +763,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 break
             }
         case .refresh:
-            return Just(.tabAction(.moveToDMTab)).eraseToAnyPublisher()
+            return Just(.tabAction(.moveToDMTabWithNetowrkCall)).eraseToAnyPublisher()
         }
     case .chatAction(let chatAction):
         switch chatAction {

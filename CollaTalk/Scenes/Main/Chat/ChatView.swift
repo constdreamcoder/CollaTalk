@@ -28,7 +28,6 @@ struct ChatView: View {
     
     @Namespace private var bottomID
     
-    
     var body: some View {
         
         VStack {
@@ -174,7 +173,11 @@ struct ChatViewNavigationBar: View {
                     action: {
                         print("뒤로가기")
                         navigationRouter.pop()
-                        store.dispatch(.dmAction(.refresh))
+                        if store.state.tabState.currentTab == .dm {
+                            store.dispatch(.dmAction(.refresh))
+                        } else if store.state.tabState.currentTab == .home {
+                            store.dispatch(.homeAction(.refresh))
+                        }
                     }, label: {
                         Image(systemName: "chevron.left")
                             .font(.title1)

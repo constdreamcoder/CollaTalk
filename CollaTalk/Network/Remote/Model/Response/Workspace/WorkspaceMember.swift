@@ -51,7 +51,7 @@ extension WorkspaceMember: Equatable {
 }
 
 extension WorkspaceMember {
-    var convertToLocalWorkspaceMember: LocalWorkspaceMemeber {
-        LocalWorkspaceMemeber(userId: self.userId, email: self.email, nickname: self.nickname, profileImage: self.profileImage)
+    var convertToLocalWorkspaceMember: LocalWorkspaceMember {
+        LocalWorkspaceMember(userId: self.userId, email: self.email, nickname: self.nickname, profileImage: self.profileImage)
     }
 }

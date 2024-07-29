@@ -17,13 +17,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         
     case .homeAction(let homeAction):
         switch homeAction {
-        
+        case .refresh:
+            mutatingState.isLoading = true
         }
     case .tabAction(let tabAction):
         switch tabAction {
-        case .moveToDMTab:
+        case .moveToDMTabWithNetowrkCall:
             mutatingState.isLoading = true
             break
+        case .moveToDMTab:
+            mutatingState.tabState.currentTab = .dm
         }
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
@@ -320,11 +323,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .fetchHomeDefaultViewDatas:
             mutatingState.isLoading = true
         case .completeFetchHomeDefaultViewDatas(let myChennels, let dmRooms):
+            mutatingState.isLoading = false
+
             mutatingState.workspaceState.myChannels = myChennels
             mutatingState.workspaceState.dmRooms = dmRooms
-            
-            mutatingState.isLoading = false
-            
+        
             mutatingState.navigationState.isSidebarVisible = false
             
         case .deleteWorkspace(let workspace):
@@ -476,11 +479,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             
             mutatingState.workspaceState.workspaceMembers = workspaceMembers
-            mutatingState.dmState.dmRooms = dmRooms
+            mutatingState.workspaceState.dmRooms = dmRooms
             
-            if mutatingState.tabState.currentTab != .dm {
-                mutatingState.tabState.currentTab = .dm
-            }
+            mutatingState.tabState.currentTab = .dm
         case .dmError(let error):
             mutatingState.isLoading = false
             

@@ -19,7 +19,11 @@ struct MainTabView: View {
                     switch tab {
                     case .home: break
                     case .dm:
-                        store.dispatch(.tabAction(.moveToDMTab))
+                        if store.state.workspaceState.workspaces.count > 0 {
+                            store.dispatch(.tabAction(.moveToDMTabWithNetowrkCall))
+                        } else {
+                            store.dispatch(.tabAction(.moveToDMTab))
+                        }
                     case .search: break
                     case .setting: break
                     }

@@ -73,9 +73,11 @@ enum AppAction {
     }
     
     enum HomeAction {
+        case refresh
     }
     
     enum TabAction {
+        case moveToDMTabWithNetowrkCall
         case moveToDMTab
     }
     
@@ -98,7 +100,7 @@ enum AppAction {
         case workspaceError(Error)
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
-        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dms: [DMRoom])
+        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dmRooms: [LocalDMRoom])
         case deleteWorkspace(workspace: Workspace?)
         case selectWorkspace(workspace: Workspace?)
     }

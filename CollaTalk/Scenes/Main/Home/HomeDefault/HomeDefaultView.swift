@@ -65,14 +65,19 @@ struct HomeCell: View {
                         
                         AddNewCellView(contentType: .channel)
                     case .directMessage:
-                        ForEach(store.state.workspaceState.dmRooms, id: \.roomId) { dmRooms in
-                            DMRoomCellContent(dmRooms: dmRooms)
+                        ForEach(store.state.workspaceState.dmRooms, id: \.roomId) { dmRoom in
+                            DMRoomCellContent(dmRoom: dmRoom)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    guard let opponent = dmRoom.opponent?.convertToWorkspaceMember else { return }
+                                    store.dispatch(.dmAction(.createOrFetchChatRoom(chatRoomType: .dm, opponent: opponent)))
+                                }
                         }
                         
                         AddNewCellView(contentType: .directMessage)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                store.dispatch(.tabAction(.moveToDMTab))
+                                store.dispatch(.tabAction(.moveToDMTabWithNetowrkCall))
                             }
                     }
                 }
@@ -130,20 +135,26 @@ struct MyChannelCellContent: View {
 
 struct DMRoomCellContent: View {
     
-    let dmRooms: DMRoom
+    let dmRoom: LocalDMRoom
     
     var body: some View {
         HStack {
             
-            DMCellFrontPart(user: dmRooms.user)
+            DMCellFrontPart(
+                opponent: dmRoom.opponent,
+                unreadNumber: dmRoom.unreadDMCount
+            )
             
-            Text("99")
-                .font(.caption)
-                .foregroundColor(.brandWhite)
-                .padding(.horizontal, 4)
-                .padding(.vertical, 2)
-                .background(.brandGreen)
-                .cornerRadius(8, corners: .allCorners)
+            if dmRoom.unreadDMCount > 0 {
+                Text("\(dmRoom.unreadDMCount)")
+                    .font(.caption)
+                    .foregroundColor(.brandWhite)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 2)
+                    .background(.brandGreen)
+                    .cornerRadius(8, corners: .allCorners)
+            }
+           
         }
         .frame(height: 41)
     }
@@ -183,8 +194,10 @@ struct MyChennelCellFrontPart: View {
         HStack {
             
             Image(systemName: "number")
-                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
+                .resizable()
+                .aspectRatio(1, contentMode: .fit)
                 .frame(width: 18)
+                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
             
             Spacer()
                 .frame(width: 16)
@@ -201,19 +214,40 @@ struct MyChennelCellFrontPart: View {
 
 struct DMCellFrontPart: View {
 
-    let user: WorkspaceMember
-    private let unreadNumber = 99
+    let opponent: LocalWorkspaceMember?
+    let unreadNumber: Int
     
     var body: some View {
         HStack {
-            Image(systemName: "number")
-                .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
-                .frame(width: 18)
-            
+            RemoteImage(
+                path: opponent?.profileImage,
+                imageView: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 24)
+                },
+                placeHolderView: {
+                    Image(systemName: "number")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 24)
+                },
+                errorView: { error in
+                    Image(systemName: "number")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 24)
+                }
+            )
+            .cornerRadius(4, corners: .allCorners)
+            .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
+
+           
             Spacer()
                 .frame(width: 16)
             
-            Text(user.nickname)
+            Text(opponent?.nickname ?? "")
                 .font(unreadNumber > 0 ? .bodyBold : .body)
                 .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
                 .lineLimit(1)
@@ -230,7 +264,7 @@ struct NewMessageButton: View {
     var body: some View {
         Button {
            print("새 메세지 생성")
-            store.dispatch(.tabAction(.moveToDMTab))
+            store.dispatch(.tabAction(.moveToDMTabWithNetowrkCall))
         } label: {
             Image(.newMessage)
                 .resizable()

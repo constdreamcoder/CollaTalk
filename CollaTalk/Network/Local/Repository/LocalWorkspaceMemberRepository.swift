@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class LocalWorkspaceMemberRepository: BaseRepository<LocalWorkspaceMemeber> {
+final class LocalWorkspaceMemberRepository: BaseRepository<LocalWorkspaceMember> {
     
     static let shared = LocalWorkspaceMemberRepository()
     
@@ -23,19 +23,19 @@ extension LocalWorkspaceMemberRepository {
     }
     
     /// DM 작성자 검색
-    func findOne(_ userId: String) -> LocalWorkspaceMemeber? {
+    func findOne(_ userId: String) -> LocalWorkspaceMember? {
         super.read().first(where: { $0.userId == userId })
     }
     
     /// 기존 DM 작성자가 있는지 여부 확인
-    func createSender(_ newDM: DirectMessage) -> LocalWorkspaceMemeber? {
+    func createSender(_ newDM: DirectMessage) -> LocalWorkspaceMember? {
         let userId = newDM.user.userId
         
-        var localWorkspaceMemeber: LocalWorkspaceMemeber?
+        var localWorkspaceMemeber: LocalWorkspaceMember?
         if isExist(userId) {
             localWorkspaceMemeber = LocalWorkspaceMemberRepository.shared.findOne(userId)
         } else {
-            localWorkspaceMemeber = LocalWorkspaceMemeber(
+            localWorkspaceMemeber = LocalWorkspaceMember(
                 userId: userId,
                 email: newDM.user.email,
                 nickname: newDM.user.nickname,
@@ -47,7 +47,7 @@ extension LocalWorkspaceMemberRepository {
     }
     
     func write(_ workspaceMember: WorkspaceMember) {
-        let localWorkspaceMemeber = LocalWorkspaceMemeber(
+        let localWorkspaceMemeber = LocalWorkspaceMember(
             userId: workspaceMember.userId,
             email: workspaceMember.email,
             nickname: workspaceMember.nickname,

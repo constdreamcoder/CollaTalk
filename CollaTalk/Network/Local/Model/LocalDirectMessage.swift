@@ -14,7 +14,7 @@ final class LocalDirectMessage: Object {
     @Persisted var content: String?
     @Persisted var createdAt: String
     @Persisted var files: List<String>
-    @Persisted var user: LocalWorkspaceMemeber?
+    @Persisted var user: LocalWorkspaceMember?
     
     convenience init(
         dmId: String,
@@ -22,7 +22,7 @@ final class LocalDirectMessage: Object {
         content: String? = nil,
         createdAt: String,
         files: [String],
-        user: LocalWorkspaceMemeber? = nil
+        user: LocalWorkspaceMember? = nil
     ) {
         self.init()
         

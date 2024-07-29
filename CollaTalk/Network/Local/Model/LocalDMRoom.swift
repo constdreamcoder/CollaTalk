@@ -11,7 +11,7 @@ import RealmSwift
 final class LocalDMRoom: Object {
     @Persisted(primaryKey: true) var roomId: String
     @Persisted var createdAt: String
-    @Persisted var opponent: LocalWorkspaceMemeber?
+    @Persisted var opponent: LocalWorkspaceMember?
     
     @Persisted var dms: List<LocalDirectMessage>
     @Persisted var lastDM: LastLocalDirectMessage?
@@ -20,7 +20,7 @@ final class LocalDMRoom: Object {
     convenience init(
         roomId: String,
         createdAt: String,
-        opponent: LocalWorkspaceMemeber? = nil,
+        opponent: LocalWorkspaceMember? = nil,
         lastDM: LastLocalDirectMessage? = nil,
         unreadDMCount: Int = 0
     ) {
@@ -40,7 +40,7 @@ final class LastLocalDirectMessage: EmbeddedObject {
     @Persisted var content: String?
     @Persisted var createdAt: String
     @Persisted var files: List<String>
-    @Persisted var user: LocalWorkspaceMemeber?
+    @Persisted var user: LocalWorkspaceMember?
     
     convenience init(
         dmId: String,
@@ -48,7 +48,7 @@ final class LastLocalDirectMessage: EmbeddedObject {
         content: String? = nil,
         createdAt: String,
         files: [String],
-        user: LocalWorkspaceMemeber? = nil
+        user: LocalWorkspaceMember? = nil
     ) {
         self.init()
         

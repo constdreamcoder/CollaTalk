@@ -96,7 +96,7 @@ struct DMRoomListView:View {
     
     var body: some View {
         List {
-            ForEach(store.state.dmState.dmRooms, id: \.roomId) { dmRoom in
+            ForEach(store.state.workspaceState.dmRooms, id: \.roomId) { dmRoom in
                 DMRoomListCell(dmRoom: dmRoom)
                 .listRowSeparator(.hidden)
                 .contentShape(Rectangle())

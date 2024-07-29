@@ -23,7 +23,7 @@ extension LocalDirectMessageRepository {
     }
     
     /// 새로운 DM 생성
-    func write(newDirectMessage: DirectMessage, sender: LocalWorkspaceMemeber?) {
+    func write(newDirectMessage: DirectMessage, sender: LocalWorkspaceMember?) {
         /// 로컬 DB(Realm) 저장을 위한 새로운 DM 생성
         let localDirectMessage = LocalDirectMessage(
             dmId: newDirectMessage.dmId,
