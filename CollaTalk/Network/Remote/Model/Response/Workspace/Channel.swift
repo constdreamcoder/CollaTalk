@@ -36,6 +36,25 @@ struct Channel: Decodable {
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.channelMembers = try container.decodeIfPresent([WorkspaceMember].self, forKey: .channelMembers)
     }
+    
+    init(
+        channelId: String,
+        name: String,
+        description: String?,
+        coverImage: String?,
+        ownerId: String,
+        createdAt: String,
+        channelMembers: [WorkspaceMember]?
+    ) {
+        self.channelId = channelId
+        self.name = name
+        self.description = description
+        self.coverImage = coverImage
+        self.ownerId = ownerId
+        self.createdAt = createdAt
+        self.channelMembers = channelMembers
+    }
+    
 }
 
 extension Channel {

@@ -62,14 +62,14 @@ extension DMService: BaseService {
             
             multipartList = multipartList + imageFilesMultipart
             return .uploadMultipart(multipartList)
-        case .fetchDMHistory(_, let queries):
+        case .fetchDMHistory(_, let query):
             return .requestParameters(
-                parameters: [QueryKey.cursorDate: queries.cursorDate ?? ""],
+                parameters: [QueryKey.cursorDate: query.cursorDate ?? ""],
                 encoding: URLEncoding.default
             )
-        case .fetchUnreadDMCount(_, let queries):
+        case .fetchUnreadDMCount(_, let query):
             return .requestParameters(
-                parameters: [QueryKey.after: queries.after ?? ""],
+                parameters: [QueryKey.after: query.after ?? ""],
                 encoding: URLEncoding.default
             )
         }

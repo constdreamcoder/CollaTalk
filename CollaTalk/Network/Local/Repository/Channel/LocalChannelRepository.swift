@@ -16,6 +16,11 @@ final class LocalChannelRepository: BaseRepository<LocalChannel> {
 }
 
 extension LocalChannelRepository {
+    
+    var localChannelsSortedByDescending: [LocalChannel] {
+        super.read().sorted(by: \.lastChat?.createdAt, ascending: false).map { $0 }
+    }
+    
     /// 기존 채널 존재 여부 판별
     func isExist(_ channelId: String) -> Bool {
         super.read().contains(where: { $0.channelId ==  channelId})
@@ -70,6 +75,20 @@ extension LocalChannelRepository {
             let realm = try Realm()
             try realm.write {
                 existingChannel.lastChat = lastestChannelChat
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// 읽지 않은 채널 채팅 개수
+    func updateUnreadChannelChatCount(_ unreadChannelChatCount: UnreadChannelChatCount) {
+        guard let existingChannel = findOne(unreadChannelChatCount.channelId) else { return }
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingChannel.unreadChannelChatCount = unreadChannelChatCount.count
             }
         } catch {
             print(error)

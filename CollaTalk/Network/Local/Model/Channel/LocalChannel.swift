@@ -18,6 +18,7 @@ final class LocalChannel: Object {
     @Persisted var channelMembers: List<LocalWorkspaceMember>
     @Persisted var lastChat: LastLocalChannelChat?
     @Persisted var channelChats: List<LocalChannelChat>
+    @Persisted var unreadChannelChatCount: Int
     
     convenience init(
         channelId: String, 
@@ -28,7 +29,8 @@ final class LocalChannel: Object {
         createdAt: String,
         channelMembers: [LocalWorkspaceMember] = [],
         lastChat: LastLocalChannelChat? = nil,
-        channelChats: [LocalChannelChat] = []
+        channelChats: [LocalChannelChat] = [],
+        unreadChannelChatCount: Int = 0
     ) {
         self.init()
         
@@ -41,6 +43,22 @@ final class LocalChannel: Object {
         self.channelMembers.append(objectsIn: channelMembers)
         self.lastChat = lastChat
         self.channelChats.append(objectsIn: channelChats)
+        self.unreadChannelChatCount = unreadChannelChatCount
+    }
+}
+
+extension LocalChannel {
+    var convertToChannel: Channel {
+        let channelMembers: [WorkspaceMember] = self.channelMembers.map { $0.convertToWorkspaceMember }
+        return Channel(
+            channelId: self.channelId,
+            name: self.name,
+            description: self.desc,
+            coverImage: self.coverImage,
+            ownerId: self.ownerId,
+            createdAt: self.createdAt,
+            channelMembers: channelMembers
+        )
     }
 }
 
@@ -73,4 +91,3 @@ final class LastLocalChannelChat: EmbeddedObject {
         self.sender = sender
     }
 }
-

@@ -15,6 +15,10 @@
 		000F3FFF2C588A8500FF87BF /* SendChannelChatParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3FFE2C588A8500FF87BF /* SendChannelChatParams.swift */; };
 		000F40022C588AC300FF87BF /* SendChannelChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40012C588AC300FF87BF /* SendChannelChatRequest.swift */; };
 		000F40042C588CDA00FF87BF /* SendChannelChatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40032C588CDA00FF87BF /* SendChannelChatError.swift */; };
+		000F40062C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40052C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift */; };
+		000F40082C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40072C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift */; };
+		000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */; };
+		000F400C2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
@@ -179,6 +183,10 @@
 		000F3FFE2C588A8500FF87BF /* SendChannelChatParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChannelChatParams.swift; sourceTree = "<group>"; };
 		000F40012C588AC300FF87BF /* SendChannelChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChannelChatRequest.swift; sourceTree = "<group>"; };
 		000F40032C588CDA00FF87BF /* SendChannelChatError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChannelChatError.swift; sourceTree = "<group>"; };
+		000F40052C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelChatsParams.swift; sourceTree = "<group>"; };
+		000F40072C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelQuery.swift; sourceTree = "<group>"; };
+		000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadChannelChatCount.swift; sourceTree = "<group>"; };
+		000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelChatsError.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -398,6 +406,7 @@
 			children = (
 				000F3FFE2C588A8500FF87BF /* SendChannelChatParams.swift */,
 				00292E602C57D66E00D19AB5 /* FetchChannelChatsParams.swift */,
+				000F40052C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift */,
 			);
 			path = Paramas;
 			sourceTree = "<group>";
@@ -406,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				00292E662C57D7AC00D19AB5 /* ChannelChat.swift */,
+				000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -415,6 +425,7 @@
 			children = (
 				00292E692C57DDEA00D19AB5 /* FetchChannelChatsError.swift */,
 				000F40032C588CDA00FF87BF /* SendChannelChatError.swift */,
+				000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -423,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				00292E6C2C57E05F00D19AB5 /* FetchChannelChatsQuery.swift */,
+				000F40072C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -1168,6 +1180,7 @@
 				006060C12C450BF5001D300F /* FetchDMRoomsParams.swift in Sources */,
 				00FF60E62C52B0C600A4970E /* LocalWorkspaceMember.swift in Sources */,
 				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
+				000F40082C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift in Sources */,
 				0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */,
 				0070E7132C4A01D4009058EA /* AlertView.swift in Sources */,
 				00F47A4E2C4E9F8D0095EB4E /* ChatView.swift in Sources */,
@@ -1192,6 +1205,7 @@
 				006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */,
 				00F1B6922C43696900E7EA56 /* MainNaigationBar.swift in Sources */,
 				0086B5AD2C37E83B00AD889C /* OnboardingView.swift in Sources */,
+				000F400C2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift in Sources */,
 				00318EEB2C3F8EB6003206CB /* ModifyWorkspaceView.swift in Sources */,
 				00F47A392C4E1C100095EB4E /* InviteMemberRequest.swift in Sources */,
 				000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */,
@@ -1251,6 +1265,7 @@
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
+				000F40062C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift in Sources */,
 				00ED9E092C4BED7100DF5AE7 /* TransferWorkspaceOwnershipError.swift in Sources */,
 				0020887D2C4B6FD00094E3B6 /* AlertType.swift in Sources */,
 				006060C52C450D83001D300F /* FetchDMsError.swift in Sources */,
@@ -1264,6 +1279,7 @@
 				00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */,
 				00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
+				000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,

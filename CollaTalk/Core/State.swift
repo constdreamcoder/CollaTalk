@@ -82,7 +82,7 @@ struct AppState {
     struct WorkspaceState {
         var selectedWorkspace: Workspace? = nil
         var workspaces: [Workspace] = []
-        var myChannels: [Channel] = []
+        var myChannels: [LocalChannel] = []
         var dmRooms: [LocalDMRoom] = [] // DM 화면 DM 방 목록, TODO: 추후 WorkspaceState로 통합
         var workspaceMembers: [WorkspaceMember] = []
     }

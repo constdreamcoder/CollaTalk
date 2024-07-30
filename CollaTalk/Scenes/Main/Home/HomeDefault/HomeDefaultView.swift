@@ -63,7 +63,7 @@ struct HomeCell: View {
                             MyChannelCellContent(channel: channel)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    store.dispatch(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: channel)))
+                                    store.dispatch(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: channel.convertToChannel)))
                                 }
                         }
                         
@@ -118,20 +118,25 @@ struct CellHeader: View {
 
 struct MyChannelCellContent: View {
     
-    let channel: Channel
+    let channel: LocalChannel
     
     var body: some View {
         HStack {
             
-            MyChennelCellFrontPart(name: channel.name)
+            MyChennelCellFrontPart(
+                name: channel.name,
+                unreadNumber: channel.unreadChannelChatCount
+            )
             
-            Text("99")
-                .font(.caption)
-                .foregroundColor(.brandWhite)
-                .padding(.horizontal, 4)
-                .padding(.vertical, 2)
-                .background(.brandGreen)
-                .cornerRadius(8, corners: .allCorners)
+            if channel.unreadChannelChatCount > 0 {
+                Text("\(channel.unreadChannelChatCount)")
+                    .font(.caption)
+                    .foregroundColor(.brandWhite)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 2)
+                    .background(.brandGreen)
+                    .cornerRadius(8, corners: .allCorners)
+            }
         }
         .frame(height: 41)
     }
@@ -192,7 +197,7 @@ struct AddNewCellView: View {
 struct MyChennelCellFrontPart: View {
     
     let name: String
-    private let unreadNumber = 99
+    let unreadNumber: Int
     
     var body: some View {
         HStack {

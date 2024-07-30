@@ -17,7 +17,7 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         do {
             let fetchChannelParams = FetchChannelChatsParams(workspaceID: workspaceID, channelID: channelID)
             let fetchChannelChatsQuery = FetchChannelChatsQuery(cursorDate: cursorDate)
-            let response = try await request(.fetchChannelChats(params: fetchChannelParams, queries: fetchChannelChatsQuery))
+            let response = try await request(.fetchChannelChats(params: fetchChannelParams, query: fetchChannelChatsQuery))
             switch response.statusCode {
             case 200:
                 // 새로 생성된 채팅방 혹은 이미 생성되어 있던 채팅방
@@ -64,5 +64,28 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         return nil
     }
     
+    func fetchUnreadChannelChats(workspaceID: String, channelID: String, after: String?) async throws -> UnreadChannelChatCount? {
+        do {
+            let fetchUnreadChannelChatsParams = FetchUnreadChannelChatsParams(workspaceID: workspaceID, channelID: channelID)
+            let fetchUnreadChannelQuery = FetchUnreadChannelQuery(after: after)
+            let response = try await request(.fetchUnreadChannelChats(params: fetchUnreadChannelChatsParams, query: fetchUnreadChannelQuery))
+            switch response.statusCode {
+            case 200:
+                let unreadChannelChatCount = try decode(response.data, as: UnreadChannelChatCount.self)
+                return unreadChannelChatCount
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let fetchUnreadChannelChatsError = FetchUnreadChannelChatsError(rawValue: errorCode.errorCode) {
+                    throw fetchUnreadChannelChatsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }
-

@@ -103,7 +103,7 @@ enum AppAction {
         case workspaceError(Error)
         case toggleSideBarAction
         case fetchHomeDefaultViewDatas
-        case completeFetchHomeDefaultViewDatas(myChennels: [Channel], dmRooms: [LocalDMRoom])
+        case completeFetchHomeDefaultViewDatas(myChennels: [LocalChannel], dmRooms: [LocalDMRoom])
         case deleteWorkspace(workspace: Workspace?)
         case selectWorkspace(workspace: Workspace?)
     }

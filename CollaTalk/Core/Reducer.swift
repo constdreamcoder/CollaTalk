@@ -642,7 +642,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = true
             
             mutatingState.chatState.chatRoomType = chatRoomType
-            mutatingState.channelState.channel = channel
         case .channelError(let error ):
             if let error = error as? CommonError {
                 switch error {

@@ -129,7 +129,7 @@ struct ChannelChatsView: View {
     let chatRoomType: ChatRoomType
     
     @EnvironmentObject private var store: AppStore
-    @Namespace private var bottomID
+    @Namespace private var channelChatBottomID
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -177,13 +177,13 @@ struct ChannelChatsView: View {
                 Rectangle()
                     .frame(height: 0)
                     .background(.clear)
-                    .id(bottomID)
+                    .id(channelChatBottomID)
             }
-            .onChange(of: store.state.dmState.dmCount, action: { _ in
-                withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
-            })
             .onAppear(perform: {
-                proxy.scrollTo(bottomID, anchor: .bottom)
+                proxy.scrollTo(channelChatBottomID, anchor: .bottom)
+            })
+            .onChange(of: store.state.channelState.channelChatCount, action: { _ in
+                withAnimation { proxy.scrollTo(channelChatBottomID, anchor: .bottom) }
             })
         }
     }
@@ -194,7 +194,7 @@ struct DMChatRoomsView: View {
     let chatRoomType: ChatRoomType
     
     @EnvironmentObject private var store: AppStore
-    @Namespace private var bottomID
+    @Namespace private var dmChatBottomID
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -242,13 +242,13 @@ struct DMChatRoomsView: View {
                 Rectangle()
                     .frame(height: 0)
                     .background(.clear)
-                    .id(bottomID)
+                    .id(dmChatBottomID)
             }
-            .onChange(of: store.state.dmState.dmCount, action: { _ in
-                withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
-            })
             .onAppear(perform: {
-                proxy.scrollTo(bottomID, anchor: .bottom)
+                proxy.scrollTo(dmChatBottomID, anchor: .bottom)
+            })
+            .onChange(of: store.state.dmState.dmCount, action: { _ in
+                withAnimation { proxy.scrollTo(dmChatBottomID, anchor: .bottom) }
             })
         }
     }
@@ -319,7 +319,6 @@ struct ChatItem: View {
     
     @EnvironmentObject private var store: AppStore
     
-//    let dm: LocalDirectMessage
     let chatDirection: ChatDirection
     
     let profileImage: String?
