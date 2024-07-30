@@ -20,7 +20,7 @@ struct ContentView: View {
             ZStack {
                 OnboardingView()
                 
-                AuthView()                
+                AuthView()
             }
             .animation(.interactiveSpring, value: store.state.navigationState.isBottomSheetPresented)
             .sheet(
@@ -58,24 +58,16 @@ struct ContentView: View {
                     set: { store.dispatch(.navigationAction(.presentChangeWorkspaceOwnerView(present: $0))) }
                 )
             ) {
-               ChangeWorkspaceOwnerView()
+                ChangeWorkspaceOwnerView()
             }
-            .sheet(
-                isPresented:Binding(
-                    get: { store.state.navigationState.isInviteMemeberViewPresented },
-                    set: { store.dispatch(.navigationAction(.presentInviteMemeberView(present: $0))) }
-                )
-            ) {
-                InviteMemberView()
-            }
-            .sheet(
-                isPresented: Binding(
-                    get: { store.state.navigationState.isCreateNewChannelViewPresented },
-                    set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
-                )
-            ) {
-                CreateNewChannelView()
-            }
+//            .sheet(
+//                isPresented:Binding(
+//                    get: { store.state.navigationState.isInviteMemeberViewPresented },
+//                    set: { store.dispatch(.navigationAction(.presentInviteMemeberView(present: $0))) }
+//                )
+//            ) {
+//                InviteMemberView()
+//            }
             .navigationDestination(for: PathType.self) { path in
                 Group {
                     switch path {

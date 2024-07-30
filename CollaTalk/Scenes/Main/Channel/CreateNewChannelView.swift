@@ -22,8 +22,7 @@ struct CreateNewChannelView: View {
                     title: .createNewChannel,
                     isPresented: Binding(
                         get: { store.state.navigationState.isCreateNewChannelViewPresented },
-                        set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0)))
-                        }
+                        set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
                     ),
                     transitionAction: {}
                 )

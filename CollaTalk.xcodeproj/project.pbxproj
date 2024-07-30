@@ -22,6 +22,9 @@
 		000F400F2C58DA3200FF87BF /* CreateNewChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
+		001D14202C59265F00CC8777 /* SearchChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001D141F2C59265F00CC8777 /* SearchChannelView.swift */; };
+		001D14222C5931B600CC8777 /* FetchAllChannelsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001D14212C5931B600CC8777 /* FetchAllChannelsParams.swift */; };
+		001D14242C59326C00CC8777 /* FetchAllChannelsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001D14232C59326C00CC8777 /* FetchAllChannelsError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
 		002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */; };
 		002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F72C3EC3E8007E76BD /* JoinError.swift */; };
@@ -194,6 +197,9 @@
 		000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelView.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
+		001D141F2C59265F00CC8777 /* SearchChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChannelView.swift; sourceTree = "<group>"; };
+		001D14212C5931B600CC8777 /* FetchAllChannelsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllChannelsParams.swift; sourceTree = "<group>"; };
+		001D14232C59326C00CC8777 /* FetchAllChannelsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllChannelsError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDoubleCheckRequest.swift; sourceTree = "<group>"; };
 		002066F72C3EC3E8007E76BD /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
@@ -370,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */,
+				001D141F2C59265F00CC8777 /* SearchChannelView.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -425,6 +432,7 @@
 				00292E602C57D66E00D19AB5 /* FetchChannelChatsParams.swift */,
 				000F40052C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift */,
 				006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */,
+				001D14212C5931B600CC8777 /* FetchAllChannelsParams.swift */,
 			);
 			path = Paramas;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 				000F40032C588CDA00FF87BF /* SendChannelChatError.swift */,
 				000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */,
 				006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */,
+				001D14232C59326C00CC8777 /* FetchAllChannelsError.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -1247,6 +1256,7 @@
 				00292E712C57EB9F00D19AB5 /* LocalChannelChat.swift in Sources */,
 				006064342C51DB8C00A6E060 /* DMService.swift in Sources */,
 				0086B5BF2C37F50500AD889C /* RoundedCorner.swift in Sources */,
+				001D14222C5931B600CC8777 /* FetchAllChannelsParams.swift in Sources */,
 				006064492C522F0100A6E060 /* SendDirectMessageRequest.swift in Sources */,
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
@@ -1322,6 +1332,7 @@
 				00292E7B2C57F29F00D19AB5 /* LocalChannelChatRepository.swift in Sources */,
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				006060C32C450C3D001D300F /* DM.swift in Sources */,
+				001D14202C59265F00CC8777 /* SearchChannelView.swift in Sources */,
 				00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				000F40042C588CDA00FF87BF /* SendChannelChatError.swift in Sources */,
@@ -1343,6 +1354,7 @@
 				006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */,
 				000F400F2C58DA3200FF87BF /* CreateNewChannelView.swift in Sources */,
 				006C32FD2C53E06C0084C4E2 /* UnreadDMCount.swift in Sources */,
+				001D14242C59326C00CC8777 /* FetchAllChannelsError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

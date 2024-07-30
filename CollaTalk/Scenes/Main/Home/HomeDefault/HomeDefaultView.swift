@@ -39,8 +39,35 @@ struct HomeDefaultView: View {
             Button("채널 생성", role: .none) {
                 store.dispatch(.navigationAction(.presentCreateNewChannelView(present: true)))
             }
-            Button("채널 탐색", role: .none) {}
+            Button("채널 탐색", role: .none) {
+//                store.dispatch(.navigationAction(.presentSearchChannelView(present: true)))
+                store.dispatch(.searchChannelAction(.fetchAllChannels))
+            }
             Button("취소", role: .cancel) {}
+        }
+        .sheet(
+            isPresented:Binding(
+                get: { store.state.navigationState.isInviteMemeberViewPresented },
+                set: { store.dispatch(.navigationAction(.presentInviteMemeberView(present: $0))) }
+            )
+        ) {
+            InviteMemberView()
+        }
+        .sheet(
+            isPresented: Binding(
+                get: { store.state.navigationState.isCreateNewChannelViewPresented },
+                set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
+            )
+        ) {
+            CreateNewChannelView()
+        }
+        .fullScreenCover(
+            isPresented: Binding(
+                get: { store.state.navigationState.isSearchChannelViewPresented },
+                set: { store.dispatch(.navigationAction(.presentSearchChannelView(present: $0, allChannels: []))) }
+            )
+        ) {
+            SearchChannelView()
         }
     }
 }

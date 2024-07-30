@@ -28,6 +28,7 @@ struct AppState {
     var dmState = DMState()
     var chatState = ChatState()
     var channelState = ChannelState()
+    var searchChannelState = SearchChannelState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -39,6 +40,7 @@ struct AppState {
         var isChangeWorkspaceOwnerViewPresented: Bool = false
         var isInviteMemeberViewPresented: Bool = false
         var isCreateNewChannelViewPresented: Bool = false
+        var isSearchChannelViewPresented: Bool = false
     }
    
     struct LoginState {
@@ -129,9 +131,14 @@ struct AppState {
         var selectedImages: [UIImage] = []
     }
     
+    /// 채널 채팅 화면 State
     struct ChannelState {
         var channel: Channel? = nil
         var channelChats: groupdChannelChatsType = []
         var channelChatCount: Int = 0
+    }
+    
+    struct SearchChannelState {
+        var allChannels: [Channel] = []
     }
 }

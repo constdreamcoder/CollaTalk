@@ -193,6 +193,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentCreateNewChannelView(let present):
             break
+        case .presentSearchChannelView(let present):
+            break
         }
         
     case .loginAction(let loginAction):
@@ -1172,6 +1174,27 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .returnToHomeView:
             return Just(.homeAction(.refresh)).eraseToAnyPublisher()
         case .nameValidationError:
+            break
+        }
+    case .searchChannelAction(let searchAction):
+        switch searchAction {
+        case .fetchAllChannels:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let allChannels = try await ChannelProvider.shared.fetchAllChannels(
+                            workspaceID: state.workspaceState.selectedWorkspace?.workspaceId ?? ""
+                        )
+                        
+                        guard let allChannels else { return }
+                        promise(.success(.navigationAction(.presentSearchChannelView(present: true, allChannels: allChannels))))
+                    } catch {
+                        print("error", error)
+                        promise(.success(.searchChannelAction(.SearchChannelError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .SearchChannelError(let error):
             break
         }
     }

@@ -18,6 +18,7 @@ struct SheetNavigation: View {
         case changeWorkspaceOwner = "워크스페이스 관리자 변경"
         case inviteMember = "팀원 초대"
         case createNewChannel = "채널 생성"
+        case searchChannel = "채널 탐색"
     }
     
     let title: Feature
@@ -28,7 +29,9 @@ struct SheetNavigation: View {
         VStack {
             ZStack {
                 VStack(spacing: 15) {
-                    if title != .workspaceInit {
+                    if  title == .workspaceInit || title == .searchChannel {
+                        EmptyView()
+                    } else {
                         BottomViewGrabber()
                             .padding(.top, 6)
                     }
@@ -38,7 +41,9 @@ struct SheetNavigation: View {
                 }
                 
                 VStack(spacing: 15) {
-                    if title != .workspaceInit {
+                    if title == .workspaceInit || title == .searchChannel {
+                        EmptyView()
+                    } else {
                         BottomViewGrabber()
                             .padding(.top, 4)
                             .hidden()

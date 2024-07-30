@@ -113,4 +113,28 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         
         return nil
     }
+    
+    func fetchAllChannels(workspaceID: String) async throws -> [Channel]? {
+        do {
+            let fetchAllChannelsParams = FetchAllChannelsParams(workspaceID: workspaceID)
+            let response = try await request(.fetchAllChannels(params: fetchAllChannelsParams))
+            switch response.statusCode {
+            case 200:
+                let allChannels = try decode(response.data, as: [Channel].self)
+                return allChannels
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let createNewChannelError = FetchAllChannelsError(rawValue: errorCode.errorCode) {
+                    throw createNewChannelError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

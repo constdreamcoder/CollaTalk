@@ -28,6 +28,7 @@ enum AppAction {
     case dmAction(DMAction)
     case channelAction(ChannelAction)
     case chatAction(ChatAction)
+    case searchChannelAction(SearchChannelAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -51,6 +52,7 @@ enum AppAction {
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
         case presentInviteMemeberView(present: Bool)
         case presentCreateNewChannelView(present: Bool)
+        case presentSearchChannelView(present: Bool, allChannels: [Channel])
     }
     
     enum LoginAction {
@@ -169,5 +171,10 @@ enum AppAction {
         case receiveNewChannelChat(receivedChannelChat: ChannelChat)
         case updateDirectMessages(dms: groupdDMsType)
         case updateChannelChats(channelChats: groupdChannelChatsType)
+    }
+    
+    enum SearchChannelAction {
+        case fetchAllChannels
+        case SearchChannelError(Error)
     }
 }

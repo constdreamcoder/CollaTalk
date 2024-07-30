@@ -73,6 +73,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isInviteMemeberViewPresented = present
         case .presentCreateNewChannelView(let present):
             mutatingState.navigationState.isCreateNewChannelViewPresented = present
+        case .presentSearchChannelView(let present, let allChannels):
+            mutatingState.isLoading = false
+            mutatingState.navigationState.isSearchChannelViewPresented = present
+            mutatingState.searchChannelState.allChannels = allChannels
         }
         
     case .loginAction(let loginAction):
@@ -722,6 +726,37 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.toastMessage = ToastMessage.createNewChannel(.nameValidationError).message
             mutatingState.showToast = true
+        }
+    case .searchChannelAction(let searchChannelAction):
+        switch searchChannelAction {
+        case .fetchAllChannels:
+            mutatingState.isLoading = true
+        case .SearchChannelError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchAllChannelsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     return mutatingState
