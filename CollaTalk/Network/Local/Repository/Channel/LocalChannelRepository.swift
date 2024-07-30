@@ -1,0 +1,55 @@
+//
+//  LocalChannelRepository.swift
+//  CollaTalk
+//
+//  Created by SUCHAN CHANG on 7/30/24.
+//
+
+import Foundation
+import RealmSwift
+
+final class LocalChannelRepository: BaseRepository<LocalChannel> {
+    
+    static let shared = LocalChannelRepository()
+    
+    private override init() { super.init() }
+}
+
+extension LocalChannelRepository {
+    /// 기존 채널 존재 여부 판별
+    func isExist(_ channelId: String) -> Bool {
+        super.read().contains(where: { $0.channelId ==  channelId})
+    }
+    
+    /// 채널  하나 조회
+    func findOne(_ channelId: String) -> LocalChannel? {
+        super.read().first(where: { $0.channelId == channelId})
+    }
+
+    /// 채널 목록 생성 및 업데이트
+    func updateChannelList(_ channels: [LocalChannel]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(channels, update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// 새로운 채널 채팅 목록 업데이트
+    func updateChannelChats(_ chatList: [LocalChannelChat], channelId: String) {
+        guard let channel = findOne(channelId) else { return }
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                channel.channelChats.append(objectsIn: chatList)
+            }
+        } catch {
+            print(error)
+        }
+    }
+}
+

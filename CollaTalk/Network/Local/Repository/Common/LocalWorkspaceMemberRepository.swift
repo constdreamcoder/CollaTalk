@@ -31,11 +31,11 @@ extension LocalWorkspaceMemberRepository {
     func createSender(_ newDM: DirectMessage) -> LocalWorkspaceMember? {
         let userId = newDM.user.userId
         
-        var localWorkspaceMemeber: LocalWorkspaceMember?
+        var localWorkspaceMember: LocalWorkspaceMember?
         if isExist(userId) {
-            localWorkspaceMemeber = LocalWorkspaceMemberRepository.shared.findOne(userId)
+            localWorkspaceMember = LocalWorkspaceMemberRepository.shared.findOne(userId)
         } else {
-            localWorkspaceMemeber = LocalWorkspaceMember(
+            localWorkspaceMember = LocalWorkspaceMember(
                 userId: userId,
                 email: newDM.user.email,
                 nickname: newDM.user.nickname,
@@ -43,17 +43,17 @@ extension LocalWorkspaceMemberRepository {
             )
         }
         
-        return localWorkspaceMemeber
+        return localWorkspaceMember
     }
     
     func write(_ workspaceMember: WorkspaceMember) {
-        let localWorkspaceMemeber = LocalWorkspaceMember(
+        let localWorkspaceMember = LocalWorkspaceMember(
             userId: workspaceMember.userId,
             email: workspaceMember.email,
             nickname: workspaceMember.nickname,
             profileImage: workspaceMember.profileImage
         )
         
-        LocalWorkspaceMemberRepository.shared.write(localWorkspaceMemeber)
+        LocalWorkspaceMemberRepository.shared.write(localWorkspaceMember)
     }
 }

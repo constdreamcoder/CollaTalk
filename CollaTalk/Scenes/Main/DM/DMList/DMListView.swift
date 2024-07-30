@@ -118,7 +118,7 @@ struct DMRoomListCell: View {
     var body: some View {
         HStack(alignment: .top) {
             RemoteImage(
-                path: dmRoom.lastDM?.user?.profileImage,
+                path: dmRoom.opponent?.profileImage,
                 imageView: { image in
                     image
                         .resizable()
@@ -147,7 +147,7 @@ struct DMRoomListCell: View {
             
             VStack {
                 HStack {
-                    Text(dmRoom.lastDM?.user?.nickname ?? "")
+                    Text(dmRoom.opponent?.nickname ?? "")
                         .font(.caption)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)

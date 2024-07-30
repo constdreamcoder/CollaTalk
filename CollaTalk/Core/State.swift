@@ -26,6 +26,7 @@ struct AppState {
     var inviteMemberState = InviteMemberState()
     var dmState = DMState()
     var chatState = ChatState()
+    var channelState = ChannelState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -117,5 +118,11 @@ struct AppState {
         var message: String = ""
         var isMessageEmpty: Bool = false
         var selectedImages: [UIImage] = []
+    }
+    
+    struct ChannelState {
+        var channel: Channel? = nil
+        var channelChats: groupdChannelChatsType = []
+        var channelChatCount: Int = 0
     }
 }

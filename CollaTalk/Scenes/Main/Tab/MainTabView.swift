@@ -17,13 +17,10 @@ struct MainTabView: View {
                 get: { store.state.tabState.currentTab },
                 set: { tab, transaction in
                     switch tab {
-                    case .home: break
+                    case .home:
+                        store.dispatch(.tabAction(.moveToHomeTab))
                     case .dm:
-                        if store.state.workspaceState.workspaces.count > 0 {
-                            store.dispatch(.tabAction(.moveToDMTabWithNetowrkCall))
-                        } else {
-                            store.dispatch(.tabAction(.moveToDMTab))
-                        }
+                        store.dispatch(.tabAction(.moveToDMTab))
                     case .search: break
                     case .setting: break
                     }

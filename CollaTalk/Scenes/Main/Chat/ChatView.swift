@@ -26,50 +26,13 @@ struct ChatView: View {
     @State private var inputViewVStackSpacing: CGFloat = 0
     @State private var selectedImageHeight: CGFloat = 0
     
-    @Namespace private var bottomID
-    
     var body: some View {
         
         VStack {
-            ScrollViewReader { proxy in
-                ChatViewNavigationBar(
-                    chatRoomType: chatRoomType,
-                    title: store.state.dmState.opponent?.nickname ?? ""
-                )
-                ScrollView {
-                    LazyVStack(pinnedViews: .sectionHeaders) {
-                        ForEach(store.state.dmState.dms, id: \.chatDate) { chatDate, dms in
-                            Section(
-                                content: {
-                                    ForEach(dms, id: \.dmId) { dm in
-                                        if dm.user?.userId == store.state.user?.userId {
-                                            ChatItem(dm: dm, chatDirection: .right)
-                                        } else {
-                                            ChatItem(dm: dm, chatDirection: .left)
-                                        }
-                                    }
-                                },
-                                header: {
-                                    ChatHeader(chateDate: chatDate)
-                                        .padding(.top, 0.5)
-                                }
-                            )
-                            
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    
-                    Rectangle()
-                        .frame(height: 0)
-                        .background(.clear)
-                        .id(bottomID)
-                }
-                .onChange(of: store.state.dmState.dmCount, action: { _ in
-                    withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
-                })
-                .onAppear(perform: {
-                    proxy.scrollTo(bottomID, anchor: .bottom)
-                })
+            if chatRoomType == .dm {
+                DMChatRoomsView(chatRoomType: chatRoomType)
+            } else if chatRoomType == .channel {
+                ChannelChatsView(chatRoomType: chatRoomType)
             }
         }
         .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight)  {
@@ -158,6 +121,136 @@ struct ChatView: View {
     ChatView(chatRoomType: .dm)
 }
 
+struct ChannelChatsView: View {
+    
+    let chatRoomType: ChatRoomType
+    
+    @EnvironmentObject private var store: AppStore
+    @Namespace private var bottomID
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ChatViewNavigationBar(
+                chatRoomType: chatRoomType,
+                title: "#\(store.state.channelState.channel?.name ?? "")"
+            )
+            ScrollView {
+                LazyVStack(pinnedViews: .sectionHeaders) {
+                    ForEach(store.state.channelState.channelChats, id: \.chatDate) { chatDate, channelChats in
+                        Section(
+                            content: {
+                                ForEach(channelChats, id: \.channelId) { channelChat in
+                                    if channelChat.sender?.userId == store.state.user?.userId {
+                                        ChatItem(
+                                            chatDirection: .right,
+                                            profileImage: channelChat.sender?.profileImage,
+                                            chatTime: channelChat.createdAt.toChatTime,
+                                            nickname: channelChat.sender?.nickname ?? "",
+                                            content: channelChat.content,
+                                            files: channelChat.files.map { $0 }
+                                        )
+                                    } else {
+                                        ChatItem(
+                                            chatDirection: .left,
+                                            profileImage: channelChat.sender?.profileImage,
+                                            chatTime: channelChat.createdAt.toChatTime,
+                                            nickname: channelChat.sender?.nickname ?? "",
+                                            content: channelChat.content,
+                                            files: channelChat.files.map { $0 }
+                                        )
+                                    }
+                                }
+                            },
+                            header: {
+                                ChatHeader(chateDate: chatDate)
+                                    .padding(.top, 0.5)
+                            }
+                        )
+                        
+                    }
+                }
+                .padding(.horizontal, 16)
+                
+                Rectangle()
+                    .frame(height: 0)
+                    .background(.clear)
+                    .id(bottomID)
+            }
+            .onChange(of: store.state.dmState.dmCount, action: { _ in
+                withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
+            })
+            .onAppear(perform: {
+                proxy.scrollTo(bottomID, anchor: .bottom)
+            })
+        }
+    }
+}
+
+struct DMChatRoomsView: View {
+
+    let chatRoomType: ChatRoomType
+    
+    @EnvironmentObject private var store: AppStore
+    @Namespace private var bottomID
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ChatViewNavigationBar(
+                chatRoomType: chatRoomType,
+                title: store.state.dmState.opponent?.nickname ?? ""
+            )
+            ScrollView {
+                LazyVStack(pinnedViews: .sectionHeaders) {
+                    ForEach(store.state.dmState.dms, id: \.chatDate) { chatDate, dms in
+                        Section(
+                            content: {
+                                ForEach(dms, id: \.dmId) { dm in
+                                    if dm.user?.userId == store.state.user?.userId {
+                                        ChatItem(
+                                            chatDirection: .right,
+                                            profileImage: dm.user?.profileImage,
+                                            chatTime: dm.createdAt.toChatTime,
+                                            nickname: dm.user?.nickname ?? "",
+                                            content: dm.content,
+                                            files: dm.files.map { $0 }
+                                        )
+                                    } else {
+                                        ChatItem(
+                                            chatDirection: .left,
+                                            profileImage: dm.user?.profileImage,
+                                            chatTime: dm.createdAt.toChatTime,
+                                            nickname: dm.user?.nickname ?? "",
+                                            content: dm.content,
+                                            files: dm.files.map { $0 }
+                                        )
+                                    }
+                                }
+                            },
+                            header: {
+                                ChatHeader(chateDate: chatDate)
+                                    .padding(.top, 0.5)
+                            }
+                        )
+                        
+                    }
+                }
+                .padding(.horizontal, 16)
+                
+                Rectangle()
+                    .frame(height: 0)
+                    .background(.clear)
+                    .id(bottomID)
+            }
+            .onChange(of: store.state.dmState.dmCount, action: { _ in
+                withAnimation { proxy.scrollTo(bottomID, anchor: .bottom) }
+            })
+            .onAppear(perform: {
+                proxy.scrollTo(bottomID, anchor: .bottom)
+            })
+        }
+    }
+}
+
 struct ChatViewNavigationBar: View {
     
     @EnvironmentObject private var navigationRouter: NavigationRouter
@@ -223,8 +316,14 @@ struct ChatItem: View {
     
     @EnvironmentObject private var store: AppStore
     
-    let dm: LocalDirectMessage
+//    let dm: LocalDirectMessage
     let chatDirection: ChatDirection
+    
+    let profileImage: String?
+    let chatTime: String
+    let nickname: String
+    let content: String?
+    let files: [String]
     
     private let screenWidth = UIScreen.main.bounds.width
     
@@ -232,7 +331,7 @@ struct ChatItem: View {
         HStack(alignment: .top) {
             if chatDirection == .left {
                 RemoteImage(
-                    path: dm.user?.profileImage,
+                    path: profileImage,
                     imageView: { image in
                         image
                             .resizable()
@@ -263,7 +362,7 @@ struct ChatItem: View {
                 
                 Spacer()
                 
-                Text(dm.createdAt.toChatTime)
+                Text(chatTime)
                     .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)
@@ -272,17 +371,17 @@ struct ChatItem: View {
             VStack(alignment: chatDirection == .left ? .leading : .trailing) {
                 
                 if chatDirection == .left {
-                    Text(dm.user?.nickname ?? "")
+                    Text(nickname)
                         .font(.caption)
                         .foregroundStyle(.textPrimary)
                 }
                 
-                if let content = dm.content, !(content.isEmpty && dm.files.count > 0) {
+                if let content = content, !(content.isEmpty && files.count > 0) {
                     Text(content)
                         .font(.body)
                         .foregroundStyle(.textPrimary)
                         .padding(8)
-                        .background(dm.user?.userId == store.state.user?.userId ? .yellow.opacity(0.4) : .backgroundSecondary)
+                        .background(chatDirection == .left ? .backgroundSecondary :  .yellow.opacity(0.4))
                         .cornerRadius(8, corners: .allCorners)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
@@ -292,10 +391,10 @@ struct ChatItem: View {
                 }
                 
                 // TODO: - 개수별 이미지 표시 레이아웃 구성
-                if dm.files.count > 0 {
+                if files.count > 0 {
                     Group {
                         RemoteImage(
-                            path: dm.files[0],
+                            path: files[0],
                             imageView: { image in
                                 image
                                     .resizable()
@@ -319,7 +418,7 @@ struct ChatItem: View {
             }
             
             if chatDirection == .left {
-                Text(dm.createdAt.toChatTime)
+                Text(chatTime)
                     .font(.caption2)
                     .foregroundStyle(.textSecondary)
                     .frame(maxHeight: .infinity, alignment: .bottom)

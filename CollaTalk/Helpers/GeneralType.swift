@@ -8,4 +8,5 @@
 import Foundation
 
 typealias groupdDMsType = [(chatDate: String, dms: [LocalDirectMessage])]
+typealias groupdChannelChatsType = [(chatDate: String, dms: [LocalChannelChat])]
 

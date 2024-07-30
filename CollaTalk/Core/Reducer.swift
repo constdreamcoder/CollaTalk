@@ -27,6 +27,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             break
         case .moveToDMTab:
             mutatingState.tabState.currentTab = .dm
+        case .moveToHomeTab:
+            mutatingState.tabState.currentTab = .home
         }
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
@@ -329,7 +331,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.dmRooms = dmRooms
         
             mutatingState.navigationState.isSidebarVisible = false
-            
+                        
         case .deleteWorkspace(let workspace):
             mutatingState.isLoading = true
         case .selectWorkspace(let workspace):
@@ -345,7 +347,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
             mutatingState.workspaceState.selectedWorkspace = workspaces.first
-        case .setChatView(let chatRoom, let dms):
+        case .setDMChatView(let chatRoom, let dms):
             mutatingState.isLoading = false
             
             mutatingState.dmState.dmRoom = chatRoom
@@ -354,6 +356,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.networkCallSuccessType = .chatView
         case .setNone: break
+        case .setChannelChatView(let channel, let channelChats):
+            mutatingState.isLoading = false
+            
+            mutatingState.channelState.channel = channel
+            mutatingState.channelState.channelChats = channelChats
+            mutatingState.channelState.channelChatCount = channelChats.count
+            
+            mutatingState.networkCallSuccessType = .chatView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -605,6 +615,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .updateDirectMessages(let dms):
             mutatingState.dmState.dms = dms
             mutatingState.dmState.dmCount += 1
+        }
+    case .channelAction(let channelAction):
+        switch channelAction {
+        case .fetchChannelChats(let chatRoomType, let channel):
+            mutatingState.isLoading = true
+            
+            mutatingState.chatState.chatRoomType = chatRoomType
+            mutatingState.channelState.channel = channel
         }
     }
     return mutatingState

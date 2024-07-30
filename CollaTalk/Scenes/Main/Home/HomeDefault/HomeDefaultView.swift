@@ -61,6 +61,10 @@ struct HomeCell: View {
                     case .channel:
                         ForEach(store.state.workspaceState.myChannels, id: \.channelId) { channel in
                             MyChannelCellContent(channel: channel)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    store.dispatch(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: channel)))
+                                }
                         }
                         
                         AddNewCellView(contentType: .channel)

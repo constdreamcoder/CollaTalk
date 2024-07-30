@@ -25,6 +25,7 @@ enum AppAction {
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case inviteMemeberAction(InviteMemeberAction)
     case dmAction(DMAction)
+    case channelAction(ChannelAction)
     case chatAction(ChatAction)
     
     enum LoadingAction {
@@ -35,7 +36,8 @@ enum AppAction {
         case setStartView
         case setHomeEmptyView
         case setHomeDefaultView(workspaces: [Workspace])
-        case setChatView(chatRoom: DMRoom, dms: groupdDMsType)
+        case setDMChatView(chatRoom: DMRoom, dms: groupdDMsType)
+        case setChannelChatView(channel: Channel, channelChats: groupdChannelChatsType)
         case setNone
     }
     
@@ -77,6 +79,7 @@ enum AppAction {
     }
     
     enum TabAction {
+        case moveToHomeTab
         case moveToDMTabWithNetowrkCall
         case moveToDMTab
     }
@@ -134,6 +137,10 @@ enum AppAction {
         case completeConfigrationDMView(workspaceMembers: [WorkspaceMember], dmRooms: [LocalDMRoom])
         case dmError(Error)
         case createOrFetchChatRoom(chatRoomType: ChatRoomType, opponent: WorkspaceMember)
+    }
+    
+    enum ChannelAction {
+        case fetchChannelChats(chatRoomType: ChatRoomType, channel: Channel)
     }
     
     enum ChatAction {

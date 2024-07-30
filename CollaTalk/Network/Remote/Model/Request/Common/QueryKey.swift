@@ -8,7 +8,7 @@
 import Foundation
 
 enum QueryKey {
-    // MARK: - DMService
+    // MARK: - DMService, ChannelService
     static let cursorDate = "cursor_date"
     static let after = "after"
 }

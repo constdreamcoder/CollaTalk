@@ -33,7 +33,7 @@ extension LocalDMRoomRepository {
     
     /// 새로운 DM 생성
     func write(_ chatRoom: DMRoom) {
-        let localWorkspaceMemeber = LocalWorkspaceMember(
+        let localWorkspaceMember = LocalWorkspaceMember(
             userId: chatRoom.user.userId,
             email: chatRoom.user.email,
             nickname: chatRoom.user.nickname,
@@ -43,7 +43,7 @@ extension LocalDMRoomRepository {
         let localDMRoom = LocalDMRoom(
             roomId: chatRoom.roomId,
             createdAt: chatRoom.createdAt,
-            opponent: localWorkspaceMemeber
+            opponent: localWorkspaceMember
         )
         
         super.write(localDMRoom)
@@ -115,7 +115,6 @@ extension LocalDMRoomRepository {
     /// 새로운 DM 목록 업데이트
     func updateDMs(_ dmList: [LocalDirectMessage], roomId: String) {
         guard let dmRoom = findOne(roomId) else { return }
-                
         
         do {
             let realm = try Realm()

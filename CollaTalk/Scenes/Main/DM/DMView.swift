@@ -18,6 +18,9 @@ struct DMView: View {
                 DMListView()
             } else {
                 DMEmptyView()
+                    .onAppear {
+                        store.dispatch(.dmAction(.refresh))
+                    }
             }
         }
     }

@@ -145,6 +145,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             
         case .moveToDMTab:
             break
+        case .moveToHomeTab:
+            break
         }
         
     case .alertAction(let alertAction):
@@ -166,8 +168,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             if workspaces.count > 0 {
                 return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
             }
-        case .setChatView: break
+        case .setDMChatView: break
         case .setNone: break
+        case .setChannelChatView: break
         }
         
     case .navigationAction(let navigationAction):
@@ -481,6 +484,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
+                        
                         guard let workspace = state.workspaceState.selectedWorkspace else { return }
                         
                         /// 로그인한 유저가 속한 채널 목록 조회
@@ -490,11 +494,23 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         let channelsResult = try await myChannels
                         let dmRoomsResult = try await dms
-                        
+
                         guard let channelsResult, let dmRoomsResult else { return }
+                        
+                        /// 각 channel 로컬(Realm)에 저장
+                        let convertedChannel = channelsResult.map {
+                            if let existingChannel = LocalChannelRepository.shared.findOne($0.channelId) {
+                                return existingChannel
+                            } else {
+                                return $0.convertToLocalChannel
+                            }
+                        }
+                        
+                        LocalChannelRepository.shared.updateChannelList(convertedChannel)
                         
                         guard dmRoomsResult.count > 0
                         else {
+                            
                             promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dmRooms: []))))
                             return
                         }
@@ -507,6 +523,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 return $0.convertToLocalDMRoom
                             }
                         }
+                        
                         LocalDMRoomRepository.shared.updateDMRoomList(convertedDMRooms)
                         
                         /// 각 DM 방 읽지 않은 채팅 개수 조회 병렬 처리
@@ -539,6 +556,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         }
                         
                         DispatchQueue.main.async {
+                            
                             let updatedDmRooms: [LocalDMRoom] = LocalDMRoomRepository.shared.localDMRoomsSortedByDescending
                             
                             promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dmRooms: updatedDmRooms))))
@@ -717,11 +735,11 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                     let sortedGroupedDMs: groupdDMsType = groupedDM.keys.sorted().map { key in (key, groupedDM[key]!) }
                                     
                                     /// 소켓 연결
-                                    SocketIOManager.shared.setupSocketEventListeners(dmRoom.roomId)
+                                    SocketIOManager.shared.setupSocketEventListeners(.dm(roomId: dmRoom.roomId))
                                     SocketIOManager.shared.establishConnection()
                                                                         
                                     /// DM 채팅방으로 이동
-                                    promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom, dms: sortedGroupedDMs))))
+                                    promise(.success(.networkCallSuccessTypeAction(.setDMChatView(chatRoom: dmRoom, dms: sortedGroupedDMs))))
                                 }
                                 return
                             }
@@ -746,11 +764,11 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 let sortedGroupedDMs: groupdDMsType = groupedDM.keys.sorted().map { key in (key, groupedDM[key]!) }
                                 
                                 /// 소켓 연결
-                                SocketIOManager.shared.setupSocketEventListeners(dmRoom.roomId)
+                                SocketIOManager.shared.setupSocketEventListeners(.dm(roomId: dmRoom.roomId))
                                 SocketIOManager.shared.establishConnection()
                                 
                                 /// 채팅화면으로 이동
-                                promise(.success(.networkCallSuccessTypeAction(.setChatView(chatRoom: dmRoom, dms: sortedGroupedDMs))))
+                                promise(.success(.networkCallSuccessTypeAction(.setDMChatView(chatRoom: dmRoom, dms: sortedGroupedDMs))))
                             }
                         } catch {
                             promise(.success(.dmAction(.dmError(error))))
@@ -838,7 +856,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     guard newImages.count > 0 else { return }
                     promise(.success(.chatAction(.appendNewImages(newImages: newImages))))
                 }
-                
             }.eraseToAnyPublisher()
         case .appendNewImages(let newImages):
             break
@@ -871,6 +888,77 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .updateDirectMessages(let dms):
             break
+        }
+    case .channelAction(let channelAction):
+        switch channelAction {
+        case .fetchChannelChats(let chatRoomType, let channel):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                        
+                        let lastChannelChatInLocal = LocalChannelRepository.shared.findOne(channel.channelId)?.lastChat
+                        
+                        let channelChats = try await ChannelProvider.shared.fetchChannelChats(
+                            workspaceID: workspace.workspaceId,
+                            channelID: channel.channelId,
+                            cursorDate: lastChannelChatInLocal?.createdAt
+                        )
+                        
+                        guard let channelChats = channelChats, channelChats.count > 0 else {
+                            DispatchQueue.main.async {
+                                /// 기존 채널 채팅 기록 조회
+                                let existingLocalChannelChats: [LocalChannelChat] =
+                                LocalChannelChatRepository.shared.read().filter { $0.channelId == channel.channelId }
+                                
+                                /// 채널 채팅 기록 날짜별 그룹화
+                                let groupedChannelChat = Dictionary(grouping: existingLocalChannelChats) { channelChat -> String in
+                                    return channelChat.createdAt.toChatDate
+                                }
+                                let sortedGroupedChannelChats: groupdChannelChatsType = groupedChannelChat.keys.sorted().map { key in (key, groupedChannelChat[key]!) }
+                                
+                                /// 소켓 연결
+                                SocketIOManager.shared.setupSocketEventListeners(.channel(channelId: channel.channelId))
+                                SocketIOManager.shared.establishConnection()
+                                                                    
+                                /// DM 채팅방으로 이동
+                                promise(.success(.networkCallSuccessTypeAction(.setChannelChatView(channel: channel, channelChats: sortedGroupedChannelChats))))
+                            }
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            /// 새로 추가된 채널 채팅 로컬 DB(Realm)에 추가
+                            let latestChannelChatList: [LocalChannelChat] = channelChats.map {
+                                let convertedChannelChat = $0.convertToLocalChannelChat
+                                let sender = LocalWorkspaceMemberRepository.shared.findOne(convertedChannelChat.sender?.userId ?? "" )
+                                convertedChannelChat.sender = sender
+                                return convertedChannelChat
+                            }
+                            LocalChannelRepository.shared.updateChannelChats(latestChannelChatList, channelId: channel.channelId)
+                            
+                            /// 최신 채널 채팅 기록 조회
+                            let updatedLocalChannelChats: [LocalChannelChat] = LocalChannelChatRepository.shared.read().filter { $0.channelId == channel.channelId }
+                            
+                            /// 채널 채팅 기록 날짜별 그룹화
+                            let groupedChannelChat = Dictionary(grouping: updatedLocalChannelChats) { channelChat -> String in
+                                return channelChat.createdAt.toChatDate
+                            }
+                            let sortedGroupedChannelChats: groupdChannelChatsType = groupedChannelChat.keys.sorted().map { key in (key, groupedChannelChat[key]!) }
+                            
+                            /// 소켓 연결
+                            SocketIOManager.shared.setupSocketEventListeners(.channel(channelId: channel.channelId))
+                            SocketIOManager.shared.establishConnection()
+                            
+                            /// 채팅화면으로 이동
+                            promise(.success(.networkCallSuccessTypeAction(.setChannelChatView(channel: channel, channelChats: sortedGroupedChannelChats))))
+                        }
+                    } catch {
+                        print("error", error)
+                        return
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     }
     
