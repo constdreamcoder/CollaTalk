@@ -17,6 +17,7 @@ struct SheetNavigation: View {
         case editWorkspace = "워크스페이스 편집"
         case changeWorkspaceOwner = "워크스페이스 관리자 변경"
         case inviteMember = "팀원 초대"
+        case createNewChannel = "채널 생성"
     }
     
     let title: Feature

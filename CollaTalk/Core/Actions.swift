@@ -24,6 +24,7 @@ enum AppAction {
     case alertAction(AlertAction)
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case inviteMemeberAction(InviteMemeberAction)
+    case createNewChannelAction(CreateNewChannelAction)
     case dmAction(DMAction)
     case channelAction(ChannelAction)
     case chatAction(ChatAction)
@@ -49,6 +50,7 @@ enum AppAction {
         case showImagePickerView(show: Bool)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
         case presentInviteMemeberView(present: Bool)
+        case presentCreateNewChannelView(present: Bool)
     }
     
     enum LoginAction {
@@ -130,6 +132,12 @@ enum AppAction {
         case inviteMemberError(Error)
         case isValid(isEmailValid: Bool)
         case showToastMessageForNoRightToInviteMember
+    }
+    
+    enum CreateNewChannelAction {
+        case writeName(name: String)
+        case writeDescription(description: String)
+        case createNewChannel
     }
     
     enum DMAction {

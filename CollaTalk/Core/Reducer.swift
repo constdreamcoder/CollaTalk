@@ -71,6 +71,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
         case .presentInviteMemeberView(let present):
             mutatingState.navigationState.isInviteMemeberViewPresented = present
+        case .presentCreateNewChannelView(let present):
+            mutatingState.navigationState.isCreateNewChannelViewPresented = present
         }
         
     case .loginAction(let loginAction):
@@ -666,6 +668,17 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 }
             }
+        }
+    case .createNewChannelAction(let createNewChannelAction):
+        switch createNewChannelAction {
+       
+        case .writeName(let name):
+            mutatingState.createNewChannel.channelName = name
+            mutatingState.createNewChannel.isChannelNameEmpty = name.isEmpty
+        case .writeDescription(let description):
+            mutatingState.createNewChannel.channelDescription = description
+        case .createNewChannel:
+            mutatingState.isLoading = true
         }
     }
     return mutatingState

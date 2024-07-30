@@ -11,10 +11,12 @@ struct HomeDefaultView: View {
     
     @EnvironmentObject private var store: AppStore
     
+    @State private var isDialogPresented: Bool = false
+    
     var body: some View {
         ScrollView {
             ForEach(HomeContentType.allCases, id: \.title) { contentType in
-                HomeCell(homeContentType: contentType)
+                HomeCell(isDialogPresented: $isDialogPresented, homeContentType: contentType)
             }
             AddNewCellView(contentType: .teamMember)
                 .contentShape(Rectangle())
@@ -33,6 +35,13 @@ struct HomeDefaultView: View {
         .overlay(alignment: .bottomTrailing) {
             NewMessageButton()
         }
+        .confirmationDialog("", isPresented: $isDialogPresented) {
+            Button("채널 생성", role: .none) {
+                store.dispatch(.navigationAction(.presentCreateNewChannelView(present: true)))
+            }
+            Button("채널 탐색", role: .none) {}
+            Button("취소", role: .cancel) {}
+        }
     }
 }
 
@@ -43,8 +52,9 @@ struct HomeDefaultView: View {
 
 struct HomeCell: View {
     
-    @EnvironmentObject private var store: AppStore
+    @Binding var isDialogPresented: Bool
     
+    @EnvironmentObject private var store: AppStore
     @State private var isExpanded: Bool = false
     let homeContentType: HomeContentType
     
@@ -68,6 +78,10 @@ struct HomeCell: View {
                         }
                         
                         AddNewCellView(contentType: .channel)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                isDialogPresented = true
+                            }
                     case .directMessage:
                         ForEach(store.state.workspaceState.dmRooms, id: \.roomId) { dmRoom in
                             DMRoomCellContent(dmRoom: dmRoom)

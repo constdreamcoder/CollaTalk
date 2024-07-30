@@ -66,7 +66,15 @@ struct ContentView: View {
                     set: { store.dispatch(.navigationAction(.presentInviteMemeberView(present: $0))) }
                 )
             ) {
-                    InviteMemberView()
+                InviteMemberView()
+            }
+            .sheet(
+                isPresented: Binding(
+                    get: { store.state.navigationState.isCreateNewChannelViewPresented },
+                    set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
+                )
+            ) {
+                CreateNewChannelView()
             }
             .navigationDestination(for: PathType.self) { path in
                 Group {

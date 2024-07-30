@@ -191,6 +191,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }
         case .presentInviteMemeberView(let present):
             break
+        case .presentCreateNewChannelView(let present):
+            break
         }
         
     case .loginAction(let loginAction):
@@ -1140,6 +1142,14 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .channelError(let error):
+            break
+        }
+    case .createNewChannelAction(let createNewChannelAction):
+        switch createNewChannelAction {
+        case .writeName(let name): break
+        case .writeDescription(let description): break
+        case .createNewChannel:
+            // TODO: - 채널 생성 기능 구현
             break
         }
     }

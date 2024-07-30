@@ -24,6 +24,7 @@ struct AppState {
     var workspaceState = WorkspaceState()
     var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
     var inviteMemberState = InviteMemberState()
+    var createNewChannel = CreateNewChannelState()
     var dmState = DMState()
     var chatState = ChatState()
     var channelState = ChannelState()
@@ -37,6 +38,7 @@ struct AppState {
         var showImagePicker: Bool = false
         var isChangeWorkspaceOwnerViewPresented: Bool = false
         var isInviteMemeberViewPresented: Bool = false
+        var isCreateNewChannelViewPresented: Bool = false
     }
    
     struct LoginState {
@@ -105,6 +107,13 @@ struct AppState {
         var email: String = ""
         var isEmailEmpty: Bool = true
     }
+    
+    struct CreateNewChannelState {
+        var channelName: String = ""
+        var isChannelNameEmpty: Bool = true
+        var channelDescription: String = ""
+    }
+    
     /// DM 화면 데이터
     struct DMState {
         var opponent: WorkspaceMember? = nil

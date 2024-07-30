@@ -19,6 +19,7 @@
 		000F40082C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40072C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift */; };
 		000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */; };
 		000F400C2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */; };
+		000F400F2C58DA3200FF87BF /* CreateNewChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002066F12C3E971D007E76BD /* ToastMessage.swift */; };
@@ -187,6 +188,7 @@
 		000F40072C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelQuery.swift; sourceTree = "<group>"; };
 		000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadChannelChatCount.swift; sourceTree = "<group>"; };
 		000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelChatsError.swift; sourceTree = "<group>"; };
+		000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelView.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		002066F12C3E971D007E76BD /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -355,6 +357,14 @@
 				000F40012C588AC300FF87BF /* SendChannelChatRequest.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		000F400D2C58DA1E00FF87BF /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */,
+			);
+			path = Channel;
 			sourceTree = "<group>";
 		};
 		0018096B2C46A7B200F41D50 /* RemoteImage */ = {
@@ -552,6 +562,7 @@
 				00F1B6972C438F2400E7EA56 /* Workspace */,
 				00F47A3E2C4E415A0095EB4E /* DM */,
 				00F47A4C2C4E9F4F0095EB4E /* Chat */,
+				000F400D2C58DA1E00FF87BF /* Channel */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1318,6 +1329,7 @@
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 				00ED9E032C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift in Sources */,
 				006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */,
+				000F400F2C58DA3200FF87BF /* CreateNewChannelView.swift in Sources */,
 				006C32FD2C53E06C0084C4E2 /* UnreadDMCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
