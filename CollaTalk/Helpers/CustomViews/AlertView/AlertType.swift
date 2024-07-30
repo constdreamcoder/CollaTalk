@@ -14,6 +14,7 @@ enum AlertType {
     case deleteWorkspace
     case unableToChangeWorkspaceOwner
     case changeWorkspaceOwner(newOwner: String)
+    case joinChannel(channelName: String)
     case none
         
     var title: String {
@@ -28,6 +29,8 @@ enum AlertType {
             return "\(newOwner) 님을 관리자로 지정하시겠습니까?"
         case .none:
             return ""
+        case .joinChannel:
+            return "채널 참여"
         }
     }
     
@@ -48,6 +51,8 @@ enum AlertType {
                     · 워크스페이스 삭제
                     · 워크스페이스 멤버 초대
                     """
+        case .joinChannel(let channelName):
+            return "[\(channelName)] 채널에 참여하시겠습니까?"
         case .none:
             return ""
         }
@@ -57,7 +62,7 @@ enum AlertType {
         switch self {
         case .leavetWorkspaceAsAMember:
             return "나가기"
-        case .leaveWorkspaceAsAnOwner, .unableToChangeWorkspaceOwner, .changeWorkspaceOwner:
+        case .leaveWorkspaceAsAnOwner, .unableToChangeWorkspaceOwner, .changeWorkspaceOwner, .joinChannel:
             return "확인"
         case .deleteWorkspace:
             return "삭제"
@@ -72,6 +77,8 @@ extension AlertType: Equatable {
         switch (lhs, rhs) {
         case (.changeWorkspaceOwner(let lhsNewOwner), .changeWorkspaceOwner(let rhsNewOwner)):
             return !(lhsNewOwner == rhsNewOwner)
+        case (.joinChannel(let lhsChannelName), .joinChannel(let rhsChannelName)):
+            return !(lhsChannelName == rhsChannelName)
         default: return !(lhs == rhs)
         }
     }

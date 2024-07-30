@@ -176,5 +176,7 @@ enum AppAction {
     enum SearchChannelAction {
         case fetchAllChannels
         case SearchChannelError(Error)
+        case compareIfMember(selectedChannel: Channel, confirmAction: (() -> Void)? = nil)
+        case dismissSearchChannelViewAndMoveToChannelChatView(selectedChannel: Channel)
     }
 }

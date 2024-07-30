@@ -1196,6 +1196,31 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .SearchChannelError(let error):
             break
+        case .compareIfMember(let selectedChannel, let confirmAction):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let myChannels = try await WorkspaceProvider.shared.fetchMyChannels(
+                            workspaceID: state.workspaceState.selectedWorkspace?.workspaceId ?? ""
+                        )
+                        
+                        guard let myChannels else { return }
+                        
+                        /// 유저가 속한 채널인지 확인
+                        if myChannels.contains(where: { $0.channelId == selectedChannel.channelId }) {
+                            promise(.success(.searchChannelAction(.dismissSearchChannelViewAndMoveToChannelChatView(selectedChannel: selectedChannel))))
+                        } else {
+                            guard let confirmAction else { return }
+                            promise(.success(.alertAction(.showAlert(alertType: .joinChannel(channelName: selectedChannel.name), confirmAction: confirmAction))))
+                        }
+                        
+                    } catch {
+                        promise(.success(.searchChannelAction(.SearchChannelError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .dismissSearchChannelViewAndMoveToChannelChatView(let selectedChannel):
+            return Just(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: selectedChannel))).eraseToAnyPublisher()
         }
     }
     

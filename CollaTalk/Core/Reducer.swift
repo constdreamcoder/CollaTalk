@@ -757,6 +757,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 }
             }
+        case .compareIfMember(let selectedChannel, let confirmAction):
+            mutatingState.isLoading = true
+        case .dismissSearchChannelViewAndMoveToChannelChatView(let selectedChannel):
+            mutatingState.isLoading = false
+            
+            mutatingState.navigationState.isSearchChannelViewPresented = false
         }
     }
     return mutatingState

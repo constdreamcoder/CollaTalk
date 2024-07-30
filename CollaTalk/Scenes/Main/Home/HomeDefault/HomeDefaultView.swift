@@ -40,7 +40,6 @@ struct HomeDefaultView: View {
                 store.dispatch(.navigationAction(.presentCreateNewChannelView(present: true)))
             }
             Button("채널 탐색", role: .none) {
-//                store.dispatch(.navigationAction(.presentSearchChannelView(present: true)))
                 store.dispatch(.searchChannelAction(.fetchAllChannels))
             }
             Button("취소", role: .cancel) {}

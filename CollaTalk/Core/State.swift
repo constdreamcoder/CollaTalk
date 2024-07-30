@@ -140,5 +140,6 @@ struct AppState {
     
     struct SearchChannelState {
         var allChannels: [Channel] = []
+        var isAlreadyJoined: Bool = false
     }
 }

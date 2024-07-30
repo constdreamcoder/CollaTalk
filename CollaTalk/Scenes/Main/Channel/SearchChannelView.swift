@@ -40,6 +40,20 @@ struct SearchChannelView: View {
                         .font(.bodyBold)
                         .foregroundStyle(.textPrimary)
                         .listRowSeparator(.hidden)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            store.dispatch(
+                                .searchChannelAction(
+                                    .compareIfMember(
+                                        selectedChannel: channel,
+                                        confirmAction: {
+                                            print("채널 가입")
+                                            store.dispatch(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: channel)))
+                                        }
+                                    )
+                                )
+                            )
+                        }
                     }
                 }
                 .listStyle(.plain)
