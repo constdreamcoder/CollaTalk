@@ -23,6 +23,10 @@ struct CollaTalkApp: App {
             ContentView()
                 .environmentObject(store)
                 .environmentObject(windowProvider)
+                .onAppear {
+                    print(">>>>>>>>>>>>>>>>>>>>>>>>")
+                    LocalChannelRepository.shared.getLocationOfDefaultRealm()
+                }
         }
     }
 }

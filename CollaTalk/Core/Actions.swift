@@ -148,6 +148,7 @@ enum AppAction {
         case initializeAllElements
         case sendDirectMessage
         case completeSendDMAction
+        case completeSendChannelChatAction
         case writeMessage(message: String)
         case appendNewImages(newImages: [UIImage])
         case removeSelectedImage(image: UIImage)

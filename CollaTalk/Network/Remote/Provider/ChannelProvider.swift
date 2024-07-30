@@ -39,5 +39,30 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         return nil
     }
     
+    func sendChannelChat(workspaceID: String, channelID: String, message: String?, files: [ImageFile]?) async throws -> ChannelChat? {
+        do {
+            let sendChannelChatParams = SendChannelChatParams(channelID: channelID, workspaceID: workspaceID)
+            let sendChannelChatRequest = SendChannelChatRequest(content: message, files: files)
+            let response = try await request(.sendChannelChat(params: sendChannelChatParams, request: sendChannelChatRequest))
+            switch response.statusCode {
+            case 200:
+                let newChannelChat = try decode(response.data, as: ChannelChat.self)
+                return newChannelChat
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let sendChannelChatError = SendChannelChatError(rawValue: errorCode.errorCode) {
+                    throw sendChannelChatError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+    
 }
 

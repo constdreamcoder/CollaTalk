@@ -615,6 +615,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .updateDirectMessages(let dms):
             mutatingState.dmState.dms = dms
             mutatingState.dmState.dmCount += 1
+        case .completeSendChannelChatAction:
+            mutatingState.isLoading = false
         }
     case .channelAction(let channelAction):
         switch channelAction {

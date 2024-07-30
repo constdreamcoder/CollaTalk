@@ -792,7 +792,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             SocketIOManager.shared.removeAllEventHandlers()
         case .sendDirectMessage:
             return Future<AppAction, Never> { promise in
-                
                 guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
                 
                 let imageFiles = state.chatState.selectedImages.map { image in
@@ -803,22 +802,41 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     )
                 }
                 
-                Task {
-                    do {
-                        /// DM 전송
-                        let newDirectMessage = try await DMProvider.shared.sendDirectMessage(
-                            workspaceID: workspace.workspaceId,
-                            roomID: state.dmState.dmRoom?.roomId ?? "",
-                            message: state.chatState.message,
-                            files: imageFiles
-                        )
-                        
-                        promise(.success(.chatAction(.completeSendDMAction)))
-                        
-                    } catch {
-                        promise(.success(.chatAction(.chatError(error))))
+                if state.chatState.chatRoomType == .dm {
+                    /// DM 전송
+                    Task {
+                        do {
+                            let _ = try await DMProvider.shared.sendDirectMessage(
+                                workspaceID: workspace.workspaceId,
+                                roomID: state.dmState.dmRoom?.roomId ?? "",
+                                message: state.chatState.message,
+                                files: imageFiles
+                            )
+                            
+                            promise(.success(.chatAction(.completeSendDMAction)))
+                        } catch {
+                            promise(.success(.chatAction(.chatError(error))))
+                        }
+                    }
+                } else if state.chatState.chatRoomType == .channel {
+                    /// 채널 채팅 전송
+                    Task {
+                        do {
+                            let newChannelChat = try await ChannelProvider.shared.sendChannelChat(
+                                workspaceID:  workspace.workspaceId,
+                                channelID: state.channelState.channel?.channelId ?? "",
+                                message: state.chatState.message,
+                                files: imageFiles
+                            )
+                                                       
+                            promise(.success(.chatAction(.completeSendChannelChatAction)))
+                            
+                        } catch {
+                            promise(.success(.chatAction(.chatError(error))))
+                        }
                     }
                 }
+                
                 
             }.eraseToAnyPublisher()
         case .writeMessage(let message):
@@ -888,6 +906,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .updateDirectMessages(let dms):
             break
+        case .completeSendChannelChatAction:
+            break
         }
     case .channelAction(let channelAction):
         switch channelAction {
@@ -954,6 +974,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             promise(.success(.networkCallSuccessTypeAction(.setChannelChatView(channel: channel, channelChats: sortedGroupedChannelChats))))
                         }
                     } catch {
+                        // TODO: - 에러 핸들링
                         print("error", error)
                         return
                     }

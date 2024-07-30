@@ -11,12 +11,15 @@ import Moya
 
 enum ChannelService {
     case fetchChannelChats(params: FetchChannelChatsParams, queries: FetchChannelChatsQuery)
+    case sendChannelChat(params: SendChannelChatParams, request: SendChannelChatRequest)
 }
 
 extension ChannelService: BaseService {
     var path: String {
         switch self {
         case .fetchChannelChats(let params, _):
+            return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/chats"
+        case .sendChannelChat(let params, _):
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/chats"
         }
     }
@@ -25,6 +28,8 @@ extension ChannelService: BaseService {
         switch self {
         case .fetchChannelChats:
             return .get
+        case .sendChannelChat:
+            return .post
         }
     }
     
@@ -35,6 +40,26 @@ extension ChannelService: BaseService {
                 parameters: [QueryKey.cursorDate: queries.cursorDate ?? ""],
                 encoding: URLEncoding.default
             )
+        case .sendChannelChat(_, let request):
+            
+            var multipartList: [MultipartFormData] = [
+                MultipartFormData(
+                    provider: .data(request.content?.data(using: .utf8) ?? Data()),
+                    name: MultiPartFormKey.content
+                )
+            ]
+            
+            let imageFilesMultipart: [MultipartFormData] = request.files?.map { imageFile in
+                MultipartFormData(
+                    provider: .data(imageFile.imageData),
+                    name: MultiPartFormKey.files,
+                    fileName: imageFile.name,
+                    mimeType: imageFile.mimeType.rawValue
+                )
+            } ?? []
+            
+            multipartList = multipartList + imageFilesMultipart
+            return .uploadMultipart(multipartList)
         }
     }
 }
