@@ -138,6 +138,9 @@ enum AppAction {
         case writeName(name: String)
         case writeDescription(description: String)
         case createNewChannel
+        case createNewChannelError(Error)
+        case returnToHomeView
+        case nameValidationError
     }
     
     enum DMAction {

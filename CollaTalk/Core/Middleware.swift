@@ -1070,13 +1070,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
-                        print("13")
                         guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
                         
-                        print("14")
                         let lastChannelChatInLocal = LocalChannelChatRepository.shared.findLastestChannelChat(channel.channelId)
                         
-                        print("15")
                         let channelChats = try await ChannelProvider.shared.fetchChannelChats(
                             workspaceID: workspace.workspaceId,
                             channelID: channel.channelId,
@@ -1149,7 +1146,32 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeName(let name): break
         case .writeDescription(let description): break
         case .createNewChannel:
-            // TODO: - 채널 생성 기능 구현
+            return Future<AppAction, Never> { promise in
+                guard ValidationCheck.channelName(input: state.createNewChannel.channelName).validation 
+                else {
+                    promise(.success(.createNewChannelAction(.nameValidationError)))
+                    return
+                }
+                guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                Task {
+                    do {
+                        let newChannel = try await ChannelProvider.shared.createNewChannel(
+                            workspaceID: workspace.workspaceId,
+                            name: state.createNewChannel.channelName,
+                            description: state.createNewChannel.channelDescription
+                        )
+                        
+                        promise(.success(.createNewChannelAction(.returnToHomeView)))
+                    } catch {
+                        promise(.success(.createNewChannelAction(.createNewChannelError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .createNewChannelError(let error):
+            break
+        case .returnToHomeView:
+            return Just(.homeAction(.refresh)).eraseToAnyPublisher()
+        case .nameValidationError:
             break
         }
     }

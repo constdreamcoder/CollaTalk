@@ -9,7 +9,7 @@ import Foundation
 
 enum MultiPartFormKey {
     
-    // MARK: - WorkspaceService
+    // MARK: - WorkspaceService, ChannelService
     static let name = "name"
     static let description = "description"
     static let image = "image"

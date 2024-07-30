@@ -333,7 +333,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.dmRooms = dmRooms
         
             mutatingState.navigationState.isSidebarVisible = false
-                        
+                                    
         case .deleteWorkspace(let workspace):
             mutatingState.isLoading = true
         case .selectWorkspace(let workspace):
@@ -671,7 +671,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         }
     case .createNewChannelAction(let createNewChannelAction):
         switch createNewChannelAction {
-       
         case .writeName(let name):
             mutatingState.createNewChannel.channelName = name
             mutatingState.createNewChannel.isChannelNameEmpty = name.isEmpty
@@ -679,6 +678,50 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.createNewChannel.channelDescription = description
         case .createNewChannel:
             mutatingState.isLoading = true
+        case .createNewChannelError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? CreateNewChannelError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.createNewChannel(.duplicatedData).message
+                    mutatingState.showToast = true
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
+        case .returnToHomeView:
+            mutatingState.isLoading = false
+            
+            mutatingState.navigationState.isCreateNewChannelViewPresented = false
+            
+            mutatingState.toastMessage = ToastMessage.createNewChannel(.successToCreate).message
+            mutatingState.showToast = true
+        case .nameValidationError:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.createNewChannel(.nameValidationError).message
+            mutatingState.showToast = true
         }
     }
     return mutatingState

@@ -13,6 +13,7 @@ enum ChannelService {
     case fetchChannelChats(params: FetchChannelChatsParams, query: FetchChannelChatsQuery)
     case sendChannelChat(params: SendChannelChatParams, request: SendChannelChatRequest)
     case fetchUnreadChannelChats(params: FetchUnreadChannelChatsParams, query: FetchUnreadChannelQuery)
+    case createNewChannel(params: CreateNewChannelParams, request: CreateNewChannelRequest)
 }
 
 extension ChannelService: BaseService {
@@ -24,6 +25,8 @@ extension ChannelService: BaseService {
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/chats"
         case .fetchUnreadChannelChats(let params, _):
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/unreads"
+        case .createNewChannel(let params, _):
+            return "/workspaces/\(params.workspaceID)/channels"
         }
     }
     
@@ -31,7 +34,7 @@ extension ChannelService: BaseService {
         switch self {
         case .fetchChannelChats, .fetchUnreadChannelChats:
             return .get
-        case .sendChannelChat:
+        case .sendChannelChat, .createNewChannel:
             return .post
         }
     }
@@ -68,6 +71,30 @@ extension ChannelService: BaseService {
                 parameters: [QueryKey.after: query.after ?? ""],
                 encoding: URLEncoding.default
             )
+        case .createNewChannel(_, let request):
+            var dataMultipart: [MultipartFormData] = [
+                MultipartFormData(
+                    provider: .data(request.name.data(using: .utf8) ?? Data()),
+                    name: MultiPartFormKey.name
+                ),
+                MultipartFormData(
+                    provider: .data(request.description?.data(using: .utf8) ?? Data()),
+                    name: MultiPartFormKey.description
+                )
+            ]
+            
+            let imageFile = request.image
+            let imageFilesMultipart = [
+                MultipartFormData(
+                    provider: .data(imageFile?.imageData ?? Data()),
+                    name: MultiPartFormKey.image,
+                    fileName: imageFile?.name,
+                    mimeType: imageFile?.mimeType.rawValue
+                )
+            ]
+            
+            let multipartList = dataMultipart + imageFilesMultipart
+            return .uploadMultipart(multipartList)
         }
     }
 }

@@ -16,6 +16,7 @@ enum ValidationCheck {
     case phoneNumber(input: String)
     case workspaceName(input: String)
     case workspaceCoverImage(input: Data)
+    case channelName(input: String)
     
     var validation: Bool {
         switch self {
@@ -35,6 +36,8 @@ enum ValidationCheck {
             return isWorkspaceNameValid(workspaceName)
         case .workspaceCoverImage(let workspaceCoverImage):
             return isWorkspaceCoverImageValid(workspaceCoverImage)
+        case .channelName(let channelName):
+            return isChannelName(channelName)
         }
     }
 
@@ -73,5 +76,9 @@ enum ValidationCheck {
     
     private func isWorkspaceCoverImageValid(_ input: Data) -> Bool {
         return input.count > 0
+    }
+    
+    private func isChannelName(_ input: String) -> Bool {
+        return input.count >= 1 && input.count <= 30
     }
 }

@@ -80,6 +80,9 @@
 		0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */; };
 		006064532C523A1A00A6E060 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; };
 		006064542C523A5F00A6E060 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		006A9EC52C58E1790068AF32 /* CreateNewChannelParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */; };
+		006A9EC72C58E1880068AF32 /* CreateNewChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */; };
+		006A9EC92C58E5280068AF32 /* CreateNewChannelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */; };
 		006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */; };
 		006C32EA2C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32E92C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift */; };
 		006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006C32EB2C535DF20084C4E2 /* BaseRepository.swift */; };
@@ -246,6 +249,9 @@
 		006064482C522F0100A6E060 /* SendDirectMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageRequest.swift; sourceTree = "<group>"; };
 		0060644A2C52337400A6E060 /* DirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessage.swift; sourceTree = "<group>"; };
 		0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageError.swift; sourceTree = "<group>"; };
+		006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelParams.swift; sourceTree = "<group>"; };
+		006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelRequest.swift; sourceTree = "<group>"; };
+		006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelError.swift; sourceTree = "<group>"; };
 		006C32E72C53436B0084C4E2 /* LocalDMRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoomRepository.swift; sourceTree = "<group>"; };
 		006C32E92C535AF90084C4E2 /* LocalWorkspaceMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMemberRepository.swift; sourceTree = "<group>"; };
 		006C32EB2C535DF20084C4E2 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
@@ -355,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				000F40012C588AC300FF87BF /* SendChannelChatRequest.swift */,
+				006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -417,6 +424,7 @@
 				000F3FFE2C588A8500FF87BF /* SendChannelChatParams.swift */,
 				00292E602C57D66E00D19AB5 /* FetchChannelChatsParams.swift */,
 				000F40052C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift */,
+				006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */,
 			);
 			path = Paramas;
 			sourceTree = "<group>";
@@ -436,6 +444,7 @@
 				00292E692C57DDEA00D19AB5 /* FetchChannelChatsError.swift */,
 				000F40032C588CDA00FF87BF /* SendChannelChatError.swift */,
 				000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */,
+				006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -1273,6 +1282,7 @@
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
+				006A9EC72C58E1880068AF32 /* CreateNewChannelRequest.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
 				00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
@@ -1289,6 +1299,7 @@
 				00436E9B2C440F8C009FDB71 /* ImagePickerView.swift in Sources */,
 				00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */,
 				00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */,
+				006A9EC92C58E5280068AF32 /* CreateNewChannelError.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
@@ -1297,6 +1308,7 @@
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
 				006C32F12C5385B00084C4E2 /* FetchDMHistoryQuery.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
+				006A9EC52C58E1790068AF32 /* CreateNewChannelParams.swift in Sources */,
 				006C32EC2C535DF20084C4E2 /* BaseRepository.swift in Sources */,
 				00F47A352C4E15020095EB4E /* InviteMemberView.swift in Sources */,
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,

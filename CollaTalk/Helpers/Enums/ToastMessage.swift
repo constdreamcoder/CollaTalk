@@ -18,6 +18,7 @@ enum ToastMessage: ToastMessageType {
     case changeWorkspaceOwner(ChangeWorkspaceOwner)
     case inviteMemeber(InviteMember)
     case downloadImage(DownloadImage)
+    case createNewChannel(CreateNewChannel)
     
     var message: String {
         switch self {
@@ -33,6 +34,8 @@ enum ToastMessage: ToastMessageType {
             return inviteMember.message
         case .downloadImage(let downloadImage):
             return downloadImage.message
+        case .createNewChannel(let createNewChannel):
+            return createNewChannel.message
         }
     }
     
@@ -162,6 +165,23 @@ enum ToastMessage: ToastMessageType {
                 return "네트워크가 불안정합니다."
             case .imageCapacityLimit:
                 return "크키가 1MB이하인 이미지만 업로드 가능합니다."
+            }
+        }
+    }
+    
+    enum CreateNewChannel: ToastMessageType {
+        case duplicatedData
+        case successToCreate
+        case nameValidationError
+        
+        var message: String {
+            switch self {
+            case .duplicatedData:
+                return "워크스페이스에 이미 있는 채널 이름입니다. 다른 이름을 입력해주세요. "
+            case .successToCreate:
+                return "채널이 생성되었습니다."
+            case .nameValidationError:
+                return "채널명은 1~30자까지만 가능합니다."
             }
         }
     }

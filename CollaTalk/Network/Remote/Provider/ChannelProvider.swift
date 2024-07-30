@@ -88,4 +88,29 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         
         return nil
     }
+    
+    func createNewChannel(workspaceID: String, name: String, description: String?) async throws -> Channel? {
+        do {
+            let createNewChannelParams = CreateNewChannelParams(workspaceID: workspaceID)
+            let createNewChannelRequest = CreateNewChannelRequest(name: name, description: description, image: nil)
+            let response = try await request(.createNewChannel(params: createNewChannelParams, request: createNewChannelRequest))
+            switch response.statusCode {
+            case 200:
+                let newChannel = try decode(response.data, as: Channel.self)
+                return newChannel
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let createNewChannelError = CreateNewChannelError(rawValue: errorCode.errorCode) {
+                    throw createNewChannelError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }
