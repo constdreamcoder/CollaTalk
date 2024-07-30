@@ -46,6 +46,24 @@ extension LocalWorkspaceMemberRepository {
         return localWorkspaceMember
     }
     
+    func createSender(_ newChannelChat: ChannelChat) -> LocalWorkspaceMember? {
+        guard let user = newChannelChat.user else { return nil}
+        
+        var localWorkspaceMember: LocalWorkspaceMember?
+        if isExist(user.userId) {
+            localWorkspaceMember = LocalWorkspaceMemberRepository.shared.findOne(user.userId)
+        } else {
+            localWorkspaceMember = LocalWorkspaceMember(
+                userId: user.userId,
+                email: user.email,
+                nickname: user.nickname,
+                profileImage: user.profileImage
+            )
+        }
+        
+        return localWorkspaceMember
+    }
+    
     func write(_ workspaceMember: WorkspaceMember) {
         let localWorkspaceMember = LocalWorkspaceMember(
             userId: workspaceMember.userId,

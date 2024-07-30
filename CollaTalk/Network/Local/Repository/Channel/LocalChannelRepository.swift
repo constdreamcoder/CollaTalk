@@ -51,5 +51,29 @@ extension LocalChannelRepository {
             print(error)
         }
     }
+    
+    /// 채널 마지막 채팅 업데이트
+    func updateLastChannelChat(_ lastChannelChatFromRemote: ChannelChat, lastSender: LocalWorkspaceMember?) {
+        let lastestChannelChat = LastLocalChannelChat(
+            chatId: lastChannelChatFromRemote.chatId,
+            channelId: lastChannelChatFromRemote.channelId,
+            channelName: lastChannelChatFromRemote.channelName,
+            content: lastChannelChatFromRemote.content,
+            createdAt: lastChannelChatFromRemote.createdAt,
+            files: lastChannelChatFromRemote.files,
+            sender: lastSender
+        )
+        
+        guard let existingChannel = findOne(lastChannelChatFromRemote.channelId) else { return }
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingChannel.lastChat = lastestChannelChat
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 

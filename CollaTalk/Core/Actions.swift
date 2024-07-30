@@ -141,12 +141,13 @@ enum AppAction {
     
     enum ChannelAction {
         case fetchChannelChats(chatRoomType: ChatRoomType, channel: Channel)
+        case channelError(Error)
     }
     
     enum ChatAction {
         case chatError(Error)
         case initializeAllElements
-        case sendDirectMessage
+        case sendNewMessage
         case completeSendDMAction
         case completeSendChannelChatAction
         case writeMessage(message: String)
@@ -154,6 +155,8 @@ enum AppAction {
         case removeSelectedImage(image: UIImage)
         case handleSelectedPhotos(newPhotos: [PhotosPickerItem])
         case receiveNewDirectMessage(receivedDM: DirectMessage)
+        case receiveNewChannelChat(receivedChannelChat: ChannelChat)
         case updateDirectMessages(dms: groupdDMsType)
+        case updateChannelChats(channelChats: groupdChannelChatsType)
     }
 }

@@ -31,8 +31,14 @@ struct ChatView: View {
         VStack {
             if chatRoomType == .dm {
                 DMChatRoomsView(chatRoomType: chatRoomType)
+                    .onReceive(socket.receivedDMSubject) { receivedDM in
+                        store.dispatch(.chatAction(.receiveNewDirectMessage(receivedDM: receivedDM)))
+                    }
             } else if chatRoomType == .channel {
                 ChannelChatsView(chatRoomType: chatRoomType)
+                    .onReceive(socket.receivedChannelChatSubject) { receivedChannelChat in
+                        store.dispatch(.chatAction(.receiveNewChannelChat(receivedChannelChat: receivedChannelChat)))
+                    }
             }
         }
         .keyboardToolbar(height: textViewHeight + textViewPadding * 2 + inputViewVStackSpacing + selectedImageHeight)  {
@@ -88,7 +94,7 @@ struct ChatView: View {
                         .padding(.bottom, 12)
                         .onTapGesture {
                             print("메세지 전송")
-                            store.dispatch(.chatAction(.sendDirectMessage))
+                            store.dispatch(.chatAction(.sendNewMessage))
                         }
                 }
                 .padding(.horizontal, 12)
@@ -108,9 +114,6 @@ struct ChatView: View {
                 selectedImageHeight = 0
             }
         })
-        .onReceive(socket.receivedDMSubject) { receivedDM in
-            store.dispatch(.chatAction(.receiveNewDirectMessage(receivedDM: receivedDM)))
-        }
         .onDisappear {
             store.dispatch(.chatAction(.initializeAllElements))
         }
@@ -139,7 +142,7 @@ struct ChannelChatsView: View {
                     ForEach(store.state.channelState.channelChats, id: \.chatDate) { chatDate, channelChats in
                         Section(
                             content: {
-                                ForEach(channelChats, id: \.channelId) { channelChat in
+                                ForEach(channelChats, id: \.chatId) { channelChat in
                                     if channelChat.sender?.userId == store.state.user?.userId {
                                         ChatItem(
                                             chatDirection: .right,

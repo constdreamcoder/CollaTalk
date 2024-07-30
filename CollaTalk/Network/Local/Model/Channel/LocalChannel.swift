@@ -59,7 +59,7 @@ final class LastLocalChannelChat: EmbeddedObject {
         channelName: String,
         content: String? = nil,
         createdAt: String,
-        files: List<String>,
+        files: [String],
         sender: LocalWorkspaceMember? = nil
     ) {
         self.init()
@@ -69,7 +69,7 @@ final class LastLocalChannelChat: EmbeddedObject {
         self.channelName = channelName
         self.content = content
         self.createdAt = createdAt
-        self.files = files
+        self.files.append(objectsIn: files)
         self.sender = sender
     }
 }

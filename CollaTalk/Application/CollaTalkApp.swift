@@ -24,7 +24,6 @@ struct CollaTalkApp: App {
                 .environmentObject(store)
                 .environmentObject(windowProvider)
                 .onAppear {
-                    print(">>>>>>>>>>>>>>>>>>>>>>>>")
                     LocalChannelRepository.shared.getLocationOfDefaultRealm()
                 }
         }

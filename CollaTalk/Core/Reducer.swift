@@ -586,16 +586,29 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? SendChannelChatError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                }
             }
         case .initializeAllElements:
             mutatingState.dmState.dmRoom = nil
             mutatingState.dmState.opponent = nil
+            mutatingState.dmState.dms = []
+            mutatingState.dmState.dmCount = 0
+            
+            mutatingState.channelState.channel = nil
+            mutatingState.channelState.channelChats = []
+            mutatingState.channelState.channelChatCount = 0
             
             mutatingState.chatState.chatRoomType = .dm
             mutatingState.chatState.message = ""
             mutatingState.chatState.isMessageEmpty = false
             mutatingState.chatState.selectedImages = []
-        case .sendDirectMessage:
+        case .sendNewMessage:
             mutatingState.isLoading = true
         case .writeMessage(let message):
             mutatingState.chatState.message = message
@@ -615,8 +628,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .updateDirectMessages(let dms):
             mutatingState.dmState.dms = dms
             mutatingState.dmState.dmCount += 1
+        case .updateChannelChats(let channelChats):
+            mutatingState.channelState.channelChats = channelChats
+            mutatingState.channelState.channelChatCount += 1
         case .completeSendChannelChatAction:
             mutatingState.isLoading = false
+        case .receiveNewChannelChat(let receivedChannelChat):
+            break
         }
     case .channelAction(let channelAction):
         switch channelAction {
@@ -625,6 +643,30 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.chatState.chatRoomType = chatRoomType
             mutatingState.channelState.channel = channel
+        case .channelError(let error ):
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchChannelChatsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     return mutatingState

@@ -59,7 +59,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         }
                         LocalDMRoomRepository.shared.updateDMRoomList(convertedDMRooms)
                             
-                        /// 각 DM 방 채팅내역 조회 병렬 처리
+                        /// 각 DM 방 마지막 DM 업데이트 병렬 처리
                        let fetchLastDMTasks = dmRoomsResult.map { dmRoom in
                             Task {
                                 do {
@@ -423,7 +423,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             image: image
                         )
                         guard let updatedWorkspace else { return }
-                        print("updatedWorkspace", updatedWorkspace)
+                        
                         UserDefaultsManager.setObject(updatedWorkspace, forKey: .selectedWorkspace)
                         promise(.success(.modifyWorkspaceAction(.fetchUpdatedWorkspaces)))
                     } catch {
@@ -505,12 +505,55 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 return $0.convertToLocalChannel
                             }
                         }
-                        
                         LocalChannelRepository.shared.updateChannelList(convertedChannel)
+                        
+                        /// 각 채널 마지막 채팅 업데이트 병렬 처리
+                        let fetchLastChannelChatTasks = channelsResult.map { channel in
+                            Task {
+                                do {
+                                    let lastChannelChatInLocal = LocalChannelRepository.shared.findOne(channel.channelId)?.lastChat
+                                    
+                                    /// 각 채널 채팅내역 조회
+                                    let channelChatList = try await ChannelProvider.shared.fetchChannelChats(
+                                        workspaceID: workspace.workspaceId,
+                                        channelID: channel.channelId,
+                                        cursorDate: lastChannelChatInLocal?.createdAt
+                                    )
+                                    
+                                    guard let channelChatList = channelChatList, channelChatList.count > 0 else { return }
+                                    guard let lastChannelChatFromRemote = channelChatList.last else { return }
+                                    
+                                    let lastSender: LocalWorkspaceMember?
+                                    if LocalWorkspaceMemberRepository.shared.isExist(lastChannelChatFromRemote.user?.userId ?? "") {
+                                        lastSender = LocalWorkspaceMemberRepository.shared.findOne(lastChannelChatFromRemote.user?.userId ?? "")
+                                    } else {
+                                        lastSender = .init(
+                                            userId: lastChannelChatFromRemote.user?.userId ?? "",
+                                            email: lastChannelChatFromRemote.user?.email ?? "",
+                                            nickname: lastChannelChatFromRemote.user?.nickname ?? "",
+                                            profileImage: lastChannelChatFromRemote.user?.profileImage
+                                        )
+                                    }
+                                    
+                                    /// 마지막 채널 채팅 업데이트
+                                    LocalChannelRepository.shared.updateLastChannelChat(lastChannelChatFromRemote, lastSender: lastSender)
+                                } catch {
+                                    promise(.success(.channelAction(.channelError(error))))
+                                }
+                            }
+                        }
+                        
+                        await withTaskGroup(of: Void.self) { group in
+                            for task in fetchLastChannelChatTasks {
+                                group.addTask {
+                                    await task.value
+                                }
+                            }
+                        }
+                        
                         
                         guard dmRoomsResult.count > 0
                         else {
-                            
                             promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: channelsResult, dmRooms: []))))
                             return
                         }
@@ -523,8 +566,43 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 return $0.convertToLocalDMRoom
                             }
                         }
-                        
                         LocalDMRoomRepository.shared.updateDMRoomList(convertedDMRooms)
+                        
+                        /// 각 DM 방 마지막 채팅 업데이트 병렬 처리
+                        let fetchLastDMTasks = dmRoomsResult.map { dmRoom in
+                            Task {
+                                do {
+                                    let lastDMInLocal = LocalDMRoomRepository.shared.findOne(dmRoom.roomId)?.lastDM
+                                    
+                                    /// 각 DM 방 채팅내역 조회
+                                    let dmList = try await DMProvider.shared.fetchDMHistory(
+                                        workspaceID: workspace.workspaceId,
+                                        roomID: dmRoom.roomId,
+                                        cursorDate: lastDMInLocal?.createdAt
+                                    )
+                                    
+                                    guard let dmList = dmList, dmList.count > 0 else { return }
+                                    guard let lastDMFromRemote = dmList.last else { return }
+                                    
+                                    let lastSender: LocalWorkspaceMember?
+                                    if LocalWorkspaceMemberRepository.shared.isExist(lastDMFromRemote.user.userId) {
+                                        lastSender = LocalWorkspaceMemberRepository.shared.findOne(lastDMFromRemote.user.userId)
+                                    } else {
+                                        lastSender = .init(
+                                            userId: lastDMFromRemote.user.userId,
+                                            email: lastDMFromRemote.user.email,
+                                            nickname: lastDMFromRemote.user.nickname,
+                                            profileImage: lastDMFromRemote.user.profileImage
+                                        )
+                                    }
+                                    
+                                    /// 마지막 DM 업데이트
+                                    LocalDMRoomRepository.shared.updateLastDM(lastDMFromRemote, lastSender: lastSender)
+                                } catch {
+                                    promise(.success(.dmAction(.dmError(error))))
+                                }
+                            }
+                        }
                         
                         /// 각 DM 방 읽지 않은 채팅 개수 조회 병렬 처리
                         let fetchUnreadDMCountsTasks = dmRoomsResult.map { dmRoom in
@@ -545,6 +623,14 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                     LocalDMRoomRepository.shared.updateUnreadDMCount(unreadDMCount)
                                 } catch {
                                     promise(.success(.dmAction(.dmError(error))))
+                                }
+                            }
+                        }
+                        
+                        await withTaskGroup(of: Void.self) { group in
+                            for task in fetchLastDMTasks {
+                                group.addTask {
+                                    await task.value
                                 }
                             }
                         }
@@ -790,7 +876,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .initializeAllElements:
             SocketIOManager.shared.leaveConnection()
             SocketIOManager.shared.removeAllEventHandlers()
-        case .sendDirectMessage:
+        case .sendNewMessage:
             return Future<AppAction, Never> { promise in
                 guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
                 
@@ -908,6 +994,33 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .completeSendChannelChatAction:
             break
+        case .receiveNewChannelChat(let receivedChannelChat):
+            /// 기존 채널 채팅 작성자가 있는지 여부 확인
+            let sender = LocalWorkspaceMemberRepository.shared.createSender(receivedChannelChat)
+            
+            /// 로컬 DB(Realm)에 새로운 채널 채팅 저장
+            LocalChannelChatRepository.shared.write(
+                newChannelChat: receivedChannelChat,
+                sender: sender
+            )
+            
+            /// 로컬 DB(Realm)에 마지막 채널 채팅 업데이트
+            LocalChannelRepository.shared.updateLastChannelChat(
+                receivedChannelChat,
+                lastSender: sender
+            )
+            
+            let updatedLocalChannelChats: [LocalChannelChat] = LocalChannelChatRepository.shared.read().map { $0 }
+            
+            /// 채널 채팅 기록 날짜별 그룹화
+            let groupeChannelChat = Dictionary(grouping: updatedLocalChannelChats) { channelChat -> String in
+                return channelChat.createdAt.toChatDate
+            }
+            let sortedGroupedChannelChats: groupdChannelChatsType = groupeChannelChat.keys.sorted().map { key in (key, groupeChannelChat[key]!) }
+            
+            return Just(.chatAction(.updateChannelChats(channelChats: sortedGroupedChannelChats))).eraseToAnyPublisher()
+        case .updateChannelChats(let channelChats):
+            break
         }
     case .channelAction(let channelAction):
         switch channelAction {
@@ -917,7 +1030,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     do {
                         guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
                         
-                        let lastChannelChatInLocal = LocalChannelRepository.shared.findOne(channel.channelId)?.lastChat
+                        let lastChannelChatInLocal = LocalChannelChatRepository.shared.findLastestChannelChat(channel.channelId)
                         
                         let channelChats = try await ChannelProvider.shared.fetchChannelChats(
                             workspaceID: workspace.workspaceId,
@@ -930,13 +1043,13 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 /// 기존 채널 채팅 기록 조회
                                 let existingLocalChannelChats: [LocalChannelChat] =
                                 LocalChannelChatRepository.shared.read().filter { $0.channelId == channel.channelId }
-                                
+                               
                                 /// 채널 채팅 기록 날짜별 그룹화
                                 let groupedChannelChat = Dictionary(grouping: existingLocalChannelChats) { channelChat -> String in
                                     return channelChat.createdAt.toChatDate
                                 }
                                 let sortedGroupedChannelChats: groupdChannelChatsType = groupedChannelChat.keys.sorted().map { key in (key, groupedChannelChat[key]!) }
-                                
+                               
                                 /// 소켓 연결
                                 SocketIOManager.shared.setupSocketEventListeners(.channel(channelId: channel.channelId))
                                 SocketIOManager.shared.establishConnection()
@@ -951,19 +1064,22 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             /// 새로 추가된 채널 채팅 로컬 DB(Realm)에 추가
                             let latestChannelChatList: [LocalChannelChat] = channelChats.map {
                                 let convertedChannelChat = $0.convertToLocalChannelChat
-                                let sender = LocalWorkspaceMemberRepository.shared.findOne(convertedChannelChat.sender?.userId ?? "" )
-                                convertedChannelChat.sender = sender
+                                if let sender = LocalWorkspaceMemberRepository.shared.findOne(convertedChannelChat.sender?.userId ?? "" ) {
+                                   
+                                    convertedChannelChat.sender = sender
+                                }
                                 return convertedChannelChat
                             }
                             LocalChannelRepository.shared.updateChannelChats(latestChannelChatList, channelId: channel.channelId)
                             
                             /// 최신 채널 채팅 기록 조회
                             let updatedLocalChannelChats: [LocalChannelChat] = LocalChannelChatRepository.shared.read().filter { $0.channelId == channel.channelId }
-                            
+                           
                             /// 채널 채팅 기록 날짜별 그룹화
                             let groupedChannelChat = Dictionary(grouping: updatedLocalChannelChats) { channelChat -> String in
                                 return channelChat.createdAt.toChatDate
                             }
+                            
                             let sortedGroupedChannelChats: groupdChannelChatsType = groupedChannelChat.keys.sorted().map { key in (key, groupedChannelChat[key]!) }
                             
                             /// 소켓 연결
@@ -975,11 +1091,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         }
                     } catch {
                         // TODO: - 에러 핸들링
-                        print("error", error)
-                        return
+                        promise(.success(.channelAction(.channelError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
+        case .channelError(let error):
+            break
         }
     }
     
