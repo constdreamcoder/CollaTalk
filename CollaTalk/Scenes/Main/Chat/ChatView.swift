@@ -275,8 +275,9 @@ struct ChatViewNavigationBar: View {
                 }
             },
             rightButtonAction: {
-                print("채널 설정")
-                navigationRouter.push(screen: .channelSettingView)
+                print("채널 설정 화면으로 이동")
+//                navigationRouter.push(screen: .channelSettingView)
+                store.dispatch(.channelSettingAction(.fetchChannel))
             },
             isRightButtonHidden: chatRoomType == .dm
         )

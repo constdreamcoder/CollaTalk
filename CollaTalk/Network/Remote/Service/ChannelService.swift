@@ -15,6 +15,7 @@ enum ChannelService {
     case fetchUnreadChannelChats(params: FetchUnreadChannelChatsParams, query: FetchUnreadChannelQuery)
     case createNewChannel(params: CreateNewChannelParams, request: CreateNewChannelRequest)
     case fetchAllChannels(params: FetchAllChannelsParams)
+    case fetchChannelDetails(params: FetchChannelDetailsParams)
 }
 
 extension ChannelService: BaseService {
@@ -30,12 +31,14 @@ extension ChannelService: BaseService {
             return "/workspaces/\(params.workspaceID)/channels"
         case .fetchAllChannels(let params):
             return "/workspaces/\(params.workspaceID)/channels"
+        case .fetchChannelDetails(let params):
+            return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchChannelChats, .fetchUnreadChannelChats, .fetchAllChannels:
+        case .fetchChannelChats, .fetchUnreadChannelChats, .fetchAllChannels, .fetchChannelDetails:
             return .get
         case .sendChannelChat, .createNewChannel:
             return .post
@@ -98,7 +101,7 @@ extension ChannelService: BaseService {
             
             let multipartList = dataMultipart + imageFilesMultipart
             return .uploadMultipart(multipartList)
-        case .fetchAllChannels:
+        case .fetchAllChannels, .fetchChannelDetails:
             return .requestPlain
         }
     }

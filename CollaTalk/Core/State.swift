@@ -29,6 +29,7 @@ struct AppState {
     var chatState = ChatState()
     var channelState = ChannelState()
     var searchChannelState = SearchChannelState()
+    var channelSettingState = ChannelSettingState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -141,5 +142,9 @@ struct AppState {
     struct SearchChannelState {
         var allChannels: [Channel] = []
         var isAlreadyJoined: Bool = false
+    }
+    
+    struct ChannelSettingState {
+        var channelDetails: Channel? = nil
     }
 }

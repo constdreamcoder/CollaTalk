@@ -370,6 +370,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.channelState.channelChatCount = channelChats.count
             
             mutatingState.networkCallSuccessType = .chatView
+        case .setChannelSettingView(let channelDetails):
+            mutatingState.isLoading = false
+            
+            mutatingState.channelSettingState.channelDetails = channelDetails
+            
+            mutatingState.networkCallSuccessType = .channelSettingView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -763,6 +769,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             
             mutatingState.navigationState.isSearchChannelViewPresented = false
+        }
+    case .channelSettingAction(let channelSettingAction):
+        switch channelSettingAction {
+        case .fetchChannel:
+            mutatingState.isLoading = true
         }
     }
     return mutatingState

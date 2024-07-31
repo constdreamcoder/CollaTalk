@@ -29,6 +29,7 @@ enum AppAction {
     case channelAction(ChannelAction)
     case chatAction(ChatAction)
     case searchChannelAction(SearchChannelAction)
+    case channelSettingAction(ChannelSettingAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -40,6 +41,7 @@ enum AppAction {
         case setHomeDefaultView(workspaces: [Workspace])
         case setDMChatView(chatRoom: DMRoom, dms: groupdDMsType)
         case setChannelChatView(channel: Channel, channelChats: groupdChannelChatsType)
+        case setChannelSettingView(channelDetails: Channel)
         case setNone
     }
     
@@ -178,5 +180,9 @@ enum AppAction {
         case SearchChannelError(Error)
         case compareIfMember(selectedChannel: Channel, confirmAction: (() -> Void)? = nil)
         case dismissSearchChannelViewAndMoveToChannelChatView(selectedChannel: Channel)
+    }
+    
+    enum ChannelSettingAction {
+        case fetchChannel
     }
 }

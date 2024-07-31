@@ -171,6 +171,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .setDMChatView: break
         case .setNone: break
         case .setChannelChatView: break
+        case .setChannelSettingView(let channelDetails):
+            break
         }
         
     case .navigationAction(let navigationAction):
@@ -1221,6 +1223,25 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .dismissSearchChannelViewAndMoveToChannelChatView(let selectedChannel):
             return Just(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: selectedChannel))).eraseToAnyPublisher()
+        }
+    case .channelSettingAction(let channelSettingAction):
+        switch channelSettingAction {
+        case .fetchChannel:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let channelDetails = try await ChannelProvider.shared.fetchChannelDetails(
+                            workspaceID: state.workspaceState.selectedWorkspace?.workspaceId ?? "",
+                            channelID: state.channelState.channel?.channelId ?? ""
+                        )
+                        
+                        guard let channelDetails else { return }
+                        promise(.success(.networkCallSuccessTypeAction(.setChannelSettingView(channelDetails: channelDetails))))
+                    } catch {
+                        print("error", error)
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     }
     
