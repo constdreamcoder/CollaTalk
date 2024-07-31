@@ -78,8 +78,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             mutatingState.navigationState.isSearchChannelViewPresented = present
             mutatingState.searchChannelState.allChannels = allChannels
-        case .presentChangeChannelOwnerView(let present):
+        case .presentChangeChannelOwnerView(let present, let channelMembers):
+            mutatingState.isLoading = false
             mutatingState.navigationState.isChangeChannelOwnerViewPresented = present
+            mutatingState.changeChannelOwnerState.channelMembers = channelMembers
         }
         
     case .loginAction(let loginAction):
@@ -827,6 +829,37 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 }
             } else if let error = error as? FetchChannelDetailsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
+        switch changeChannelOwnerViewAction {
+        case .moveToChangeChannelOwnerView:
+            mutatingState.isLoading = true
+        case .changeChannelOwnerViewActionError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchChannelMembersError {
                 switch error {
                 case .noData:
                     print(error.localizedDescription)

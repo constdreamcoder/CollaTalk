@@ -95,7 +95,8 @@ extension LocalChannelRepository {
         }
     }
     
-    func updateChannel(with updatdChanel: Channel) {
+    /// 채널 이름, 설명 업데이트
+    func updateChannelNameAndDescription(with updatdChanel: Channel) {
         guard let exisitingChannel = findOne(updatdChanel.channelId) else { return }
         
         do {
@@ -103,6 +104,23 @@ extension LocalChannelRepository {
             try realm.write {
                 exisitingChannel.name = updatdChanel.name
                 exisitingChannel.desc = updatdChanel.description
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// 채널 멤버 업데이트
+    func updateChannelMembers(channelId: String, newChannelMembers: [LocalWorkspaceMember]) {
+        guard let existingChannel = findOne(channelId) else { return }
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingChannel.channelMembers.removeAll()
+                let convertedChannelMembers = List<LocalWorkspaceMember>()
+                convertedChannelMembers.append(objectsIn: newChannelMembers)
+                existingChannel.channelMembers = convertedChannelMembers
             }
         } catch {
             print(error)

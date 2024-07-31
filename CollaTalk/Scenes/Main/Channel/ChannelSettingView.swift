@@ -37,7 +37,6 @@ struct ChannelSettingView: View {
                 )
                 
                 ScrollView {
-                    
                     ChannelDescriptionSection(
                         name: store.state.channelSettingState.channelDetails?.name ?? "",
                         description: store.state.channelSettingState.channelDetails?.description
@@ -50,7 +49,6 @@ struct ChannelSettingView: View {
                     
                     ChannelSettingButtonSection()
                         .padding(.top, 16)
-
             
                     Spacer()
                 }
@@ -60,7 +58,7 @@ struct ChannelSettingView: View {
         .sheet(
             isPresented: Binding(
                 get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
-                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0, channelMembers: []))) }
             )
         ) {
             ChangeChannelOwnerView()
@@ -71,7 +69,6 @@ struct ChannelSettingView: View {
 #Preview {
     ChannelSettingView()
 }
-
 
 struct ChannelDescriptionSection: View {
     
@@ -198,7 +195,7 @@ struct ChannelSettingButtonSection: View {
             
             CustomButton {
                 print("채널 관리자 변경")
-                store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: true)))
+                store.dispatch(.changeChannelOwnerViewAction(.moveToChangeChannelOwnerView))
             } label: {
                 Text("채널 관리자 변경")
                     .foregroundStyle(.brandBlack)

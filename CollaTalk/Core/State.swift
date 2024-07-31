@@ -23,6 +23,7 @@ struct AppState {
     var modifyWorkspaceState = ModifyWorkspaceState()
     var workspaceState = WorkspaceState()
     var changeWorkspaceOwnerState = ChangeWorkspaceOwnerState()
+    var changeChannelOwnerState = ChangeChannelOwnerState()
     var inviteMemberState = InviteMemberState()
     var createOrEditChannel = CreateOrEditChannelState()
     var dmState = DMState()
@@ -105,6 +106,10 @@ struct AppState {
     struct ChangeWorkspaceOwnerState {
         var selectedWorkspace: Workspace? = nil
         var workspaceMembers: [WorkspaceMember] = []
+    }
+    
+    struct ChangeChannelOwnerState {
+        var channelMembers: [WorkspaceMember] = []
     }
     
     struct InviteMemberState {

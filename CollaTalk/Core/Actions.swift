@@ -30,6 +30,7 @@ enum AppAction {
     case chatAction(ChatAction)
     case searchChannelAction(SearchChannelAction)
     case channelSettingAction(ChannelSettingAction)
+    case changeChannelOwnerViewAction(ChangeChannelOwnerViewAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -52,7 +53,7 @@ enum AppAction {
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
-        case presentChangeChannelOwnerView(present: Bool)
+        case presentChangeChannelOwnerView(present: Bool, channelMembers: [WorkspaceMember])
         case presentInviteMemeberView(present: Bool)
         case presentCreateOrEditChannelView(present: Bool, isEditMode: Bool = false)
         case presentSearchChannelView(present: Bool, allChannels: [Channel])
@@ -192,5 +193,10 @@ enum AppAction {
     enum ChannelSettingAction {
         case fetchChannel
         case channelSettingError(Error)
+    }
+    
+    enum ChangeChannelOwnerViewAction {
+        case moveToChangeChannelOwnerView
+        case changeChannelOwnerViewActionError(Error)
     }
 }

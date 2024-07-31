@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 enum EditChannelDetailsError: String, LocalizedError {
     case badRequest = "E11"
     case duplicatedData = "E12"

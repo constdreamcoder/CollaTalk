@@ -1198,7 +1198,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let updatedChannel else { return }
                         
                         /// 로컬 DB(Realm) 업데이트
-                        LocalChannelRepository.shared.updateChannel(with: updatedChannel)
+                        LocalChannelRepository.shared.updateChannelNameAndDescription(with: updatedChannel)
                         
                         promise(.success(.createOrEditChannelAction(.returnToChannelSettingView)))
                     } catch {
@@ -1274,6 +1274,47 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .channelSettingError(let error):
+            break
+        }
+    case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
+        switch changeChannelOwnerViewAction {
+        case .moveToChangeChannelOwnerView:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        
+                        guard let workspaceID = state.workspaceState.selectedWorkspace?.workspaceId,
+                              let channelID = state.channelSettingState.channelDetails?.channelId
+                        else { return }
+                        
+                        let channelMembers = try await ChannelProvider.shared.fetchChannelMembers(
+                            workspaceID: workspaceID,
+                            channelID: channelID
+                        )
+                        
+                        guard let channelMembers else { return }
+                        
+                        /// 채널 멤버 로컬 DB(Realm) 타입으로 변환: WorkspaceMember -> LocalWorkspaceMember
+                        let convertedChannelMembers: [LocalWorkspaceMember] = channelMembers.map {
+                            if let existingWorkspaceMember = LocalWorkspaceMemberRepository.shared.findOne($0.userId) {
+                                return existingWorkspaceMember
+                            }
+                            return $0.convertToLocalWorkspaceMember
+                        }
+
+                        /// 새로 조회된 채널 멤버 로컬 DB(Realm)에 업데이트
+                        LocalChannelRepository.shared.updateChannelMembers(
+                            channelId: channelID,
+                            newChannelMembers: convertedChannelMembers
+                        )
+                        
+                        promise(.success(.navigationAction(.presentChangeChannelOwnerView(present: true, channelMembers: channelMembers))))
+                    } catch {
+                        promise(.success(.changeChannelOwnerViewAction(.changeChannelOwnerViewActionError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .changeChannelOwnerViewActionError(let error):
             break
         }
     }

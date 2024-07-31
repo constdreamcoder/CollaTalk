@@ -16,25 +16,25 @@ struct ChangeChannelOwnerView: View {
         ChangeOwnerViewFrame(
             isPresented: Binding(
                 get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
-                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0, channelMembers: []))) }
             ),
             onDisappearAction: { store.dispatch(.changeWorkspaceOwnerAction(.initializeAllElements)) },
             onChangeValue: store.state.changeWorkspaceOwnerState.workspaceMembers,
             onChangeAction: { workspaceMembers in
-                if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
-                    store.dispatch(
-                        .alertAction(
-                            .showAlert(
-                                alertType: .unableToChangeWorkspaceOwner,
-                                confirmAction: { windowProvider.dismissAlert() }
-                            )
-                        )
-                    )
-                }
+//                if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
+//                    store.dispatch(
+//                        .alertAction(
+//                            .showAlert(
+//                                alertType: .unableToChangeWorkspaceOwner,
+//                                confirmAction: { windowProvider.dismissAlert() }
+//                            )
+//                        )
+//                    )
+//                }
             },
             content: {
                 List {
-                    ForEach(store.state.changeWorkspaceOwnerState.workspaceMembers, id: \.userId) { workspaceMember in
+                    ForEach(store.state.changeChannelOwnerState.channelMembers, id: \.userId) { workspaceMember in
                         if workspaceMember.userId != store.state.user?.userId ?? ""  {
                             ChangeChannelOwnerViewCell(workspaceMember: workspaceMember)
                                 .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
@@ -42,22 +42,22 @@ struct ChangeChannelOwnerView: View {
                                 .listRowBackground(Color.clear)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    store.dispatch(
-                                        .alertAction(
-                                            .showAlert(
-                                                alertType: .changeWorkspaceOwner(newOwner: workspaceMember.nickname),
-                                                confirmAction: {
-                                                    store.dispatch(
-                                                        .changeWorkspaceOwnerAction(
-                                                            .changeWorkspaceOwnerShip(
-                                                                member: workspaceMember
-                                                            )
-                                                        )
-                                                    )
-                                                }
-                                            )
-                                        )
-                                    )
+//                                    store.dispatch(
+//                                        .alertAction(
+//                                            .showAlert(
+//                                                alertType: .changeWorkspaceOwner(newOwner: workspaceMember.nickname),
+//                                                confirmAction: {
+//                                                    store.dispatch(
+//                                                        .changeWorkspaceOwnerAction(
+//                                                            .changeWorkspaceOwnerShip(
+//                                                                member: workspaceMember
+//                                                            )
+//                                                        )
+//                                                    )
+//                                                }
+//                                            )
+//                                        )
+//                                    )
                                 }
                         }
                     }
