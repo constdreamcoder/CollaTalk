@@ -58,7 +58,7 @@ struct ChannelSettingView: View {
         .sheet(
             isPresented: Binding(
                 get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
-                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0, channelMembers: []))) }
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
             )
         ) {
             ChangeChannelOwnerView()
@@ -195,7 +195,7 @@ struct ChannelSettingButtonSection: View {
             
             CustomButton {
                 print("채널 관리자 변경")
-                store.dispatch(.changeChannelOwnerViewAction(.moveToChangeChannelOwnerView))
+                store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: true)))
             } label: {
                 Text("채널 관리자 변경")
                     .foregroundStyle(.brandBlack)

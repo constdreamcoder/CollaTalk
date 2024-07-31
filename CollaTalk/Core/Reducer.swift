@@ -78,10 +78,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             mutatingState.navigationState.isSearchChannelViewPresented = present
             mutatingState.searchChannelState.allChannels = allChannels
-        case .presentChangeChannelOwnerView(let present, let channelMembers):
-            mutatingState.isLoading = false
+        case .presentChangeChannelOwnerView(let present):
             mutatingState.navigationState.isChangeChannelOwnerViewPresented = present
-            mutatingState.changeChannelOwnerState.channelMembers = channelMembers
         }
         
     case .loginAction(let loginAction):
@@ -837,7 +835,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {
-        case .moveToChangeChannelOwnerView:
+        case .fetchChannelMembers:
             mutatingState.isLoading = true
         case .changeChannelOwnerViewActionError(let error):
             mutatingState.isLoading = false
@@ -865,6 +863,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 }
             }
+        case .completeFetchChannelMembers(let channelMembers):
+            mutatingState.isLoading = false
+            
+            mutatingState.changeChannelOwnerState.channelMembers = channelMembers
         }
     }
     return mutatingState

@@ -53,7 +53,7 @@ enum AppAction {
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
         case showImagePickerView(show: Bool)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
-        case presentChangeChannelOwnerView(present: Bool, channelMembers: [WorkspaceMember])
+        case presentChangeChannelOwnerView(present: Bool)
         case presentInviteMemeberView(present: Bool)
         case presentCreateOrEditChannelView(present: Bool, isEditMode: Bool = false)
         case presentSearchChannelView(present: Bool, allChannels: [Channel])
@@ -196,7 +196,8 @@ enum AppAction {
     }
     
     enum ChangeChannelOwnerViewAction {
-        case moveToChangeChannelOwnerView
+        case fetchChannelMembers
+        case completeFetchChannelMembers(channelMembers: [WorkspaceMember])
         case changeChannelOwnerViewActionError(Error)
     }
 }

@@ -198,7 +198,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .presentSearchChannelView(let present, let allChannels):
             break
         case .presentChangeChannelOwnerView(let present):
-            break
+            if present {
+                return Just(.changeChannelOwnerViewAction(.fetchChannelMembers)).eraseToAnyPublisher()
+            }
         }
         
     case .loginAction(let loginAction):
@@ -1278,7 +1280,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {
-        case .moveToChangeChannelOwnerView:
+        case .fetchChannelMembers:
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
@@ -1308,13 +1310,15 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             newChannelMembers: convertedChannelMembers
                         )
                         
-                        promise(.success(.navigationAction(.presentChangeChannelOwnerView(present: true, channelMembers: channelMembers))))
+                        promise(.success(.changeChannelOwnerViewAction(.completeFetchChannelMembers(channelMembers: channelMembers))))
                     } catch {
                         promise(.success(.changeChannelOwnerViewAction(.changeChannelOwnerViewActionError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
         case .changeChannelOwnerViewActionError(let error):
+            break
+        case .completeFetchChannelMembers:
             break
         }
     }

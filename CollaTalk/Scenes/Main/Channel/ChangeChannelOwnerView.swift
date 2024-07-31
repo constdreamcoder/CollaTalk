@@ -16,27 +16,27 @@ struct ChangeChannelOwnerView: View {
         ChangeOwnerViewFrame(
             isPresented: Binding(
                 get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
-                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0, channelMembers: []))) }
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
             ),
             onDisappearAction: { store.dispatch(.changeWorkspaceOwnerAction(.initializeAllElements)) },
-            onChangeValue: store.state.changeWorkspaceOwnerState.workspaceMembers,
-            onChangeAction: { workspaceMembers in
-//                if workspaceMembers.count >= 1 && (workspaceMembers.count - 1) <= 0 {
-//                    store.dispatch(
-//                        .alertAction(
-//                            .showAlert(
-//                                alertType: .unableToChangeWorkspaceOwner,
-//                                confirmAction: { windowProvider.dismissAlert() }
-//                            )
-//                        )
-//                    )
-//                }
+            onChangeValue: store.state.changeChannelOwnerState.channelMembers,
+            onChangeAction: { channelMember in
+                if channelMember.count >= 1 && (channelMember.count - 1) <= 0 {
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .unableToChangeChannelOwner,
+                                confirmAction: { windowProvider.dismissAlert() }
+                            )
+                        )
+                    )
+                }
             },
             content: {
                 List {
-                    ForEach(store.state.changeChannelOwnerState.channelMembers, id: \.userId) { workspaceMember in
-                        if workspaceMember.userId != store.state.user?.userId ?? ""  {
-                            ChangeChannelOwnerViewCell(workspaceMember: workspaceMember)
+                    ForEach(store.state.changeChannelOwnerState.channelMembers, id: \.userId) { channelMember in
+                        if channelMember.userId != store.state.user?.userId ?? ""  {
+                            ChangeChannelOwnerViewCell(channelMember: channelMember)
                                 .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
@@ -78,13 +78,13 @@ struct ChangeChannelOwnerView: View {
 
 struct ChangeChannelOwnerViewCell: View {
     
-    let workspaceMember: WorkspaceMember
+    let channelMember: WorkspaceMember
     
     var body: some View {
         ChangeOwnerViewCellFrame(
-            profileImage: workspaceMember.profileImage,
-            nickname: workspaceMember.nickname,
-            email: workspaceMember.email
+            profileImage: channelMember.profileImage,
+            nickname: channelMember.nickname,
+            email: channelMember.email
         )
     }
 }

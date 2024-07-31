@@ -13,6 +13,7 @@ enum AlertType {
     case leaveWorkspaceAsAnOwner
     case deleteWorkspace
     case unableToChangeWorkspaceOwner
+    case unableToChangeChannelOwner
     case changeWorkspaceOwner(newOwner: String)
     case joinChannel(channelName: String)
     case none
@@ -25,6 +26,8 @@ enum AlertType {
             return "워크스페이스 삭제"
         case .unableToChangeWorkspaceOwner:
             return "워크스페이스 관리자 변경 불가"
+        case .unableToChangeChannelOwner:
+            return "채널 관리자 변경 불가"
         case .changeWorkspaceOwner(let newOwner):
             return "\(newOwner) 님을 관리자로 지정하시겠습니까?"
         case .none:
@@ -44,6 +47,8 @@ enum AlertType {
             return "정말 이 워크스페이스를 삭제하시겠습니까? 삭제 시 채널/멤버/채팅 등 워크스페이스 내의 모든 정보가 삭제되며 복구할 수 없습니다."
         case .unableToChangeWorkspaceOwner:
             return "워크스페이스 멤버가 없어 관리자 변경을 할 수 없습니다.\n새로운 멤버를 워크스페이스에 초대해보세요."
+        case .unableToChangeChannelOwner:
+            return "채널 멤버가 없어 관리자 변경을 할 수 없습니다."
         case .changeWorkspaceOwner:
             return """
                     워크스페이스 관리자는 다음과 같은 권한이 있습니다.
@@ -62,7 +67,7 @@ enum AlertType {
         switch self {
         case .leavetWorkspaceAsAMember:
             return "나가기"
-        case .leaveWorkspaceAsAnOwner, .unableToChangeWorkspaceOwner, .changeWorkspaceOwner, .joinChannel:
+        case .leaveWorkspaceAsAnOwner, .unableToChangeWorkspaceOwner, .changeWorkspaceOwner, .joinChannel, .unableToChangeChannelOwner:
             return "확인"
         case .deleteWorkspace:
             return "삭제"
