@@ -61,6 +61,9 @@
 		0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0037BC142C42E1AB00E9AF0A /* Workspace.swift */; };
 		003F6FCA2C5A849800C125EA /* FetchChannelMembersParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FC92C5A849800C125EA /* FetchChannelMembersParams.swift */; };
 		003F6FCC2C5A869C00C125EA /* FetchChannelMembersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCB2C5A869C00C125EA /* FetchChannelMembersError.swift */; };
+		003F6FCE2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */; };
+		003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */; };
+		003F6FD22C5A9D0400C125EA /* ChangeChannelOwnershipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */; };
 		00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E962C43ED17009FDB71 /* LogginPlugin.swift */; };
 		00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E982C43ED8D009FDB71 /* Data+Ext.swift */; };
 		00436E9B2C440F8C009FDB71 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */; };
@@ -249,6 +252,9 @@
 		0037BC142C42E1AB00E9AF0A /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		003F6FC92C5A849800C125EA /* FetchChannelMembersParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelMembersParams.swift; sourceTree = "<group>"; };
 		003F6FCB2C5A869C00C125EA /* FetchChannelMembersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelMembersError.swift; sourceTree = "<group>"; };
+		003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipParams.swift; sourceTree = "<group>"; };
+		003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipRequest.swift; sourceTree = "<group>"; };
+		003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipError.swift; sourceTree = "<group>"; };
 		00436E962C43ED17009FDB71 /* LogginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginPlugin.swift; sourceTree = "<group>"; };
 		00436E982C43ED8D009FDB71 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -395,6 +401,7 @@
 				000F40012C588AC300FF87BF /* SendChannelChatRequest.swift */,
 				006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */,
 				00BD4E5E2C5A0E56004C2E14 /* EditChannelDetailsRequest.swift */,
+				003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -465,6 +472,7 @@
 				00BD4E562C59F326004C2E14 /* FetchChannelDetailsParams.swift */,
 				00BD4E5C2C5A0E21004C2E14 /* EditChannelDetailsParams.swift */,
 				003F6FC92C5A849800C125EA /* FetchChannelMembersParams.swift */,
+				003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */,
 			);
 			path = Paramas;
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 				00BD4E582C59F442004C2E14 /* FetchChannelDetailsError.swift */,
 				00BD4E602C5A0FE7004C2E14 /* EditChannelDetailsError.swift */,
 				003F6FCB2C5A869C00C125EA /* FetchChannelMembersError.swift */,
+				003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -1267,6 +1276,7 @@
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
 				0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */,
 				00F47A442C4E5C870095EB4E /* DMView.swift in Sources */,
+				003F6FCE2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift in Sources */,
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
@@ -1349,6 +1359,7 @@
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
 				006A9EC72C58E1880068AF32 /* CreateNewChannelRequest.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,
+				003F6FD22C5A9D0400C125EA /* ChangeChannelOwnershipError.swift in Sources */,
 				00ED9DFF2C4BBFC600DF5AE7 /* FetchWorkspaceMembersParams.swift in Sources */,
 				0086B5B12C37E98D00AD889C /* CustomButton.swift in Sources */,
 				000F40062C58C19E00FF87BF /* FetchUnreadChannelChatsParams.swift in Sources */,
@@ -1395,6 +1406,7 @@
 				00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				000F40042C588CDA00FF87BF /* SendChannelChatError.swift in Sources */,
+				003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */,
 				0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */,
 				00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */,
 				0086B5C12C38065600AD889C /* SheetNavigation.swift in Sources */,

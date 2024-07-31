@@ -168,56 +168,69 @@ struct ChannelSettingButtonSection: View {
     
     var body: some View {
         VStack {
-            CustomButton {
-                print("채널 편집")
-                store.dispatch(.createOrEditChannelAction(.moveToEditChannelView))
-            } label: {
-                Text("채널 편집")
-                    .foregroundStyle(.brandBlack)
+            if store.state.channelSettingState.channelDetails?.ownerId == store.state.user?.userId {
+                CustomButton {
+                    print("채널 편집")
+                    store.dispatch(.createOrEditChannelAction(.moveToEditChannelView))
+                } label: {
+                    Text("채널 편집")
+                        .foregroundStyle(.brandBlack)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.brandBlack, lineWidth: 1)
+                }
+                .bottomButtonShape(.backgroundSecondary)
+                
+                CustomButton {
+                    print("채널에서 나가기")
+                } label: {
+                    Text("채널에서 나가기")
+                        .foregroundStyle(.brandBlack)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.brandBlack, lineWidth: 1)
+                }
+                .bottomButtonShape(.backgroundSecondary)
+                
+                CustomButton {
+                    print("채널 관리자 변경")
+                    store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: true)))
+                } label: {
+                    Text("채널 관리자 변경")
+                        .foregroundStyle(.brandBlack)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.brandBlack, lineWidth: 1)
+                }
+                .bottomButtonShape(.backgroundSecondary)
+                
+                CustomButton {
+                    print("채널 삭제")
+                } label: {
+                    Text("채널 삭제")
+                        .foregroundStyle(.brandError)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.brandError, lineWidth: 1)
+                }
+                .bottomButtonShape(.backgroundSecondary)
+            } else {
+                CustomButton {
+                    print("채널에서 나가기")
+                } label: {
+                    Text("채널에서 나가기")
+                        .foregroundStyle(.brandBlack)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.brandBlack, lineWidth: 1)
+                }
+                .bottomButtonShape(.backgroundSecondary)
             }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(.brandBlack, lineWidth: 1)
-            }
-            .bottomButtonShape(.backgroundSecondary)
-            
-            CustomButton {
-                print("채널에서 나가기")
-            } label: {
-                Text("채널에서 나가기")
-                    .foregroundStyle(.brandBlack)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(.brandBlack, lineWidth: 1)
-            }
-            .bottomButtonShape(.backgroundSecondary)
-            
-            CustomButton {
-                print("채널 관리자 변경")
-                store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: true)))
-            } label: {
-                Text("채널 관리자 변경")
-                    .foregroundStyle(.brandBlack)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(.brandBlack, lineWidth: 1)
-            }
-            .bottomButtonShape(.backgroundSecondary)
-            
-            CustomButton {
-                print("채널 삭제")
-            } label: {
-                Text("채널 삭제")
-                    .foregroundStyle(.brandError)
-            }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(.brandError, lineWidth: 1)
-            }
-            .bottomButtonShape(.backgroundSecondary)
-            
         }
     }
 }

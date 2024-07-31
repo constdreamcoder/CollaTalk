@@ -16,6 +16,7 @@ enum ToastMessage: ToastMessageType {
     case signUp(SignUp)
     case modifyWorkspace(ModifyWorkspace)
     case changeWorkspaceOwner(ChangeWorkspaceOwner)
+    case changeChannelOwner(ChangeChannelOwner)
     case inviteMemeber(InviteMember)
     case downloadImage(DownloadImage)
     case createOrEditChannel(CreateOrEditChannel)
@@ -30,6 +31,8 @@ enum ToastMessage: ToastMessageType {
             return modifyWorkspace.message
         case .changeWorkspaceOwner(let changeWorkspaceOwner):
             return changeWorkspaceOwner.message
+        case .changeChannelOwner(let changeChannelOwner):
+            return changeChannelOwner.message
         case .inviteMemeber(let inviteMember):
             return inviteMember.message
         case .downloadImage(let downloadImage):
@@ -124,6 +127,17 @@ enum ToastMessage: ToastMessageType {
             switch self {
             case .completeOwnershipTransfer:
                 return "워크스페이스 관리자가 변경되었습니다."
+            }
+        }
+    }
+    
+    enum ChangeChannelOwner: ToastMessageType {
+        case completeOwnershipTransfer
+        
+        var message: String {
+            switch self {
+            case .completeOwnershipTransfer:
+                return "채널 관리자가 변경되었습니다."
             }
         }
     }

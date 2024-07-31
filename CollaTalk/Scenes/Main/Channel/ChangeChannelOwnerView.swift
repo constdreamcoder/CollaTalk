@@ -42,22 +42,23 @@ struct ChangeChannelOwnerView: View {
                                 .listRowBackground(Color.clear)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-//                                    store.dispatch(
-//                                        .alertAction(
-//                                            .showAlert(
-//                                                alertType: .changeWorkspaceOwner(newOwner: workspaceMember.nickname),
-//                                                confirmAction: {
-//                                                    store.dispatch(
-//                                                        .changeWorkspaceOwnerAction(
-//                                                            .changeWorkspaceOwnerShip(
-//                                                                member: workspaceMember
-//                                                            )
-//                                                        )
-//                                                    )
-//                                                }
-//                                            )
-//                                        )
-//                                    )
+                                    store.dispatch(
+                                        .alertAction(
+                                            .showAlert(
+                                                alertType: .changeChannelOwner(newOwner: channelMember.nickname),
+                                                confirmAction: {
+                                                    windowProvider.dismissAlert()
+                                                    store.dispatch(
+                                                        .changeChannelOwnerViewAction(
+                                                            .changeChannelOwnerShip(
+                                                                channelMember: channelMember
+                                                            )
+                                                        )
+                                                    )
+                                                }
+                                            )
+                                        )
+                                    )
                                 }
                         }
                     }

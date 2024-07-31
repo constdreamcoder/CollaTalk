@@ -18,6 +18,7 @@ enum ChannelService {
     case fetchChannelDetails(params: FetchChannelDetailsParams)
     case editChannelDetails(params: EditChannelDetailsParams, request: EditChannelDetailsRequest)
     case fetchChannelMembers(params: FetchChannelMembersParams)
+    case changeChannelOwnership(params: ChangeChannelOwnershipParams, request: ChangeChannelOwnershipRequest)
 }
 
 extension ChannelService: BaseService {
@@ -39,6 +40,8 @@ extension ChannelService: BaseService {
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)"
         case .fetchChannelMembers(let params):
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/members"
+        case .changeChannelOwnership(let params, _):
+            return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/transfer/ownership"
         }
     }
     
@@ -48,7 +51,7 @@ extension ChannelService: BaseService {
             return .get
         case .sendChannelChat, .createNewChannel:
             return .post
-        case .editChannelDetails:
+        case .editChannelDetails, .changeChannelOwnership:
             return .put
         }
     }
@@ -133,6 +136,8 @@ extension ChannelService: BaseService {
             
             let multipartList = dataMultipart + imageFilesMultipart
             return .uploadMultipart(multipartList)
+        case .changeChannelOwnership(_, let request):
+            return .requestJSONEncodable(request)
         case .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers:
             return .requestPlain
         }

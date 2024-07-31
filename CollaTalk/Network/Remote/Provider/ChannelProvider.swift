@@ -210,4 +210,29 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         
         return nil
     }
+    
+    func changeChannelOwnership(workspaceID: String, channelID: String, ownerId: String) async throws -> Channel? {
+        do {
+            let changeChannelOwnershipParams = ChangeChannelOwnershipParams(workspaceID: workspaceID, channelID: channelID)
+            let changeChannelOwnershipRequest = ChangeChannelOwnershipRequest(owner_id: ownerId)
+            let response = try await request(.changeChannelOwnership(params: changeChannelOwnershipParams, request: changeChannelOwnershipRequest))
+            switch response.statusCode {
+            case 200:
+                let updatedChannel = try decode(response.data, as: Channel.self)
+                return updatedChannel
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let changeChannelOwnershipError = ChangeChannelOwnershipError(rawValue: errorCode.errorCode) {
+                    throw changeChannelOwnershipError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

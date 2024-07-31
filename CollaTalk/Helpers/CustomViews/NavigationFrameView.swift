@@ -70,5 +70,6 @@ struct NavigationFrameView: View {
             
             Divider()
         }
+        .background(.backgroundSecondary)
     }
 }

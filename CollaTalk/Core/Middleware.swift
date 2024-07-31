@@ -1320,6 +1320,36 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .completeFetchChannelMembers:
             break
+        case .changeChannelOwnerShip(let channelMember):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    guard let workspaceID = state.workspaceState.selectedWorkspace?.workspaceId,
+                          let channelID = state.channelSettingState.channelDetails?.channelId
+                    else { return }
+                                        
+                    do {
+                        let updatedChannel = try await ChannelProvider.shared.changeChannelOwnership(
+                            workspaceID: workspaceID,
+                            channelID: channelID,
+                            ownerId: channelMember.userId
+                        )
+                        
+                        guard let updatedChannel else { return }
+                        
+                        /// 로컬 DB(Realm) 채널 관리자 업데이트
+                        LocalChannelRepository.shared.updateChannelOwner(
+                            updatedChannel.channelId,
+                            newOwnerId: updatedChannel.ownerId
+                        )
+                        
+                        promise(.success(.changeChannelOwnerViewAction(.completeChangeChannelOwnerShip(updatedChannel: updatedChannel))))
+                    } catch {
+                        promise(.success(.changeChannelOwnerViewAction(.changeChannelOwnerViewActionError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .completeChangeChannelOwnerShip(let updatedChannel):
+            break
         }
     }
     

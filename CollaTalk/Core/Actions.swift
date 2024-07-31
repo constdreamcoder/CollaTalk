@@ -199,5 +199,7 @@ enum AppAction {
         case fetchChannelMembers
         case completeFetchChannelMembers(channelMembers: [WorkspaceMember])
         case changeChannelOwnerViewActionError(Error)
+        case changeChannelOwnerShip(channelMember: WorkspaceMember)
+        case completeChangeChannelOwnerShip(updatedChannel: Channel)
     }
 }

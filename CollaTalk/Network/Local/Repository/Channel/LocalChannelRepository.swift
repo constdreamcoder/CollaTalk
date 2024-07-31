@@ -126,5 +126,19 @@ extension LocalChannelRepository {
             print(error)
         }
     }
+    
+    /// 채널 관리자 업데이트
+    func updateChannelOwner(_ channelId: String, newOwnerId: String) {
+        guard let existingChannel = findOne(channelId) else { return }
+
+        do {
+            let realm = try Realm()
+            try realm.write {
+                existingChannel.ownerId = newOwnerId
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 

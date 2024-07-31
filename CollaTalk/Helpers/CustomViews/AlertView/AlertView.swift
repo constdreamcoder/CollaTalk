@@ -105,7 +105,7 @@ struct Alert: View {
                 .foregroundStyle(.textPrimary)
             
             switch alertType {
-            case .changeWorkspaceOwner:
+            case .changeWorkspaceOwner, .changeChannelOwner:
                 Text(message)
                     .font(.body)
                     .foregroundStyle(.textSecondary)

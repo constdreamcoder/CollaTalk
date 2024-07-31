@@ -338,8 +338,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
 
             mutatingState.workspaceState.myChannels = myChennels
             mutatingState.workspaceState.dmRooms = dmRooms
-        
-            mutatingState.navigationState.isSidebarVisible = false
+           
+            /// 채널 관리자 변경 후, 화면 전환 중인지 여부에 따른 분기처리
+            if mutatingState.networkCallSuccessType == .popFromChannelSettingViewToHomeView {
+                mutatingState.networkCallSuccessType = .none
+            } else {
+                mutatingState.navigationState.isSidebarVisible = false
+            }
                                     
         case .deleteWorkspace(let workspace):
             mutatingState.isLoading = true
@@ -353,9 +358,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.selectedWorkspace = nil
         case .setHomeDefaultView(let workspaces):
-            mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.workspaces = workspaces
             mutatingState.workspaceState.selectedWorkspace = workspaces.first
+        
+            /// 채널 관리자 변경 후, 화면 전환 중이지 않을 때만 홈 화면으로 이동
+            if !(mutatingState.networkCallSuccessType == .popFromChannelSettingViewToHomeView) {
+                mutatingState.networkCallSuccessType = .homeView
+            }
+            
         case .setDMChatView(let chatRoom, let dms):
             mutatingState.isLoading = false
             
@@ -862,11 +872,33 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? ChangeChannelOwnershipError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                case .noAccess:
+                    print(error.localizedDescription)
+                }
             }
         case .completeFetchChannelMembers(let channelMembers):
             mutatingState.isLoading = false
             
             mutatingState.changeChannelOwnerState.channelMembers = channelMembers
+        case .changeChannelOwnerShip(let channelMember):
+            mutatingState.isLoading = true
+        case .completeChangeChannelOwnerShip(let updatedChannel):
+            mutatingState.isLoading = false
+            
+            mutatingState.channelState.channel = updatedChannel
+            
+            mutatingState.navigationState.isChangeChannelOwnerViewPresented = false
+            
+            mutatingState.toastMessage = ToastMessage.changeChannelOwner(.completeOwnershipTransfer).message
+            mutatingState.showToast = true
+            
+            mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
         }
     }
     return mutatingState
