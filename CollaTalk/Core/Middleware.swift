@@ -197,6 +197,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentSearchChannelView(let present, let allChannels):
             break
+        case .presentChangeChannelOwnerView(let present):
+            break
         }
         
     case .loginAction(let loginAction):

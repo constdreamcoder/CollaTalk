@@ -57,6 +57,14 @@ struct ChannelSettingView: View {
                 .scrollIndicators(.hidden)
             }
         }
+        .sheet(
+            isPresented: Binding(
+                get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
+            )
+        ) {
+            ChangeChannelOwnerView()
+        }
     }
 }
 
@@ -91,7 +99,6 @@ struct ChannelDescriptionSection: View {
 }
 
 struct ChannelMemberSection: View {
-    
     
     @Binding var isExpanded: Bool
     
@@ -190,9 +197,10 @@ struct ChannelSettingButtonSection: View {
             .bottomButtonShape(.backgroundSecondary)
             
             CustomButton {
-                print("채널 관리자")
+                print("채널 관리자 변경")
+                store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: true)))
             } label: {
-                Text("채널 관리자")
+                Text("채널 관리자 변경")
                     .foregroundStyle(.brandBlack)
             }
             .overlay {

@@ -78,6 +78,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = false
             mutatingState.navigationState.isSearchChannelViewPresented = present
             mutatingState.searchChannelState.allChannels = allChannels
+        case .presentChangeChannelOwnerView(let present):
+            mutatingState.navigationState.isChangeChannelOwnerViewPresented = present
         }
         
     case .loginAction(let loginAction):

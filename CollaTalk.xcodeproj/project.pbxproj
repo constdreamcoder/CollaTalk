@@ -124,6 +124,9 @@
 		00BD4E5D2C5A0E21004C2E14 /* EditChannelDetailsParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E5C2C5A0E21004C2E14 /* EditChannelDetailsParams.swift */; };
 		00BD4E5F2C5A0E56004C2E14 /* EditChannelDetailsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E5E2C5A0E56004C2E14 /* EditChannelDetailsRequest.swift */; };
 		00BD4E612C5A0FE7004C2E14 /* EditChannelDetailsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E602C5A0FE7004C2E14 /* EditChannelDetailsError.swift */; };
+		00BD4E642C5A3489004C2E14 /* ChangeOwnerViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E632C5A3489004C2E14 /* ChangeOwnerViewFrame.swift */; };
+		00BD4E662C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E652C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift */; };
+		00BD4E682C5A36E9004C2E14 /* ChangeChannelOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E672C5A36E9004C2E14 /* ChangeChannelOwnerView.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
 		00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* SelectPhotosView.swift */; };
@@ -304,6 +307,9 @@
 		00BD4E5C2C5A0E21004C2E14 /* EditChannelDetailsParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChannelDetailsParams.swift; sourceTree = "<group>"; };
 		00BD4E5E2C5A0E56004C2E14 /* EditChannelDetailsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChannelDetailsRequest.swift; sourceTree = "<group>"; };
 		00BD4E602C5A0FE7004C2E14 /* EditChannelDetailsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChannelDetailsError.swift; sourceTree = "<group>"; };
+		00BD4E632C5A3489004C2E14 /* ChangeOwnerViewFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeOwnerViewFrame.swift; sourceTree = "<group>"; };
+		00BD4E652C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeOwnerViewCellFrame.swift; sourceTree = "<group>"; };
+		00BD4E672C5A36E9004C2E14 /* ChangeChannelOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnerView.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
 		00DA64D42C512F42005BC393 /* SelectPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotosView.swift; sourceTree = "<group>"; };
@@ -392,9 +398,10 @@
 		000F400D2C58DA1E00FF87BF /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				00BD4E522C59D685004C2E14 /* ChannelSettingView.swift */,
 				000F400E2C58DA3200FF87BF /* CreateOrEditChannelView.swift */,
 				001D141F2C59265F00CC8777 /* SearchChannelView.swift */,
-				00BD4E522C59D685004C2E14 /* ChannelSettingView.swift */,
+				00BD4E672C5A36E9004C2E14 /* ChangeChannelOwnerView.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -836,6 +843,7 @@
 				00318EEC2C3FA9A7003206CB /* LoadingView.swift */,
 				0020887E2C4B6FE20094E3B6 /* AlertView */,
 				0018096B2C46A7B200F41D50 /* RemoteImage */,
+				00BD4E622C5A3467004C2E14 /* ChangeOwnerViewFrame */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -861,6 +869,15 @@
 				0034AC182C44E9870052EE0D /* String+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00BD4E622C5A3467004C2E14 /* ChangeOwnerViewFrame */ = {
+			isa = PBXGroup;
+			children = (
+				00BD4E632C5A3489004C2E14 /* ChangeOwnerViewFrame.swift */,
+				00BD4E652C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift */,
+			);
+			path = ChangeOwnerViewFrame;
 			sourceTree = "<group>";
 		};
 		00C4F9B02C3CE5F90027B2D6 /* Enums */ = {
@@ -1248,6 +1265,7 @@
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
+				00BD4E682C5A36E9004C2E14 /* ChangeChannelOwnerView.swift in Sources */,
 				00DF69AF2C54BE93001EE608 /* SocketIOManager.swift in Sources */,
 				005327502C41381800977D31 /* HomeDefaultView.swift in Sources */,
 				00BD4E572C59F326004C2E14 /* FetchChannelDetailsParams.swift in Sources */,
@@ -1303,6 +1321,7 @@
 				00292E5C2C57579700D19AB5 /* GeneralType.swift in Sources */,
 				0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
+				00BD4E662C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift in Sources */,
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
@@ -1348,6 +1367,7 @@
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
 				006C32F12C5385B00084C4E2 /* FetchDMHistoryQuery.swift in Sources */,
+				00BD4E642C5A3489004C2E14 /* ChangeOwnerViewFrame.swift in Sources */,
 				0037BC012C42C77700E9AF0A /* MainTab.swift in Sources */,
 				006A9EC52C58E1790068AF32 /* CreateNewChannelParams.swift in Sources */,
 				00BD4E5F2C5A0E56004C2E14 /* EditChannelDetailsRequest.swift in Sources */,

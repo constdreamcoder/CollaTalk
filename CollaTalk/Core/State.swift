@@ -39,6 +39,7 @@ struct AppState {
         var isSidebarVisible: Bool = false
         var showImagePicker: Bool = false
         var isChangeWorkspaceOwnerViewPresented: Bool = false
+        var isChangeChannelOwnerViewPresented: Bool = false
         var isInviteMemeberViewPresented: Bool = false
         var isCreateOrEditChannelViewPresented: Bool = false
         var isSearchChannelViewPresented: Bool = false

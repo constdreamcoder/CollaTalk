@@ -1,14 +1,13 @@
 //
-//  ChangeWorkspaceOwnerView.swift
+//  ChangeChannelOwnerView.swift
 //  CollaTalk
 //
-//  Created by SUCHAN CHANG on 7/20/24.
+//  Created by SUCHAN CHANG on 7/31/24.
 //
 
 import SwiftUI
-import Combine
 
-struct ChangeWorkspaceOwnerView: View {
+struct ChangeChannelOwnerView: View {
     
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var windowProvider: WindowProvider
@@ -16,8 +15,8 @@ struct ChangeWorkspaceOwnerView: View {
     var body: some View {
         ChangeOwnerViewFrame(
             isPresented: Binding(
-                get: { store.state.navigationState.isChangeWorkspaceOwnerViewPresented },
-                set: { store.dispatch(.navigationAction(.presentChangeWorkspaceOwnerView(present: $0))) }
+                get: { store.state.navigationState.isChangeChannelOwnerViewPresented },
+                set: { store.dispatch(.navigationAction(.presentChangeChannelOwnerView(present: $0))) }
             ),
             onDisappearAction: { store.dispatch(.changeWorkspaceOwnerAction(.initializeAllElements)) },
             onChangeValue: store.state.changeWorkspaceOwnerState.workspaceMembers,
@@ -37,7 +36,7 @@ struct ChangeWorkspaceOwnerView: View {
                 List {
                     ForEach(store.state.changeWorkspaceOwnerState.workspaceMembers, id: \.userId) { workspaceMember in
                         if workspaceMember.userId != store.state.user?.userId ?? ""  {
-                            ChangeWorkspaceOwnerViewCell(workspaceMember: workspaceMember)
+                            ChangeChannelOwnerViewCell(workspaceMember: workspaceMember)
                                 .listRowInsets(.init(top: 8, leading: 14, bottom: 8, trailing: 14))
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
@@ -65,19 +64,19 @@ struct ChangeWorkspaceOwnerView: View {
                 }
                 .listStyle(.plain)
                 .scrollIndicators(.hidden)
-            }
+            },
+            isChangingChannelOwnerShip: true
         )
         
     }
 }
 
-
-
 #Preview {
-    ChangeWorkspaceOwnerView()
+    ChangeChannelOwnerView()
 }
 
-struct ChangeWorkspaceOwnerViewCell: View {
+
+struct ChangeChannelOwnerViewCell: View {
     
     let workspaceMember: WorkspaceMember
     
