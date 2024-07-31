@@ -116,6 +116,9 @@
 		0086B5C72C3812DD00AD889C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086B5C62C3812DD00AD889C /* LoginView.swift */; };
 		00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */; };
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
+		00BD4E512C59D632004C2E14 /* NavigationFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */; };
+		00BD4E532C59D685004C2E14 /* ChannelSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E522C59D685004C2E14 /* ChannelSettingView.swift */; };
+		00BD4E552C59DC70004C2E14 /* CellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E542C59DC70004C2E14 /* CellHeader.swift */; };
 		00C4F9BC2C3D1FB00027B2D6 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */; };
 		00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */; };
 		00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DA64D42C512F42005BC393 /* SelectPhotosView.swift */; };
@@ -288,6 +291,9 @@
 		0086B5C62C3812DD00AD889C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
+		00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrameView.swift; sourceTree = "<group>"; };
+		00BD4E522C59D685004C2E14 /* ChannelSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSettingView.swift; sourceTree = "<group>"; };
+		00BD4E542C59DC70004C2E14 /* CellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellHeader.swift; sourceTree = "<group>"; };
 		00C4F9BB2C3D1FB00027B2D6 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowProvider.swift; sourceTree = "<group>"; };
 		00DA64D42C512F42005BC393 /* SelectPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotosView.swift; sourceTree = "<group>"; };
@@ -377,6 +383,7 @@
 			children = (
 				000F400E2C58DA3200FF87BF /* CreateNewChannelView.swift */,
 				001D141F2C59265F00CC8777 /* SearchChannelView.swift */,
+				00BD4E522C59D685004C2E14 /* ChannelSettingView.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -803,6 +810,8 @@
 		0086B5AF2C37E90600AD889C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				00BD4E542C59DC70004C2E14 /* CellHeader.swift */,
+				00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */,
 				0086B5B02C37E98C00AD889C /* CustomButton.swift */,
 				0086B5B82C37F18E00AD889C /* BottomSheetView.swift */,
 				0086B5BA2C37F1A600AD889C /* BottomViewGrabber.swift */,
@@ -1243,6 +1252,7 @@
 				0060643A2C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
+				00BD4E552C59DC70004C2E14 /* CellHeader.swift in Sources */,
 				000F40022C588AC300FF87BF /* SendChannelChatRequest.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
@@ -1282,6 +1292,7 @@
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
 				005278872C4EBA2500A85AA5 /* HiddenModifier.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
+				00BD4E512C59D632004C2E14 /* NavigationFrameView.swift in Sources */,
 				007441A52C465AEE00FA8727 /* ImageService.swift in Sources */,
 				0037BC0F2C42E04900E9AF0A /* WorkspaceService.swift in Sources */,
 				00292E6D2C57E05F00D19AB5 /* FetchChannelChatsQuery.swift in Sources */,
@@ -1291,6 +1302,7 @@
 				006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
 				00F47A422C4E4B4D0095EB4E /* DMListView.swift in Sources */,
+				00BD4E532C59D685004C2E14 /* ChannelSettingView.swift in Sources */,
 				001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */,
 				006A9EC72C58E1880068AF32 /* CreateNewChannelRequest.swift in Sources */,
 				00F6F2C72C3C129700C1AFF1 /* Headers.swift in Sources */,

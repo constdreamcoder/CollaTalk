@@ -22,7 +22,7 @@ struct CustomButton<Content>: View where Content: View {
             label
                 .foregroundStyle(.brandWhite)
                 .font(.title2)
-                .frame(maxWidth: .infinity, maxHeight: 44)
+                .frame(maxWidth: .infinity, idealHeight: 44, maxHeight: 44)
         })
     }
 }

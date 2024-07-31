@@ -69,6 +69,8 @@ struct ContentView: View {
                         MainView()
                     case .chatView:
                         ChatView(chatRoomType: store.state.chatState.chatRoomType)
+                    case .channelSettingView:
+                        ChannelSettingView()
                     case .none:
                         EmptyView()
                             .background(.clear)
@@ -122,6 +124,9 @@ struct ContentView: View {
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .chatView:
                     navigationRouter.push(screen: .chatView)
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .channelSettingView:
+                    navigationRouter.push(screen: .channelSettingView)
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

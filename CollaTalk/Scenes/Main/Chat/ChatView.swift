@@ -263,50 +263,23 @@ struct ChatViewNavigationBar: View {
     let title: String
     
     var body: some View {
-        VStack {
-            HStack {
-                Button(
-                    action: {
-                        print("뒤로가기")
-                        navigationRouter.pop()
-                        if store.state.tabState.currentTab == .dm {
-                            store.dispatch(.dmAction(.refresh))
-                        } else if store.state.tabState.currentTab == .home {
-                            store.dispatch(.homeAction(.refresh))
-                        }
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                            .font(.title1)
-                            .frame(width: 17, height: 22)
-                    }
-                )
-                .padding(10)
-                
-                Spacer()
-                
-                Text(title)
-                    .font(.title1)
-                    .lineLimit(1)
-                
-                Spacer()
-                
-                Button(
-                    action: {
-                        print("채널 설정")
-                    },
-                    label: {
-                        Image(systemName: "list.bullet")
-                            .font(.title1)
-                            .frame(width: 18, height: 16)
-                    }
-                )
-                .padding(.trailing, 15)
-                .hidden(chatRoomType == .dm)
-            }
-            .foregroundStyle(.brandBlack)
-            
-            Divider()
-        }
+        NavigationFrameView(
+            title: title,
+            leftButtonAction: {
+                print("뒤로가기")
+                navigationRouter.pop()
+                if store.state.tabState.currentTab == .dm {
+                    store.dispatch(.dmAction(.refresh))
+                } else if store.state.tabState.currentTab == .home {
+                    store.dispatch(.homeAction(.refresh))
+                }
+            },
+            rightButtonAction: {
+                print("채널 설정")
+                navigationRouter.push(screen: .channelSettingView)
+            },
+            isRightButtonHidden: chatRoomType == .dm
+        )
     }
 }
 

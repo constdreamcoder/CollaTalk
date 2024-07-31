@@ -86,7 +86,8 @@ struct HomeCell: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            CellHeader(
+            
+            HomeCellHeader(
                 isExpanded: $isExpanded,
                 homeContentType: homeContentType
             )
@@ -133,26 +134,15 @@ struct HomeCell: View {
     }
 }
 
-struct CellHeader: View {
+struct HomeCellHeader: View {
     @Binding var isExpanded: Bool
     let homeContentType: HomeContentType
     
     var body: some View {
-        HStack {
-            Text(homeContentType.title)
-                .font(.title2)
-            
-            Spacer()
-            
-            Image(systemName: isExpanded ? "chevron.down" : "chevron.forward")
-                .font(.title2)
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        isExpanded.toggle()
-                    }
-                }
-        }
-        .frame(height: 56)
+        CellHeader(
+            isExpanded: $isExpanded,
+            title: homeContentType.title
+        )
     }
 }
 
@@ -217,7 +207,7 @@ struct AddNewCellView: View {
         HStack {
             Image(systemName: "plus")
                 .foregroundStyle(.textSecondary)
-                .frame(width: 18)
+                .frame(width: 14)
             
             Spacer()
                 .frame(width: 16)
@@ -245,7 +235,7 @@ struct MyChennelCellFrontPart: View {
             Image(systemName: "number")
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
-                .frame(width: 18)
+                .frame(width: 14)
                 .foregroundStyle(unreadNumber > 0 ? .brandBlack : .textSecondary)
             
             Spacer()
