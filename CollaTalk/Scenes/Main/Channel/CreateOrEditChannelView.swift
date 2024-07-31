@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateNewChannelView: View {
+struct CreateOrEditChannelView: View {
     @EnvironmentObject private var store: AppStore
     
     var body: some View {
@@ -19,10 +19,10 @@ struct CreateNewChannelView: View {
             VStack(spacing: 24) {
                 
                 SheetNavigation(
-                    title: .createNewChannel,
+                    title: store.state.createOrEditChannel.isEditMode ? .editChannel : .createNewChannel,
                     isPresented: Binding(
-                        get: { store.state.navigationState.isCreateNewChannelViewPresented },
-                        set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
+                        get: { store.state.navigationState.isCreateOrEditChannelViewPresented },
+                        set: { store.dispatch(.navigationAction(.presentCreateOrEditChannelView(present: $0, isEditMode: false))) }
                     ),
                     transitionAction: {}
                 )
@@ -30,8 +30,8 @@ struct CreateNewChannelView: View {
                 InputView(
                     title: "채널 이름",
                     placeholder: "채널 이름을 입력하세요 (필수)",
-                    textFieldGetter: { store.state.createNewChannel.channelName },
-                    textFieldSetter: { store.dispatch(.createNewChannelAction(.writeName(name: $0))) },
+                    textFieldGetter: { store.state.createOrEditChannel.channelName },
+                    textFieldSetter: { store.dispatch(.createOrEditChannelAction(.writeName(name: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -41,8 +41,8 @@ struct CreateNewChannelView: View {
                 InputView(
                     title: "채널 설명",
                     placeholder: "채널을 설명하세요 (옵션)",
-                    textFieldGetter: { store.state.createNewChannel.channelDescription },
-                    textFieldSetter: { store.dispatch(.createNewChannelAction(.writeDescription(description: $0))) },
+                    textFieldGetter: { store.state.createOrEditChannel.channelDescription },
+                    textFieldSetter: { store.dispatch(.createOrEditChannelAction(.writeDescription(description: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -52,10 +52,19 @@ struct CreateNewChannelView: View {
                 Spacer()
                 
                 CustomButton {
-                    print("생성")
-                    store.dispatch(.createNewChannelAction(.createNewChannel))
+                    if store.state.createOrEditChannel.isEditMode {
+                        print("완료")
+                        store.dispatch(.createOrEditChannelAction(.editChannel))
+                    } else {
+                        print("생성")
+                        store.dispatch(.createOrEditChannelAction(.createNewChannel))
+                    }
                 } label: {
-                    Text("생성")
+                    if store.state.createOrEditChannel.isEditMode {
+                        Text("완료")
+                    } else {
+                        Text("생성")
+                    }
                 }
                 .disabled(!createNewChannelButtonValid)
                 .bottomButtonShape(createNewChannelButtonValid ? .brandGreen : .brandInactive)
@@ -64,12 +73,12 @@ struct CreateNewChannelView: View {
     }
 }
 
-extension CreateNewChannelView {
+extension CreateOrEditChannelView {
     private var createNewChannelButtonValid: Bool {
-        !store.state.createNewChannel.isChannelNameEmpty
+        !store.state.createOrEditChannel.isChannelNameEmpty
     }
 }
 
 #Preview {
-    CreateNewChannelView()
+    CreateOrEditChannelView()
 }

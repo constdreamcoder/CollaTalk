@@ -161,4 +161,29 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         
         return nil
     }
+    
+    func editChannelDetails(workspaceID: String, channelID: String, name: String, description: String?) async throws -> Channel? {
+        do {
+            let editChannelDetailsParams = EditChannelDetailsParams(workspaceID: workspaceID, channelID: channelID)
+            let editChannelDetailsRequest = EditChannelDetailsRequest(name: name, description: description, image: nil)
+            let response = try await request(.editChannelDetails(params: editChannelDetailsParams, request: editChannelDetailsRequest))
+            switch response.statusCode {
+            case 200:
+                let updatedChannel = try decode(response.data, as: Channel.self)
+                return updatedChannel
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let editChannelDetailsError = EditChannelDetailsError(rawValue: errorCode.errorCode) {
+                    throw editChannelDetailsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }

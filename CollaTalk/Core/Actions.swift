@@ -24,7 +24,7 @@ enum AppAction {
     case alertAction(AlertAction)
     case changeWorkspaceOwnerAction(ChangeWorkspaceOwnerAction)
     case inviteMemeberAction(InviteMemeberAction)
-    case createNewChannelAction(CreateNewChannelAction)
+    case createOrEditChannelAction(CreateOrEditChannelAction)
     case dmAction(DMAction)
     case channelAction(ChannelAction)
     case chatAction(ChatAction)
@@ -53,7 +53,7 @@ enum AppAction {
         case showImagePickerView(show: Bool)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
         case presentInviteMemeberView(present: Bool)
-        case presentCreateNewChannelView(present: Bool)
+        case presentCreateOrEditChannelView(present: Bool, isEditMode: Bool = false)
         case presentSearchChannelView(present: Bool, allChannels: [Channel])
     }
     
@@ -138,13 +138,19 @@ enum AppAction {
         case showToastMessageForNoRightToInviteMember
     }
     
-    enum CreateNewChannelAction {
+    enum CreateOrEditChannelAction {
+        /// 채널 생성 액션
         case writeName(name: String)
         case writeDescription(description: String)
         case createNewChannel
-        case createNewChannelError(Error)
+        case createOrEditChannelError(Error)
         case returnToHomeView
         case nameValidationError
+        
+        /// 채널 편집 액션
+        case moveToEditChannelView
+        case editChannel
+        case returnToChannelSettingView
     }
     
     enum DMAction {
@@ -155,7 +161,7 @@ enum AppAction {
     }
     
     enum ChannelAction {
-        case fetchChannelChats(chatRoomType: ChatRoomType, channel: Channel)
+        case fetchChannelChats(chatRoomType: ChatRoomType, channel: Channel?, isRefreshing: Bool = false)
         case channelError(Error)
     }
     
@@ -184,5 +190,6 @@ enum AppAction {
     
     enum ChannelSettingAction {
         case fetchChannel
+        case channelSettingError(Error)
     }
 }

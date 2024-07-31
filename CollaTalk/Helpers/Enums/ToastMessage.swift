@@ -18,7 +18,7 @@ enum ToastMessage: ToastMessageType {
     case changeWorkspaceOwner(ChangeWorkspaceOwner)
     case inviteMemeber(InviteMember)
     case downloadImage(DownloadImage)
-    case createNewChannel(CreateNewChannel)
+    case createOrEditChannel(CreateOrEditChannel)
     
     var message: String {
         switch self {
@@ -34,7 +34,7 @@ enum ToastMessage: ToastMessageType {
             return inviteMember.message
         case .downloadImage(let downloadImage):
             return downloadImage.message
-        case .createNewChannel(let createNewChannel):
+        case .createOrEditChannel(let createNewChannel):
             return createNewChannel.message
         }
     }
@@ -169,10 +169,11 @@ enum ToastMessage: ToastMessageType {
         }
     }
     
-    enum CreateNewChannel: ToastMessageType {
+    enum CreateOrEditChannel: ToastMessageType {
         case duplicatedData
         case successToCreate
         case nameValidationError
+        case successToEdit
         
         var message: String {
             switch self {
@@ -182,6 +183,8 @@ enum ToastMessage: ToastMessageType {
                 return "채널이 생성되었습니다."
             case .nameValidationError:
                 return "채널명은 1~30자까지만 가능합니다."
+            case .successToEdit:
+                return "채널이 편집되었습니다."
             }
         }
     }

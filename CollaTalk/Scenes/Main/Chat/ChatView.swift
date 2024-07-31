@@ -115,7 +115,8 @@ struct ChatView: View {
             }
         })
         .onDisappear {
-            store.dispatch(.chatAction(.initializeAllElements))
+            // TODO: - 정확한 시점으로 옮기기
+//            store.dispatch(.chatAction(.initializeAllElements))
         }
     }
 }
@@ -276,7 +277,6 @@ struct ChatViewNavigationBar: View {
             },
             rightButtonAction: {
                 print("채널 설정 화면으로 이동")
-//                navigationRouter.push(screen: .channelSettingView)
                 store.dispatch(.channelSettingAction(.fetchChannel))
             },
             isRightButtonHidden: chatRoomType == .dm

@@ -94,5 +94,19 @@ extension LocalChannelRepository {
             print(error)
         }
     }
+    
+    func updateChannel(with updatdChanel: Channel) {
+        guard let exisitingChannel = findOne(updatdChanel.channelId) else { return }
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                exisitingChannel.name = updatdChanel.name
+                exisitingChannel.desc = updatdChanel.description
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 

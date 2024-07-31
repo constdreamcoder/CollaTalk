@@ -19,8 +19,9 @@ struct SheetNavigation: View {
         case inviteMember = "팀원 초대"
         case createNewChannel = "채널 생성"
         case searchChannel = "채널 탐색"
+        case editChannel = "채널 편집"
     }
-    
+        
     let title: Feature
     @Binding var isPresented: Bool
     let transitionAction: () -> Void

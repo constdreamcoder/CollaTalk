@@ -193,9 +193,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }
         case .presentInviteMemeberView(let present):
             break
-        case .presentCreateNewChannelView(let present):
+        case .presentCreateOrEditChannelView(let present, let isEditMode):
             break
-        case .presentSearchChannelView(let present):
+        case .presentSearchChannelView(let present, let allChannels):
             break
         }
         
@@ -1070,11 +1070,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         }
     case .channelAction(let channelAction):
         switch channelAction {
-        case .fetchChannelChats(let chatRoomType, let channel):
+        case .fetchChannelChats(let chatRoomType, let channel, let isRefreshing):
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
                         guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                        guard let channel else { return }
                         
                         let lastChannelChatInLocal = LocalChannelChatRepository.shared.findLastestChannelChat(channel.channelId)
                         
@@ -1134,8 +1135,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             SocketIOManager.shared.setupSocketEventListeners(.channel(channelId: channel.channelId))
                             SocketIOManager.shared.establishConnection()
                             
-                            /// 채팅화면으로 이동
-                            promise(.success(.networkCallSuccessTypeAction(.setChannelChatView(channel: channel, channelChats: sortedGroupedChannelChats))))
+                            if !isRefreshing {
+                                /// 채팅화면으로 이동
+                                promise(.success(.networkCallSuccessTypeAction(.setChannelChatView(channel: channel, channelChats: sortedGroupedChannelChats))))
+                            }
                         }
                     } catch {
                         promise(.success(.channelAction(.channelError(error))))
@@ -1145,15 +1148,15 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .channelError(let error):
             break
         }
-    case .createNewChannelAction(let createNewChannelAction):
+    case .createOrEditChannelAction(let createNewChannelAction):
         switch createNewChannelAction {
         case .writeName(let name): break
         case .writeDescription(let description): break
         case .createNewChannel:
             return Future<AppAction, Never> { promise in
-                guard ValidationCheck.channelName(input: state.createNewChannel.channelName).validation 
+                guard ValidationCheck.channelName(input: state.createOrEditChannel.channelName).validation 
                 else {
-                    promise(.success(.createNewChannelAction(.nameValidationError)))
+                    promise(.success(.createOrEditChannelAction(.nameValidationError)))
                     return
                 }
                 guard let workspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
@@ -1161,22 +1164,48 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     do {
                         let newChannel = try await ChannelProvider.shared.createNewChannel(
                             workspaceID: workspace.workspaceId,
-                            name: state.createNewChannel.channelName,
-                            description: state.createNewChannel.channelDescription
+                            name: state.createOrEditChannel.channelName,
+                            description: state.createOrEditChannel.channelDescription
                         )
                         
-                        promise(.success(.createNewChannelAction(.returnToHomeView)))
+                        promise(.success(.createOrEditChannelAction(.returnToHomeView)))
                     } catch {
-                        promise(.success(.createNewChannelAction(.createNewChannelError(error))))
+                        promise(.success(.createOrEditChannelAction(.createOrEditChannelError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
-        case .createNewChannelError(let error):
+        case .createOrEditChannelError(let error):
             break
         case .returnToHomeView:
             return Just(.homeAction(.refresh)).eraseToAnyPublisher()
         case .nameValidationError:
             break
+        case .moveToEditChannelView:
+            return Just(.navigationAction(.presentCreateOrEditChannelView(present: true, isEditMode: true))).eraseToAnyPublisher()
+        case .editChannel:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let updatedChannel = try await ChannelProvider.shared.editChannelDetails(
+                            workspaceID: state.workspaceState.selectedWorkspace?.workspaceId ?? "",
+                            channelID: state.channelSettingState.channelDetails?.channelId ?? "",
+                            name: state.createOrEditChannel.channelName,
+                            description: state.createOrEditChannel.channelDescription
+                        )
+                        
+                        guard let updatedChannel else { return }
+                        
+                        /// 로컬 DB(Realm) 업데이트
+                        LocalChannelRepository.shared.updateChannel(with: updatedChannel)
+                        
+                        promise(.success(.createOrEditChannelAction(.returnToChannelSettingView)))
+                    } catch {
+                        promise(.success(.createOrEditChannelAction(.createOrEditChannelError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .returnToChannelSettingView:
+            return Just(.channelSettingAction(.fetchChannel)).eraseToAnyPublisher()
         }
     case .searchChannelAction(let searchAction):
         switch searchAction {
@@ -1191,7 +1220,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let allChannels else { return }
                         promise(.success(.navigationAction(.presentSearchChannelView(present: true, allChannels: allChannels))))
                     } catch {
-                        print("error", error)
                         promise(.success(.searchChannelAction(.SearchChannelError(error))))
                     }
                 }
@@ -1236,12 +1264,15 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         
                         guard let channelDetails else { return }
+                        
                         promise(.success(.networkCallSuccessTypeAction(.setChannelSettingView(channelDetails: channelDetails))))
                     } catch {
-                        print("error", error)
+                        promise(.success(.channelSettingAction(.channelSettingError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
+        case .channelSettingError(let error):
+            break
         }
     }
     

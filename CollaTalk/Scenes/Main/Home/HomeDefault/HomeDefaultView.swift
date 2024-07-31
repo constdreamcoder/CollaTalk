@@ -37,7 +37,7 @@ struct HomeDefaultView: View {
         }
         .confirmationDialog("", isPresented: $isDialogPresented) {
             Button("채널 생성", role: .none) {
-                store.dispatch(.navigationAction(.presentCreateNewChannelView(present: true)))
+                store.dispatch(.navigationAction(.presentCreateOrEditChannelView(present: true)))
             }
             Button("채널 탐색", role: .none) {
                 store.dispatch(.searchChannelAction(.fetchAllChannels))
@@ -54,11 +54,11 @@ struct HomeDefaultView: View {
         }
         .sheet(
             isPresented: Binding(
-                get: { store.state.navigationState.isCreateNewChannelViewPresented },
-                set: { store.dispatch(.navigationAction(.presentCreateNewChannelView(present: $0))) }
+                get: { store.state.navigationState.isCreateOrEditChannelViewPresented },
+                set: { store.dispatch(.navigationAction(.presentCreateOrEditChannelView(present: $0, isEditMode: false))) }
             )
         ) {
-            CreateNewChannelView()
+            CreateOrEditChannelView()
         }
         .fullScreenCover(
             isPresented: Binding(

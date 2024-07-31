@@ -71,8 +71,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
         case .presentInviteMemeberView(let present):
             mutatingState.navigationState.isInviteMemeberViewPresented = present
-        case .presentCreateNewChannelView(let present):
-            mutatingState.navigationState.isCreateNewChannelViewPresented = present
+        case .presentCreateOrEditChannelView(let present, let isEditMode):
+            mutatingState.navigationState.isCreateOrEditChannelViewPresented = present
+            mutatingState.createOrEditChannel.isEditMode = isEditMode
         case .presentSearchChannelView(let present, let allChannels):
             mutatingState.isLoading = false
             mutatingState.navigationState.isSearchChannelViewPresented = present
@@ -375,7 +376,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.channelSettingState.channelDetails = channelDetails
             
-            mutatingState.networkCallSuccessType = .channelSettingView
+            /// 채널 편집 모드일 때
+            if mutatingState.createOrEditChannel.isEditMode {
+                mutatingState.navigationState.isCreateOrEditChannelViewPresented = false
+                mutatingState.createOrEditChannel.isEditMode = false
+            } else {
+                mutatingState.networkCallSuccessType = .channelSettingView
+            }
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -650,7 +657,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         }
     case .channelAction(let channelAction):
         switch channelAction {
-        case .fetchChannelChats(let chatRoomType, let channel):
+        case .fetchChannelChats(let chatRoomType, let channel, let isRefreshing):
             mutatingState.isLoading = true
             
             mutatingState.chatState.chatRoomType = chatRoomType
@@ -679,16 +686,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 }
             }
         }
-    case .createNewChannelAction(let createNewChannelAction):
+    case .createOrEditChannelAction(let createNewChannelAction):
         switch createNewChannelAction {
         case .writeName(let name):
-            mutatingState.createNewChannel.channelName = name
-            mutatingState.createNewChannel.isChannelNameEmpty = name.isEmpty
+            mutatingState.createOrEditChannel.channelName = name
+            mutatingState.createOrEditChannel.isChannelNameEmpty = name.isEmpty
         case .writeDescription(let description):
-            mutatingState.createNewChannel.channelDescription = description
+            mutatingState.createOrEditChannel.channelDescription = description
         case .createNewChannel:
             mutatingState.isLoading = true
-        case .createNewChannelError(let error):
+        case .createOrEditChannelError(let error):
             mutatingState.isLoading = false
             
             if let error = error as? CommonError {
@@ -714,23 +721,46 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 case .duplicatedData:
                     print(error.localizedDescription)
-                    mutatingState.toastMessage = ToastMessage.createNewChannel(.duplicatedData).message
+                    mutatingState.toastMessage = ToastMessage.createOrEditChannel(.duplicatedData).message
                     mutatingState.showToast = true
                 case .noData:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? EditChannelDetailsError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.createOrEditChannel(.duplicatedData).message
+                    mutatingState.showToast = true
+                case .noData:
+                    print(error.localizedDescription)
+                case .noAccess:
                     print(error.localizedDescription)
                 }
             }
         case .returnToHomeView:
             mutatingState.isLoading = false
             
-            mutatingState.navigationState.isCreateNewChannelViewPresented = false
+            mutatingState.navigationState.isCreateOrEditChannelViewPresented = false
             
-            mutatingState.toastMessage = ToastMessage.createNewChannel(.successToCreate).message
+            mutatingState.toastMessage = ToastMessage.createOrEditChannel(.successToCreate).message
             mutatingState.showToast = true
         case .nameValidationError:
             mutatingState.isLoading = false
             
-            mutatingState.toastMessage = ToastMessage.createNewChannel(.nameValidationError).message
+            mutatingState.toastMessage = ToastMessage.createOrEditChannel(.nameValidationError).message
+            mutatingState.showToast = true
+        case .moveToEditChannelView:
+            mutatingState.createOrEditChannel.channelName = mutatingState.channelSettingState.channelDetails?.name ?? ""
+            mutatingState.createOrEditChannel.channelDescription = mutatingState.channelSettingState.channelDetails?.description ?? ""
+        case .editChannel:
+            mutatingState.isLoading = true
+        case .returnToChannelSettingView:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.createOrEditChannel(.successToEdit).message
             mutatingState.showToast = true
         }
     case .searchChannelAction(let searchChannelAction):
@@ -774,6 +804,32 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         switch channelSettingAction {
         case .fetchChannel:
             mutatingState.isLoading = true
+        case .channelSettingError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? FetchChannelDetailsError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     return mutatingState

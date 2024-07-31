@@ -24,6 +24,15 @@ struct ChannelSettingView: View {
                     leftButtonAction: {
                         print("뒤로가기")
                         navigationRouter.pop()
+                        store.dispatch(
+                            .channelAction(
+                                .fetchChannelChats(
+                                    chatRoomType: .channel,
+                                    channel: store.state.channelSettingState.channelDetails,
+                                    isRefreshing: true
+                                )
+                            )
+                        )
                     }
                 )
                 
@@ -150,10 +159,14 @@ struct ChannelMemberSection: View {
 }
 
 struct ChannelSettingButtonSection: View {
+    
+    @EnvironmentObject private var store: AppStore
+    
     var body: some View {
         VStack {
             CustomButton {
                 print("채널 편집")
+                store.dispatch(.createOrEditChannelAction(.moveToEditChannelView))
             } label: {
                 Text("채널 편집")
                     .foregroundStyle(.brandBlack)
@@ -175,7 +188,6 @@ struct ChannelSettingButtonSection: View {
                     .stroke(.brandBlack, lineWidth: 1)
             }
             .bottomButtonShape(.backgroundSecondary)
-            
             
             CustomButton {
                 print("채널 관리자")
