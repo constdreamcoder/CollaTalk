@@ -236,14 +236,14 @@ final class ChannelProvider: BaseProvider<ChannelService> {
         return nil
     }
     
-    func leaveChannel(workspaceID: String, channelID: String) async throws -> Channel? {
+    func leaveChannel(workspaceID: String, channelID: String) async throws -> [Channel]? {
         do {
             let leaveChannelParams = LeaveChannelParams(workspaceID: workspaceID, channelID: channelID)
             let response = try await request(.leaveChannel(Params: leaveChannelParams))
             switch response.statusCode {
             case 200:
-                let updatedChannel = try decode(response.data, as: Channel.self)
-                return updatedChannel
+                let updatedChannels = try decode(response.data, as: [Channel].self)
+                return updatedChannels
             case 400...500:
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {

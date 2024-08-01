@@ -134,8 +134,8 @@ struct ContentView: View {
                     store.dispatch(.workspaceAction(.fetchWorkspaces))
                 case .popFromChannelSettingViewToHomeView:
                     navigationRouter.pop(depth: 2)
-                    store.dispatch(.initializeNetworkCallSuccessType)
                     store.dispatch(.workspaceAction(.fetchWorkspaces))
+                    store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }
             }

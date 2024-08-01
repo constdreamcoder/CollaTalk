@@ -32,7 +32,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         }
     case .initializeNetworkCallSuccessType:
         mutatingState.networkCallSuccessType = .none
-        
     case .alertAction(let alertAction):
         switch alertAction {
         case .showAlert(let alertType, let confirmAction):
@@ -859,13 +858,16 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     mutatingState.showToast = true
                 }
             }
-        case .leaveChannel:
+        case .leaveChannel:            
             mutatingState.isLoading = true
-        case .completeLeaveChannelAction:
+        case .completeLeaveChannelAction(let updatedChannels):
+            print("6")
             mutatingState.isLoading = false
             
+            mutatingState.workspaceState.myChannels = updatedChannels
             mutatingState.channelSettingState.channelDetails = nil
             mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
+            print("7")
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {

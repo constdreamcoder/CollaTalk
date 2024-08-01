@@ -43,6 +43,31 @@ extension LocalChannelRepository {
         }
     }
     
+    /// 채널 목록 생성 및 업데이트
+    func updateChannelList(_ updatedChannels: [Channel]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                let convertedUpdatedChannels: [LocalChannel] = updatedChannels.map {
+                    if let existingChannel = LocalChannelRepository.shared.findOne($0.channelId) {
+                        existingChannel.name = $0.convertToLocalChannel.name
+                        existingChannel.desc = $0.convertToLocalChannel.desc
+                        existingChannel.coverImage = $0.convertToLocalChannel.coverImage
+                        existingChannel.ownerId = $0.convertToLocalChannel.ownerId
+                        existingChannel.createdAt = $0.convertToLocalChannel.createdAt
+                        return existingChannel
+                    }
+                    return $0.convertToLocalChannel
+                }
+                
+                realm.add(convertedUpdatedChannels, update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     /// 새로운 채널 채팅 목록 업데이트
     func updateChannelChats(_ chatList: [LocalChannelChat], channelId: String) {
         guard let channel = findOne(channelId) else { return }

@@ -1285,20 +1285,33 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         let channel = state.channelSettingState.channelDetails
                     else { return }
                     do {
+                        print("1")
                         /// 채널 퇴장
-                        let leavedChannel = try await ChannelProvider.shared.leaveChannel(
+                        let updatedChannels = try await ChannelProvider.shared.leaveChannel(
                             workspaceID: workspace.workspaceId,
                             channelID: channel.channelId
                         )
+                        print("2")
+                        guard let updatedChannels else { return }
+                        print("3")
                         
-                        guard let leavedChannel else { return }
-                        
-                        /// 퇴장한 채널에 대한 로컬 DB(Realm)에서 삭제
-                        if let existingChannel = LocalChannelRepository.shared.findOne(leavedChannel.channelId) {
-                            LocalChannelRepository.shared.delete(existingChannel)
+                        DispatchQueue.main.async {
+                            /// 퇴장한 채널에 대한 로컬 DB(Realm)에서 삭제
+                            if let existingChannel = LocalChannelRepository.shared.findOne(channel.channelId) {
+                                print("4")
+                                LocalChannelRepository.shared.delete(existingChannel)
+                            }
+                           
+                            /// 로컬 DB(Realm)에 채널 목록 업데이트
+                            LocalChannelRepository.shared.updateChannelList(updatedChannels)
+                            
+                            print("5")
+                           
+                            let updatedChannelsInLocal: [LocalChannel] = LocalChannelRepository.shared.read().map { $0 }
+                            
+                            promise(.success(.channelSettingAction(.completeLeaveChannelAction(updateChannels: updatedChannelsInLocal))))
                         }
                         
-                        promise(.success(.channelSettingAction(.completeLeaveChannelAction)))
                     } catch {
                         promise(.success(.channelSettingAction(.channelSettingError(error))))
                     }
