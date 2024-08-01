@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchChannelView: View {
 
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var windowProvider: WindowProvider
 
     var body: some View {
         ZStack {
@@ -48,6 +49,7 @@ struct SearchChannelView: View {
                                         selectedChannel: channel,
                                         confirmAction: {
                                             print("채널 가입")
+                                            windowProvider.dismissAlert()
                                             store.dispatch(.channelAction(.fetchChannelChats(chatRoomType: .channel, channel: channel)))
                                         }
                                     )

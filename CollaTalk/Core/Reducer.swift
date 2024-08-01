@@ -36,6 +36,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
     case .alertAction(let alertAction):
         switch alertAction {
         case .showAlert(let alertType, let confirmAction):
+            mutatingState.isLoading = false
             mutatingState.alertState.showAlert = (alertType, confirmAction)
         case .initializeAllAlertElements:
             mutatingState.alertState.showAlert = (.none, {})
@@ -381,6 +382,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.channelState.channel = channel
             mutatingState.channelState.channelChats = channelChats
             mutatingState.channelState.channelChatCount = channelChats.count
+            
+            /// 채널 검색 화면이 표시되어 있다면 dimiss
+            if mutatingState.navigationState.isSearchChannelViewPresented {
+                mutatingState.navigationState.isSearchChannelViewPresented = false
+            }
             
             mutatingState.networkCallSuccessType = .chatView
         case .setChannelSettingView(let channelDetails):
