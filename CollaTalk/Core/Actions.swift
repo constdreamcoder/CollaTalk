@@ -193,6 +193,8 @@ enum AppAction {
     enum ChannelSettingAction {
         case fetchChannel
         case channelSettingError(Error)
+        case leaveChannel
+        case completeLeaveChannelAction
     }
     
     enum ChangeChannelOwnerViewAction {

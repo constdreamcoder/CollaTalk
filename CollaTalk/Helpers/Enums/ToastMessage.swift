@@ -20,6 +20,7 @@ enum ToastMessage: ToastMessageType {
     case inviteMemeber(InviteMember)
     case downloadImage(DownloadImage)
     case createOrEditChannel(CreateOrEditChannel)
+    case leaveChannel(LeaveChannel)
     
     var message: String {
         switch self {
@@ -39,6 +40,8 @@ enum ToastMessage: ToastMessageType {
             return downloadImage.message
         case .createOrEditChannel(let createNewChannel):
             return createNewChannel.message
+        case .leaveChannel(let leaveChannel):
+            return leaveChannel.message
         }
     }
     
@@ -199,6 +202,17 @@ enum ToastMessage: ToastMessageType {
                 return "채널명은 1~30자까지만 가능합니다."
             case .successToEdit:
                 return "채널이 편집되었습니다."
+            }
+        }
+    }
+    
+    enum LeaveChannel: ToastMessageType {
+        case requestDeined
+        
+        var message: String {
+            switch self {
+            case .requestDeined:
+                return "일반 채널은 워크스페이스 기본 채널입니다. 기본 채널은 퇴장할 수 없습니다."
             }
         }
     }

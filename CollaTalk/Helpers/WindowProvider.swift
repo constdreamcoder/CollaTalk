@@ -90,6 +90,7 @@ final class WindowProvider: ObservableObject {
         /// Alert Type에 따른 cancel action 정의
         var cancelAction: (() -> Void)?
         if alertType == .leaveWorkspaceAsAnOwner
+            || alertType == .leaveChannelAsAnOwner
             || alertType == .unableToChangeWorkspaceOwner
             || alertType == .unableToChangeChannelOwner {
             cancelAction = nil

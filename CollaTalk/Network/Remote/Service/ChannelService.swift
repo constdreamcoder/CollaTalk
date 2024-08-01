@@ -19,6 +19,7 @@ enum ChannelService {
     case editChannelDetails(params: EditChannelDetailsParams, request: EditChannelDetailsRequest)
     case fetchChannelMembers(params: FetchChannelMembersParams)
     case changeChannelOwnership(params: ChangeChannelOwnershipParams, request: ChangeChannelOwnershipRequest)
+    case leaveChannel(Params: LeaveChannelParams)
 }
 
 extension ChannelService: BaseService {
@@ -42,12 +43,14 @@ extension ChannelService: BaseService {
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/members"
         case .changeChannelOwnership(let params, _):
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/transfer/ownership"
+        case .leaveChannel(let params):
+            return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/exit"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchChannelChats, .fetchUnreadChannelChats, .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers:
+        case .fetchChannelChats, .fetchUnreadChannelChats, .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers, .leaveChannel:
             return .get
         case .sendChannelChat, .createNewChannel:
             return .post
@@ -138,7 +141,7 @@ extension ChannelService: BaseService {
             return .uploadMultipart(multipartList)
         case .changeChannelOwnership(_, let request):
             return .requestJSONEncodable(request)
-        case .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers:
+        case .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers, .leaveChannel:
             return .requestPlain
         }
     }

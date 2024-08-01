@@ -165,6 +165,7 @@ struct ChannelMemberSection: View {
 struct ChannelSettingButtonSection: View {
     
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var windowProvider: WindowProvider
     
     var body: some View {
         VStack {
@@ -184,6 +185,14 @@ struct ChannelSettingButtonSection: View {
                 
                 CustomButton {
                     print("채널에서 나가기")
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .leaveChannelAsAnOwner,
+                                confirmAction: { windowProvider.dismissAlert() }
+                            )
+                        )
+                    )
                 } label: {
                     Text("채널에서 나가기")
                         .foregroundStyle(.brandBlack)
@@ -221,6 +230,17 @@ struct ChannelSettingButtonSection: View {
             } else {
                 CustomButton {
                     print("채널에서 나가기")
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .leaveChannelAsAMember,
+                                confirmAction: {
+                                    windowProvider.dismissAlert()
+                                    store.dispatch(.channelSettingAction(.leaveChannel))
+                                }
+                            )
+                        )
+                    )
                 } label: {
                     Text("채널에서 나가기")
                         .foregroundStyle(.brandBlack)

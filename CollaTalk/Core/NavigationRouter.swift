@@ -12,6 +12,7 @@ enum PathType: Hashable {
     case homeView
     case chatView
     case channelSettingView
+    case popFromChannelSettingViewToSideBar
     case popFromChannelSettingViewToHomeView
     case none
 }

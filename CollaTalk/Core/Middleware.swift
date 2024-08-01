@@ -1277,6 +1277,35 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .channelSettingError(let error):
             break
+        case .leaveChannel:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    guard 
+                        let workspace = state.workspaceState.selectedWorkspace,
+                        let channel = state.channelSettingState.channelDetails
+                    else { return }
+                    do {
+                        /// 채널 퇴장
+                        let leavedChannel = try await ChannelProvider.shared.leaveChannel(
+                            workspaceID: workspace.workspaceId,
+                            channelID: channel.channelId
+                        )
+                        
+                        guard let leavedChannel else { return }
+                        
+                        /// 퇴장한 채널에 대한 로컬 DB(Realm)에서 삭제
+                        if let existingChannel = LocalChannelRepository.shared.findOne(leavedChannel.channelId) {
+                            LocalChannelRepository.shared.delete(existingChannel)
+                        }
+                        
+                        promise(.success(.channelSettingAction(.completeLeaveChannelAction)))
+                    } catch {
+                        promise(.success(.channelSettingAction(.channelSettingError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .completeLeaveChannelAction:
+            break
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {

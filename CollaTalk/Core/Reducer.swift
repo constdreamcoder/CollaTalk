@@ -340,7 +340,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.dmRooms = dmRooms
            
             /// 채널 관리자 변경 후, 화면 전환 중인지 여부에 따른 분기처리
-            if mutatingState.networkCallSuccessType == .popFromChannelSettingViewToHomeView {
+            if mutatingState.networkCallSuccessType == .popFromChannelSettingViewToSideBar {
                 mutatingState.networkCallSuccessType = .none
             } else {
                 mutatingState.navigationState.isSidebarVisible = false
@@ -362,7 +362,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.selectedWorkspace = workspaces.first
         
             /// 채널 관리자 변경 후, 화면 전환 중이지 않을 때만 홈 화면으로 이동
-            if !(mutatingState.networkCallSuccessType == .popFromChannelSettingViewToHomeView) {
+            if !(mutatingState.networkCallSuccessType == .popFromChannelSettingViewToSideBar) {
                 mutatingState.networkCallSuccessType = .homeView
             }
             
@@ -841,7 +841,25 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? LeaveChannelParamsError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .noData:
+                    print(error.localizedDescription)
+                case .requestDenied:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.leaveChannel(.requestDeined).message
+                    mutatingState.showToast = true
+                }
             }
+        case .leaveChannel:
+            mutatingState.isLoading = true
+        case .completeLeaveChannelAction:
+            mutatingState.isLoading = false
+            
+            mutatingState.channelSettingState.channelDetails = nil
+            mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {
@@ -898,7 +916,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.toastMessage = ToastMessage.changeChannelOwner(.completeOwnershipTransfer).message
             mutatingState.showToast = true
             
-            mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
+            mutatingState.networkCallSuccessType = .popFromChannelSettingViewToSideBar
         }
     }
     return mutatingState
