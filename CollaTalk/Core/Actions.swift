@@ -194,7 +194,9 @@ enum AppAction {
         case fetchChannel
         case channelSettingError(Error)
         case leaveChannel
-        case completeLeaveChannelAction(updateChannels: [LocalChannel])
+        case completeLeaveChannelAction(updatedChannels: [LocalChannel])
+        case deleteChannel
+        case completeDeleteChannelAction(updatedChannels: [LocalChannel])
     }
     
     enum ChangeChannelOwnerViewAction {

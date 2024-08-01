@@ -217,7 +217,18 @@ struct ChannelSettingButtonSection: View {
                 .bottomButtonShape(.backgroundSecondary)
                 
                 CustomButton {
-                    print("채널 삭제")
+                    store.dispatch(
+                        .alertAction(
+                            .showAlert(
+                                alertType: .deleteChannel,
+                                confirmAction: {
+                                    print("채널 삭제")
+                                    windowProvider.dismissAlert()
+                                    store.dispatch(.channelSettingAction(.deleteChannel))
+                                }
+                            )
+                        )
+                    )
                 } label: {
                     Text("채널 삭제")
                         .foregroundStyle(.brandError)
@@ -229,12 +240,12 @@ struct ChannelSettingButtonSection: View {
                 .bottomButtonShape(.backgroundSecondary)
             } else {
                 CustomButton {
-                    print("채널에서 나가기")
                     store.dispatch(
                         .alertAction(
                             .showAlert(
                                 alertType: .leaveChannelAsAMember,
                                 confirmAction: {
+                                    print("채널에서 나가기")
                                     windowProvider.dismissAlert()
                                     store.dispatch(.channelSettingAction(.leaveChannel))
                                 }

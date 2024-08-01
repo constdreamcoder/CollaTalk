@@ -239,7 +239,7 @@ final class ChannelProvider: BaseProvider<ChannelService> {
     func leaveChannel(workspaceID: String, channelID: String) async throws -> [Channel]? {
         do {
             let leaveChannelParams = LeaveChannelParams(workspaceID: workspaceID, channelID: channelID)
-            let response = try await request(.leaveChannel(Params: leaveChannelParams))
+            let response = try await request(.leaveChannel(params: leaveChannelParams))
             switch response.statusCode {
             case 200:
                 let updatedChannels = try decode(response.data, as: [Channel].self)
@@ -248,8 +248,31 @@ final class ChannelProvider: BaseProvider<ChannelService> {
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
                     throw commonError
-                } else if let leaveChannelParamsError = LeaveChannelParamsError(rawValue: errorCode.errorCode) {
+                } else if let leaveChannelParamsError = LeaveChannelError(rawValue: errorCode.errorCode) {
                     throw leaveChannelParamsError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+    
+    func deleteChannel(workspaceID: String, channelID: String) async throws -> Bool? {
+        do {
+            let deleteChannelParams = DeleteChannelParams(workspaceID: workspaceID, channelID: channelID)
+            let response = try await request(.deleteChannel(params: deleteChannelParams))
+            switch response.statusCode {
+            case 200:
+               return true
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let deleteChannelError = DeleteChannelError(rawValue: errorCode.errorCode) {
+                    throw deleteChannelError
                 }
             default: break
             }

@@ -19,7 +19,8 @@ enum ChannelService {
     case editChannelDetails(params: EditChannelDetailsParams, request: EditChannelDetailsRequest)
     case fetchChannelMembers(params: FetchChannelMembersParams)
     case changeChannelOwnership(params: ChangeChannelOwnershipParams, request: ChangeChannelOwnershipRequest)
-    case leaveChannel(Params: LeaveChannelParams)
+    case leaveChannel(params: LeaveChannelParams)
+    case deleteChannel(params: DeleteChannelParams)
 }
 
 extension ChannelService: BaseService {
@@ -45,6 +46,8 @@ extension ChannelService: BaseService {
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/transfer/ownership"
         case .leaveChannel(let params):
             return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)/exit"
+        case .deleteChannel(let params):
+            return "/workspaces/\(params.workspaceID)/channels/\(params.channelID)"
         }
     }
     
@@ -56,6 +59,8 @@ extension ChannelService: BaseService {
             return .post
         case .editChannelDetails, .changeChannelOwnership:
             return .put
+        case .deleteChannel:
+            return .delete
         }
     }
     
@@ -141,7 +146,7 @@ extension ChannelService: BaseService {
             return .uploadMultipart(multipartList)
         case .changeChannelOwnership(_, let request):
             return .requestJSONEncodable(request)
-        case .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers, .leaveChannel:
+        case .fetchAllChannels, .fetchChannelDetails, .fetchChannelMembers, .leaveChannel, .deleteChannel:
             return .requestPlain
         }
     }

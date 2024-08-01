@@ -11,14 +11,15 @@ enum AlertType {
     // MARK: - Workspace 관련 Alert
     case leavetWorkspaceAsAMember
     case leaveWorkspaceAsAnOwner
-    case leaveChannelAsAMember
-    case leaveChannelAsAnOwner
     case deleteWorkspace
     case unableToChangeWorkspaceOwner
     case unableToChangeChannelOwner
     case changeWorkspaceOwner(newOwner: String)
     case changeChannelOwner(newOwner: String)
     case joinChannel(channelName: String)
+    case leaveChannelAsAMember
+    case leaveChannelAsAnOwner
+    case deleteChannel
     case none
         
     var title: String {
@@ -41,6 +42,8 @@ enum AlertType {
             return "채널 참여"
         case .leaveChannelAsAMember, .leaveChannelAsAnOwner:
             return "채널에서 나가기"
+        case .deleteChannel:
+            return "채널 삭제"
         }
     }
     
@@ -79,6 +82,8 @@ enum AlertType {
             return "나가기를 하면 채널 목록에서 삭제됩니다."
         case .leaveChannelAsAnOwner:
             return "회원님은 채널 관리자입니다. 채널 관리자를 다른 멤버로 변경한 후 나갈 수 있습니다."
+        case .deleteChannel:
+            return "정말 이 채널을 삭제하시겠습니까? 삭제 시 멤버/채팅 등 채널 내의 모든 정보가 삭제되며 복구할 수 없습니다."
         }
     }
     
@@ -88,7 +93,7 @@ enum AlertType {
             return "나가기"
         case .leaveWorkspaceAsAnOwner, .unableToChangeWorkspaceOwner, .changeWorkspaceOwner, .joinChannel, .unableToChangeChannelOwner, .changeChannelOwner, .leaveChannelAsAnOwner:
             return "확인"
-        case .deleteWorkspace:
+        case .deleteWorkspace, .deleteChannel:
             return "삭제"
         case .none:
             return ""

@@ -846,7 +846,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noData:
                     print(error.localizedDescription)
                 }
-            } else if let error = error as? LeaveChannelParamsError {
+            } else if let error = error as? LeaveChannelError {
                 switch error {
                 case .badRequest:
                     print(error.localizedDescription)
@@ -861,13 +861,19 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .leaveChannel:            
             mutatingState.isLoading = true
         case .completeLeaveChannelAction(let updatedChannels):
-            print("6")
             mutatingState.isLoading = false
             
             mutatingState.workspaceState.myChannels = updatedChannels
             mutatingState.channelSettingState.channelDetails = nil
             mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
-            print("7")
+        case .deleteChannel:
+            mutatingState.isLoading = true
+        case .completeDeleteChannelAction(let updatedChannels):
+            mutatingState.isLoading = false
+            
+            mutatingState.workspaceState.myChannels = updatedChannels
+            mutatingState.channelSettingState.channelDetails = nil
+            mutatingState.networkCallSuccessType = .popFromChannelSettingViewToHomeView
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
         switch changeChannelOwnerViewAction {

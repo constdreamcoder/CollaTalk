@@ -1124,7 +1124,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 return convertedChannelChat
                             }
                             LocalChannelRepository.shared.updateChannelChats(latestChannelChatList, channelId: channel.channelId)
-                        
+                            
                             /// 최신 채널 채팅 기록 조회
                             let updatedLocalChannelChats: [LocalChannelChat] = LocalChannelChatRepository.shared.read().filter { $0.channelId == channel.channelId }
                             
@@ -1132,7 +1132,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             let groupedChannelChat = Dictionary(grouping: updatedLocalChannelChats) { channelChat -> String in
                                 return channelChat.createdAt.toChatDate
                             }
-
+                            
                             let sortedGroupedChannelChats: groupdChannelChatsType = groupedChannelChat.keys.sorted().map { key in (key, groupedChannelChat[key]!) }
                             
                             /// 소켓 연결
@@ -1158,7 +1158,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeDescription(let description): break
         case .createNewChannel:
             return Future<AppAction, Never> { promise in
-                guard ValidationCheck.channelName(input: state.createOrEditChannel.channelName).validation 
+                guard ValidationCheck.channelName(input: state.createOrEditChannel.channelName).validation
                 else {
                     promise(.success(.createOrEditChannelAction(.nameValidationError)))
                     return
@@ -1280,36 +1280,31 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .leaveChannel:
             return Future<AppAction, Never> { promise in
                 Task {
-                    guard 
+                    guard
                         let workspace = state.workspaceState.selectedWorkspace,
                         let channel = state.channelSettingState.channelDetails
                     else { return }
                     do {
-                        print("1")
                         /// 채널 퇴장
                         let updatedChannels = try await ChannelProvider.shared.leaveChannel(
                             workspaceID: workspace.workspaceId,
                             channelID: channel.channelId
                         )
-                        print("2")
+                        
                         guard let updatedChannels else { return }
-                        print("3")
                         
                         DispatchQueue.main.async {
                             /// 퇴장한 채널에 대한 로컬 DB(Realm)에서 삭제
                             if let existingChannel = LocalChannelRepository.shared.findOne(channel.channelId) {
-                                print("4")
                                 LocalChannelRepository.shared.delete(existingChannel)
                             }
-                           
+                            
                             /// 로컬 DB(Realm)에 채널 목록 업데이트
                             LocalChannelRepository.shared.updateChannelList(updatedChannels)
                             
-                            print("5")
-                           
                             let updatedChannelsInLocal: [LocalChannel] = LocalChannelRepository.shared.read().map { $0 }
                             
-                            promise(.success(.channelSettingAction(.completeLeaveChannelAction(updateChannels: updatedChannelsInLocal))))
+                            promise(.success(.channelSettingAction(.completeLeaveChannelAction(updatedChannels: updatedChannelsInLocal))))
                         }
                         
                     } catch {
@@ -1318,6 +1313,38 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .completeLeaveChannelAction:
+            break
+        case .deleteChannel:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    guard
+                        let workspace = state.workspaceState.selectedWorkspace,
+                        let channel = state.channelSettingState.channelDetails
+                    else { return }
+                    
+                    do {
+                        /// 채널 삭제
+                        let result = try await ChannelProvider.shared.deleteChannel(
+                            workspaceID: workspace.workspaceId,
+                            channelID: channel.channelId
+                        )
+                        DispatchQueue.main.async {
+                            /// 로컬DB(Realm)에서 해당 채널 삭제
+                            if let existingChannel = LocalChannelRepository.shared.findOne(channel.channelId) {
+                                LocalChannelRepository.shared.delete(existingChannel)
+                            }
+                            
+                            /// 로컬DB(Realm)에서 업데이트된 채널 목록 조회
+                            let updatedChannels: [LocalChannel] = LocalChannelRepository.shared.read().map { $0 }
+                            
+                            promise(.success(.channelSettingAction(.completeDeleteChannelAction(updatedChannels: updatedChannels))))
+                        }
+                    } catch {
+                        promise(.success(.channelSettingAction(.channelSettingError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .completeDeleteChannelAction(let updateChannels):
             break
         }
     case .changeChannelOwnerViewAction(let changeChannelOwnerViewAction):
@@ -1345,7 +1372,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             }
                             return $0.convertToLocalWorkspaceMember
                         }
-
+                        
                         /// 새로 조회된 채널 멤버 로컬 DB(Realm)에 업데이트
                         LocalChannelRepository.shared.updateChannelMembers(
                             channelId: channelID,
@@ -1368,7 +1395,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     guard let workspaceID = state.workspaceState.selectedWorkspace?.workspaceId,
                           let channelID = state.channelSettingState.channelDetails?.channelId
                     else { return }
-                                        
+                    
                     do {
                         let updatedChannel = try await ChannelProvider.shared.changeChannelOwnership(
                             workspaceID: workspaceID,
