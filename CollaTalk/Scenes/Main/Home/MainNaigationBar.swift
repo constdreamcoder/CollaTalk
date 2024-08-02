@@ -10,6 +10,7 @@ import SwiftUI
 struct MainNaigationBar: View {
     
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var navigationRouter: NavigationRouter
     
     var body: some View {
         VStack {
@@ -57,6 +58,10 @@ struct MainNaigationBar: View {
                             Circle().stroke(.black, lineWidth: 2)
                         )
                         .padding(.leading, 8)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            navigationRouter.push(screen: .editProfileView)
+                        }
                 } placeHolderView: {
                     Image(.workspace)
                         .resizable()

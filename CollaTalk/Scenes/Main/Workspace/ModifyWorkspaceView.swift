@@ -64,7 +64,6 @@ struct ModifyWorkspaceView: View {
                             store.dispatch(.navigationAction(.showImagePickerView(show: true)))
                         }
                 } else {
-                    
                     if store.state.modifyWorkspaceState.existingWorkspace?.coverImage == "" {
                         Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
                             .resizable()

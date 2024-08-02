@@ -71,6 +71,8 @@ struct ContentView: View {
                         ChatView(chatRoomType: store.state.chatState.chatRoomType)
                     case .channelSettingView:
                         ChannelSettingView()
+                    case .editProfileView:
+                        EditProfileView()
                     case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .none:
                         EmptyView()
                             .background(.clear)
@@ -135,6 +137,9 @@ struct ContentView: View {
                 case .popFromChannelSettingViewToHomeView:
                     navigationRouter.pop(depth: 2)
                     store.dispatch(.workspaceAction(.fetchWorkspaces))
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .editProfileView:
+                    navigationRouter.push(screen: .editProfileView)
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

@@ -43,7 +43,7 @@ struct WorkspaceMember: Decodable {
 }
 
 extension WorkspaceMember: Equatable {
-    static func ==(lhs: WorkspaceMember, rhs: WorkspaceMember) -> Bool {
+    static func == (lhs: WorkspaceMember, rhs: WorkspaceMember) -> Bool {
         return lhs.userId == rhs.userId
         && lhs.nickname == rhs.nickname
         && lhs.email == rhs.email

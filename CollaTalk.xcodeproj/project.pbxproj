@@ -22,6 +22,7 @@
 		000F400F2C58DA3200FF87BF /* CreateOrEditChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400E2C58DA3200FF87BF /* CreateOrEditChannelView.swift */; };
 		0013E0E32C5C916900AF747E /* LeaveWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0013E0E22C5C916900AF747E /* LeaveWorkspaceParams.swift */; };
 		0013E0E52C5C921700AF747E /* LeaveWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0013E0E42C5C921700AF747E /* LeaveWorkspaceError.swift */; };
+		00141ECB2C5D36A400BCC037 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00141ECA2C5D36A400BCC037 /* EditProfileView.swift */; };
 		0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018096D2C46A82900F41D50 /* RemoteImageService.swift */; };
 		001809712C46A90D00F41D50 /* DownloadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001809702C46A90D00F41D50 /* DownloadImageError.swift */; };
 		001D14202C59265F00CC8777 /* SearchChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001D141F2C59265F00CC8777 /* SearchChannelView.swift */; };
@@ -219,6 +220,7 @@
 		000F400E2C58DA3200FF87BF /* CreateOrEditChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditChannelView.swift; sourceTree = "<group>"; };
 		0013E0E22C5C916900AF747E /* LeaveWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveWorkspaceParams.swift; sourceTree = "<group>"; };
 		0013E0E42C5C921700AF747E /* LeaveWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveWorkspaceError.swift; sourceTree = "<group>"; };
+		00141ECA2C5D36A400BCC037 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		0018096D2C46A82900F41D50 /* RemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		001809702C46A90D00F41D50 /* DownloadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageError.swift; sourceTree = "<group>"; };
 		001D141F2C59265F00CC8777 /* SearchChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChannelView.swift; sourceTree = "<group>"; };
@@ -427,6 +429,14 @@
 				00BD4E672C5A36E9004C2E14 /* ChangeChannelOwnerView.swift */,
 			);
 			path = Channel;
+			sourceTree = "<group>";
+		};
+		00141EC92C5D367600BCC037 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				00141ECA2C5D36A400BCC037 /* EditProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		0018096B2C46A7B200F41D50 /* RemoteImage */ = {
@@ -643,6 +653,7 @@
 				00F47A3E2C4E415A0095EB4E /* DM */,
 				00F47A4C2C4E9F4F0095EB4E /* Chat */,
 				000F400D2C58DA1E00FF87BF /* Channel */,
+				00141EC92C5D367600BCC037 /* Profile */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1367,6 +1378,7 @@
 				003F6FCA2C5A849800C125EA /* FetchChannelMembersParams.swift in Sources */,
 				002088822C4B72EA0094E3B6 /* DeleteWorkspaceError.swift in Sources */,
 				00BD4E662C5A34A1004C2E14 /* ChangeOwnerViewCellFrame.swift in Sources */,
+				00141ECB2C5D36A400BCC037 /* EditProfileView.swift in Sources */,
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
