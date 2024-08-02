@@ -36,6 +36,7 @@ final class NavigationRouter: ObservableObject {
     
     @MainActor
     func pop(depth: Int) {
+        print("route count", route.count)
         route.removeLast(depth)
     }
     

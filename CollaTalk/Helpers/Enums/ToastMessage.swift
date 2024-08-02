@@ -21,6 +21,7 @@ enum ToastMessage: ToastMessageType {
     case downloadImage(DownloadImage)
     case createOrEditChannel(CreateOrEditChannel)
     case leaveChannel(LeaveChannel)
+    case leaveWorkspace(LeaveWorkspace)
     
     var message: String {
         switch self {
@@ -42,6 +43,8 @@ enum ToastMessage: ToastMessageType {
             return createNewChannel.message
         case .leaveChannel(let leaveChannel):
             return leaveChannel.message
+        case .leaveWorkspace(let leaveWorkspace):
+            return leaveWorkspace.message
         }
     }
     
@@ -213,6 +216,17 @@ enum ToastMessage: ToastMessageType {
             switch self {
             case .requestDeined:
                 return "일반 채널은 워크스페이스 기본 채널입니다. 기본 채널은 퇴장할 수 없습니다."
+            }
+        }
+    }
+    
+    enum LeaveWorkspace: ToastMessageType {
+        case requestDeined
+        
+        var message: String {
+            switch self {
+            case .requestDeined:
+                return "채널 관리자이신 것 같아요. 채널 관리자는 채널에 대한 권한을 양도해야 워크스페이스를 퇴장할 수 있어요."
             }
         }
     }

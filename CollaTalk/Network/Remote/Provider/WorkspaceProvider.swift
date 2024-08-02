@@ -223,4 +223,29 @@ final class WorkspaceProvider: BaseProvider<WorkspaceService> {
         
         return nil
     }
+    
+    func leaveWorkspace(workspaceID: String) async throws -> [Workspace]? {
+        let leaveWorkspaceParams = LeaveWorkspaceParams(workspaceID: workspaceID)
+        do {
+            let response = try await request(.leaveWorkspace(params: leaveWorkspaceParams))
+            switch response.statusCode {
+            case 200:
+                let updatedWorkspaceList = try decode(response.data, as: [Workspace].self)
+                return updatedWorkspaceList
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let leaveWorkspaceError = LeaveWorkspaceError(rawValue: errorCode.errorCode) {
+                    throw leaveWorkspaceError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+
 }

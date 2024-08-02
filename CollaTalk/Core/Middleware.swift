@@ -164,7 +164,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         switch networkCallSuccessTypeAction {
         case .setStartView: break
         case .setHomeEmptyView: break
-        case .setHomeDefaultView(let workspaces):
+        case .setHomeDefaultView(let workspaces, let selectedWorkspace):
             if workspaces.count > 0 {
                 return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
             }
@@ -379,7 +379,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             image: image
                         )
                         guard let newWorkspace else { return }
-                        print("newWorkspace", newWorkspace)
+                        
                         UserDefaultsManager.setObject(newWorkspace, forKey: .selectedWorkspace)
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
@@ -476,10 +476,20 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
                             promise(.success(.networkCallSuccessTypeAction(.setHomeEmptyView)))
                         } else if workspaces.count >= 1 {
-                            if let selectedWorkspace = workspaces.first {
-                                UserDefaultsManager.setObject(selectedWorkspace, forKey: .selectedWorkspace)
+                            
+                            guard let selectedWorkspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else {
+                                
+                                /// UserDefaults에 조회된 첫번재 워크스페이스 저장
+                                UserDefaultsManager.setObject(workspaces[0], forKey: .selectedWorkspace)
+                                
+                                /// UserDefaults에 저장된 현재 선택된 워크스페이스 조회
+                                guard let selectedWorkspace = UserDefaultsManager.getObject(forKey: .selectedWorkspace, as: Workspace.self) else { return }
+                                
+                                promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces, selectedWorkspace: selectedWorkspace))))
+                                return
                             }
-                            promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces))))
+                           
+                            promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces, selectedWorkspace: selectedWorkspace))))
                         }
                     } catch {
                         promise(.success(.workspaceAction(.workspaceError(error))))
@@ -493,8 +503,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .fetchHomeDefaultViewDatas:
             return Future<AppAction, Never> { promise in
                 Task {
+                    /// 모든 기록 삭제
+                    BaseRepository.deleteAllObjects()
+                    
                     do {
-                        
                         guard let workspace = state.workspaceState.selectedWorkspace else { return }
                         
                         /// 로그인한 유저가 속한 채널 목록 조회
@@ -509,7 +521,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         guard channelsResult.count > 0
                         else {
-                            promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: [], dmRooms: []))))
+                            DispatchQueue.main.async {
+                                promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: [], dmRooms: []))))
+                            }
                             return
                         }
                         
@@ -598,9 +612,11 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         guard dmRoomsResult.count > 0
                         else {
-                            let updatedChannel: [LocalChannel] = LocalChannelRepository.shared.localChannelsSortedByDescending
-                            
-                            promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: updatedChannel, dmRooms: []))))
+                            DispatchQueue.main.async {
+                                let updatedChannel: [LocalChannel] = LocalChannelRepository.shared.localChannelsSortedByDescending
+                                
+                                promise(.success(.workspaceAction(.completeFetchHomeDefaultViewDatas(myChennels: updatedChannel, dmRooms: []))))
+                            }
                             return
                         }
                         
@@ -717,8 +733,26 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-        case .selectWorkspace(let workspace):
+        case .selectWorkspace(let workspace):            
+            /// UserDefaults에 현재 선택된 워크스페이스 저장
+            UserDefaultsManager.setObject(workspace, forKey: .selectedWorkspace)
             return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
+        case .leaveWorkspace(let workspace):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        guard let workspace else { return }
+                        
+                        let updatedWorkspaceList = try await WorkspaceProvider.shared.leaveWorkspace(workspaceID: workspace.workspaceId)
+                        print("2")
+                        guard let updatedWorkspaceList else { return }
+                        
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                    } catch {
+                        promise(.success(.workspaceAction(.workspaceError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
         switch changeWorkspaceOwnerAction {
@@ -1302,7 +1336,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             /// 로컬 DB(Realm)에 채널 목록 업데이트
                             LocalChannelRepository.shared.updateChannelList(updatedChannels)
                             
-                            let updatedChannelsInLocal: [LocalChannel] = LocalChannelRepository.shared.read().map { $0 }
+                            let updatedChannelsInLocal: [LocalChannel] = LocalChannelRepository.shared.localChannelsSortedByDescending
                             
                             promise(.success(.channelSettingAction(.completeLeaveChannelAction(updatedChannels: updatedChannelsInLocal))))
                         }
@@ -1335,7 +1369,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             }
                             
                             /// 로컬DB(Realm)에서 업데이트된 채널 목록 조회
-                            let updatedChannels: [LocalChannel] = LocalChannelRepository.shared.read().map { $0 }
+                            let updatedChannels: [LocalChannel] = LocalChannelRepository.shared.localChannelsSortedByDescending
                             
                             promise(.success(.channelSettingAction(.completeDeleteChannelAction(updatedChannels: updatedChannels))))
                         }

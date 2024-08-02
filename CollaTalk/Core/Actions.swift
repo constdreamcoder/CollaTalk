@@ -39,7 +39,7 @@ enum AppAction {
     enum NetworkCallSuccessType {
         case setStartView
         case setHomeEmptyView
-        case setHomeDefaultView(workspaces: [Workspace])
+        case setHomeDefaultView(workspaces: [Workspace], selectedWorkspace: Workspace)
         case setDMChatView(chatRoom: DMRoom, dms: groupdDMsType)
         case setChannelChatView(channel: Channel, channelChats: groupdChannelChatsType)
         case setChannelSettingView(channelDetails: Channel)
@@ -114,6 +114,7 @@ enum AppAction {
         case completeFetchHomeDefaultViewDatas(myChennels: [LocalChannel], dmRooms: [LocalDMRoom])
         case deleteWorkspace(workspace: Workspace?)
         case selectWorkspace(workspace: Workspace?)
+        case leaveWorkspace(workspace: Workspace?)
     }
     
     enum AlertAction {

@@ -325,6 +325,15 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .noAccess:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? LeaveWorkspaceError {
+                switch error {
+                case .noData:
+                    print(error.localizedDescription)
+                case .requestDenied:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.leaveWorkspace(.requestDeined).message
+                    mutatingState.showToast = true
+                }
             }
             
             mutatingState.isLoading = false
@@ -350,6 +359,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.isLoading = true
         case .selectWorkspace(let workspace):
             mutatingState.workspaceState.selectedWorkspace = workspace
+        case .leaveWorkspace(let workspace):
+            mutatingState.isLoading = true
         }
     case .networkCallSuccessTypeAction(let networkCallSuccessTypeAction):
         switch networkCallSuccessTypeAction {
@@ -357,15 +368,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .setHomeEmptyView:
             mutatingState.networkCallSuccessType = .homeView
             mutatingState.workspaceState.selectedWorkspace = nil
-        case .setHomeDefaultView(let workspaces):
+        case .setHomeDefaultView(let workspaces, let selectedWorkspace):
             mutatingState.workspaceState.workspaces = workspaces
-            mutatingState.workspaceState.selectedWorkspace = workspaces.first
+            mutatingState.workspaceState.selectedWorkspace = selectedWorkspace
         
             /// 채널 관리자 변경 후, 화면 전환 중이지 않을 때만 홈 화면으로 이동
             if !(mutatingState.networkCallSuccessType == .popFromChannelSettingViewToSideBar) {
                 mutatingState.networkCallSuccessType = .homeView
             }
-            
         case .setDMChatView(let chatRoom, let dms):
             mutatingState.isLoading = false
             

@@ -72,4 +72,16 @@ extension BaseRepository {
             print(error)
         }
     }
+    
+    static func deleteAllObjects() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+                print("Realm에 있는 모든 객체가 삭제되었습니다.")
+            }
+        } catch {
+            print(error)
+        }
+    }
 }

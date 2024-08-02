@@ -85,7 +85,8 @@ struct SideBar: View {
                             .showAlert(
                                 alertType: .leavetWorkspaceAsAMember,
                                 confirmAction: {
-                                    print("멤버로서 워크스페이스 나기기")
+                                    windowProvider.dismissAlert()
+                                    store.dispatch(.workspaceAction(.leaveWorkspace(workspace: dialogWorkspace)))
                                 }
                             )
                         )
