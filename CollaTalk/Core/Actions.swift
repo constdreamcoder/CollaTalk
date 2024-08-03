@@ -213,5 +213,6 @@ enum AppAction {
     enum EditProfileAction {
         case fetchMyProfile
         case editProfileError(Error)
+        case writeNickname(nickname: String)
     }
 }

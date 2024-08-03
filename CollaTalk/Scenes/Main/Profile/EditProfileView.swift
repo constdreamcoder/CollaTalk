@@ -57,7 +57,7 @@ struct EditProfileView: View {
                         PlaceHolderImage()
                     }
                 )
-                                
+                
                 List {
                     Section {
                         EditProfileContentFirstSectionCell(
@@ -65,19 +65,28 @@ struct EditProfileView: View {
                                 title: .myCoinTitle,
                                 coin: store.state.myProfileState.myProfile?.sesacCoin ?? 0,
                                 value: "충전하기"
-                            )
+                            ), 
+                            action: {
+                                
+                            }
                         )
                         EditProfileContentFirstSectionCell(
                             cellType: .nickname(
                                 title: .nicknameTitle,
                                 value: store.state.myProfileState.myProfile?.nickname ?? ""
-                            )
+                            ),
+                            action: {
+                                navigationRouter.push(screen: .editNicknameView)
+                            }
                         )
                         EditProfileContentFirstSectionCell(
                             cellType: .phone(
                                 title: .phoneTitle,
                                 value: store.state.myProfileState.myProfile?.phone ?? ""
-                            )
+                            ),
+                            action: {
+                                
+                            }
                         )
                     }
                     
@@ -104,7 +113,7 @@ struct EditProfileView: View {
                     }
                 }
                 .scrollDisabled(true)
-            
+                
                 Spacer()
             }
         }
@@ -131,10 +140,10 @@ struct PlaceHolderImage:View {
                     .frame(width: 24)
                     .offset(x: 5, y: 5)
             }
-//            .contentShape(Rectangle())
-//            .onTapGesture {
-//                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
-//            }
+        //            .contentShape(Rectangle())
+        //            .onTapGesture {
+        //                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+        //            }
     }
 }
 
@@ -152,6 +161,12 @@ struct EditProfileContentFirstSectionCell: View {
     }
     
     let cellType: CellType
+    let action: () -> Void
+    
+    init(cellType: CellType, action: @escaping () -> Void) {
+        self.cellType = cellType
+        self.action = action
+    }
     
     var body: some View {
         HStack {
@@ -196,6 +211,8 @@ struct EditProfileContentFirstSectionCell: View {
                     .frame(width: 6.5, height: 13)
             }
         }
+        .contentShape(Rectangle())
+        .onTapGesture(perform: action)
     }
 }
 

@@ -972,6 +972,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                     print(error.localizedDescription)
                 }
             }
+        case .writeNickname(let nickname):
+            mutatingState.myProfileState.nickname = nickname
+            mutatingState.myProfileState.isNicknameEmpty = nickname.isEmpty
         }
     }
     return mutatingState

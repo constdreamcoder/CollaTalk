@@ -116,6 +116,7 @@ extension SignUpView {
         && !store.state.signUpState.isPWForMatchCheckEmpty
     }
     
+    // TODO: - Middleware로 옮기기
     private func validateAndFormatPhoneNumber(_ phoneNumber: String) -> String {
         let cleanPhoneNumber = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         

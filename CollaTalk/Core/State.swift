@@ -158,5 +158,7 @@ struct AppState {
     
     struct MyProfileState {
         var myProfile: MyProfile? = nil
+        var nickname: String = ""
+        var isNicknameEmpty: Bool = true
     }
 }

@@ -1475,6 +1475,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .editProfileError(let error):
             break
+        case .writeNickname(let nickname):
+            break
         }
     }
     
