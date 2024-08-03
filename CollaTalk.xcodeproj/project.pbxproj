@@ -76,6 +76,7 @@
 		004A47D12C5E5FEC000D78F1 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47D02C5E5FEC000D78F1 /* ProfileProvider.swift */; };
 		004A47D42C5E6122000D78F1 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47D32C5E6122000D78F1 /* MyProfile.swift */; };
 		004A47DA2C5E7A26000D78F1 /* EditNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47D92C5E7A26000D78F1 /* EditNicknameView.swift */; };
+		004A47DC2C5E827C000D78F1 /* EditPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */; };
 		005278872C4EBA2500A85AA5 /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005278862C4EBA2500A85AA5 /* HiddenModifier.swift */; };
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
@@ -278,6 +279,7 @@
 		004A47D02C5E5FEC000D78F1 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		004A47D32C5E6122000D78F1 /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		004A47D92C5E7A26000D78F1 /* EditNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameView.swift; sourceTree = "<group>"; };
+		004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneView.swift; sourceTree = "<group>"; };
 		005278862C4EBA2500A85AA5 /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 			children = (
 				00141ECA2C5D36A400BCC037 /* EditProfileView.swift */,
 				004A47D92C5E7A26000D78F1 /* EditNicknameView.swift */,
+				004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1401,6 +1404,7 @@
 				002066FB2C3ED63D007E76BD /* JoinRequest.swift in Sources */,
 				007441A72C465E8E00FA8727 /* ImageProvider.swift in Sources */,
 				000CDD7F2C49082E001F6085 /* ImageFile.swift in Sources */,
+				004A47DC2C5E827C000D78F1 /* EditPhoneView.swift in Sources */,
 				00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */,
 				006060BD2C44FC5D001D300F /* FetchMyChannelsError.swift in Sources */,
 				0018096E2C46A82900F41D50 /* RemoteImageService.swift in Sources */,

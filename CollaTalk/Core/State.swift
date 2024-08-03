@@ -160,5 +160,7 @@ struct AppState {
         var myProfile: MyProfile? = nil
         var nickname: String = ""
         var isNicknameEmpty: Bool = true
+        var phoneNumber: String = ""
+        var isPhoneNumberEmpty: Bool = true
     }
 }

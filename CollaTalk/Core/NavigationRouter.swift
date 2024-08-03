@@ -16,6 +16,7 @@ enum PathType: Hashable {
     case popFromChannelSettingViewToHomeView
     case editProfileView
     case editNicknameView
+    case editPhoneView
     case none
 }
 

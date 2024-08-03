@@ -975,6 +975,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writeNickname(let nickname):
             mutatingState.myProfileState.nickname = nickname
             mutatingState.myProfileState.isNicknameEmpty = nickname.isEmpty
+        case .writePhoneNumber(let phoneNumber):
+            mutatingState.myProfileState.phoneNumber = phoneNumber
+            mutatingState.myProfileState.isPhoneNumberEmpty = phoneNumber.isEmpty
         }
     }
     return mutatingState

@@ -85,7 +85,7 @@ struct EditProfileView: View {
                                 value: store.state.myProfileState.myProfile?.phone ?? ""
                             ),
                             action: {
-                                
+                                navigationRouter.push(screen: .editPhoneView)
                             }
                         )
                     }

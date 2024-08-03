@@ -1477,6 +1477,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .writeNickname(let nickname):
             break
+        case .writePhoneNumber(let phoneNumber):
+            break
         }
     }
     

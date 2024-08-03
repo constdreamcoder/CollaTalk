@@ -214,5 +214,6 @@ enum AppAction {
         case fetchMyProfile
         case editProfileError(Error)
         case writeNickname(nickname: String)
+        case writePhoneNumber(phoneNumber: String)
     }
 }
