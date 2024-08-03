@@ -410,6 +410,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             } else {
                 mutatingState.networkCallSuccessType = .channelSettingView
             }
+        case .setEditProfileView(let myProfile):
+            mutatingState.isLoading = false
+            
+            mutatingState.myProfileState.myProfile = myProfile
+            mutatingState.networkCallSuccessType = .editProfileView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -941,6 +946,32 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.showToast = true
             
             mutatingState.networkCallSuccessType = .popFromChannelSettingViewToSideBar
+        }
+    case .editProfileAction(let editProfileAction):
+        switch editProfileAction {
+        case .fetchMyProfile:
+            mutatingState.isLoading = true
+        case .editProfileError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     return mutatingState

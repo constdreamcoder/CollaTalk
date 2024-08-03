@@ -124,7 +124,6 @@ struct ModifyWorkspaceView: View {
                     
                 }
                 
-                
                 InputView(
                     title: "워크스페이스 이름",
                     placeholder: "워크스페이스 이름을 입력하세요 (필수)",
@@ -172,14 +171,6 @@ struct ModifyWorkspaceView: View {
         }
         .onDisappear {
             store.dispatch(.modifyWorkspaceAction(.initializeAllElements))
-        }
-        .fullScreenCover(
-            isPresented: Binding(
-                get: { store.state.navigationState.showImagePicker },
-                set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0))) }
-            )
-        ) {
-            ImagePickerView()
         }
     }
 }

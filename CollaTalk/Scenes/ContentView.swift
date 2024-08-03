@@ -60,6 +60,14 @@ struct ContentView: View {
             ) {
                 ChangeWorkspaceOwnerView()
             }
+            .fullScreenCover(
+                isPresented: Binding(
+                    get: { store.state.navigationState.showImagePicker },
+                    set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0))) }
+                )
+            ) {
+                ImagePickerView()
+            }
             .navigationDestination(for: PathType.self) { path in
                 Group {
                     switch path {

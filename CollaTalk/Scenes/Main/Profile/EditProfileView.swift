@@ -28,19 +28,62 @@ struct EditProfileView: View {
                 Spacer()
                     .frame(height: 24)
                 
-                EditImage()
                 
+                RemoteImage(
+                    path: store.state.myProfileState.myProfile?.profileImage,
+                    imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1.0, contentMode: .fit)
+                            .frame(width: 70)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                            .overlay(alignment: .bottomTrailing) {
+                                Image(.camera)
+                                    .resizable()
+                                    .aspectRatio(1.0, contentMode: .fit)
+                                    .frame(width: 24)
+                                    .offset(x: 5, y: 5)
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+                            }
+                    },
+                    placeHolderView: {
+                        PlaceHolderImage()
+                    },
+                    errorView: { error in
+                        PlaceHolderImage()
+                    }
+                )
+                                
                 List {
                     Section {
-                        EditProfileContentFirstSectionCell(cellType: .myCoin(title: .myCoinTitle, coin: 130, value: "충전하기"))
-                        EditProfileContentFirstSectionCell(cellType: .nickname(title: .nicknameTitle, value: "옹골찬 고래밥"))
-                        EditProfileContentFirstSectionCell(cellType: .phone(title: .phoneTitle, value: "010-1234-1234"))
+                        EditProfileContentFirstSectionCell(
+                            cellType: .myCoin(
+                                title: .myCoinTitle,
+                                coin: store.state.myProfileState.myProfile?.sesacCoin ?? 0,
+                                value: "충전하기"
+                            )
+                        )
+                        EditProfileContentFirstSectionCell(
+                            cellType: .nickname(
+                                title: .nicknameTitle,
+                                value: store.state.myProfileState.myProfile?.nickname ?? ""
+                            )
+                        )
+                        EditProfileContentFirstSectionCell(
+                            cellType: .phone(
+                                title: .phoneTitle,
+                                value: store.state.myProfileState.myProfile?.phone ?? ""
+                            )
+                        )
                     }
                     
                     Section {
-                        
                         EditProfileContentSecondSectionCell(cellType: .email, trailingView: {
-                            Text("test100@test.com")
+                            Text(store.state.myProfileState.myProfile?.email ?? "")
                                 .font(.body)
                                 .foregroundStyle(.textSecondary)
                         })
@@ -61,13 +104,10 @@ struct EditProfileView: View {
                     }
                 }
                 .scrollDisabled(true)
-                
-                
+            
                 Spacer()
             }
-            
         }
-        
     }
 }
 
@@ -75,9 +115,7 @@ struct EditProfileView: View {
     EditProfileView()
 }
 
-struct EditImage:View {
-    
-    @EnvironmentObject private var store: AppStore
+struct PlaceHolderImage:View {
     
     var body: some View {
         Image(.kakaoLogo)
@@ -93,10 +131,10 @@ struct EditImage:View {
                     .frame(width: 24)
                     .offset(x: 5, y: 5)
             }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
-            }
+//            .contentShape(Rectangle())
+//            .onTapGesture {
+//                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+//            }
     }
 }
 
@@ -178,7 +216,6 @@ struct EditProfileContentSecondSectionCell<Content: View>: View {
                 return "로그아웃"
             }
         }
-        
     }
     
     let cellType: CellType

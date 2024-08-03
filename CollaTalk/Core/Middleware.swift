@@ -173,6 +173,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .setChannelChatView: break
         case .setChannelSettingView(let channelDetails):
             break
+        case .setEditProfileView(let myProfile):
+            break
         }
         
     case .navigationAction(let navigationAction):
@@ -1452,6 +1454,26 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .completeChangeChannelOwnerShip(let updatedChannel):
+            break
+        }
+    case .editProfileAction(let editProfileAction):
+        switch editProfileAction {
+        case .fetchMyProfile:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 내 프로필 조회 기능 구현
+                        let myProfile = try await ProfileProvider.shared.fetchMyProfile()
+                        
+                        guard let myProfile else { return }
+                        
+                        promise(.success(.networkCallSuccessTypeAction(.setEditProfileView(myProfile: myProfile))))
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .editProfileError(let error):
             break
         }
     }

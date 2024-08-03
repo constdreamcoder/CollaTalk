@@ -31,6 +31,7 @@ enum AppAction {
     case searchChannelAction(SearchChannelAction)
     case channelSettingAction(ChannelSettingAction)
     case changeChannelOwnerViewAction(ChangeChannelOwnerViewAction)
+    case editProfileAction(EditProfileAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -43,6 +44,7 @@ enum AppAction {
         case setDMChatView(chatRoom: DMRoom, dms: groupdDMsType)
         case setChannelChatView(channel: Channel, channelChats: groupdChannelChatsType)
         case setChannelSettingView(channelDetails: Channel)
+        case setEditProfileView(myProfile: MyProfile)
         case setNone
     }
     
@@ -206,5 +208,10 @@ enum AppAction {
         case changeChannelOwnerViewActionError(Error)
         case changeChannelOwnerShip(channelMember: WorkspaceMember)
         case completeChangeChannelOwnerShip(updatedChannel: Channel)
+    }
+    
+    enum EditProfileAction {
+        case fetchMyProfile
+        case editProfileError(Error)
     }
 }

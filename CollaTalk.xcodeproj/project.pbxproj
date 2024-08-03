@@ -72,6 +72,9 @@
 		00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E962C43ED17009FDB71 /* LogginPlugin.swift */; };
 		00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E982C43ED8D009FDB71 /* Data+Ext.swift */; };
 		00436E9B2C440F8C009FDB71 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */; };
+		004A47CF2C5E5D61000D78F1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47CE2C5E5D61000D78F1 /* ProfileService.swift */; };
+		004A47D12C5E5FEC000D78F1 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47D02C5E5FEC000D78F1 /* ProfileProvider.swift */; };
+		004A47D42C5E6122000D78F1 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A47D32C5E6122000D78F1 /* MyProfile.swift */; };
 		005278872C4EBA2500A85AA5 /* HiddenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005278862C4EBA2500A85AA5 /* HiddenModifier.swift */; };
 		0052C0E52C3A8A2E003D08D3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */; };
 		0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 0052C1392C3AFB4D003D08D3 /* CombineMoya */; };
@@ -270,6 +273,9 @@
 		00436E962C43ED17009FDB71 /* LogginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginPlugin.swift; sourceTree = "<group>"; };
 		00436E982C43ED8D009FDB71 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		004A47CE2C5E5D61000D78F1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		004A47D02C5E5FEC000D78F1 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
+		004A47D32C5E6122000D78F1 /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		005278862C4EBA2500A85AA5 /* HiddenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenModifier.swift; sourceTree = "<group>"; };
 		0052C0E42C3A8A2E003D08D3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0053274F2C41381800977D31 /* HomeDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDefaultView.swift; sourceTree = "<group>"; };
@@ -739,6 +745,21 @@
 			path = UIVIew;
 			sourceTree = "<group>";
 		};
+		004A47D22C5E6116000D78F1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				004A47D32C5E6122000D78F1 /* MyProfile.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		004A47D82C5E62F1000D78F1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		0052C0FF2C3AD554003D08D3 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -992,6 +1013,7 @@
 				0018096F2C46A8FD00F41D50 /* Image */,
 				0060643F2C51DED300A6E060 /* DM */,
 				00292E682C57DDE400D19AB5 /* Channel */,
+				004A47D82C5E62F1000D78F1 /* Profile */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1080,6 +1102,7 @@
 				007441A42C465AEE00FA8727 /* ImageService.swift */,
 				006064332C51DB8C00A6E060 /* DMService.swift */,
 				00292E5D2C57D54E00D19AB5 /* ChannelService.swift */,
+				004A47CE2C5E5D61000D78F1 /* ProfileService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1123,6 +1146,7 @@
 				007441A62C465E8E00FA8727 /* ImageProvider.swift */,
 				0060643B2C51DD4400A6E060 /* DMProvider.swift */,
 				00292E632C57D6E700D19AB5 /* ChannelProvider.swift */,
+				004A47D02C5E5FEC000D78F1 /* ProfileProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -1135,6 +1159,7 @@
 				006064382C51DC8E00A6E060 /* DM */,
 				00292E652C57D71F00D19AB5 /* Channel */,
 				006C32F52C5388A00084C4E2 /* Error */,
+				004A47D22C5E6116000D78F1 /* Profile */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1311,11 +1336,13 @@
 				0037BC072C42D46900E9AF0A /* HomeEmptyView.swift in Sources */,
 				000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */,
 				00DFAF8E2C3C61C700D25633 /* ValidationCheck.swift in Sources */,
+				004A47D42C5E6122000D78F1 /* MyProfile.swift in Sources */,
 				0037BC122C42E12D00E9AF0A /* WorkspaceProvider.swift in Sources */,
 				00F47A442C4E5C870095EB4E /* DMView.swift in Sources */,
 				003F6FCE2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift in Sources */,
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
+				004A47D12C5E5FEC000D78F1 /* ProfileProvider.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,
 				00BD4E682C5A36E9004C2E14 /* ChangeChannelOwnerView.swift in Sources */,
@@ -1361,6 +1388,7 @@
 				000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */,
 				0034AC192C44E9870052EE0D /* String+Ext.swift in Sources */,
 				0086B5B72C37ED2800AD889C /* Fonts+Ext.swift in Sources */,
+				004A47CF2C5E5D61000D78F1 /* ProfileService.swift in Sources */,
 				00292E5E2C57D54E00D19AB5 /* ChannelService.swift in Sources */,
 				007441AB2C4666E500FA8727 /* RemoteImage.swift in Sources */,
 				006064452C522EBC00A6E060 /* SendDirectMessageParams.swift in Sources */,

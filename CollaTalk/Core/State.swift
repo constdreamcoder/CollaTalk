@@ -31,6 +31,7 @@ struct AppState {
     var channelState = ChannelState()
     var searchChannelState = SearchChannelState()
     var channelSettingState = ChannelSettingState()
+    var myProfileState = MyProfileState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -153,5 +154,9 @@ struct AppState {
     
     struct ChannelSettingState {
         var channelDetails: Channel? = nil
+    }
+    
+    struct MyProfileState {
+        var myProfile: MyProfile? = nil
     }
 }

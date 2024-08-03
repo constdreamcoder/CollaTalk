@@ -60,7 +60,7 @@ struct MainNaigationBar: View {
                         .padding(.leading, 8)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            navigationRouter.push(screen: .editProfileView)
+                            store.dispatch(.editProfileAction(.fetchMyProfile))
                         }
                 } placeHolderView: {
                     Image(.workspace)
