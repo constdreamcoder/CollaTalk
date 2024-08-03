@@ -26,11 +26,8 @@ struct EditPhoneView: View {
                     }
                 )
                 
-                Spacer()
-                    .frame(height: 12)
-                
                 InputView(
-                    title: "연락처",
+                    title: "",
                     placeholder: "전화번호를 입력하세요",
                     textFieldGetter: { validateAndFormatPhoneNumber(store.state.myProfileState.phoneNumber) },
                     textFieldSetter: { store.dispatch(.editProfileAction(.writePhoneNumber(phoneNumber: $0))) },

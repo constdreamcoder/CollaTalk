@@ -28,7 +28,6 @@ struct EditProfileView: View {
                 Spacer()
                     .frame(height: 24)
                 
-                
                 RemoteImage(
                     path: store.state.myProfileState.myProfile?.profileImage,
                     imageView: { image in
@@ -67,9 +66,10 @@ struct EditProfileView: View {
                                 value: "충전하기"
                             ), 
                             action: {
-                                
+                                navigationRouter.push(screen: .coinShopView)
                             }
                         )
+
                         EditProfileContentFirstSectionCell(
                             cellType: .nickname(
                                 title: .nicknameTitle,
@@ -79,6 +79,7 @@ struct EditProfileView: View {
                                 navigationRouter.push(screen: .editNicknameView)
                             }
                         )
+
                         EditProfileContentFirstSectionCell(
                             cellType: .phone(
                                 title: .phoneTitle,
@@ -89,6 +90,7 @@ struct EditProfileView: View {
                             }
                         )
                     }
+                    .listRowSeparator(.hidden)
                     
                     Section {
                         EditProfileContentSecondSectionCell(cellType: .email, trailingView: {
@@ -96,6 +98,7 @@ struct EditProfileView: View {
                                 .font(.body)
                                 .foregroundStyle(.textSecondary)
                         })
+                        
                         EditProfileContentSecondSectionCell(cellType: .connectedSocialLogin, trailingView: {
                             HStack {
                                 Image(.appleIDLogin)
@@ -109,9 +112,12 @@ struct EditProfileView: View {
                                     .frame(width: 20)
                             }
                         })
+
                         EditProfileContentSecondSectionCell(cellType: .logOut, trailingView: {})
                     }
+                    .listRowSeparator(.hidden)
                 }
+                .scrollContentBackground(.hidden)
                 .scrollDisabled(true)
                 
                 Spacer()

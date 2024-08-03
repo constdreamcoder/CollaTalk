@@ -17,6 +17,7 @@ enum PathType: Hashable {
     case editProfileView
     case editNicknameView
     case editPhoneView
+    case coinShopView
     case none
 }
 

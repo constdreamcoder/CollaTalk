@@ -26,11 +26,8 @@ struct EditNicknameView: View {
                     }
                 )
                 
-                Spacer()
-                    .frame(height: 12)
-                
                 InputView(
-                    title: "닉네임",
+                    title: "",
                     placeholder: "닉네임을 입력하세요",
                     textFieldGetter: { store.state.myProfileState.nickname },
                     textFieldSetter: { store.dispatch(.editProfileAction(.writeNickname(nickname: $0))) },

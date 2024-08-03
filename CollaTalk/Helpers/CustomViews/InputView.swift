@@ -47,13 +47,13 @@ struct InputView: View {
         self.isValid = isValid
     }
     
-        
     var body: some View {
         VStack(alignment: .leading) {
+            
             Text(title)
                 .foregroundStyle(isValid ? .brandBlack : .brandError)
                 .font(.system(size: 15, weight: .bold))
-            
+          
             HStack {
                 
                 Group {
