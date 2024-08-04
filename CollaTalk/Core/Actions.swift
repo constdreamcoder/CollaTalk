@@ -49,6 +49,7 @@ enum AppAction {
         case setEditProfileView(myProfile: MyProfile)
         case setEditNicknameView
         case setEditPhoneView
+        case setCoinShopView(coinItemList: [CoinItem])
         case popToRootView
         case setNone
     }
@@ -223,6 +224,7 @@ enum AppAction {
         case noImageDataError
         case updateUserInfo(updatedUserInfo: ChangedMyProfile, isProfileImageChanged: Bool = false)
         case logout
+        case moveToCoinShoopView
     }
     
     enum EditNicknameAction {

@@ -429,6 +429,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.selectedWorkspace = nil
             
             mutatingState.networkCallSuccessType = .popToRootView
+        case .setCoinShopView(let coinItemList):
+            mutatingState.isLoading = false
+            
+            mutatingState.coinShopState.coinItemList = coinItemList
+            
+            mutatingState.networkCallSuccessType = .coinShopView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -1037,6 +1043,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 mutatingState.networkCallSuccessType = .pop
             }
         case .logout:
+            mutatingState.isLoading = true
+        case .moveToCoinShoopView:
             mutatingState.isLoading = true
         }
     case .editNicknameAction(let editNicknameAction):

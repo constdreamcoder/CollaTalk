@@ -35,6 +35,7 @@ struct AppState {
     var editNicknameState = EditNicknameState()
     var editPhoneState = EditPhoneState()
     var imagePickerState = ImagePickerState()
+    var coinShopState = CoinShopState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -175,5 +176,9 @@ struct AppState {
     struct EditPhoneState {
         var phoneNumber: String = ""
         var isPhoneNumberEmpty: Bool = true
+    }
+    
+    struct CoinShopState {
+        var coinItemList: [CoinItem] = []
     }
 }

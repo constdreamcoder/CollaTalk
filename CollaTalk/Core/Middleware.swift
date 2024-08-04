@@ -185,6 +185,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             BaseRepository.deleteAllObjects()
             
             return Empty().eraseToAnyPublisher()
+        case .setCoinShopView:
+           break
         }
         
     case .navigationAction(let navigationAction):
@@ -1533,6 +1535,21 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         if result {
                             promise(.success(.networkCallSuccessTypeAction(.popToRootView)))
                         }
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .moveToCoinShoopView:
+            return Future<AppAction, Never> { promise  in
+                Task {
+                    do {
+                        /// 코인 스토어 아이템 목록 조회
+                        let shopCoinItemList = try await CoinProvider.shared.fetchMyProfile()
+                        
+                        guard let shopCoinItemList else { return }
+                        
+                        promise(.success(.networkCallSuccessTypeAction(.setCoinShopView(coinItemList: shopCoinItemList))))
                     } catch {
                         promise(.success(.editProfileAction(.editProfileError(error))))
                     }

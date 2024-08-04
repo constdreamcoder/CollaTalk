@@ -67,7 +67,7 @@ struct EditProfileView: View {
                                 value: "충전하기"
                             ), 
                             action: {
-                                navigationRouter.push(screen: .coinShopView)
+                                store.dispatch(.editProfileAction(.moveToCoinShoopView))
                             }
                         )
 

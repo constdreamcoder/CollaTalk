@@ -29,9 +29,9 @@ struct CoinShopView: View {
                     Section {
                         HStack {
                             HStack {
-                                Text("🪙 현재보유한 코인")
+                                Text("🪙 현재 보유한 코인")
                                 
-                                Text("330개")
+                                Text("\(store.state.myProfileState.myProfile?.sesacCoin ?? 0)개")
                                     .foregroundStyle(.brandGreen)
                             }
                             .font(.bodyBold)
@@ -47,24 +47,23 @@ struct CoinShopView: View {
                     
                     
                     Section {
-                        ForEach(0..<3) { _ in
+                        ForEach(store.state.coinShopState.coinItemList, id: \.item) { coinItem in
                             HStack {
-                                Text("🪙 10 Coin")
+                                Text("🪙 \(coinItem.item)")
                                     .font(.bodyBold)
                                     .foregroundStyle(.brandBlack)
                                 
                                 Spacer()
                                 
-                                Text("₩100")
+                                Text("₩\(coinItem.amount)")
                                     .font(.title2)
                                     .foregroundStyle(.brandWhite)
-                                    .padding(.vertical, 4)
-                                    .padding(.horizontal, 16)
+                                    .frame(width: 74, height: 28)
                                     .background(.brandGreen)
                                     .cornerRadius(4, corners: .allCorners)
                                     .contentShape(Rectangle())
                                     .onTapGesture {
-                                        print("100원")
+                                        print("\(coinItem.amount)원")
                                     }
                             }
                         }
