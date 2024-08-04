@@ -79,7 +79,9 @@ struct ContentView: View {
                         EditPhoneView()
                     case .coinShopView:
                         CoinShopView()
-                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .none, .popToRootView:
+                    case .paymentView:
+                        PaymentView()
+                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .popTwice, .none, .popToRootView:
                         EmptyView()
                             .background(.clear)
                             .hidden()
@@ -162,7 +164,14 @@ struct ContentView: View {
                 case .popToRootView:
                     navigationRouter.popToRoot()
                     store.dispatch(.initializeNetworkCallSuccessType)
+                case .paymentView:
+                    navigationRouter.push(screen: .paymentView)
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .popTwice:
+                    navigationRouter.pop(depth: 2)
+                    store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
+               
                 }
             }
         }

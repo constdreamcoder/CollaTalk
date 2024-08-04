@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import iamport_ios
 
 @main
 struct CollaTalkApp: App {
@@ -26,6 +27,9 @@ struct CollaTalkApp: App {
                 .onAppear {
                     LocalChannelRepository.shared.getLocationOfDefaultRealm()
                 }
+                .onOpenURL(perform: { url in
+                    Iamport.shared.receivedURL(url)
+                })
         }
     }
 }

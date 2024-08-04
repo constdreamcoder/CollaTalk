@@ -25,6 +25,7 @@ enum ToastMessage: ToastMessageType {
     case changeProfileImage(ChangeProfileImage)
     case changeNickname(ChangeNickname)
     case changePhone(ChangePhone)
+    case paymentValidation(PaymentValidation)
     
     var message: String {
         switch self {
@@ -54,6 +55,8 @@ enum ToastMessage: ToastMessageType {
             return changeNickname.message
         case .changePhone(let changePhone):
             return changePhone.message
+        case .paymentValidation(let paymentValidation):
+            return paymentValidation.message
         }
     }
     
@@ -275,6 +278,23 @@ enum ToastMessage: ToastMessageType {
             switch self {
             case .validationError:
                 return "연락처는 앞 숫자 010을 포함한 총 10~11자리까지만 가능합니다."
+            }
+        }
+    }
+    
+    enum PaymentValidation: ToastMessageType {
+        case successToPayCoin(purchasedCoinAmount: String)
+        case nonExistingPayment
+        case invalidPayment
+        
+        var message: String {
+            switch self {
+            case .successToPayCoin(let purchasedCoinAmount):
+                return "\(purchasedCoinAmount) 이 결제되었습니다."
+            case .nonExistingPayment:
+                return "존재하는 결제건이 아닙니다."
+            case .invalidPayment:
+                return "유효하지 않은 결제건입니다."
             }
         }
     }

@@ -45,7 +45,6 @@ struct CoinShopView: View {
                     }
                     .listRowSeparator(.hidden)
                     
-                    
                     Section {
                         ForEach(store.state.coinShopState.coinItemList, id: \.item) { coinItem in
                             HStack {
@@ -64,12 +63,12 @@ struct CoinShopView: View {
                                     .contentShape(Rectangle())
                                     .onTapGesture {
                                         print("\(coinItem.amount)원")
+                                        store.dispatch(.networkCallSuccessTypeAction(.setPaymentView(coinItem: coinItem)))
                                     }
                             }
                         }
                     }
                     .listRowSeparator(.hidden)
-                    
                 }
                 .scrollContentBackground(.hidden)
                 .scrollDisabled(true)

@@ -435,6 +435,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.coinShopState.coinItemList = coinItemList
             
             mutatingState.networkCallSuccessType = .coinShopView
+        case .setPaymentView(let coinItem):
+            mutatingState.coinShopState.selectedCoinItem = coinItem
+            
+            mutatingState.networkCallSuccessType = .paymentView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -1001,6 +1005,19 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .badRequest:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? PaymentValidationError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                case .nonExistingPayment:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.paymentValidation(.nonExistingPayment).message
+                    mutatingState.showToast = true
+                case .invalidPayment:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.paymentValidation(.invalidPayment).message
+                    mutatingState.showToast = true
+                }
             }
         case .changeProfileImage(let image):
             mutatingState.isLoading = true
@@ -1072,6 +1089,20 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.toastMessage = ToastMessage.changePhone(.validationError).message
             mutatingState.showToast = true
+        }
+    case .coinShopAction(let coinShopAction):
+        switch coinShopAction {
+        case .paymentValidation(let paymentResultResponse):
+            mutatingState.isLoading = true
+        case .updateMyProfile(let myProile, let purchasedCoinAmount):
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.paymentValidation(.successToPayCoin(purchasedCoinAmount: purchasedCoinAmount)).message
+            mutatingState.showToast = true
+            
+            mutatingState.myProfileState.myProfile = myProile
+
+            mutatingState.networkCallSuccessType = .popTwice
         }
     }
     return mutatingState

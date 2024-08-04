@@ -98,6 +98,10 @@
 		0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */; };
 		006064532C523A1A00A6E060 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; };
 		006064542C523A5F00A6E060 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 006064522C523A1A00A6E060 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		006615082C5FCCCB008F5AA2 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006615072C5FCCCB008F5AA2 /* PaymentView.swift */; };
+		0066150C2C5FDD8C008F5AA2 /* PaymentValidationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0066150B2C5FDD8C008F5AA2 /* PaymentValidationRequest.swift */; };
+		0066150E2C5FDE00008F5AA2 /* CoinValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0066150D2C5FDE00008F5AA2 /* CoinValidationResult.swift */; };
+		006615112C5FDF1E008F5AA2 /* PaymentValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006615102C5FDF1E008F5AA2 /* PaymentValidationError.swift */; };
 		006A9EC52C58E1790068AF32 /* CreateNewChannelParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */; };
 		006A9EC72C58E1880068AF32 /* CreateNewChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */; };
 		006A9EC92C58E5280068AF32 /* CreateNewChannelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */; };
@@ -138,6 +142,7 @@
 		009C55E72C5F984000713065 /* CoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55E62C5F984000713065 /* CoinService.swift */; };
 		009C55E92C5F989A00713065 /* CoinProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55E82C5F989A00713065 /* CoinProvider.swift */; };
 		009C55EC2C5F98D000713065 /* CoinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55EB2C5F98D000713065 /* CoinItem.swift */; };
+		009C55EF2C5FB0C700713065 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 009C55EE2C5FB0C700713065 /* iamport-ios */; };
 		00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */; };
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
 		00BD4E512C59D632004C2E14 /* NavigationFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */; };
@@ -307,6 +312,10 @@
 		006064482C522F0100A6E060 /* SendDirectMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageRequest.swift; sourceTree = "<group>"; };
 		0060644A2C52337400A6E060 /* DirectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessage.swift; sourceTree = "<group>"; };
 		0060644C2C52346D00A6E060 /* SendDirectMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDirectMessageError.swift; sourceTree = "<group>"; };
+		006615072C5FCCCB008F5AA2 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		0066150B2C5FDD8C008F5AA2 /* PaymentValidationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentValidationRequest.swift; sourceTree = "<group>"; };
+		0066150D2C5FDE00008F5AA2 /* CoinValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinValidationResult.swift; sourceTree = "<group>"; };
+		006615102C5FDF1E008F5AA2 /* PaymentValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentValidationError.swift; sourceTree = "<group>"; };
 		006A9EC42C58E1790068AF32 /* CreateNewChannelParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelParams.swift; sourceTree = "<group>"; };
 		006A9EC62C58E1880068AF32 /* CreateNewChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelRequest.swift; sourceTree = "<group>"; };
 		006A9EC82C58E5280068AF32 /* CreateNewChannelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelError.swift; sourceTree = "<group>"; };
@@ -421,6 +430,7 @@
 				006064532C523A1A00A6E060 /* RealmSwift in Frameworks */,
 				0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */,
 				00DF69AC2C54BE25001EE608 /* SocketIO in Frameworks */,
+				009C55EF2C5FB0C700713065 /* iamport-ios in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +476,7 @@
 				004A47D92C5E7A26000D78F1 /* EditNicknameView.swift */,
 				004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */,
 				004A47DD2C5E84FD000D78F1 /* CoinShopView.swift */,
+				006615072C5FCCCB008F5AA2 /* PaymentView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -872,6 +883,30 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		006615092C5FDD74008F5AA2 /* Coin */ = {
+			isa = PBXGroup;
+			children = (
+				0066150A2C5FDD85008F5AA2 /* Request */,
+			);
+			path = Coin;
+			sourceTree = "<group>";
+		};
+		0066150A2C5FDD85008F5AA2 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				0066150B2C5FDD8C008F5AA2 /* PaymentValidationRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		0066150F2C5FDF11008F5AA2 /* Coin */ = {
+			isa = PBXGroup;
+			children = (
+				006615102C5FDF1E008F5AA2 /* PaymentValidationError.swift */,
+			);
+			path = Coin;
+			sourceTree = "<group>";
+		};
 		006C32EF2C5385A60084C4E2 /* Query */ = {
 			isa = PBXGroup;
 			children = (
@@ -977,6 +1012,7 @@
 			isa = PBXGroup;
 			children = (
 				009C55EB2C5F98D000713065 /* CoinItem.swift */,
+				0066150D2C5FDE00008F5AA2 /* CoinValidationResult.swift */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -1059,6 +1095,7 @@
 				0060643F2C51DED300A6E060 /* DM */,
 				00292E682C57DDE400D19AB5 /* Channel */,
 				009C55DF2C5F2E9500713065 /* Profile */,
+				0066150F2C5FDF11008F5AA2 /* Coin */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1181,6 +1218,7 @@
 				006064352C51DC7200A6E060 /* DM */,
 				00292E5F2C57D66300D19AB5 /* Channel */,
 				009C55DA2C5F29F900713065 /* Profile */,
+				006615092C5FDD74008F5AA2 /* Coin */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1310,6 +1348,7 @@
 				0052C1392C3AFB4D003D08D3 /* CombineMoya */,
 				006064522C523A1A00A6E060 /* RealmSwift */,
 				00DF69AB2C54BE25001EE608 /* SocketIO */,
+				009C55EE2C5FB0C700713065 /* iamport-ios */,
 			);
 			productName = CollaTalk;
 			productReference = 00F878C72C2BEE5B002610A8 /* CollaTalk.app */;
@@ -1343,6 +1382,7 @@
 				0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */,
 				006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				009C55ED2C5FB0C700713065 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = 00F878C82C2BEE5B002610A8 /* Products */;
 			projectDirPath = "";
@@ -1378,6 +1418,7 @@
 				00ED9E052C4BECE000DF5AE7 /* TransferWorkspaceOwnershipParams.swift in Sources */,
 				000F40082C58C1BD00FF87BF /* FetchUnreadChannelQuery.swift in Sources */,
 				0060644D2C52346D00A6E060 /* SendDirectMessageError.swift in Sources */,
+				0066150E2C5FDE00008F5AA2 /* CoinValidationResult.swift in Sources */,
 				0070E7132C4A01D4009058EA /* AlertView.swift in Sources */,
 				00F47A4E2C4E9F8D0095EB4E /* ChatView.swift in Sources */,
 				00292E672C57D7AC00D19AB5 /* ChannelChat.swift in Sources */,
@@ -1403,6 +1444,7 @@
 				0060644B2C52337400A6E060 /* DirectMessage.swift in Sources */,
 				006C32F32C5387530084C4E2 /* QueryKey.swift in Sources */,
 				00318EED2C3FA9A7003206CB /* LoadingView.swift in Sources */,
+				006615112C5FDF1E008F5AA2 /* PaymentValidationError.swift in Sources */,
 				00F47A3B2C4E1D980095EB4E /* InviteMemberError.swift in Sources */,
 				00292E642C57D6E700D19AB5 /* ChannelProvider.swift in Sources */,
 				006C32E82C53436B0084C4E2 /* LocalDMRoomRepository.swift in Sources */,
@@ -1533,6 +1575,7 @@
 				00F6F2B82C3BE9F700C1AFF1 /* State.swift in Sources */,
 				006060C32C450C3D001D300F /* DM.swift in Sources */,
 				001D14202C59265F00CC8777 /* SearchChannelView.swift in Sources */,
+				006615082C5FCCCB008F5AA2 /* PaymentView.swift in Sources */,
 				00DA64D92C515E98005BC393 /* OnChangeModifier.swift in Sources */,
 				0086B5BB2C37F1A600AD889C /* BottomViewGrabber.swift in Sources */,
 				004A47DE2C5E84FD000D78F1 /* CoinShopView.swift in Sources */,
@@ -1558,6 +1601,7 @@
 				000F400F2C58DA3200FF87BF /* CreateOrEditChannelView.swift in Sources */,
 				003F6FCC2C5A869C00C125EA /* FetchChannelMembersError.swift in Sources */,
 				006C32FD2C53E06C0084C4E2 /* UnreadDMCount.swift in Sources */,
+				0066150C2C5FDD8C008F5AA2 /* PaymentValidationRequest.swift in Sources */,
 				001D14242C59326C00CC8777 /* FetchAllChannelsError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1701,6 +1745,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1735,6 +1780,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1792,6 +1838,14 @@
 				minimumVersion = 10.52.2;
 			};
 		};
+		009C55ED2C5FB0C700713065 /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
@@ -1812,6 +1866,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		009C55EE2C5FB0C700713065 /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 009C55ED2C5FB0C700713065 /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
 		};
 		00DF69AB2C54BE25001EE608 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;

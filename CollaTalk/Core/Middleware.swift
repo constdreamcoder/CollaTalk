@@ -186,7 +186,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             
             return Empty().eraseToAnyPublisher()
         case .setCoinShopView:
-           break
+            break
+        case .setPaymentView(let coinItem):
+            break
         }
         
     case .navigationAction(let navigationAction):
@@ -1563,7 +1565,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .changeNickname:
             return Future<AppAction, Never> { promise in
                 Task {
-                   
+                    
                     /// 닉네임 유효성 검사
                     let isNicknameValid = ValidationCheck.nickname(input: state.editNicknameState.nickname).validation
                     
@@ -1625,6 +1627,34 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .changePhoneValidationError:
+            break
+        }
+    case .coinShopAction(let coinShopAction):
+        switch coinShopAction {
+        case .paymentValidation(let paymentResultResponse):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 코인 결제 검증
+                        let paymentValidationResult = try await CoinProvider.shared.paymentValidation(
+                            impUid: paymentResultResponse.imp_uid ?? "",
+                            merchantUid: paymentResultResponse.merchant_uid ?? ""
+                        )
+                        
+                        /// 내 프로필 조회 
+                        let myProfile = try await ProfileProvider.shared.fetchMyProfile()
+                        
+                        guard 
+                            let paymentValidationResult,
+                            let myProfile
+                        else { return }
+                        promise(.success(.coinShopAction(.updateMyProfile(myProile: myProfile, purchasedCoinAmount: paymentValidationResult.productName))))
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .updateMyProfile:
             break
         }
     }

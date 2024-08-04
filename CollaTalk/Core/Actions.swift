@@ -7,6 +7,7 @@
 
 import UIKit
 import _PhotosUI_SwiftUI
+import iamport_ios
 
 enum AppAction {
     
@@ -34,6 +35,7 @@ enum AppAction {
     case editProfileAction(EditProfileAction)
     case editNicknameAction(EditNicknameAction)
     case editPhoneAction(EditPhoneAction)
+    case coinShopAction(CoinShopAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -51,6 +53,7 @@ enum AppAction {
         case setEditPhoneView
         case setCoinShopView(coinItemList: [CoinItem])
         case popToRootView
+        case setPaymentView(coinItem: CoinItem)
         case setNone
     }
     
@@ -237,5 +240,10 @@ enum AppAction {
         case writePhoneNumber(phoneNumber: String)
         case changePhone
         case changePhoneValidationError
+    }
+    
+    enum CoinShopAction {
+        case paymentValidation(paymentResultResponse: IamportResponse)
+        case updateMyProfile(myProile: MyProfile, purchasedCoinAmount: String)
     }
 }

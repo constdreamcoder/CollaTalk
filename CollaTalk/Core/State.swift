@@ -180,5 +180,6 @@ struct AppState {
     
     struct CoinShopState {
         var coinItemList: [CoinItem] = []
+        var selectedCoinItem: CoinItem? = nil
     }
 }

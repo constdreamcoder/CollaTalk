@@ -10,6 +10,7 @@ import Moya
 
 enum CoinService {
    case fetchCoinItemList
+    case paymentValidation(request: PaymentValidationRequest)
 }
 
 extension CoinService: BaseService {
@@ -17,6 +18,8 @@ extension CoinService: BaseService {
         switch self {
         case .fetchCoinItemList:
             return "/store/item/list"
+        case .paymentValidation:
+            return "store/pay/validation"
         }
     }
     
@@ -24,6 +27,8 @@ extension CoinService: BaseService {
         switch self {
         case .fetchCoinItemList:
             return .get
+        case .paymentValidation:
+            return .post
         }
     }
     
@@ -31,6 +36,8 @@ extension CoinService: BaseService {
         switch self {
         case .fetchCoinItemList:
             return .requestPlain
+        case .paymentValidation(let request):
+            return.requestJSONEncodable(request)
         }
     }
 }

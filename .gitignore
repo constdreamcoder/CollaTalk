@@ -5,6 +5,7 @@
 .DS_Store
 GoogleService-Info.plist
 APIKeys.swift
+info.plist
 
 ### Swift ###
 # Xcode
