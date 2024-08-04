@@ -9,7 +9,8 @@ import Foundation
 import Moya
 
 enum ProfileService {
-   case fetchMyProfile
+    case fetchMyProfile
+    case changeProfileImage(request: ChangeProfileImageRequest)
 }
 
 extension ProfileService: BaseService {
@@ -17,6 +18,8 @@ extension ProfileService: BaseService {
         switch self {
         case .fetchMyProfile:
             return "/users/me"
+        case .changeProfileImage:
+            return "/users/me/image"
         }
     }
     
@@ -24,6 +27,8 @@ extension ProfileService: BaseService {
         switch self {
         case .fetchMyProfile:
             return .get
+        case .changeProfileImage:
+            return .put
         }
     }
     
@@ -31,6 +36,17 @@ extension ProfileService: BaseService {
         switch self {
         case .fetchMyProfile:
             return .requestPlain
+        case .changeProfileImage(let request):
+            let imageFile = request.image
+            let imageFileMultipart = [
+                MultipartFormData(
+                    provider: .data(imageFile.imageData),
+                    name: MultiPartFormKey.image,
+                    fileName: imageFile.name,
+                    mimeType: imageFile.mimeType.rawValue
+                )
+            ]
+            return .uploadMultipart(imageFileMultipart)
         }
     }
 }

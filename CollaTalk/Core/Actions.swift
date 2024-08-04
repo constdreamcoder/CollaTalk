@@ -53,7 +53,7 @@ enum AppAction {
         case presentLoginView(present: Bool)
         case presentSignUpView(present: Bool)
         case presentModifyWorkspaceView(present: Bool, workspaceModificationType: WorkspaceModificationType, selectedWorkspace: Workspace? = nil)
-        case showImagePickerView(show: Bool)
+        case showImagePickerView(show: Bool, isEditProfileMode: Bool = false)
         case presentChangeWorkspaceOwnerView(present: Bool, workspace: Workspace? = nil)
         case presentChangeChannelOwnerView(present: Bool)
         case presentInviteMemeberView(present: Bool)
@@ -95,7 +95,6 @@ enum AppAction {
     }
     
     enum ModifyWorkspaceAction {
-        case selectImage(image: UIImage)
         case dismissGallery(selectedImage: UIImage)
         case writeName(name: String)
         case writeDescription(description: String)
@@ -106,6 +105,7 @@ enum AppAction {
         case returnToSideBar(updatedWorkspaces: [Workspace])
         case isValid(isWorkspaceNameValid: Bool, isWorkspaceCoverImageValid: Bool)
         case initializeAllElements
+        case selectImage(image: UIImage)
     }
     
     enum WorkspaceAction {
@@ -215,5 +215,9 @@ enum AppAction {
         case editProfileError(Error)
         case writeNickname(nickname: String)
         case writePhoneNumber(phoneNumber: String)
+        case changeProfileImage(image: UIImage)
+        case profileImageDataLimitError
+        case noImageDataError
+        case updateUserInfo(updatedUserInfo: ChangedMyProfile)
     }
 }

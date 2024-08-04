@@ -22,6 +22,7 @@ enum ToastMessage: ToastMessageType {
     case createOrEditChannel(CreateOrEditChannel)
     case leaveChannel(LeaveChannel)
     case leaveWorkspace(LeaveWorkspace)
+    case changeProfileImage(ChangeProfileImage)
     
     var message: String {
         switch self {
@@ -45,6 +46,8 @@ enum ToastMessage: ToastMessageType {
             return leaveChannel.message
         case .leaveWorkspace(let leaveWorkspace):
             return leaveWorkspace.message
+        case .changeProfileImage(let changeProfileImage):
+            return changeProfileImage.message
         }
     }
     
@@ -227,6 +230,20 @@ enum ToastMessage: ToastMessageType {
             switch self {
             case .requestDeined:
                 return "채널 관리자이신 것 같아요. 채널 관리자는 채널에 대한 권한을 양도해야 워크스페이스를 퇴장할 수 있어요."
+            }
+        }
+    }
+    
+    enum ChangeProfileImage: ToastMessageType {
+        case noImageData
+        case imageDataLimit
+        
+        var message: String {
+            switch self {
+            case .noImageData:
+                return "선택된 이미지가 존재하지 않습니다. 이미지를 선택해 주세요."
+            case .imageDataLimit:
+                return "1MB이상의 이미지는 선택하실 수 없습니다."
             }
         }
     }

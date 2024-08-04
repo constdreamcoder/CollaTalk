@@ -1,21 +1,20 @@
 //
-//  MyProfile.swift
+//  ChangedMyProfile.swift
 //  CollaTalk
 //
-//  Created by SUCHAN CHANG on 8/3/24.
+//  Created by SUCHAN CHANG on 8/4/24.
 //
 
 import Foundation
 
-struct MyProfile: Decodable {
-    var userId: String
-    var email: String
-    var nickname: String
-    var profileImage: String?
-    var phone: String?
-    var provider: String?
-    var sesacCoin: Int
-    var createdAt: String
+struct ChangedMyProfile: Decodable {
+    let userId: String
+    let email: String
+    let nickname: String
+    let profileImage: String?
+    let phone: String?
+    let provider: String?
+    let createdAt: String
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -24,7 +23,6 @@ struct MyProfile: Decodable {
         case profileImage
         case phone
         case provider
-        case sesacCoin
         case createdAt
     }
     
@@ -36,7 +34,6 @@ struct MyProfile: Decodable {
         self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage)
         self.phone = try container.decodeIfPresent(String.self, forKey: .phone)
         self.provider = try container.decodeIfPresent(String.self, forKey: .provider)
-        self.sesacCoin = try container.decode(Int.self, forKey: .sesacCoin)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
     }
 }

@@ -32,6 +32,7 @@ struct AppState {
     var searchChannelState = SearchChannelState()
     var channelSettingState = ChannelSettingState()
     var myProfileState = MyProfileState()
+    var imagePickerState = ImagePickerState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -162,5 +163,9 @@ struct AppState {
         var isNicknameEmpty: Bool = true
         var phoneNumber: String = ""
         var isPhoneNumberEmpty: Bool = true
+    }
+    
+    struct ImagePickerState {
+        var isEditProfileMode: Bool = false
     }
 }

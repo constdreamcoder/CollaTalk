@@ -14,8 +14,8 @@ struct ImagePickerView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary //이미지 소스 선택
-        imagePicker.allowsEditing = false //이미지 편집기능 여부
+        imagePicker.sourceType = .photoLibrary // 이미지 소스 선택
+        imagePicker.allowsEditing = false // 이미지 편집기능 여부
         imagePicker.delegate = context.coordinator
 
         return imagePicker
@@ -38,7 +38,11 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                imagePickerView.store.dispatch(.modifyWorkspaceAction(.selectImage(image: selectedImage)))
+                if imagePickerView.store.state.imagePickerState.isEditProfileMode {
+                    imagePickerView.store.dispatch(.editProfileAction(.changeProfileImage(image: selectedImage)))
+                } else {
+                    imagePickerView.store.dispatch(.modifyWorkspaceAction(.selectImage(image: selectedImage)))
+                }
             }
         }
     }

@@ -63,7 +63,7 @@ struct ContentView: View {
             .fullScreenCover(
                 isPresented: Binding(
                     get: { store.state.navigationState.showImagePicker },
-                    set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0))) }
+                    set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0, isEditProfileMode: false))) }
                 )
             ) {
                 ImagePickerView()

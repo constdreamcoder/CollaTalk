@@ -65,8 +65,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 }
             default: break
             }
-        case .showImagePickerView(let show):
+        case .showImagePickerView(let show, let isEditProfileMode):
             mutatingState.navigationState.showImagePicker = show
+            mutatingState.imagePickerState.isEditProfileMode = isEditProfileMode
         case .presentChangeWorkspaceOwnerView(let present, let workspace):
             mutatingState.navigationState.isChangeWorkspaceOwnerViewPresented = present
         case .presentInviteMemeberView(let present):
@@ -978,6 +979,39 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writePhoneNumber(let phoneNumber):
             mutatingState.myProfileState.phoneNumber = phoneNumber
             mutatingState.myProfileState.isPhoneNumberEmpty = phoneNumber.isEmpty
+        case .changeProfileImage(let image):
+            mutatingState.isLoading = true
+        case .profileImageDataLimitError:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.changeProfileImage(.imageDataLimit).message
+            mutatingState.showToast = true
+        case .noImageDataError:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.changeProfileImage(.noImageData).message
+            mutatingState.showToast = true
+        case .updateUserInfo(let updatedUserInfo):
+            mutatingState.isLoading = false
+            
+            mutatingState.myProfileState.myProfile?.userId = updatedUserInfo.userId
+            mutatingState.myProfileState.myProfile?.email = updatedUserInfo.email
+            mutatingState.myProfileState.myProfile?.nickname = updatedUserInfo.nickname
+            mutatingState.myProfileState.myProfile?.profileImage = updatedUserInfo.profileImage
+            mutatingState.myProfileState.myProfile?.phone = updatedUserInfo.phone
+            mutatingState.myProfileState.myProfile?.provider = updatedUserInfo.provider
+            mutatingState.myProfileState.myProfile?.createdAt = updatedUserInfo.createdAt
+            
+            mutatingState.user?.userId = updatedUserInfo.userId
+            mutatingState.user?.email = updatedUserInfo.email
+            mutatingState.user?.nickname = updatedUserInfo.nickname
+            mutatingState.user?.profileImage = updatedUserInfo.profileImage
+            mutatingState.user?.phone = updatedUserInfo.phone
+            mutatingState.user?.provider = updatedUserInfo.provider
+            mutatingState.user?.createdAt = updatedUserInfo.createdAt
+            
+            mutatingState.navigationState.showImagePicker = false
+            mutatingState.imagePickerState.isEditProfileMode = false
         }
     }
     return mutatingState

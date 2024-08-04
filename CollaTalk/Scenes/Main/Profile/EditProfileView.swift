@@ -46,7 +46,7 @@ struct EditProfileView: View {
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
+                                store.dispatch(.navigationAction(.showImagePickerView(show: true, isEditProfileMode: true)))
                             }
                     },
                     placeHolderView: {

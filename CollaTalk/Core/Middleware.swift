@@ -187,7 +187,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .presentModifyWorkspaceView(let present, let workspaceModificationType, let selectedWorkspace):
             break
-        case .showImagePickerView(let show):
+        case .showImagePickerView(let show, let isEditProfileMode):
             break
         case .presentChangeWorkspaceOwnerView(let present, let workspace):
             if present {
@@ -1478,6 +1478,41 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .writeNickname(let nickname):
             break
         case .writePhoneNumber(let phoneNumber):
+            break
+        case .changeProfileImage(let image):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    guard let imageData = image.pngData(), imageData.count > 0 else {
+                        promise(.success(.editProfileAction(.noImageDataError)))
+                        return
+                    }
+                    
+                    if imageData.count > 1 * 1024 * 1024 {
+                        promise(.success(.editProfileAction(.profileImageDataLimitError)))
+                    }
+                    
+                    do {
+                        /// 프로필 이미지 수정
+                        let imageFile = ImageFile(
+                            imageData: imageData,
+                            name: (Date().timeIntervalSince1970 + 233).description,
+                            mimeType: .png
+                        )
+                        let changedProfile = try await ProfileProvider.shared.changeProfileImage(image: imageFile)
+                        
+                        guard let changedProfile else { return }
+                        
+                        promise(.success(.editProfileAction(.updateUserInfo(updatedUserInfo: changedProfile))))
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .profileImageDataLimitError:
+            break
+        case .noImageDataError:
+            break
+        case .updateUserInfo(let updatedUserInfo):
             break
         }
     }

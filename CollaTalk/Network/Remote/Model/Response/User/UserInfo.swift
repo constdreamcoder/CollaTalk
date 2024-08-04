@@ -8,14 +8,14 @@
 import Foundation
 
 struct UserInfo: Codable {
-    let userId: String
-    let email: String
-    let nickname: String
-    let profileImage: String?
-    let phone: String?
-    let provider: String?
-    let createdAt: String
-    let token: Token
+    var userId: String
+    var email: String
+    var nickname: String
+    var profileImage: String?
+    var phone: String?
+    var provider: String?
+    var createdAt: String
+    var token: Token
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
