@@ -416,6 +416,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.myProfileState.myProfile = myProfile
             mutatingState.networkCallSuccessType = .editProfileView
+        case .setEditNicknameView:
+            mutatingState.editNicknameState.nickname = mutatingState.myProfileState.myProfile?.nickname ?? ""
+            mutatingState.networkCallSuccessType = .editNicknameView
+        case .setEditPhoneView:
+            mutatingState.editPhoneState.phoneNumber = mutatingState.myProfileState.myProfile?.phone ?? ""
+            mutatingState.networkCallSuccessType = .editPhoneView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -977,13 +983,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .badRequest:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? ChangeProfileInfoError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                }
             }
-        case .writeNickname(let nickname):
-            mutatingState.myProfileState.nickname = nickname
-            mutatingState.myProfileState.isNicknameEmpty = nickname.isEmpty
-        case .writePhoneNumber(let phoneNumber):
-            mutatingState.myProfileState.phoneNumber = phoneNumber
-            mutatingState.myProfileState.isPhoneNumberEmpty = phoneNumber.isEmpty
         case .changeProfileImage(let image):
             mutatingState.isLoading = true
         case .profileImageDataLimitError:
@@ -996,7 +1001,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.toastMessage = ToastMessage.changeProfileImage(.noImageData).message
             mutatingState.showToast = true
-        case .updateUserInfo(let updatedUserInfo):
+        case .updateUserInfo(let updatedUserInfo, let isProfileImageChanged):
             mutatingState.isLoading = false
             
             mutatingState.myProfileState.myProfile?.userId = updatedUserInfo.userId
@@ -1015,13 +1020,29 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.user?.provider = updatedUserInfo.provider
             mutatingState.user?.createdAt = updatedUserInfo.createdAt
             
-            mutatingState.navigationState.showImagePicker = false
-            mutatingState.imagePickerState.isEditProfileMode = false
-            
-            mutatingState.toastMessage = ToastMessage.changeProfileImage(.successToChangeProfile).message
-            mutatingState.showToast = true
+            if isProfileImageChanged {
+                mutatingState.navigationState.showImagePicker = false
+                mutatingState.imagePickerState.isEditProfileMode = false
+                
+                mutatingState.toastMessage = ToastMessage.changeProfileImage(.successToChangeProfile).message
+                mutatingState.showToast = true
+            } else {
+                mutatingState.networkCallSuccessType = .pop
+            }
+        }
+    case .editNicknameAction(let editNicknameAction):
+        switch editNicknameAction {
+        case .writeNickname(let nickname):
+            mutatingState.editNicknameState.nickname = nickname
+            mutatingState.editNicknameState.isNicknameEmpty = nickname.isEmpty
         case .changeNickname:
             mutatingState.isLoading = true
+        }
+    case .editPhoneAction(let editPhoneAction):
+        switch editPhoneAction {
+        case .writePhoneNumber(let phoneNumber):
+            mutatingState.editPhoneState.phoneNumber = phoneNumber
+            mutatingState.editPhoneState.isPhoneNumberEmpty = phoneNumber.isEmpty
         case .changePhone:
             mutatingState.isLoading = true
         }

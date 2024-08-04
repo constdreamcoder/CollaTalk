@@ -29,8 +29,8 @@ struct EditNicknameView: View {
                 InputView(
                     title: "",
                     placeholder: "닉네임을 입력하세요",
-                    textFieldGetter: { store.state.myProfileState.nickname },
-                    textFieldSetter: { store.dispatch(.editProfileAction(.writeNickname(nickname: $0))) },
+                    textFieldGetter: { store.state.editNicknameState.nickname },
+                    textFieldSetter: { store.dispatch(.editNicknameAction(.writeNickname(nickname: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -41,12 +41,12 @@ struct EditNicknameView: View {
                 
                 CustomButton {
                     print("완료")
-                    store.dispatch(.editProfileAction(.changeNickname))
+                    store.dispatch(.editNicknameAction(.changeNickname))
                 } label: {
                     Text("완료")
                 }
-                .disabled( store.state.myProfileState.isNicknameEmpty)
-                .bottomButtonShape(!store.state.myProfileState.isNicknameEmpty ? .brandGreen : .brandInactive)
+                .disabled( store.state.editNicknameState.isNicknameEmpty)
+                .bottomButtonShape(!store.state.editNicknameState.isNicknameEmpty ? .brandGreen : .brandInactive)
                 .padding(.bottom, 12)
             }
         }

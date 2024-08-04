@@ -76,7 +76,7 @@ struct EditProfileView: View {
                                 value: store.state.myProfileState.myProfile?.nickname ?? ""
                             ),
                             action: {
-                                navigationRouter.push(screen: .editNicknameView)
+                                store.dispatch(.networkCallSuccessTypeAction(.setEditNicknameView))
                             }
                         )
 
@@ -86,7 +86,7 @@ struct EditProfileView: View {
                                 value: store.state.myProfileState.myProfile?.phone ?? ""
                             ),
                             action: {
-                                navigationRouter.push(screen: .editPhoneView)
+                                store.dispatch(.networkCallSuccessTypeAction(.setEditPhoneView))
                             }
                         )
                     }

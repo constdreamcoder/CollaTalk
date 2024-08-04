@@ -32,6 +32,8 @@ enum AppAction {
     case channelSettingAction(ChannelSettingAction)
     case changeChannelOwnerViewAction(ChangeChannelOwnerViewAction)
     case editProfileAction(EditProfileAction)
+    case editNicknameAction(EditNicknameAction)
+    case editPhoneAction(EditPhoneAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -45,6 +47,8 @@ enum AppAction {
         case setChannelChatView(channel: Channel, channelChats: groupdChannelChatsType)
         case setChannelSettingView(channelDetails: Channel)
         case setEditProfileView(myProfile: MyProfile)
+        case setEditNicknameView
+        case setEditPhoneView
         case setNone
     }
     
@@ -213,13 +217,19 @@ enum AppAction {
     enum EditProfileAction {
         case fetchMyProfile
         case editProfileError(Error)
-        case writeNickname(nickname: String)
-        case writePhoneNumber(phoneNumber: String)
         case changeProfileImage(image: UIImage)
-        case changeNickname
-        case changePhone
         case profileImageDataLimitError
         case noImageDataError
-        case updateUserInfo(updatedUserInfo: ChangedMyProfile)
+        case updateUserInfo(updatedUserInfo: ChangedMyProfile, isProfileImageChanged: Bool = false)
+    }
+    
+    enum EditNicknameAction {
+        case writeNickname(nickname: String)
+        case changeNickname
+    }
+    
+    enum EditPhoneAction {
+        case writePhoneNumber(phoneNumber: String)
+        case changePhone
     }
 }

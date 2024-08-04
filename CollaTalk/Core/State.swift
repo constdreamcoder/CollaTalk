@@ -32,6 +32,8 @@ struct AppState {
     var searchChannelState = SearchChannelState()
     var channelSettingState = ChannelSettingState()
     var myProfileState = MyProfileState()
+    var editNicknameState = EditNicknameState()
+    var editPhoneState = EditPhoneState()
     var imagePickerState = ImagePickerState()
     
     struct NavigationState {
@@ -159,13 +161,19 @@ struct AppState {
     
     struct MyProfileState {
         var myProfile: MyProfile? = nil
-        var nickname: String = ""
-        var isNicknameEmpty: Bool = true
-        var phoneNumber: String = ""
-        var isPhoneNumberEmpty: Bool = true
     }
     
     struct ImagePickerState {
         var isEditProfileMode: Bool = false
+    }
+    
+    struct EditNicknameState {
+        var nickname: String = ""
+        var isNicknameEmpty: Bool = true
+    }
+    
+    struct EditPhoneState {
+        var phoneNumber: String = ""
+        var isPhoneNumberEmpty: Bool = true
     }
 }

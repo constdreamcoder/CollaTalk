@@ -175,6 +175,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .setEditProfileView(let myProfile):
             break
+        case .setEditNicknameView:
+            break
+        case .setEditPhoneView:
+            break
         }
         
     case .navigationAction(let navigationAction):
@@ -490,7 +494,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces, selectedWorkspace: selectedWorkspace))))
                                 return
                             }
-                           
+                            
                             promise(.success(.networkCallSuccessTypeAction(.setHomeDefaultView(workspaces: workspaces, selectedWorkspace: selectedWorkspace))))
                         }
                     } catch {
@@ -735,7 +739,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-        case .selectWorkspace(let workspace):            
+        case .selectWorkspace(let workspace):
             /// UserDefaults에 현재 선택된 워크스페이스 저장
             UserDefaultsManager.setObject(workspace, forKey: .selectedWorkspace)
             return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
@@ -1475,10 +1479,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             }.eraseToAnyPublisher()
         case .editProfileError(let error):
             break
-        case .writeNickname(let nickname):
-            break
-        case .writePhoneNumber(let phoneNumber):
-            break
+            
         case .changeProfileImage(let image):
             return Future<AppAction, Never> { promise in
                 Task {
@@ -1502,7 +1503,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         
                         guard let changedProfile else { return }
                         
-                        promise(.success(.editProfileAction(.updateUserInfo(updatedUserInfo: changedProfile))))
+                        promise(.success(.editProfileAction(.updateUserInfo(updatedUserInfo: changedProfile, isProfileImageChanged: true))))
                     } catch {
                         promise(.success(.editProfileAction(.editProfileError(error))))
                     }
@@ -1512,19 +1513,32 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .noImageDataError:
             break
-        case .updateUserInfo(let updatedUserInfo):
+        case .updateUserInfo(let updatedUserInfo, let isProfileChanged):
+            break
+        }
+    case .editNicknameAction(let editNicknameAction):
+        switch editNicknameAction {
+        case .writeNickname(let nickname):
             break
         case .changeNickname:
             return Future<AppAction, Never> { promise in
                 Task {
-                    /// 닉네임
-                    let isNicknameValid = ValidationCheck.nickname(input: state.myProfileState.nickname).validation
+                   
+                    /// 닉네임 유효성 검사
+                    let isNicknameValid = ValidationCheck.nickname(input: state.editNicknameState.nickname).validation
                     
-                    guard isNicknameValid else { return }
+                    guard isNicknameValid else {
+                        // TODO: - 닉네임 유효성 검사 오류 처리 추가
+                        return
+                    }
+                    
+                    guard let phone = state.myProfileState.myProfile?.phone else { return }
                     
                     do {
+                        /// 닉네임 수정
                         let changedMyProfile = try await ProfileProvider.shared.changeProfileInfo(
-                            nickname: state.myProfileState.nickname
+                            nickname: state.editNicknameState.nickname,
+                            phone: phone
                         )
                         
                         guard let changedMyProfile else { return }
@@ -1535,8 +1549,39 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-        case .changePhone:
+        }
+    case .editPhoneAction(let editPhoneAction):
+        switch editPhoneAction {
+        case .writePhoneNumber(let phoneNumber):
             break
+        case .changePhone:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    /// 전화번호 유효성 검사
+                    let isPhoneNumberValid = ValidationCheck.phoneNumber(input: state.editPhoneState.phoneNumber).validation
+                    
+                    guard isPhoneNumberValid else {
+                        // TODO: - 전화번호 유효성 검사 오류 철
+                        return
+                    }
+                    
+                    guard let nickname = state.myProfileState.myProfile?.nickname else { return }
+                    
+                    do {
+                        /// 전화번호 수정
+                        let changedMyProfile = try await ProfileProvider.shared.changeProfileInfo(
+                            nickname: nickname,
+                            phone: state.editPhoneState.phoneNumber
+                        )
+                        
+                        guard let changedMyProfile else { return }
+                        
+                        promise(.success(.editProfileAction(.updateUserInfo(updatedUserInfo: changedMyProfile))))
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     }
     

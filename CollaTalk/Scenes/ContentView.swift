@@ -87,7 +87,7 @@ struct ContentView: View {
                         EditPhoneView()
                     case .coinShopView:
                         CoinShopView()
-                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .none:
+                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .none:
                         EmptyView()
                             .background(.clear)
                             .hidden()
@@ -163,6 +163,9 @@ struct ContentView: View {
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .coinShopView:
                     navigationRouter.push(screen: .coinShopView)
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .pop:
+                    navigationRouter.pop()
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

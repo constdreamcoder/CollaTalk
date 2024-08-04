@@ -58,7 +58,7 @@ final class ProfileProvider: BaseProvider<ProfileService> {
         return nil
     }
     
-    func changeProfileInfo(nickname: String? = "" , phone: String? = "") async throws -> ChangedMyProfile? {
+    func changeProfileInfo(nickname: String?, phone: String?) async throws -> ChangedMyProfile? {
         do {
             let changeProfileInfoRequest = ChangeProfileInfoRequest(nickname: nickname, phone: phone)
             let response = try await request(.changeProfileInfo(request: changeProfileInfoRequest))

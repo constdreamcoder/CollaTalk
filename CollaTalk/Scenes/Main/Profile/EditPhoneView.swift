@@ -29,8 +29,8 @@ struct EditPhoneView: View {
                 InputView(
                     title: "",
                     placeholder: "전화번호를 입력하세요",
-                    textFieldGetter: { validateAndFormatPhoneNumber(store.state.myProfileState.phoneNumber) },
-                    textFieldSetter: { store.dispatch(.editProfileAction(.writePhoneNumber(phoneNumber: $0))) },
+                    textFieldGetter: { validateAndFormatPhoneNumber(store.state.editPhoneState.phoneNumber) },
+                    textFieldSetter: { store.dispatch(.editPhoneAction(.writePhoneNumber(phoneNumber: $0))) },
                     secureFieldGetter: { "" },
                     secureFieldSetter: { _ in },
                     rightButtonAction: {},
@@ -42,12 +42,12 @@ struct EditPhoneView: View {
                 
                 CustomButton {
                     print("완료")
-                    store.dispatch(.editProfileAction(.changePhone))
+                    store.dispatch(.editPhoneAction(.changePhone))
                 } label: {
                     Text("완료")
                 }
-                .disabled( store.state.myProfileState.isPhoneNumberEmpty)
-                .bottomButtonShape(!store.state.myProfileState.isPhoneNumberEmpty ? .brandGreen : .brandInactive)
+                .disabled( store.state.editPhoneState.isPhoneNumberEmpty)
+                .bottomButtonShape(!store.state.editPhoneState.isPhoneNumberEmpty ? .brandGreen : .brandInactive)
                 .padding(.bottom, 12)
             }
         }
