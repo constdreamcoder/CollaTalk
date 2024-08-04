@@ -23,6 +23,8 @@ enum ToastMessage: ToastMessageType {
     case leaveChannel(LeaveChannel)
     case leaveWorkspace(LeaveWorkspace)
     case changeProfileImage(ChangeProfileImage)
+    case changeNickname(ChangeNickname)
+    case changePhone(ChangePhone)
     
     var message: String {
         switch self {
@@ -48,6 +50,10 @@ enum ToastMessage: ToastMessageType {
             return leaveWorkspace.message
         case .changeProfileImage(let changeProfileImage):
             return changeProfileImage.message
+        case .changeNickname(let changeNickname):
+            return changeNickname.message
+        case .changePhone(let changePhone):
+            return changePhone.message
         }
     }
     
@@ -247,6 +253,28 @@ enum ToastMessage: ToastMessageType {
                 return "1MB이상의 이미지는 선택하실 수 없습니다."
             case .successToChangeProfile:
                 return "프로필 이미지가 성공적으로 변경되었습니다."
+            }
+        }
+    }
+    
+    enum ChangeNickname: ToastMessageType {
+        case validationError
+        
+        var message: String {
+            switch self {
+            case .validationError:
+                return "닉네임은 1~30자까지만 가능합니다."
+            }
+        }
+    }
+    
+    enum ChangePhone: ToastMessageType {
+        case validationError
+        
+        var message: String {
+            switch self {
+            case .validationError:
+                return "연락처는 앞 숫자 010을 포함한 총 10~11자리까지만 가능합니다."
             }
         }
     }

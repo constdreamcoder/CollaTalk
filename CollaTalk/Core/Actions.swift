@@ -226,10 +226,12 @@ enum AppAction {
     enum EditNicknameAction {
         case writeNickname(nickname: String)
         case changeNickname
+        case changeNicknameValidationError
     }
     
     enum EditPhoneAction {
         case writePhoneNumber(phoneNumber: String)
         case changePhone
+        case changePhoneValidationError
     }
 }

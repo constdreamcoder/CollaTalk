@@ -1037,6 +1037,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.editNicknameState.isNicknameEmpty = nickname.isEmpty
         case .changeNickname:
             mutatingState.isLoading = true
+        case .changeNicknameValidationError:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.changeNickname(.validationError).message
+            mutatingState.showToast = true
         }
     case .editPhoneAction(let editPhoneAction):
         switch editPhoneAction {
@@ -1045,6 +1050,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.editPhoneState.isPhoneNumberEmpty = phoneNumber.isEmpty
         case .changePhone:
             mutatingState.isLoading = true
+        case .changePhoneValidationError:
+            mutatingState.isLoading = false
+            
+            mutatingState.toastMessage = ToastMessage.changePhone(.validationError).message
+            mutatingState.showToast = true
         }
     }
     return mutatingState

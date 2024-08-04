@@ -1528,7 +1528,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     let isNicknameValid = ValidationCheck.nickname(input: state.editNicknameState.nickname).validation
                     
                     guard isNicknameValid else {
-                        // TODO: - 닉네임 유효성 검사 오류 처리 추가
+                        promise(.success(.editNicknameAction(.changeNicknameValidationError)))
                         return
                     }
                     
@@ -1549,6 +1549,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
+        case .changeNicknameValidationError:
+            break
         }
     case .editPhoneAction(let editPhoneAction):
         switch editPhoneAction {
@@ -1561,7 +1563,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     let isPhoneNumberValid = ValidationCheck.phoneNumber(input: state.editPhoneState.phoneNumber).validation
                     
                     guard isPhoneNumberValid else {
-                        // TODO: - 전화번호 유효성 검사 오류 철
+                        promise(.success(.editPhoneAction(.changePhoneValidationError)))
                         return
                     }
                     
@@ -1582,6 +1584,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
+        case .changePhoneValidationError:
+            break
         }
     }
     
