@@ -216,6 +216,8 @@ enum AppAction {
         case writeNickname(nickname: String)
         case writePhoneNumber(phoneNumber: String)
         case changeProfileImage(image: UIImage)
+        case changeNickname
+        case changePhone
         case profileImageDataLimitError
         case noImageDataError
         case updateUserInfo(updatedUserInfo: ChangedMyProfile)

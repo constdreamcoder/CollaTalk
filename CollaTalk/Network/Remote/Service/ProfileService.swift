@@ -11,12 +11,13 @@ import Moya
 enum ProfileService {
     case fetchMyProfile
     case changeProfileImage(request: ChangeProfileImageRequest)
+    case changeProfileInfo(request: ChangeProfileInfoRequest)
 }
 
 extension ProfileService: BaseService {
     var path: String {
         switch self {
-        case .fetchMyProfile:
+        case .fetchMyProfile, .changeProfileInfo:
             return "/users/me"
         case .changeProfileImage:
             return "/users/me/image"
@@ -27,15 +28,15 @@ extension ProfileService: BaseService {
         switch self {
         case .fetchMyProfile:
             return .get
-        case .changeProfileImage:
+        case .changeProfileImage, .changeProfileInfo:
             return .put
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .fetchMyProfile:
-            return .requestPlain
+        case .changeProfileInfo(let request):
+            return .requestJSONEncodable(request)
         case .changeProfileImage(let request):
             let imageFile = request.image
             let imageFileMultipart = [
@@ -47,6 +48,8 @@ extension ProfileService: BaseService {
                 )
             ]
             return .uploadMultipart(imageFileMultipart)
+        case .fetchMyProfile:
+            return .requestPlain
         }
     }
 }

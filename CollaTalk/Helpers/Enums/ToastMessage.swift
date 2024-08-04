@@ -237,6 +237,7 @@ enum ToastMessage: ToastMessageType {
     enum ChangeProfileImage: ToastMessageType {
         case noImageData
         case imageDataLimit
+        case successToChangeProfile
         
         var message: String {
             switch self {
@@ -244,6 +245,8 @@ enum ToastMessage: ToastMessageType {
                 return "선택된 이미지가 존재하지 않습니다. 이미지를 선택해 주세요."
             case .imageDataLimit:
                 return "1MB이상의 이미지는 선택하실 수 없습니다."
+            case .successToChangeProfile:
+                return "프로필 이미지가 성공적으로 변경되었습니다."
             }
         }
     }

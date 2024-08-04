@@ -1514,6 +1514,29 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .updateUserInfo(let updatedUserInfo):
             break
+        case .changeNickname:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    /// 닉네임
+                    let isNicknameValid = ValidationCheck.nickname(input: state.myProfileState.nickname).validation
+                    
+                    guard isNicknameValid else { return }
+                    
+                    do {
+                        let changedMyProfile = try await ProfileProvider.shared.changeProfileInfo(
+                            nickname: state.myProfileState.nickname
+                        )
+                        
+                        guard let changedMyProfile else { return }
+                        
+                        promise(.success(.editProfileAction(.updateUserInfo(updatedUserInfo: changedMyProfile))))
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .changePhone:
+            break
         }
     }
     

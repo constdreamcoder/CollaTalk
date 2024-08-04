@@ -133,6 +133,8 @@
 		009C55DC2C5F2A0500713065 /* ChangeProfileImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55DB2C5F2A0500713065 /* ChangeProfileImageRequest.swift */; };
 		009C55DE2C5F2DAE00713065 /* ChangedMyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55DD2C5F2DAE00713065 /* ChangedMyProfile.swift */; };
 		009C55E12C5F2E9F00713065 /* ChangeProfileImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55E02C5F2E9F00713065 /* ChangeProfileImageError.swift */; };
+		009C55E32C5F3A5B00713065 /* ChangeProfileInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55E22C5F3A5B00713065 /* ChangeProfileInfoRequest.swift */; };
+		009C55E52C5F3B6500713065 /* ChangeProfileInfoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C55E42C5F3B6500713065 /* ChangeProfileInfoError.swift */; };
 		00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */; };
 		00A7E41D2C5015E100E9091B /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7E41C2C5015E100E9091B /* ResizableTextView.swift */; };
 		00BD4E512C59D632004C2E14 /* NavigationFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */; };
@@ -337,6 +339,8 @@
 		009C55DB2C5F2A0500713065 /* ChangeProfileImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageRequest.swift; sourceTree = "<group>"; };
 		009C55DD2C5F2DAE00713065 /* ChangedMyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangedMyProfile.swift; sourceTree = "<group>"; };
 		009C55E02C5F2E9F00713065 /* ChangeProfileImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileImageError.swift; sourceTree = "<group>"; };
+		009C55E22C5F3A5B00713065 /* ChangeProfileInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileInfoRequest.swift; sourceTree = "<group>"; };
+		009C55E42C5F3B6500713065 /* ChangeProfileInfoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileInfoError.swift; sourceTree = "<group>"; };
 		00A7E4132C4FD7BC00E9091B /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		00A7E41C2C5015E100E9091B /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		00BD4E502C59D632004C2E14 /* NavigationFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrameView.swift; sourceTree = "<group>"; };
@@ -949,6 +953,7 @@
 			isa = PBXGroup;
 			children = (
 				009C55DB2C5F2A0500713065 /* ChangeProfileImageRequest.swift */,
+				009C55E22C5F3A5B00713065 /* ChangeProfileInfoRequest.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -957,6 +962,7 @@
 			isa = PBXGroup;
 			children = (
 				009C55E02C5F2E9F00713065 /* ChangeProfileImageError.swift */,
+				009C55E42C5F3B6500713065 /* ChangeProfileInfoError.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1441,6 +1447,7 @@
 				0060643C2C51DD4400A6E060 /* DMProvider.swift in Sources */,
 				00F878CB2C2BEE5B002610A8 /* CollaTalkApp.swift in Sources */,
 				00F6F2C42C3C11E100C1AFF1 /* BaseService.swift in Sources */,
+				009C55E52C5F3B6500713065 /* ChangeProfileInfoError.swift in Sources */,
 				00C4F9BF2C3D1FED0027B2D6 /* WindowProvider.swift in Sources */,
 				005278872C4EBA2500A85AA5 /* HiddenModifier.swift in Sources */,
 				0086B5B92C37F18E00AD889C /* BottomSheetView.swift in Sources */,
@@ -1482,6 +1489,7 @@
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
+				009C55E32C5F3A5B00713065 /* ChangeProfileInfoRequest.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,

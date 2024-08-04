@@ -972,6 +972,11 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 case .serverError:
                     print(error.localizedDescription)
                 }
+            } else if let error = error as? ChangeProfileImageError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                }
             }
         case .writeNickname(let nickname):
             mutatingState.myProfileState.nickname = nickname
@@ -1012,6 +1017,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             
             mutatingState.navigationState.showImagePicker = false
             mutatingState.imagePickerState.isEditProfileMode = false
+            
+            mutatingState.toastMessage = ToastMessage.changeProfileImage(.successToChangeProfile).message
+            mutatingState.showToast = true
+        case .changeNickname:
+            mutatingState.isLoading = true
+        case .changePhone:
+            mutatingState.isLoading = true
         }
     }
     return mutatingState

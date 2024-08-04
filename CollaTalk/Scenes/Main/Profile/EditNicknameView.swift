@@ -41,6 +41,7 @@ struct EditNicknameView: View {
                 
                 CustomButton {
                     print("완료")
+                    store.dispatch(.editProfileAction(.changeNickname))
                 } label: {
                     Text("완료")
                 }

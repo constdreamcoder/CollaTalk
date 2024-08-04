@@ -57,6 +57,30 @@ final class ProfileProvider: BaseProvider<ProfileService> {
         
         return nil
     }
+    
+    func changeProfileInfo(nickname: String? = "" , phone: String? = "") async throws -> ChangedMyProfile? {
+        do {
+            let changeProfileInfoRequest = ChangeProfileInfoRequest(nickname: nickname, phone: phone)
+            let response = try await request(.changeProfileInfo(request: changeProfileInfoRequest))
+            switch response.statusCode {
+            case 200:
+                let changnedMyProfile = try decode(response.data, as: ChangedMyProfile.self)
+                return changnedMyProfile
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let changeProfileInfoError = ChangeProfileInfoError(rawValue: errorCode.errorCode) {
+                    throw changeProfileInfoError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
 }
 
 

@@ -42,6 +42,7 @@ struct EditPhoneView: View {
                 
                 CustomButton {
                     print("완료")
+                    store.dispatch(.editProfileAction(.changePhone))
                 } label: {
                     Text("완료")
                 }
