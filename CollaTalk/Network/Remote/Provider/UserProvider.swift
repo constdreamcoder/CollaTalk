@@ -79,4 +79,23 @@ final class UserProvider: BaseProvider<UserService> {
         }
         return nil
     }
+    
+    func logout() async throws -> Bool? {
+        do {
+            let response = try await request(.logout)
+            switch response.statusCode {
+            case 200:
+                return true
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        return nil
+    }
 }

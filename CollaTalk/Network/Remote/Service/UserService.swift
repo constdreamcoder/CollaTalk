@@ -12,6 +12,7 @@ enum UserService {
     case login(request: LoginRequest)
     case validateEmail(request: EmailValidationRequest)
     case join(request: JoinRequest)
+    case logout
 }
 
 extension UserService: BaseService {
@@ -24,6 +25,8 @@ extension UserService: BaseService {
             return "/users/validation/email"
         case .join:
             return "/users/join"
+        case .logout:
+            return "/users/logout"
         }
     }
     
@@ -31,6 +34,8 @@ extension UserService: BaseService {
         switch self {
         case .validateEmail, .login, .join:
             return .post
+        case .logout:
+            return .get
         }
     }
     
@@ -42,6 +47,8 @@ extension UserService: BaseService {
             return .requestJSONEncodable(request)
         case .join(let request):
             return .requestJSONEncodable(request)
+        case .logout:
+            return .requestPlain
         }
     }
     

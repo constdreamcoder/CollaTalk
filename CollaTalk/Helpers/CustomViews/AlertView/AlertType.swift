@@ -20,6 +20,7 @@ enum AlertType {
     case leaveChannelAsAMember
     case leaveChannelAsAnOwner
     case deleteChannel
+    case logout
     case none
         
     var title: String {
@@ -44,6 +45,8 @@ enum AlertType {
             return "채널에서 나가기"
         case .deleteChannel:
             return "채널 삭제"
+        case .logout:
+            return "로그아웃"
         }
     }
     
@@ -84,6 +87,8 @@ enum AlertType {
             return "회원님은 채널 관리자입니다. 채널 관리자를 다른 멤버로 변경한 후 나갈 수 있습니다."
         case .deleteChannel:
             return "정말 이 채널을 삭제하시겠습니까? 삭제 시 멤버/채팅 등 채널 내의 모든 정보가 삭제되며 복구할 수 없습니다."
+        case .logout:
+            return "정말 로그아웃 할까요?"
         }
     }
     
@@ -97,6 +102,8 @@ enum AlertType {
             return "삭제"
         case .none:
             return ""
+        case .logout:
+            return "로그아웃"
         }
     }
 }

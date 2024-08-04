@@ -60,14 +60,6 @@ struct ContentView: View {
             ) {
                 ChangeWorkspaceOwnerView()
             }
-            .fullScreenCover(
-                isPresented: Binding(
-                    get: { store.state.navigationState.showImagePicker },
-                    set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0, isEditProfileMode: false))) }
-                )
-            ) {
-                ImagePickerView()
-            }
             .navigationDestination(for: PathType.self) { path in
                 Group {
                     switch path {
@@ -87,7 +79,7 @@ struct ContentView: View {
                         EditPhoneView()
                     case .coinShopView:
                         CoinShopView()
-                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .none:
+                    case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .none, .popToRootView:
                         EmptyView()
                             .background(.clear)
                             .hidden()
@@ -166,6 +158,9 @@ struct ContentView: View {
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .pop:
                     navigationRouter.pop()
+                    store.dispatch(.initializeNetworkCallSuccessType)
+                case .popToRootView:
+                    navigationRouter.popToRoot()
                     store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
                 }

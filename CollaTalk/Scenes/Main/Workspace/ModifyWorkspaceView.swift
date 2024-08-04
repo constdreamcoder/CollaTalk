@@ -169,6 +169,14 @@ struct ModifyWorkspaceView: View {
                 .bottomButtonShape(modifyWorkspaceButtonValid ? .brandGreen : .brandInactive)
             }
         }
+        .fullScreenCover(
+            isPresented: Binding(
+                get: { store.state.navigationState.showImagePicker },
+                set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0, isEditProfileMode: false))) }
+            )
+        ) {
+            ImagePickerView()
+        }
         .onDisappear {
             store.dispatch(.modifyWorkspaceAction(.initializeAllElements))
         }

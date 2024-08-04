@@ -19,6 +19,7 @@ enum PathType: Hashable {
     case editPhoneView
     case coinShopView
     case pop
+    case popToRootView
     case none
 }
 

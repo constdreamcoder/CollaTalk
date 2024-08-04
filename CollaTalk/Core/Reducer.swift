@@ -422,6 +422,13 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .setEditPhoneView:
             mutatingState.editPhoneState.phoneNumber = mutatingState.myProfileState.myProfile?.phone ?? ""
             mutatingState.networkCallSuccessType = .editPhoneView
+        case .popToRootView:
+            mutatingState.isLoading = false
+            
+            mutatingState.user = nil
+            mutatingState.workspaceState.selectedWorkspace = nil
+            
+            mutatingState.networkCallSuccessType = .popToRootView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -1029,6 +1036,8 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             } else {
                 mutatingState.networkCallSuccessType = .pop
             }
+        case .logout:
+            mutatingState.isLoading = true
         }
     case .editNicknameAction(let editNicknameAction):
         switch editNicknameAction {

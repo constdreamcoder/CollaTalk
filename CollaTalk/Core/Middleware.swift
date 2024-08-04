@@ -179,6 +179,12 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .setEditPhoneView:
             break
+        case .popToRootView:
+            UserDefaultsManager.removeObject(forKey: .userInfo)
+            UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
+            BaseRepository.deleteAllObjects()
+            
+            return Empty().eraseToAnyPublisher()
         }
         
     case .navigationAction(let navigationAction):
@@ -1515,6 +1521,23 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .updateUserInfo(let updatedUserInfo, let isProfileChanged):
             break
+        case .logout:
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 로그아웃
+                        let result = try await UserProvider.shared.logout()
+                        
+                        guard let result else { return }
+                        
+                        if result {
+                            promise(.success(.networkCallSuccessTypeAction(.popToRootView)))
+                        }
+                    } catch {
+                        promise(.success(.editProfileAction(.editProfileError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
     case .editNicknameAction(let editNicknameAction):
         switch editNicknameAction {

@@ -49,6 +49,7 @@ enum AppAction {
         case setEditProfileView(myProfile: MyProfile)
         case setEditNicknameView
         case setEditPhoneView
+        case popToRootView
         case setNone
     }
     
@@ -221,6 +222,7 @@ enum AppAction {
         case profileImageDataLimitError
         case noImageDataError
         case updateUserInfo(updatedUserInfo: ChangedMyProfile, isProfileImageChanged: Bool = false)
+        case logout
     }
     
     enum EditNicknameAction {

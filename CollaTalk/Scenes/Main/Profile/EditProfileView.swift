@@ -11,6 +11,7 @@ struct EditProfileView: View {
     
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var navigationRouter: NavigationRouter
+    @EnvironmentObject private var windowProvider: WindowProvider
     
     var body: some View {
         ZStack {
@@ -83,7 +84,7 @@ struct EditProfileView: View {
                         EditProfileContentFirstSectionCell(
                             cellType: .phone(
                                 title: .phoneTitle,
-                                value: store.state.myProfileState.myProfile?.phone ?? ""
+                                value: validateAndFormatPhoneNumber(store.state.myProfileState.myProfile?.phone ?? "")
                             ),
                             action: {
                                 store.dispatch(.networkCallSuccessTypeAction(.setEditPhoneView))
@@ -114,6 +115,20 @@ struct EditProfileView: View {
                         })
 
                         EditProfileContentSecondSectionCell(cellType: .logOut, trailingView: {})
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                store.dispatch(
+                                    .alertAction(
+                                        .showAlert(
+                                            alertType: .logout,
+                                            confirmAction: {
+                                                windowProvider.dismissAlert()
+                                                store.dispatch(.editProfileAction(.logout))
+                                            }
+                                        )
+                                    )
+                                )
+                            }
                     }
                     .listRowSeparator(.hidden)
                 }
@@ -122,6 +137,37 @@ struct EditProfileView: View {
                 
                 Spacer()
             }
+        }
+        .fullScreenCover(
+            isPresented: Binding(
+                get: { store.state.navigationState.showImagePicker },
+                set: { store.dispatch(.navigationAction(.showImagePickerView(show: $0, isEditProfileMode: false))) }
+            )
+        ) {
+            ImagePickerView()
+        }
+    }
+}
+
+extension EditProfileView {
+    // TODO: - Middleware로 옮기기
+    private func validateAndFormatPhoneNumber(_ phoneNumber: String) -> String {
+        let cleanPhoneNumber = phoneNumber.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        
+        guard cleanPhoneNumber.hasPrefix("01") else {
+            return phoneNumber
+        }
+        
+        if cleanPhoneNumber.count >= 11 {
+            let startIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+            let middleIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 7)
+            return "\(cleanPhoneNumber[..<startIndex])-\(cleanPhoneNumber[startIndex..<middleIndex])-\(cleanPhoneNumber[middleIndex...])"
+        } else if cleanPhoneNumber.count >= 10 {
+            let startIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 3)
+            let middleIndex = cleanPhoneNumber.index(cleanPhoneNumber.startIndex, offsetBy: 6)
+            return "\(cleanPhoneNumber[..<startIndex])-\(cleanPhoneNumber[startIndex..<middleIndex])-\(cleanPhoneNumber[middleIndex...])"
+        } else {
+            return phoneNumber
         }
     }
 }
@@ -146,10 +192,6 @@ struct PlaceHolderImage:View {
                     .frame(width: 24)
                     .offset(x: 5, y: 5)
             }
-        //            .contentShape(Rectangle())
-        //            .onTapGesture {
-        //                store.dispatch(.navigationAction(.showImagePickerView(show: true)))
-        //            }
     }
 }
 

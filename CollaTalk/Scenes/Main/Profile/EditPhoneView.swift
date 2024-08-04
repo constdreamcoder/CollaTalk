@@ -46,7 +46,7 @@ struct EditPhoneView: View {
                 } label: {
                     Text("완료")
                 }
-                .disabled( store.state.editPhoneState.isPhoneNumberEmpty)
+                .disabled(store.state.editPhoneState.isPhoneNumberEmpty)
                 .bottomButtonShape(!store.state.editPhoneState.isPhoneNumberEmpty ? .brandGreen : .brandInactive)
                 .padding(.bottom, 12)
             }
