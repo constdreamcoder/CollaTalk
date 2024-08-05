@@ -144,25 +144,17 @@ struct ChannelChatsView: View {
                         Section(
                             content: {
                                 ForEach(channelChats, id: \.chatId) { channelChat in
-                                    if channelChat.sender?.userId == store.state.user?.userId {
-                                        ChatItem(
-                                            chatDirection: .right,
-                                            profileImage: channelChat.sender?.profileImage,
-                                            chatTime: channelChat.createdAt.toChatTime,
-                                            nickname: channelChat.sender?.nickname ?? "",
-                                            content: channelChat.content,
-                                            files: channelChat.files.map { $0 }
-                                        )
-                                    } else {
-                                        ChatItem(
-                                            chatDirection: .left,
-                                            profileImage: channelChat.sender?.profileImage,
-                                            chatTime: channelChat.createdAt.toChatTime,
-                                            nickname: channelChat.sender?.nickname ?? "",
-                                            content: channelChat.content,
-                                            files: channelChat.files.map { $0 }
-                                        )
-                                    }
+                                    ChatItem(
+                                        chatDirection: channelChat.sender?.userId == store.state.user?.userId ? .right : .left,
+                                        profileImage: channelChat.sender?.profileImage,
+                                        chatTime: channelChat.createdAt.toChatTime,
+                                        nickname: channelChat.sender?.nickname ?? "",
+                                        content: channelChat.content,
+                                        files: channelChat.files.map { $0 }, 
+                                        profileImageTouchAction: {
+                                            print("채널 채팅 프로필 조회")
+                                        }
+                                    )
                                 }
                             },
                             header: {
@@ -209,25 +201,17 @@ struct DMChatRoomsView: View {
                         Section(
                             content: {
                                 ForEach(dms, id: \.dmId) { dm in
-                                    if dm.user?.userId == store.state.user?.userId {
-                                        ChatItem(
-                                            chatDirection: .right,
-                                            profileImage: dm.user?.profileImage,
-                                            chatTime: dm.createdAt.toChatTime,
-                                            nickname: dm.user?.nickname ?? "",
-                                            content: dm.content,
-                                            files: dm.files.map { $0 }
-                                        )
-                                    } else {
-                                        ChatItem(
-                                            chatDirection: .left,
-                                            profileImage: dm.user?.profileImage,
-                                            chatTime: dm.createdAt.toChatTime,
-                                            nickname: dm.user?.nickname ?? "",
-                                            content: dm.content,
-                                            files: dm.files.map { $0 }
-                                        )
-                                    }
+                                    ChatItem(
+                                        chatDirection: dm.user?.userId == store.state.user?.userId ? .right : .left,
+                                        profileImage: dm.user?.profileImage,
+                                        chatTime: dm.createdAt.toChatTime,
+                                        nickname: dm.user?.nickname ?? "",
+                                        content: dm.content,
+                                        files: dm.files.map { $0 }, 
+                                        profileImageTouchAction: {
+                                            print("DM 채팅 프로필 조회")
+                                        }
+                                    )
                                 }
                             },
                             header: {
@@ -301,6 +285,8 @@ struct ChatItem: View {
     let content: String?
     let files: [String]
     
+    let profileImageTouchAction: () -> Void
+    
     private let screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
@@ -333,6 +319,8 @@ struct ChatItem: View {
                             .cornerRadius(8, corners: .allCorners)
                     }
                 )
+                .contentShape(Rectangle())
+                .onTapGesture(perform: profileImageTouchAction)
                 
             } else {
                 

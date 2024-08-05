@@ -69,6 +69,7 @@
 		003F6FCE2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */; };
 		003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */; };
 		003F6FD22C5A9D0400C125EA /* ChangeChannelOwnershipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */; };
+		00432ACE2C606AB8002C43A5 /* OtherProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */; };
 		00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E962C43ED17009FDB71 /* LogginPlugin.swift */; };
 		00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E982C43ED8D009FDB71 /* Data+Ext.swift */; };
 		00436E9B2C440F8C009FDB71 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */; };
@@ -286,6 +287,7 @@
 		003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipParams.swift; sourceTree = "<group>"; };
 		003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipRequest.swift; sourceTree = "<group>"; };
 		003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipError.swift; sourceTree = "<group>"; };
+		00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileView.swift; sourceTree = "<group>"; };
 		00436E962C43ED17009FDB71 /* LogginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginPlugin.swift; sourceTree = "<group>"; };
 		00436E982C43ED8D009FDB71 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */,
 				004A47DD2C5E84FD000D78F1 /* CoinShopView.swift */,
 				006615072C5FCCCB008F5AA2 /* PaymentView.swift */,
+				00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1597,6 +1600,7 @@
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 				0013E0E32C5C916900AF747E /* LeaveWorkspaceParams.swift in Sources */,
 				00ED9E032C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift in Sources */,
+				00432ACE2C606AB8002C43A5 /* OtherProfileView.swift in Sources */,
 				006C32EE2C5385830084C4E2 /* FetchDMHistoryParams.swift in Sources */,
 				000F400F2C58DA3200FF87BF /* CreateOrEditChannelView.swift in Sources */,
 				003F6FCC2C5A869C00C125EA /* FetchChannelMembersError.swift in Sources */,
