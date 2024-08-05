@@ -70,6 +70,8 @@
 		003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */; };
 		003F6FD22C5A9D0400C125EA /* ChangeChannelOwnershipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */; };
 		00432ACE2C606AB8002C43A5 /* OtherProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */; };
+		00432AD32C607096002C43A5 /* FetchOtherProfileParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432AD22C607096002C43A5 /* FetchOtherProfileParams.swift */; };
+		00432AD52C607133002C43A5 /* OtherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432AD42C607133002C43A5 /* OtherProfile.swift */; };
 		00436E972C43ED17009FDB71 /* LogginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E962C43ED17009FDB71 /* LogginPlugin.swift */; };
 		00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E982C43ED8D009FDB71 /* Data+Ext.swift */; };
 		00436E9B2C440F8C009FDB71 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */; };
@@ -288,6 +290,8 @@
 		003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipRequest.swift; sourceTree = "<group>"; };
 		003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipError.swift; sourceTree = "<group>"; };
 		00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileView.swift; sourceTree = "<group>"; };
+		00432AD22C607096002C43A5 /* FetchOtherProfileParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOtherProfileParams.swift; sourceTree = "<group>"; };
+		00432AD42C607133002C43A5 /* OtherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfile.swift; sourceTree = "<group>"; };
 		00436E962C43ED17009FDB71 /* LogginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginPlugin.swift; sourceTree = "<group>"; };
 		00436E982C43ED8D009FDB71 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -760,6 +764,14 @@
 			path = Workspace;
 			sourceTree = "<group>";
 		};
+		00432AD12C607086002C43A5 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				00432AD22C607096002C43A5 /* FetchOtherProfileParams.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
 		00436E952C43ED06009FDB71 /* Debugger */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,13 +821,6 @@
 				002066FA2C3ED63D007E76BD /* JoinRequest.swift */,
 			);
 			path = Body;
-			sourceTree = "<group>";
-		};
-		006060BB2C44FBED001D300F /* Paramas */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Paramas;
 			sourceTree = "<group>";
 		};
 		006064352C51DC7200A6E060 /* DM */ = {
@@ -1257,7 +1262,7 @@
 		00F6F2D22C3C203A00C1AFF1 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				006060BB2C44FBED001D300F /* Paramas */,
+				00432AD12C607086002C43A5 /* Params */,
 				006060BA2C44FBE5001D300F /* Body */,
 			);
 			path = User;
@@ -1267,6 +1272,7 @@
 			isa = PBXGroup;
 			children = (
 				00F6F2D42C3C206100C1AFF1 /* UserInfo.swift */,
+				00432AD42C607133002C43A5 /* OtherProfile.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1585,6 +1591,7 @@
 				000F40042C588CDA00FF87BF /* SendChannelChatError.swift in Sources */,
 				003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */,
 				0034AC132C44B8640052EE0D /* CreateWorkspaceRequest.swift in Sources */,
+				00432AD52C607133002C43A5 /* OtherProfile.swift in Sources */,
 				00DFAF8A2C3C42DB00D25633 /* CommonError.swift in Sources */,
 				0086B5C12C38065600AD889C /* SheetNavigation.swift in Sources */,
 				00318EE52C3F7538003206CB /* WorkspaceStartView.swift in Sources */,
@@ -1597,6 +1604,7 @@
 				006064372C51DC7900A6E060 /* CreateOrFetchChatRoomParams.swift in Sources */,
 				000CDD812C490947001F6085 /* EditWorkspaceError.swift in Sources */,
 				0086B5BD2C37F2AD00AD889C /* AuthView.swift in Sources */,
+				00432AD32C607096002C43A5 /* FetchOtherProfileParams.swift in Sources */,
 				00436E992C43ED8D009FDB71 /* Data+Ext.swift in Sources */,
 				0013E0E32C5C916900AF747E /* LeaveWorkspaceParams.swift in Sources */,
 				00ED9E032C4BC15300DF5AE7 /* FetchWorkspaceMembersError.swift in Sources */,

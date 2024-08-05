@@ -81,6 +81,8 @@ struct ContentView: View {
                         CoinShopView()
                     case .paymentView:
                         PaymentView()
+                    case .otherProfileView:
+                        OtherProfileView()
                     case .popFromChannelSettingViewToSideBar, .popFromChannelSettingViewToHomeView, .pop, .popTwice, .none, .popToRootView:
                         EmptyView()
                             .background(.clear)
@@ -170,8 +172,10 @@ struct ContentView: View {
                 case .popTwice:
                     navigationRouter.pop(depth: 2)
                     store.dispatch(.initializeNetworkCallSuccessType)
+                case .otherProfileView:
+                    navigationRouter.push(screen: .otherProfileView)
+                    store.dispatch(.initializeNetworkCallSuccessType)
                 case .none: break
-               
                 }
             }
         }

@@ -13,6 +13,7 @@ enum UserService {
     case validateEmail(request: EmailValidationRequest)
     case join(request: JoinRequest)
     case logout
+    case fetchOtherProfile(params: FetchOtherProfileParams)
 }
 
 extension UserService: BaseService {
@@ -27,6 +28,8 @@ extension UserService: BaseService {
             return "/users/join"
         case .logout:
             return "/users/logout"
+        case .fetchOtherProfile(let params):
+            return "/users/\(params.userID)"
         }
     }
     
@@ -34,7 +37,7 @@ extension UserService: BaseService {
         switch self {
         case .validateEmail, .login, .join:
             return .post
-        case .logout:
+        case .logout, .fetchOtherProfile:
             return .get
         }
     }
@@ -47,7 +50,7 @@ extension UserService: BaseService {
             return .requestJSONEncodable(request)
         case .join(let request):
             return .requestJSONEncodable(request)
-        case .logout:
+        case .logout, .fetchOtherProfile:
             return .requestPlain
         }
     }

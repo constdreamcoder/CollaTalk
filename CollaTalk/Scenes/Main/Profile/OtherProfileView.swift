@@ -28,23 +28,44 @@ struct OtherProfileView: View {
                 Spacer()
                     .frame(height: 24)
                 
-                Image(.kakaoLogo)
-                    .resizable()
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 232)
-                    .background(.brandGreen)
-                    .cornerRadius(8, corners: .allCorners)
+                RemoteImage(
+                    path: store.state.otherProfileState.otherProfile?.profileImage,
+                    imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 232)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    placeHolderView: {
+                        Image(.kakaoLogo)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 232)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    errorView: { error in
+                        Image(.kakaoLogo)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 232)
+                            .background(.brandGreen)
+                            .cornerRadius(8, corners: .allCorners)
+                    }
+                )
                 
                 List {
                     Section {
                         OtherProfileContentSecondSectionCell(
                             cellType: .nickname,
-                            value: "내 브랜아입니다"
+                            value: store.state.otherProfileState.otherProfile?.nickname ?? ""
                         )
                         
                         OtherProfileContentSecondSectionCell(
                             cellType: .email,
-                            value: "branTest3321021@gmail.com"
+                            value: store.state.otherProfileState.otherProfile?.email ?? ""
                         )
                     }
                     .listRowSeparator(.hidden)

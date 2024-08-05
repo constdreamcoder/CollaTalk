@@ -21,7 +21,7 @@ struct CollaTalkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            OtherProfileView()
+            ContentView()
                 .environmentObject(store)
                 .environmentObject(windowProvider)
                 .onAppear {

@@ -36,6 +36,7 @@ struct AppState {
     var editPhoneState = EditPhoneState()
     var imagePickerState = ImagePickerState()
     var coinShopState = CoinShopState()
+    var otherProfileState = OtherProfileState()
     
     struct NavigationState {
         var isBottomSheetPresented: Bool = false
@@ -181,5 +182,9 @@ struct AppState {
     struct CoinShopState {
         var coinItemList: [CoinItem] = []
         var selectedCoinItem: CoinItem? = nil
+    }
+    
+    struct OtherProfileState {
+        var otherProfile: OtherProfile? = nil
     }
 }

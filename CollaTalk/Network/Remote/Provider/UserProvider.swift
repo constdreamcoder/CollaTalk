@@ -98,4 +98,25 @@ final class UserProvider: BaseProvider<UserService> {
         }
         return nil
     }
+    
+    func fetchOtherProfile(userId: String) async throws -> OtherProfile? {
+        do {
+            let fetchOtherProfileParams = FetchOtherProfileParams(userID: userId)
+            let response = try await request(.fetchOtherProfile(params: fetchOtherProfileParams))
+            switch response.statusCode {
+            case 200:
+                let otherProfile = try decode(response.data, as: OtherProfile.self)
+                return otherProfile
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        return nil
+    }
 }

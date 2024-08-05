@@ -22,6 +22,7 @@ enum PathType: Hashable {
     case popToRootView
     case paymentView
     case popTwice
+    case otherProfileView
     case none
 }
 

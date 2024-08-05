@@ -153,6 +153,10 @@ struct ChannelChatsView: View {
                                         files: channelChat.files.map { $0 }, 
                                         profileImageTouchAction: {
                                             print("채널 채팅 프로필 조회")
+                                            if channelChat.sender?.userId != store.state.user?.userId {
+                                                guard let userId = channelChat.sender?.userId else { return }
+                                                store.dispatch(.otherProfileAction(.fetchOtherMemberProfile(userId:  userId)))
+                                            }
                                         }
                                     )
                                 }
@@ -210,6 +214,10 @@ struct DMChatRoomsView: View {
                                         files: dm.files.map { $0 }, 
                                         profileImageTouchAction: {
                                             print("DM 채팅 프로필 조회")
+                                            if dm.user?.userId != store.state.user?.userId {
+                                                guard let userId = dm.user?.userId else { return }
+                                                store.dispatch(.otherProfileAction(.fetchOtherMemberProfile(userId:  userId)))
+                                            }
                                         }
                                     )
                                 }

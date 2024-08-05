@@ -189,6 +189,8 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .setPaymentView(let coinItem):
             break
+        case .setOtherProfileView(let otherProfile):
+            break
         }
         
     case .navigationAction(let navigationAction):
@@ -1542,7 +1544,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                     }
                 }
             }.eraseToAnyPublisher()
-        case .moveToCoinShoopView:
+        case .moveToCoinShopView:
             return Future<AppAction, Never> { promise  in
                 Task {
                     do {
@@ -1655,6 +1657,26 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .updateMyProfile:
+            break
+        }
+    case .otherProfileAction(let otherProfileAction):
+        switch otherProfileAction {
+        case .fetchOtherMemberProfile(let userId):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        let otherProfile = try await UserProvider.shared.fetchOtherProfile(userId: userId)
+                        
+                        guard let otherProfile else { return }
+                        
+                        promise(.success(.networkCallSuccessTypeAction(.setOtherProfileView(otherProfile: otherProfile))))
+                    } catch {
+                        promise(.success(.otherProfileAction(.otherProfileError(error))))
+                    }
+                }
+                
+            }.eraseToAnyPublisher()
+        case .otherProfileError(let error):
             break
         }
     }

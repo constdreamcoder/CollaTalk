@@ -36,6 +36,7 @@ enum AppAction {
     case editNicknameAction(EditNicknameAction)
     case editPhoneAction(EditPhoneAction)
     case coinShopAction(CoinShopAction)
+    case otherProfileAction(OtherProfileAction)
     
     enum LoadingAction {
         case isLoadingDisplayed(isLoading: Bool)
@@ -54,6 +55,7 @@ enum AppAction {
         case setCoinShopView(coinItemList: [CoinItem])
         case popToRootView
         case setPaymentView(coinItem: CoinItem)
+        case setOtherProfileView(otherProfile: OtherProfile) 
         case setNone
     }
     
@@ -179,6 +181,7 @@ enum AppAction {
         case channelError(Error)
     }
     
+    /// 채팅 관련 액션
     enum ChatAction {
         case chatError(Error)
         case initializeAllElements
@@ -227,7 +230,7 @@ enum AppAction {
         case noImageDataError
         case updateUserInfo(updatedUserInfo: ChangedMyProfile, isProfileImageChanged: Bool = false)
         case logout
-        case moveToCoinShoopView
+        case moveToCoinShopView
     }
     
     enum EditNicknameAction {
@@ -245,5 +248,10 @@ enum AppAction {
     enum CoinShopAction {
         case paymentValidation(paymentResultResponse: IamportResponse)
         case updateMyProfile(myProile: MyProfile, purchasedCoinAmount: String)
+    }
+    
+    enum OtherProfileAction {
+        case fetchOtherMemberProfile(userId: String)
+        case otherProfileError(Error)
     }
 }

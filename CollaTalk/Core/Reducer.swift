@@ -439,6 +439,12 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.coinShopState.selectedCoinItem = coinItem
             
             mutatingState.networkCallSuccessType = .paymentView
+        case .setOtherProfileView(let otherProfile):
+            mutatingState.isLoading = false
+            
+            mutatingState.otherProfileState.otherProfile = otherProfile
+            
+            mutatingState.networkCallSuccessType = .otherProfileView
         }
         mutatingState.isLoading = false
     case .changeWorkspaceOwnerAction(let changeWorkspaceOwnerAction):
@@ -1061,7 +1067,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
         case .logout:
             mutatingState.isLoading = true
-        case .moveToCoinShoopView:
+        case .moveToCoinShopView:
             mutatingState.isLoading = true
         }
     case .editNicknameAction(let editNicknameAction):
@@ -1103,6 +1109,32 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.myProfileState.myProfile = myProile
 
             mutatingState.networkCallSuccessType = .popTwice
+        }
+    case .otherProfileAction(let otherProfileAction):
+        switch otherProfileAction {
+        case .fetchOtherMemberProfile(let userId):
+            mutatingState.isLoading = true
+        case .otherProfileError(let error):
+            mutatingState.isLoading = false
+            
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     return mutatingState
