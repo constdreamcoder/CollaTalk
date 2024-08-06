@@ -13,7 +13,7 @@ struct MyProfile: Decodable {
     var nickname: String
     var profileImage: String?
     var phone: String?
-    var provider: String?
+    var provider: SocialLoginLogo?
     var sesacCoin: Int
     var createdAt: String
     
@@ -35,7 +35,8 @@ struct MyProfile: Decodable {
         self.nickname = try container.decode(String.self, forKey: .nickname)
         self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage)
         self.phone = try container.decodeIfPresent(String.self, forKey: .phone)
-        self.provider = try container.decodeIfPresent(String.self, forKey: .provider)
+        let provider = try container.decodeIfPresent(String.self, forKey: .provider) ?? ""
+        self.provider = SocialLoginLogo(rawValue: provider)
         self.sesacCoin = try container.decode(Int.self, forKey: .sesacCoin)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
     }

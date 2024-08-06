@@ -11,6 +11,7 @@
 		000B198E2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B198D2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift */; };
 		000B19902C61CD4B00EE7ABA /* LoginWithKakaoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B198F2C61CD4B00EE7ABA /* LoginWithKakaoError.swift */; };
 		000B19982C61CF0E00EE7ABA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 000B19972C61CF0E00EE7ABA /* KakaoSDK */; };
+		000B199A2C6201BE00EE7ABA /* SocialLoginLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B19992C6201BE00EE7ABA /* SocialLoginLogo.swift */; };
 		000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD772C490788001F6085 /* EditWorkspaceParams.swift */; };
 		000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */; };
 		000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */; };
@@ -237,6 +238,7 @@
 		000B198B2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginCoordinator.swift; sourceTree = "<group>"; };
 		000B198D2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakaoRequest.swift; sourceTree = "<group>"; };
 		000B198F2C61CD4B00EE7ABA /* LoginWithKakaoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakaoError.swift; sourceTree = "<group>"; };
+		000B19992C6201BE00EE7ABA /* SocialLoginLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginLogo.swift; sourceTree = "<group>"; };
 		000CDD772C490788001F6085 /* EditWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceParams.swift; sourceTree = "<group>"; };
 		000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceRequest.swift; sourceTree = "<group>"; };
 		000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartFormKey.swift; sourceTree = "<group>"; };
@@ -1083,6 +1085,7 @@
 			children = (
 				00DFAF8D2C3C61C700D25633 /* ValidationCheck.swift */,
 				002066F12C3E971D007E76BD /* ToastMessage.swift */,
+				000B19992C6201BE00EE7ABA /* SocialLoginLogo.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1519,6 +1522,7 @@
 				000F40022C588AC300FF87BF /* SendChannelChatRequest.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
+				000B199A2C6201BE00EE7ABA /* SocialLoginLogo.swift in Sources */,
 				00C2F6C62C5B7BF000E91C46 /* LeaveChannelError.swift in Sources */,
 				00FF60E02C52A9F700A4970E /* RepositoryType.swift in Sources */,
 				002066F82C3EC3E8007E76BD /* JoinError.swift in Sources */,

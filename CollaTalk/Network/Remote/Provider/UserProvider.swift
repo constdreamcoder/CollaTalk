@@ -85,6 +85,7 @@ final class UserProvider: BaseProvider<UserService> {
     
     func validate(email: String) async throws -> Bool {
         do {
+            if email == "" { return true }
             let emailValidationRequest = EmailValidationRequest(email: email)
             let response = try await request(.validateEmail(request: emailValidationRequest))
             switch response.statusCode {

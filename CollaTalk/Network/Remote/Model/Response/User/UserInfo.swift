@@ -13,7 +13,7 @@ struct UserInfo: Codable {
     var nickname: String
     var profileImage: String?
     var phone: String?
-    var provider: String?
+    var provider: SocialLoginLogo?
     var createdAt: String
     var token: Token
     
@@ -35,7 +35,8 @@ struct UserInfo: Codable {
         self.nickname = try container.decode(String.self, forKey: .nickname)
         self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage) ?? ""
         self.phone = try container.decodeIfPresent(String.self, forKey: .phone) ?? ""
-        self.provider = try container.decodeIfPresent(String.self, forKey: .provider) ?? ""
+        let provider = try container.decodeIfPresent(String.self, forKey: .provider) ?? ""
+        self.provider = SocialLoginLogo(rawValue: provider)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.token = try container.decode(Token.self, forKey: .token)
     }

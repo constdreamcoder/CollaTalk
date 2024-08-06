@@ -101,13 +101,8 @@ struct EditProfileView: View {
                         })
                         
                         EditProfileContentSecondSectionCell(cellType: .connectedSocialLogin, trailingView: {
-                            HStack {
-                                Image(.appleIDLogin)
-                                    .resizable()
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .frame(width: 20)
-                                
-                                Image(.kakaoLogin)
+                            if store.state.myProfileState.myProfile?.provider?.image != "" {
+                                Image(store.state.myProfileState.myProfile?.provider?.image ?? "")
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: 20)

@@ -274,7 +274,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             break
         case .isValid(let isEmailValid, let isPWValid):
             break
-        case .loginError(let errorMesssage):
+        case .loginError(let error):
             break
         case .disappearView:
             break

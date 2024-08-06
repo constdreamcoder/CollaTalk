@@ -17,22 +17,32 @@ struct MainNaigationBar: View {
             HStack(spacing: 0) {
                 
                 RemoteImage(
-                    path: store.state.workspaceState.selectedWorkspace?.coverImage ?? ""
-                ) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(.brandGreen)
-                        .frame(width: 32)
-                        .cornerRadius(8, corners: .allCorners)
-                } placeHolderView: {
-                    Image(.workspace)
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(.brandGreen)
-                        .frame(width: 32)
-                        .cornerRadius(8, corners: .allCorners)
-                }
+                    path: store.state.workspaceState.selectedWorkspace?.coverImage ?? "",
+                    imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    placeHolderView: {
+                        Image(.workspace)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .cornerRadius(8, corners: .allCorners)
+                    },
+                    errorView: { error in
+                        Image(.workspace)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .cornerRadius(8, corners: .allCorners)
+                    }
+                )
                 
                 Spacer()
                     .frame(width: 8)
@@ -46,35 +56,48 @@ struct MainNaigationBar: View {
                     .frame(width: 16)
                 
                 RemoteImage(
-                    path: store.state.user?.profileImage ?? ""
-                ) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .background(.brandGreen)
-                        .frame(width: 32)
-                        .clipShape(Circle())
-                        .overlay (
-                            Circle().stroke(.black, lineWidth: 2)
-                        )
-                        .padding(.leading, 8)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            store.dispatch(.editProfileAction(.fetchMyProfile))
-                        }
-                } placeHolderView: {
-                    Image(.workspace)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .background(.brandGreen)
-                        .frame(width: 32)
-                        .clipShape(Circle())
-                        .overlay (
-                            Circle().stroke(.black, lineWidth: 2)
-                        )
-                        .padding(.leading, 8)
+                    path: store.state.user?.profileImage ?? "",
+                    imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .clipShape(Circle())
+                            .overlay (
+                                Circle().stroke(.black, lineWidth: 2)
+                            )
+                            .padding(.leading, 8)
+                    },
+                    placeHolderView: {
+                        Image(.workspace)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .clipShape(Circle())
+                            .overlay (
+                                Circle().stroke(.black, lineWidth: 2)
+                            )
+                            .padding(.leading, 8)
+                    },
+                    errorView: { error in
+                        Image(.workspace)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .background(.brandGreen)
+                            .frame(width: 32)
+                            .clipShape(Circle())
+                            .overlay (
+                                Circle().stroke(.black, lineWidth: 2)
+                            )
+                            .padding(.leading, 8)
+                    }
+                )
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    store.dispatch(.editProfileAction(.fetchMyProfile))
                 }
-                
             }
             .padding(.horizontal, 16)
             

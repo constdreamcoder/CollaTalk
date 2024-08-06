@@ -33,7 +33,7 @@ extension AppleLoginCoodinator: ASAuthorizationControllerDelegate {
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            
+                        
             guard
                 let identityToken = appleIDCredential.identityToken,
                 let identityTokenString = String(data: identityToken, encoding: .utf8)
