@@ -91,11 +91,52 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .writePassword(let password):
             mutatingState.loginState.password = password
             mutatingState.loginState.isPWEmpty = password.isEmpty
-        case .loginError(let errorMessage):
+        case .loginError(let error):
             mutatingState.isLoading = false
             
-            mutatingState.toastMessage = ToastMessage.login(.failToLogin).message
-            mutatingState.showToast = true
+            if let error = error as? CommonError {
+                switch error {
+                case .invalidAccessAuthorization:
+                    print(error.localizedDescription)
+                case .unknownRouterRoute:
+                    print(error.localizedDescription)
+                case .expiredAccessToken:
+                    print(error.localizedDescription)
+                case .invalidToken:
+                    print(error.localizedDescription)
+                case .unknownUser:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.login(.failToLogin).message
+                    mutatingState.showToast = true
+                case .excesssiveCalls:
+                    print(error.localizedDescription)
+                case .serverError:
+                    print(error.localizedDescription)
+                }
+            } else if let error = error as? LoginWithAppleIDError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.loginWithAppleID(.badRequest).message
+                    mutatingState.showToast = true
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.loginWithAppleID(.duplicatedData).message
+                    mutatingState.showToast = true
+                }
+            } else if let error = error as? LoginWithKakaoError {
+                switch error {
+                case .badRequest:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.loginWithKakao(.badRequest).message
+                    mutatingState.showToast = true
+                case .duplicatedData:
+                    print(error.localizedDescription)
+                    mutatingState.toastMessage = ToastMessage.loginWithKakao(.duplicatedData).message
+                    mutatingState.showToast = true
+                }
+            }
+           
         case .isValid(let isEmailValid, let isPWValid):
             mutatingState.loginState.isEmailValid = isEmailValid
             mutatingState.loginState.isPWValid = isPWValid
@@ -120,8 +161,14 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.loginState.isPWEmpty = true
             mutatingState.loginState.isEmailValid = true
             mutatingState.loginState.isPWValid = true
-            
         case .login:
+            mutatingState.isLoading = true
+        case .loginWithAppleID(let idToken, let nickname):
+            mutatingState.isLoading = true
+        case .EmptyNicknameError:
+            mutatingState.toastMessage = ToastMessage.loginWithAppleID(.emptyNickname).message
+            mutatingState.showToast = true
+        case .loginWithKakao(let oauthToken):
             mutatingState.isLoading = true
         }
         

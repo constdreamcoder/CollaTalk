@@ -26,6 +26,8 @@ enum ToastMessage: ToastMessageType {
     case changeNickname(ChangeNickname)
     case changePhone(ChangePhone)
     case paymentValidation(PaymentValidation)
+    case loginWithAppleID(LoginWithAppleID)
+    case loginWithKakao(LoginWithKakao)
     
     var message: String {
         switch self {
@@ -57,6 +59,10 @@ enum ToastMessage: ToastMessageType {
             return changePhone.message
         case .paymentValidation(let paymentValidation):
             return paymentValidation.message
+        case .loginWithAppleID(let loginWithAppleID):
+            return loginWithAppleID.message
+        case .loginWithKakao(let loginWithKakao):
+            return loginWithKakao.message
         }
     }
     
@@ -295,6 +301,37 @@ enum ToastMessage: ToastMessageType {
                 return "존재하는 결제건이 아닙니다."
             case .invalidPayment:
                 return "유효하지 않은 결제건입니다."
+            }
+        }
+    }
+    
+    enum LoginWithAppleID: ToastMessageType {
+        case badRequest
+        case duplicatedData
+        case emptyNickname
+        
+        var message: String {
+            switch self {
+            case .badRequest:
+                return "잘못된 요청입니다."
+            case .duplicatedData:
+                return "이미 가입된 계정입니다."
+            case .emptyNickname:
+                return "닉네임이 비어있습니다."
+            }
+        }
+    }
+        
+    enum LoginWithKakao: ToastMessageType {
+        case badRequest
+        case duplicatedData
+        
+        var message: String {
+            switch self {
+            case .badRequest:
+                return "잘못된 요청입니다."
+            case .duplicatedData:
+                return "이미 가입된 계정입니다."
             }
         }
     }

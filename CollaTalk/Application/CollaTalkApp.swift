@@ -7,6 +7,8 @@
 
 import SwiftUI
 import iamport_ios
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 struct CollaTalkApp: App {
@@ -18,6 +20,10 @@ struct CollaTalkApp: App {
     )
     
     private let windowProvider = WindowProvider()
+    
+    init() {
+        KakaoSDK.initSDK(appKey: APIKeys.kakaoNativeAppKey)
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -28,7 +34,11 @@ struct CollaTalkApp: App {
                     LocalChannelRepository.shared.getLocationOfDefaultRealm()
                 }
                 .onOpenURL(perform: { url in
-                    Iamport.shared.receivedURL(url)
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        let _ = AuthController.handleOpenUrl(url: url)
+                    } else {
+                        Iamport.shared.receivedURL(url)
+                    }
                 })
         }
     }

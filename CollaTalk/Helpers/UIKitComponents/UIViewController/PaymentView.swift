@@ -71,6 +71,5 @@ final class PaymentViewController: UIViewController {
                 $0.buyer_name = APIKeys.buyerName
                 $0.app_scheme = APIKeys.portOneAppScheme
             }
-        
     }
 }

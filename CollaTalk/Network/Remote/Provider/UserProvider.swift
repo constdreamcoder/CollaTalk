@@ -35,6 +35,54 @@ final class UserProvider: BaseProvider<UserService> {
         return nil
     }
     
+    func loginWithAppleID(idToken: String, nickname: String?) async throws -> UserInfo? {
+        do {
+            let loginWithAppleIDRequest = LoginWithAppleIDRequest(idToken: idToken, nickname: nickname, deviceToken: nil)
+            let response = try await request(.loginWithAppleID(request: loginWithAppleIDRequest))
+            switch response.statusCode {
+            case 200:
+                let userInfo = try decode(response.data, as: UserInfo.self)
+                return userInfo
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let loginWithAppleIDError = LoginWithAppleIDError(rawValue: errorCode.errorCode) {
+                    throw loginWithAppleIDError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+    
+    func loginWithKakao(oauthToken: String) async throws -> UserInfo? {
+        do {
+            let loginWithKakaoRequest = LoginWithKakaoRequest(oauthToken: oauthToken, deviceToken: nil)
+            let response = try await request(.loginWithKakao(request: loginWithKakaoRequest))
+            switch response.statusCode {
+            case 200:
+                let userInfo = try decode(response.data, as: UserInfo.self)
+                return userInfo
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let loginWithKakaoError = LoginWithKakaoError(rawValue: errorCode.errorCode) {
+                    throw loginWithKakaoError
+                }
+            default: break
+            }
+        } catch {
+            throw error
+        }
+        
+        return nil
+    }
+    
     func validate(email: String) async throws -> Bool {
         do {
             let emailValidationRequest = EmailValidationRequest(email: email)

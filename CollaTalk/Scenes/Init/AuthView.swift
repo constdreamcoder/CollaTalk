@@ -10,6 +10,8 @@ import SwiftUI
 struct AuthView: View {
         
     @EnvironmentObject private var store: AppStore
+    @StateObject private var appleLoginCoordinator = AppleLoginCoodinator()
+    @StateObject private var kakaoLoginCoordinator = KakaoLoginCoordinator()
     
     var body: some View {
         if store.state.navigationState.isBottomSheetPresented {
@@ -22,6 +24,8 @@ struct AuthView: View {
                 VStack(spacing: 16) {
                     CustomButton {
                         print("Apple으로 계속하기")
+                        appleLoginCoordinator.store = store
+                        appleLoginCoordinator.loginWithAppleID()
                     } label: {
                         HStack{
                             Image(.appleLogo)
@@ -32,6 +36,8 @@ struct AuthView: View {
                     
                     CustomButton {
                         print("카카오톡으로 계속하기")
+                        kakaoLoginCoordinator.store = store
+                        kakaoLoginCoordinator.startLoginWithKakaoTalk()
                     } label: {
                         HStack{
                             Image(.kakaoLogo)

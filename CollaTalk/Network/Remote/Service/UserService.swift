@@ -10,6 +10,8 @@ import Moya
 
 enum UserService {
     case login(request: LoginRequest)
+    case loginWithAppleID(request: LoginWithAppleIDRequest)
+    case loginWithKakao(request: LoginWithKakaoRequest)
     case validateEmail(request: EmailValidationRequest)
     case join(request: JoinRequest)
     case logout
@@ -22,6 +24,10 @@ extension UserService: BaseService {
         switch self {
         case .login:
             return "/users/login"
+        case .loginWithAppleID:
+            return "/users/login/apple"
+        case .loginWithKakao:
+            return "/users/login/kakao"
         case .validateEmail:
             return "/users/validation/email"
         case .join:
@@ -35,7 +41,7 @@ extension UserService: BaseService {
     
     var method: Moya.Method {
         switch self {
-        case .validateEmail, .login, .join:
+        case .validateEmail, .login, .join, .loginWithAppleID, .loginWithKakao:
             return .post
         case .logout, .fetchOtherProfile:
             return .get
@@ -49,6 +55,10 @@ extension UserService: BaseService {
         case .validateEmail(let request):
             return .requestJSONEncodable(request)
         case .join(let request):
+            return .requestJSONEncodable(request)
+        case .loginWithAppleID(let request):
+            return .requestJSONEncodable(request)
+        case .loginWithKakao(let request):
             return .requestJSONEncodable(request)
         case .logout, .fetchOtherProfile:
             return .requestPlain

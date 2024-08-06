@@ -236,10 +236,10 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 return Just(.loginAction(.isValid(isEmailValid: isEmailValid, isPWValid: isPWValid))).eraseToAnyPublisher()
             }
             
-            /// 로그인
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
+                        /// 이메일 로그인
                         let userInfo = try await UserProvider.shared.login(
                             email: state.loginState.email,
                             password: state.loginState.password
@@ -248,11 +248,53 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
-                        promise(.success(.loginAction(.loginError(errorMesssage: error.localizedDescription))))
+                        promise(.success(.loginAction(.loginError(error))))
                     }
                 }
             }.eraseToAnyPublisher()
-        default: break
+        
+        case .loginWithAppleID(let idToken, let nickname):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 애플 로그인
+                        let userInfo = try await UserProvider.shared.loginWithAppleID(idToken: idToken, nickname: nickname)
+                        
+                        guard let userInfo else { return }
+                        UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                    } catch {
+                        promise(.success(.loginAction(.loginError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
+        case .writeEmail(let email):
+            break
+        case .writePassword(let password):
+            break
+        case .isValid(let isEmailValid, let isPWValid):
+            break
+        case .loginError(let errorMesssage):
+            break
+        case .disappearView:
+            break
+        case .EmptyNicknameError:
+            break
+        case .loginWithKakao(let oauthToken):
+            return Future<AppAction, Never> { promise in
+                Task {
+                    do {
+                        /// 카카오 로그인
+                        let userInfo = try await UserProvider.shared.loginWithKakao(oauthToken: oauthToken)
+                        
+                        guard let userInfo else { return }
+                        UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
+                        promise(.success(.workspaceAction(.fetchWorkspaces)))
+                    } catch {
+                        promise(.success(.loginAction(.loginError(error))))
+                    }
+                }
+            }.eraseToAnyPublisher()
         }
         
     case .signUpAction(let signUpAction):

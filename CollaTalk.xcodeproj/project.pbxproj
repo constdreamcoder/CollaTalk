@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000B198C2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B198B2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift */; };
+		000B198E2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B198D2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift */; };
+		000B19902C61CD4B00EE7ABA /* LoginWithKakaoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B198F2C61CD4B00EE7ABA /* LoginWithKakaoError.swift */; };
+		000B19982C61CF0E00EE7ABA /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 000B19972C61CF0E00EE7ABA /* KakaoSDK */; };
 		000CDD782C490788001F6085 /* EditWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD772C490788001F6085 /* EditWorkspaceParams.swift */; };
 		000CDD7A2C4907BF001F6085 /* EditWorkspaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */; };
 		000CDD7D2C490823001F6085 /* MultiPartFormKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */; };
@@ -69,6 +73,9 @@
 		003F6FCE2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */; };
 		003F6FD02C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */; };
 		003F6FD22C5A9D0400C125EA /* ChangeChannelOwnershipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */; };
+		0040E4572C612A3900904CC2 /* AppleLoginCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040E4562C612A3900904CC2 /* AppleLoginCoodinator.swift */; };
+		0040E45B2C6132AA00904CC2 /* LoginWithAppleIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040E45A2C6132AA00904CC2 /* LoginWithAppleIDRequest.swift */; };
+		0040E45D2C6133DC00904CC2 /* LoginWithAppleIDError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040E45C2C6133DC00904CC2 /* LoginWithAppleIDError.swift */; };
 		00432ACE2C606AB8002C43A5 /* OtherProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */; };
 		00432AD32C607096002C43A5 /* FetchOtherProfileParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432AD22C607096002C43A5 /* FetchOtherProfileParams.swift */; };
 		00432AD52C607133002C43A5 /* OtherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00432AD42C607133002C43A5 /* OtherProfile.swift */; };
@@ -227,6 +234,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000B198B2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginCoordinator.swift; sourceTree = "<group>"; };
+		000B198D2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakaoRequest.swift; sourceTree = "<group>"; };
+		000B198F2C61CD4B00EE7ABA /* LoginWithKakaoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithKakaoError.swift; sourceTree = "<group>"; };
 		000CDD772C490788001F6085 /* EditWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceParams.swift; sourceTree = "<group>"; };
 		000CDD792C4907BF001F6085 /* EditWorkspaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkspaceRequest.swift; sourceTree = "<group>"; };
 		000CDD7C2C490823001F6085 /* MultiPartFormKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartFormKey.swift; sourceTree = "<group>"; };
@@ -289,6 +299,10 @@
 		003F6FCD2C5A9B7B00C125EA /* ChangeChannelOwnershipParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipParams.swift; sourceTree = "<group>"; };
 		003F6FCF2C5A9BAE00C125EA /* ChangeChannelOwnershipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipRequest.swift; sourceTree = "<group>"; };
 		003F6FD12C5A9D0400C125EA /* ChangeChannelOwnershipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeChannelOwnershipError.swift; sourceTree = "<group>"; };
+		0040E44F2C610B9E00904CC2 /* CollaTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CollaTalk.entitlements; sourceTree = "<group>"; };
+		0040E4562C612A3900904CC2 /* AppleLoginCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginCoodinator.swift; sourceTree = "<group>"; };
+		0040E45A2C6132AA00904CC2 /* LoginWithAppleIDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithAppleIDRequest.swift; sourceTree = "<group>"; };
+		0040E45C2C6133DC00904CC2 /* LoginWithAppleIDError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithAppleIDError.swift; sourceTree = "<group>"; };
 		00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileView.swift; sourceTree = "<group>"; };
 		00432AD22C607096002C43A5 /* FetchOtherProfileParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOtherProfileParams.swift; sourceTree = "<group>"; };
 		00432AD42C607133002C43A5 /* OtherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfile.swift; sourceTree = "<group>"; };
@@ -434,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				006064532C523A1A00A6E060 /* RealmSwift in Frameworks */,
+				000B19982C61CF0E00EE7ABA /* KakaoSDK in Frameworks */,
 				0052C13A2C3AFB4D003D08D3 /* CombineMoya in Frameworks */,
 				00DF69AC2C54BE25001EE608 /* SocketIO in Frameworks */,
 				009C55EF2C5FB0C700713065 /* iamport-ios in Frameworks */,
@@ -482,7 +497,6 @@
 				004A47D92C5E7A26000D78F1 /* EditNicknameView.swift */,
 				004A47DB2C5E827C000D78F1 /* EditPhoneView.swift */,
 				004A47DD2C5E84FD000D78F1 /* CoinShopView.swift */,
-				006615072C5FCCCB008F5AA2 /* PaymentView.swift */,
 				00432ACD2C606AB8002C43A5 /* OtherProfileView.swift */,
 			);
 			path = Profile;
@@ -509,6 +523,8 @@
 			isa = PBXGroup;
 			children = (
 				002066F72C3EC3E8007E76BD /* JoinError.swift */,
+				0040E45C2C6133DC00904CC2 /* LoginWithAppleIDError.swift */,
+				000B198F2C61CD4B00EE7ABA /* LoginWithKakaoError.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -764,6 +780,23 @@
 			path = Workspace;
 			sourceTree = "<group>";
 		};
+		0040E4542C6129EE00904CC2 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				0040E4562C612A3900904CC2 /* AppleLoginCoodinator.swift */,
+				000B198B2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0040E4552C612A0500904CC2 /* GeneralTypes */ = {
+			isa = PBXGroup;
+			children = (
+				00292E5B2C57579700D19AB5 /* GeneralType.swift */,
+			);
+			path = GeneralTypes;
+			sourceTree = "<group>";
+		};
 		00432AD12C607086002C43A5 /* Params */ = {
 			isa = PBXGroup;
 			children = (
@@ -783,6 +816,7 @@
 		00436E9C2C441E21009FDB71 /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
+				006615072C5FCCCB008F5AA2 /* PaymentView.swift */,
 				00436E9A2C440F8C009FDB71 /* ImagePickerView.swift */,
 			);
 			path = UIViewController;
@@ -819,6 +853,8 @@
 				00F6F2CA2C3C13F700C1AFF1 /* LoginRequest.swift */,
 				002066F32C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift */,
 				002066FA2C3ED63D007E76BD /* JoinRequest.swift */,
+				0040E45A2C6132AA00904CC2 /* LoginWithAppleIDRequest.swift */,
+				000B198D2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -945,8 +981,8 @@
 		0086B5AE2C37E8F800AD889C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				00292E5B2C57579700D19AB5 /* GeneralType.swift */,
-				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
+				0040E4552C612A0500904CC2 /* GeneralTypes */,
+				0040E4542C6129EE00904CC2 /* Coordinators */,
 				00C4F9BD2C3D1FDC0027B2D6 /* UIKitComponents */,
 				00C4F9B02C3CE5F90027B2D6 /* Enums */,
 				0086B5B52C37ED0B00AD889C /* Extensions */,
@@ -1165,6 +1201,7 @@
 		00F6F2B42C3BE99700C1AFF1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				00C4F9BE2C3D1FED0027B2D6 /* WindowProvider.swift */,
 				00318EE62C3F8115003206CB /* NavigationRouter.swift */,
 				00F6F2B92C3BF4BA00C1AFF1 /* Middleware.swift */,
 				00F6F2BB2C3BF4DC00C1AFF1 /* Reducer.swift */,
@@ -1296,6 +1333,7 @@
 		00F878C92C2BEE5B002610A8 /* CollaTalk */ = {
 			isa = PBXGroup;
 			children = (
+				0040E44F2C610B9E00904CC2 /* CollaTalk.entitlements */,
 				009C55D82C5F1D0900713065 /* APIKeys.swift */,
 				0052C0FF2C3AD554003D08D3 /* Application */,
 				00F6F2BF2C3C105300C1AFF1 /* Network */,
@@ -1358,6 +1396,7 @@
 				006064522C523A1A00A6E060 /* RealmSwift */,
 				00DF69AB2C54BE25001EE608 /* SocketIO */,
 				009C55EE2C5FB0C700713065 /* iamport-ios */,
+				000B19972C61CF0E00EE7ABA /* KakaoSDK */,
 			);
 			productName = CollaTalk;
 			productReference = 00F878C72C2BEE5B002610A8 /* CollaTalk.app */;
@@ -1392,6 +1431,7 @@
 				006064512C523A1A00A6E060 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				00DF69AA2C54BE25001EE608 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				009C55ED2C5FB0C700713065 /* XCRemoteSwiftPackageReference "iamport-ios" */,
+				000B19962C61CF0E00EE7ABA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 00F878C82C2BEE5B002610A8 /* Products */;
 			projectDirPath = "";
@@ -1469,11 +1509,13 @@
 				00F47A402C4E42580095EB4E /* DMEmptyView.swift in Sources */,
 				0060643A2C51DC9400A6E060 /* CreateOrFetchChatRoomRequest.swift in Sources */,
 				0013E0E52C5C921700AF747E /* LeaveWorkspaceError.swift in Sources */,
+				000B198C2C61CA0E00EE7ABA /* KakaoLoginCoordinator.swift in Sources */,
 				009C55D92C5F1D0900713065 /* APIKeys.swift in Sources */,
 				00F6F2BC2C3BF4DC00C1AFF1 /* Reducer.swift in Sources */,
 				00ED9DFD2C4BA8EC00DF5AE7 /* ChangeWorkspaceOwnerView.swift in Sources */,
 				00BD4E552C59DC70004C2E14 /* CellHeader.swift in Sources */,
 				004A47DA2C5E7A26000D78F1 /* EditNicknameView.swift in Sources */,
+				0040E45D2C6133DC00904CC2 /* LoginWithAppleIDError.swift in Sources */,
 				000F40022C588AC300FF87BF /* SendChannelChatRequest.swift in Sources */,
 				0034AC1B2C44EC170052EE0D /* FetchMyChannelsParams.swift in Sources */,
 				00F6F2BE2C3BF4FF00C1AFF1 /* Actions.swift in Sources */,
@@ -1527,6 +1569,7 @@
 				00292E6D2C57E05F00D19AB5 /* FetchChannelChatsQuery.swift in Sources */,
 				0037BC152C42E1AB00E9AF0A /* Workspace.swift in Sources */,
 				00318EE72C3F8115003206CB /* NavigationRouter.swift in Sources */,
+				0040E4572C612A3900904CC2 /* AppleLoginCoodinator.swift in Sources */,
 				00FF60E42C52ACB900A4970E /* LocalDMRoom.swift in Sources */,
 				006064412C51DF0D00A6E060 /* CreateOrFetchChatRoomError.swift in Sources */,
 				00F6F2BA2C3BF4BA00C1AFF1 /* Middleware.swift in Sources */,
@@ -1555,11 +1598,13 @@
 				00F6F2C22C3C115100C1AFF1 /* UserService.swift in Sources */,
 				00F1B6962C438BB000E7EA56 /* MainView.swift in Sources */,
 				006A9EC92C58E5280068AF32 /* CreateNewChannelError.swift in Sources */,
+				0040E45B2C6132AA00904CC2 /* LoginWithAppleIDRequest.swift in Sources */,
 				00BD4E592C59F442004C2E14 /* FetchChannelDetailsError.swift in Sources */,
 				0086B5B42C37EA1200AD889C /* BottomButtonModifier.swift in Sources */,
 				000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */,
 				00F6F2D02C3C185000C1AFF1 /* UserProvider.swift in Sources */,
 				009C55E32C5F3A5B00713065 /* ChangeProfileInfoRequest.swift in Sources */,
+				000B198E2C61CC9900EE7ABA /* LoginWithKakaoRequest.swift in Sources */,
 				00F6F2CD2C3C14EF00C1AFF1 /* BaseProvider.swift in Sources */,
 				002088802C4B720A0094E3B6 /* DeleteWorkspaceParams.swift in Sources */,
 				00DA64D52C512F42005BC393 /* SelectPhotosView.swift in Sources */,
@@ -1574,6 +1619,7 @@
 				0086B5C32C3806B500AD889C /* SignUpView.swift in Sources */,
 				00DFAF852C3C38A000D25633 /* UserDefaultsManager.swift in Sources */,
 				0060643E2C51DDEC00A6E060 /* DMRoom.swift in Sources */,
+				000B19902C61CD4B00EE7ABA /* LoginWithKakaoError.swift in Sources */,
 				007441A92C465F9500FA8727 /* ImageCacheManager.swift in Sources */,
 				009C55E92C5F989A00713065 /* CoinProvider.swift in Sources */,
 				006C32F72C5389A10084C4E2 /* FetchDMHistoryError.swift in Sources */,
@@ -1745,6 +1791,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CollaTalk/CollaTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
@@ -1752,6 +1799,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollaTalk;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1780,6 +1828,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CollaTalk/CollaTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CollaTalk/Preview Content\"";
@@ -1787,6 +1836,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CollaTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollaTalk;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1834,6 +1884,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		000B19962C61CF0E00EE7ABA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -1869,6 +1927,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		000B19972C61CF0E00EE7ABA /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000B19962C61CF0E00EE7ABA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
 		0052C1392C3AFB4D003D08D3 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0052C1382C3AFB4D003D08D3 /* XCRemoteSwiftPackageReference "Moya" */;

@@ -74,10 +74,13 @@ enum AppAction {
     
     enum LoginAction {
         case login
+        case loginWithAppleID(idToken: String, nickname: String?)
+        case loginWithKakao(oauthToken: String)
+        case EmptyNicknameError
         case writeEmail(email: String)
         case writePassword(password: String)
         case isValid(isEmailValid: Bool, isPWValid: Bool)
-        case loginError(errorMesssage: String?)
+        case loginError(Error)
         case disappearView
     }
     
