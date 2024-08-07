@@ -152,7 +152,15 @@
   ```
 
     </div>
+  </details>
 
+  <details>
+  <summary><b>해결화면</b></summary>
+  <div markdown="1">
+
+  <img src="https://github.com/user-attachments/assets/88a8aafa-68ee-401b-9278-6336a357c3ef" align="center" width="300"/>
+
+  </div>
   </details>
 
 <br/>
@@ -235,6 +243,8 @@
 
   </div>
   </details>
+
+  <br/>
 
 - 모든 버전 대응 가능한 cornerRadius Modifier 구현
 
