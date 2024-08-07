@@ -24,7 +24,6 @@
   - 회원 가입
   - 로그인 / 소셜 로그인(카카오 / 애플)
   - 로그아웃
-- 프로필 조회 / 편집
 - 워크스페이스 기능
   - 워크스페이스 생성 / 조회 / 편집 / 삭제
   - 워크스페이스 관리자 변경
@@ -35,9 +34,10 @@
   - 채널 관리자 변경
   - 채널 퇴장
   - 채널 채팅 생성
-- 채팅 기능(1:1 채팅 / 단체 채팅)
-  - 채팅 전송
-  - 이미지 업로드
+- DM 기능
+  - 채팅 생성
+  - 실시간 채팅 응답
+- 프로필 조회 / 편집
 - 코인 결제 기능
 
 <br/>
@@ -47,7 +47,7 @@
 - SwiftUI, Swift Concurrency, Combine
 - Redux Pattern, Router / Coordinator Pattern, Repository Pattern
 - Moya, LocalizedError, NSCache
-- Realm, IAMPort, SocketIO
+- Realm, IAMPort, SocketIO, UserDefaults
 - KakaoOpenSDK(Kakao Login) / AuthenticationServices(Apple Login)
 
 <br/>
@@ -61,7 +61,17 @@
 - **Realm**을 활용한 채팅 내역 저장 DB 구현
 - 여러 결제 대행사(PG) 및 간편결제 로직을 WebView 기반으로 구현하여 **결제 기능** 도입
 - Navigation Stack을 **Router**로 구현하여 화면 전환 관리
-- **Moya**의 **Router** 패턴 구현으로 네트워크 통신을 모듈화
+- **Moya**의 **Router** 패턴 구현으로 네트워크 통신 모듈화
+- **PluginType** 프로토콜 준수하는 Plugin 구성으로 네트워크 Logging 구현
+- Realm의 **Repository** 패턴 구성으로 데이터 접근 로직 추상화
+
+<br/>
+
+## ⚙️ 아키텍처
+
+<img src="https://github.com/user-attachments/assets/8c17a6f0-39e8-4800-bcba-18453884d6a5" align="image" width="100%"/>
+
+<br/>
 
 <br/>
 
