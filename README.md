@@ -15,6 +15,8 @@
   - 최소버전: iOS 16
   - Portrait Orientation 지원
   - 라이트 모드 지원
+- 사용 협업 툴
+  - Jira, Swagger, Figma
 
 <br/>
 
