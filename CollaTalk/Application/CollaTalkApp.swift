@@ -12,7 +12,6 @@ import KakaoSDKAuth
 
 @main
 struct CollaTalkApp: App {
-    
     private let store = AppStore(
         initial: AppState(),
         reducer: appReducer,

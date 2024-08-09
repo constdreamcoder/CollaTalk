@@ -390,6 +390,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.navigationState.isSidebarVisible.toggle()
         case .fetchHomeDefaultViewDatas:
             mutatingState.isLoading = true
+            
+            mutatingState.workspaceState.myChannels = []
+            mutatingState.workspaceState.dmRooms = []
         case .completeFetchHomeDefaultViewDatas(let myChennels, let dmRooms):
             mutatingState.isLoading = false
 
@@ -420,10 +423,7 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.workspaceState.workspaces = workspaces
             mutatingState.workspaceState.selectedWorkspace = selectedWorkspace
         
-            /// 채널 관리자 변경 후, 화면 전환 중이지 않을 때만 홈 화면으로 이동
-            if !(mutatingState.networkCallSuccessType == .popFromChannelSettingViewToSideBar) {
-                mutatingState.networkCallSuccessType = .homeView
-            }
+            mutatingState.networkCallSuccessType = .homeView
         case .setDMChatView(let chatRoom, let dms):
             mutatingState.isLoading = false
             
@@ -723,19 +723,20 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
                 }
             }
         case .initializeAllElements:
-            mutatingState.dmState.dmRoom = nil
-            mutatingState.dmState.opponent = nil
-            mutatingState.dmState.dms = []
-            mutatingState.dmState.dmCount = 0
-            
-            mutatingState.channelState.channel = nil
-            mutatingState.channelState.channelChats = []
-            mutatingState.channelState.channelChatCount = 0
-            
-            mutatingState.chatState.chatRoomType = .dm
-            mutatingState.chatState.message = ""
-            mutatingState.chatState.isMessageEmpty = false
-            mutatingState.chatState.selectedImages = []
+            break
+//            mutatingState.dmState.dmRoom = nil
+//            mutatingState.dmState.opponent = nil
+//            mutatingState.dmState.dms = []
+//            mutatingState.dmState.dmCount = 0
+//            
+//            mutatingState.channelState.channel = nil
+//            mutatingState.channelState.channelChats = []
+//            mutatingState.channelState.channelChatCount = 0
+//            
+//            mutatingState.chatState.chatRoomType = .dm
+//            mutatingState.chatState.message = ""
+//            mutatingState.chatState.isMessageEmpty = false
+//            mutatingState.chatState.selectedImages = []
         case .sendNewMessage:
             mutatingState.isLoading = true
         case .writeMessage(let message):

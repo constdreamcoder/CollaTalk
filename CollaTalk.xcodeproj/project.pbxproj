@@ -460,6 +460,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000B199B2C62654E00EE7ABA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		000CDD7B2C49081B001F6085 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,7 +981,7 @@
 		0086B5A92C37DEB900AD889C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				00F878CC2C2BEE5B002610A8 /* ContentView.swift */,
+				000B199B2C62654E00EE7ABA /* Root */,
 				0037BC042C42D1DB00E9AF0A /* Init */,
 				0037BC052C42D1FA00E9AF0A /* Main */,
 			);

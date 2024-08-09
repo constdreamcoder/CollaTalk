@@ -115,8 +115,7 @@ struct ChatView: View {
             }
         })
         .onDisappear {
-            // TODO: - 정확한 시점으로 옮기기
-//            store.dispatch(.chatAction(.initializeAllElements))
+            store.dispatch(.chatAction(.initializeAllElements))
         }
     }
 }

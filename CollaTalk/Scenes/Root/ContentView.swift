@@ -143,7 +143,7 @@ struct ContentView: View {
                 case .popFromChannelSettingViewToSideBar:
                     navigationRouter.pop(depth: 2)
                     store.dispatch(.workspaceAction(.toggleSideBarAction))
-                    store.dispatch(.workspaceAction(.fetchWorkspaces))
+                    store.dispatch(.workspaceAction(.fetchHomeDefaultViewDatas))
                 case .popFromChannelSettingViewToHomeView:
                     navigationRouter.pop(depth: 2)
                     store.dispatch(.workspaceAction(.fetchWorkspaces))

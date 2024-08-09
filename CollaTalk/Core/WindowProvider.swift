@@ -9,7 +9,7 @@ import SwiftUI
 
 final class WindowProvider: ObservableObject {
     
-    private var window: UIWindow?
+    private var toastMessageWindow: UIWindow?
     private var loadingViewWindow: UIWindow?
     private var alertWindow: UIWindow?
     
@@ -17,23 +17,23 @@ final class WindowProvider: ObservableObject {
     /// 토스트 메세지 표시 함수
     func showToast(message: String, duration: Double = 2.5) {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            window = UIWindow(windowScene: scene)
-            window?.windowLevel = .statusBar
+            toastMessageWindow = UIWindow(windowScene: scene)
+            toastMessageWindow?.windowLevel = .statusBar
         }
         
-        guard let window = window else { return }
+        guard let toastMessageWindow = toastMessageWindow else { return }
         
         /// 토스트 메세지 window 생성
         let hostingController = UIHostingController(rootView: ToastView(message: message))
         hostingController.view.backgroundColor = .clear
         
-        window.rootViewController = hostingController
-        window.makeKeyAndVisible()
+        toastMessageWindow.rootViewController = hostingController
+        toastMessageWindow.makeKeyAndVisible()
         
         /// 토스트 메세지 크기에 따른 window 크기 동적 변화
         let targetSize = hostingController.sizeThatFits(in: CGSize(width: UIScreen.main.bounds.width - 40, height: CGFloat.greatestFiniteMagnitude))
         
-        window.frame = CGRect(x: (UIScreen.main.bounds.width - targetSize.width) / 2,
+        toastMessageWindow.frame = CGRect(x: (UIScreen.main.bounds.width - targetSize.width) / 2,
                               y: UIScreen.main.bounds.height - targetSize.height - 80,
                               width: targetSize.width,
                               height: targetSize.height)
@@ -46,8 +46,8 @@ final class WindowProvider: ObservableObject {
     
     /// 토스트 메세지 닫는 함수
     private func dismissToast() {
-        window?.isHidden = true
-        window = nil
+        toastMessageWindow?.isHidden = true
+        toastMessageWindow = nil
     }
     
     // MARK: - Loading View

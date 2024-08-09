@@ -180,11 +180,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .setEditPhoneView:
             break
         case .popToRootView:
-            UserDefaultsManager.removeObject(forKey: .userInfo)
-            UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
-            BaseRepository.deleteAllObjects()
-            
-            return Empty().eraseToAnyPublisher()
+            break
         case .setCoinShopView:
             break
         case .setPaymentView(let coinItem):
@@ -239,6 +235,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
             return Future<AppAction, Never> { promise in
                 Task {
                     do {
+                        /// Realm 내부 데이터 모두 삭제
+                        BaseRepository.deleteAllObjects()
+
                         /// 이메일 로그인
                         let userInfo = try await UserProvider.shared.login(
                             email: state.loginState.email,
@@ -246,6 +245,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         )
                         guard let userInfo else { return }
                         UserDefaultsManager.setObject(userInfo, forKey: .userInfo)
+                        
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
                     } catch {
                         promise(.success(.loginAction(.loginError(error))))
@@ -563,9 +563,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
         case .fetchHomeDefaultViewDatas:
             return Future<AppAction, Never> { promise in
                 Task {
-                    /// 모든 기록 삭제
-                    BaseRepository.deleteAllObjects()
-                    
                     do {
                         guard let workspace = state.workspaceState.selectedWorkspace else { return }
                         
@@ -586,7 +583,6 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                             }
                             return
                         }
-                        
                         /// 각 channel 로컬(Realm)에 저장
                         let convertedChannel = channelsResult.map {
                             if let existingChannel = LocalChannelRepository.shared.findOne($0.channelId) {
@@ -595,6 +591,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                                 return $0.convertToLocalChannel
                             }
                         }
+        
                         LocalChannelRepository.shared.updateChannelList(convertedChannel)
                         
                         /// 각 채널 마지막 채팅 업데이트 병렬 처리
@@ -794,6 +791,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 }
             }.eraseToAnyPublisher()
         case .selectWorkspace(let workspace):
+            /// Realm 모든 데이터 삭제
+            BaseRepository.deleteAllObjects()
+            
             /// UserDefaults에 현재 선택된 워크스페이스 저장
             UserDefaultsManager.setObject(workspace, forKey: .selectedWorkspace)
             return Just(.workspaceAction(.fetchHomeDefaultViewDatas)).eraseToAnyPublisher()
@@ -804,7 +804,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let workspace else { return }
                         
                         let updatedWorkspaceList = try await WorkspaceProvider.shared.leaveWorkspace(workspaceID: workspace.workspaceId)
-                        print("2")
+                       
                         guard let updatedWorkspaceList else { return }
                         
                         promise(.success(.workspaceAction(.fetchWorkspaces)))
@@ -1208,15 +1208,26 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         }
                         
                         DispatchQueue.main.async {
+                            
                             /// 새로 추가된 채널 채팅 로컬 DB(Realm)에 추가
                             let latestChannelChatList: [LocalChannelChat] = channelChats.map {
+                                
                                 let convertedChannelChat = $0.convertToLocalChannelChat
                                 if let sender = LocalWorkspaceMemberRepository.shared.findOne(convertedChannelChat.sender?.userId ?? "" ) {
                                     
                                     convertedChannelChat.sender = sender
+                                } else {
+                                    /// 워크스페이스 멤버가 없으면 멤버 새로 추가
+                                    if let newWorkspaceMember = $0.user {
+                                        
+                                        LocalWorkspaceMemberRepository.shared.write(newWorkspaceMember)
+                                        
+                                        convertedChannelChat.sender = LocalWorkspaceMemberRepository.shared.findOne(convertedChannelChat.sender?.userId ?? "" )
+                                    }
                                 }
                                 return convertedChannelChat
                             }
+                            
                             LocalChannelRepository.shared.updateChannelChats(latestChannelChatList, channelId: channel.channelId)
                             
                             /// 최신 채널 채팅 기록 조회
@@ -1579,6 +1590,9 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                         guard let result else { return }
                         
                         if result {
+                            UserDefaultsManager.removeObject(forKey: .userInfo)
+                            UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
+                            
                             promise(.success(.networkCallSuccessTypeAction(.popToRootView)))
                         }
                     } catch {
