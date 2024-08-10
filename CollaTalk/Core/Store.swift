@@ -28,8 +28,9 @@ final class Store<State, Action>: ObservableObject {
     }
     
     func dispatch(_ action: Action) {
-        queue.sync {
-            self.dispatch(self.state, action)
+        queue.sync { [weak self] in
+            guard let self else { return }
+            dispatch(state, action)
         }
     }
     

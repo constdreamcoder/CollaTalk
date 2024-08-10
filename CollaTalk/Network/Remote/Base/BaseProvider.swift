@@ -15,7 +15,33 @@ class BaseProvider<Target: TargetType> {
         provider = MoyaProvider<Target>(plugins: [LoggerPlugin()])
     }
     
-    func request(_ target: Target) async throws -> Response {
+    func performRequest<DecodedType: Decodable, ErrorType: RawRepresentable & Error>(
+        _ target: Target,
+        errorType: ErrorType.Type,
+        decodingHandler: (Data) throws -> DecodedType?
+    ) async throws -> DecodedType? where ErrorType.RawValue == String {
+        do {
+            let response = try await request(target)
+            switch response.statusCode {
+            case 200:
+                return try decodingHandler(response.data)
+            case 400...500:
+                let errorCode = try decode(response.data, as: ErrorCode.self)
+                if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    throw commonError
+                } else if let specifiicError = ErrorType(rawValue: errorCode.errorCode) {
+                    throw specifiicError
+                }
+            default: break
+            }
+        } catch {
+            print("error", error)
+            throw error
+        }
+        return nil
+    }
+    
+    private func request(_ target: Target) async throws -> Response {
         return try await withCheckedThrowingContinuation { continuation in
             provider.request(target) { result in
                 switch result {

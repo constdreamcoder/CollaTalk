@@ -67,17 +67,17 @@ final class LoggerPlugin: PluginType {
         log.append("------------------- END HTTP (\(response.data.count)-byte body) -------------------")
         print(log)
         
-        if isFromError {
-            do {
-                let errorCode = try JSONDecoder().decode(ErrorCode.self, from: response.data)
-                if errorCode.errorCode == "E06" {
-                    print("Refresh Token is Expired.")
-                    // TODO: - 리프레시 토큰 갱신 트리걸 구현
-                }
-            } catch {
-                print("Decoding Error", error)
-            }
-        }
+//        if isFromError {
+//            do {
+//                let errorCode = try JSONDecoder().decode(ErrorCode.self, from: response.data)
+//                if errorCode.errorCode == "E06" {
+//                    print("Refresh Token is Expired.")
+//                    // TODO: - 리프레시 토큰 갱신 트리걸 구현
+//                }
+//            } catch {
+//                print("Decoding Error", error)
+//            }
+//        }
     }
     
     func onFail(_ error: MoyaError, target: TargetType) {

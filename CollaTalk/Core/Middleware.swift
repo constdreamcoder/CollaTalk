@@ -319,6 +319,7 @@ let appMiddleware: Middleware<AppState, AppAction> = { state, action in
                 Task {
                     do {
                         let isValidEmail = try await UserProvider.shared.validate(email: state.signUpState.email)
+                        guard let isValidEmail else { return }
                         if isValidEmail {
                             promise(.success(.signUpAction(.sendEmailValidation(isValid: true))))
                         }
