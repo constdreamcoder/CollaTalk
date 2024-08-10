@@ -18,6 +18,7 @@ class BaseProvider<Target: TargetType> {
     func performRequest<DecodedType: Decodable, ErrorType: RawRepresentable & Error>(
         _ target: Target,
         errorType: ErrorType.Type,
+        retryCount: Int = 3,
         decodingHandler: (Data) throws -> DecodedType?
     ) async throws -> DecodedType? where ErrorType.RawValue == String {
         do {
@@ -28,14 +29,30 @@ class BaseProvider<Target: TargetType> {
             case 400...500:
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
-                    throw commonError
+                    if commonError == CommonError.expiredAccessToken {
+                        if retryCount > 0 {
+                            try await RefreshTokenProvider.shared.refreshToken()
+                            
+                            return try await performRequest(target, errorType: errorType, retryCount: retryCount - 1, decodingHandler: decodingHandler)
+                        }
+                    } else {
+                        throw commonError
+                    }
                 } else if let specifiicError = ErrorType(rawValue: errorCode.errorCode) {
-                    throw specifiicError
+                    if let specifiicError = specifiicError as? RefreshTokenError,
+                       specifiicError == RefreshTokenError.expiredRefreshToken {
+                        
+                        UserDefaultsManager.removeObject(forKey: .userInfo)
+                        UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
+                        
+                        NotificationCenter.default.post(name: .gobackToRootView, object: nil, userInfo: [NotificationNameKey.gobackToRootView: true])
+                    } else {
+                        throw specifiicError
+                    }
                 }
             default: break
             }
         } catch {
-            print("error", error)
             throw error
         }
         return nil

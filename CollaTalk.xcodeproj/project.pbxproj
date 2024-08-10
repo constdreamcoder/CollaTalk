@@ -217,6 +217,7 @@
 		00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F878CC2C2BEE5B002610A8 /* ContentView.swift */; };
 		00F878CF2C2BEE5C002610A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878CE2C2BEE5C002610A8 /* Assets.xcassets */; };
 		00F878D22C2BEE5C002610A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F878D12C2BEE5C002610A8 /* Preview Assets.xcassets */; };
+		00FB6C5F2C676E9F00E40368 /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FB6C5E2C676E9F00E40368 /* NotificationName+Ext.swift */; };
 		00FF60E02C52A9F700A4970E /* RepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60DF2C52A9F700A4970E /* RepositoryType.swift */; };
 		00FF60E42C52ACB900A4970E /* LocalDMRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E32C52ACB900A4970E /* LocalDMRoom.swift */; };
 		00FF60E62C52B0C600A4970E /* LocalWorkspaceMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF60E52C52B0C600A4970E /* LocalWorkspaceMember.swift */; };
@@ -445,6 +446,7 @@
 		00F878CC2C2BEE5B002610A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		00F878CE2C2BEE5C002610A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00F878D12C2BEE5C002610A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		00FB6C5E2C676E9F00E40368 /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		00FF60DF2C52A9F700A4970E /* RepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryType.swift; sourceTree = "<group>"; };
 		00FF60E32C52ACB900A4970E /* LocalDMRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDMRoom.swift; sourceTree = "<group>"; };
 		00FF60E52C52B0C600A4970E /* LocalWorkspaceMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceMember.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				002066FC2C3EDC67007E76BD /* Error+Ext.swift */,
 				00436E982C43ED8D009FDB71 /* Data+Ext.swift */,
 				0034AC182C44E9870052EE0D /* String+Ext.swift */,
+				00FB6C5E2C676E9F00E40368 /* NotificationName+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1523,6 +1526,7 @@
 				002066FD2C3EDC67007E76BD /* Error+Ext.swift in Sources */,
 				00F878CD2C2BEE5B002610A8 /* ContentView.swift in Sources */,
 				004A47D12C5E5FEC000D78F1 /* ProfileProvider.swift in Sources */,
+				00FB6C5F2C676E9F00E40368 /* NotificationName+Ext.swift in Sources */,
 				009C55EC2C5F98D000713065 /* CoinItem.swift in Sources */,
 				002066F42C3EC0F3007E76BD /* EmailDoubleCheckRequest.swift in Sources */,
 				006060BF2C45005E001D300F /* Channel.swift in Sources */,

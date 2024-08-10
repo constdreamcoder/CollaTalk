@@ -179,6 +179,11 @@ struct ContentView: View {
                 }
             }
         }
+        .onReceive(store.gobackToRootViewTriggerSubject) { gobackToRootViewTrigger in
+            if gobackToRootViewTrigger {
+                store.dispatch(.networkCallSuccessTypeAction(.popToRootView))
+            }
+        }
     }
 }
 

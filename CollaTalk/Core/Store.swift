@@ -11,6 +11,9 @@ import Combine
 typealias AppStore = Store<AppState, AppAction>
 
 final class Store<State, Action>: ObservableObject {
+    
+    @Published private(set) var gobackToRootViewTriggerSubject = PassthroughSubject<Bool, Never>()
+    
     @Published private(set) var state: State
     private let reducer: Reducer<State, Action>
     private let middlewares: [Middleware<State, Action>]
@@ -25,6 +28,12 @@ final class Store<State, Action>: ObservableObject {
         self.state = initial
         self.reducer = reducer
         self.middlewares = middlewares
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(gobackToRootView), name: .gobackToRootView, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .gobackToRootView, object: nil)
     }
     
     func dispatch(_ action: Action) {
@@ -46,5 +55,15 @@ final class Store<State, Action>: ObservableObject {
         }
         
         state = newState
+    }
+    
+    @objc private func gobackToRootView(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let gobackToRootViewTrigger = userInfo[NotificationNameKey.gobackToRootView] as? Bool {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                gobackToRootViewTriggerSubject.send(gobackToRootViewTrigger)
+            }
+        }
     }
 }
