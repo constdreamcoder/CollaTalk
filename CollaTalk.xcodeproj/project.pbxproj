@@ -25,6 +25,7 @@
 		000F400A2C58C2CD00FF87BF /* UnreadChannelChatCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */; };
 		000F400C2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */; };
 		000F400F2C58DA3200FF87BF /* CreateOrEditChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F400E2C58DA3200FF87BF /* CreateOrEditChannelView.swift */; };
+		00113AA02C68F438005C44E2 /* ImageLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00113A9F2C68F438005C44E2 /* ImageLayoutView.swift */; };
 		0013E0E32C5C916900AF747E /* LeaveWorkspaceParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0013E0E22C5C916900AF747E /* LeaveWorkspaceParams.swift */; };
 		0013E0E52C5C921700AF747E /* LeaveWorkspaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0013E0E42C5C921700AF747E /* LeaveWorkspaceError.swift */; };
 		00141ECB2C5D36A400BCC037 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00141ECA2C5D36A400BCC037 /* EditProfileView.swift */; };
@@ -257,6 +258,7 @@
 		000F40092C58C2CD00FF87BF /* UnreadChannelChatCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadChannelChatCount.swift; sourceTree = "<group>"; };
 		000F400B2C58C3A700FF87BF /* FetchUnreadChannelChatsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUnreadChannelChatsError.swift; sourceTree = "<group>"; };
 		000F400E2C58DA3200FF87BF /* CreateOrEditChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditChannelView.swift; sourceTree = "<group>"; };
+		00113A9F2C68F438005C44E2 /* ImageLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLayoutView.swift; sourceTree = "<group>"; };
 		0013E0E22C5C916900AF747E /* LeaveWorkspaceParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveWorkspaceParams.swift; sourceTree = "<group>"; };
 		0013E0E42C5C921700AF747E /* LeaveWorkspaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveWorkspaceError.swift; sourceTree = "<group>"; };
 		00141ECA2C5D36A400BCC037 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -1233,6 +1235,7 @@
 			children = (
 				00F47A4D2C4E9F8D0095EB4E /* ChatView.swift */,
 				00DA64D42C512F42005BC393 /* SelectPhotosView.swift */,
+				00113A9F2C68F438005C44E2 /* ImageLayoutView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1691,6 +1694,7 @@
 				0028A82D2C6683EF006528CC /* RefreshTokenService.swift in Sources */,
 				00DFAF872C3C428300D25633 /* ErrorCode.swift in Sources */,
 				00FF60E82C52B3AA00A4970E /* LocalDirectMessage.swift in Sources */,
+				00113AA02C68F438005C44E2 /* ImageLayoutView.swift in Sources */,
 				00A7E4142C4FD7BC00E9091B /* KeyboardToolbar.swift in Sources */,
 				002066F22C3E971D007E76BD /* ToastMessage.swift in Sources */,
 				00F6F2D52C3C206100C1AFF1 /* UserInfo.swift in Sources */,

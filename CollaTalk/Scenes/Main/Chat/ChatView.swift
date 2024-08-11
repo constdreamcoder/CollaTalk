@@ -361,30 +361,10 @@ struct ChatItem: View {
                         .multilineTextAlignment(chatDirection == .left ? .leading : .trailing)
                 }
                 
-                // TODO: - 개수별 이미지 표시 레이아웃 구성
                 if files.count > 0 {
-                    Group {
-                        RemoteImage(
-                            path: files[0],
-                            imageView: { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(244/162, contentMode: .fit)
-                            },
-                            placeHolderView: {
-                                Image(.kakaoLogo)
-                                    .resizable()
-                                    .aspectRatio(244/162, contentMode: .fit)
-                            },
-                            errorView: { error in
-                                Image(.kakaoLogo)
-                                    .resizable()
-                                    .aspectRatio(244/162, contentMode: .fit)
-                            }
-                        )
-                    }
-                    .cornerRadius(16, corners: .allCorners)
-                    .frame(maxWidth: screenWidth * 0.57, maxHeight: 162, alignment: .top)
+                    ImageLayoutView(files: files)
+                        .cornerRadius(12, corners: .allCorners)
+                        .frame(maxWidth: screenWidth * 0.57, maxHeight: 160, alignment: .top)
                 }
             }
             

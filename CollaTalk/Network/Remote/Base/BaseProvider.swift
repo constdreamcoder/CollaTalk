@@ -15,6 +15,11 @@ class BaseProvider<Target: TargetType> {
         provider = MoyaProvider<Target>(plugins: [LoggerPlugin()])
     }
     
+    func decode<D: Decodable>(_ data: Data, as type: D.Type) throws -> D {
+        let decoder = JSONDecoder()
+        return try decoder.decode(D.self, from: data)
+    }
+    
     func performRequest<DecodedType: Decodable, ErrorType: RawRepresentable & Error>(
         _ target: Target,
         errorType: ErrorType.Type,
@@ -69,10 +74,5 @@ class BaseProvider<Target: TargetType> {
                 }
             }
         }
-    }
-    
-    func decode<D: Decodable>(_ data: Data, as type: D.Type) throws -> D {
-        let decoder = JSONDecoder()
-        return try decoder.decode(D.self, from: data)
     }
 }

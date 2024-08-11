@@ -60,7 +60,7 @@ struct MainNaigationBar: View {
                     imageView: { image in
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(1, contentMode: .fit)
                             .background(.brandGreen)
                             .frame(width: 32)
                             .clipShape(Circle())
@@ -72,7 +72,7 @@ struct MainNaigationBar: View {
                     placeHolderView: {
                         Image(.workspace)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(1, contentMode: .fit)
                             .background(.brandGreen)
                             .frame(width: 32)
                             .clipShape(Circle())
@@ -84,7 +84,7 @@ struct MainNaigationBar: View {
                     errorView: { error in
                         Image(.workspace)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(1, contentMode: .fit)
                             .background(.brandGreen)
                             .frame(width: 32)
                             .clipShape(Circle())

@@ -45,7 +45,7 @@ extension MainTab {
     }
     
     private var placeholderView: some View {
-        Text("빈 화면입니다.\n검색으로 이동 해 주세요.")
+        Text("빈 화면입니다.")
             .multilineTextAlignment(.center)
     }
 }
