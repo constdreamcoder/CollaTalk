@@ -1,4 +1,4 @@
-# CollaTalk - 협업 소통 앱(개발 진행중)
+# CollaTalk - 협업 소통 앱
 
 <p>
     <img src="https://github.com/user-attachments/assets/bebf7eb2-75bb-4b6a-b04d-1778ca03a28a" align="center" width="100%"/>
@@ -10,7 +10,7 @@
 
 - 서비스 소개: 협업 소통 앱
 - 개발 인원: 1인
-- 개발 기간: 24.07.05 ~ **(진행중)**
+- 개발 기간: 24.07.05 ~ 24.08.07(약 한달)
 - 개발 환경
   - 최소버전: iOS 16
   - Portrait Orientation 지원
@@ -67,6 +67,7 @@
 - **PluginType** 프로토콜 준수하는 Plugin 구성으로 네트워크 Logging 구현
 - Realm의 **Repository** 패턴 구성으로 데이터 접근 로직 추상화
 
+
 <br/>
 
 ## ⚙️ 아키텍처
@@ -75,6 +76,37 @@
 
 <br/>
 
+## 📱 동작 화면
+
+|회원가입|로그인|로그아웃|소셜로그인 - 애플|
+|:---:|:---:|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/021145fe-7d20-4c43-be6c-9d9471b54432" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/69772077-6ad2-4b4a-a4c8-618621acac26" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/97aef174-874e-4eba-bb67-720a6de08015" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/7d33b077-6a4e-4a26-80b0-b602ac8734d8" width="200" height="390"/>|
+
+|워크스페이스 생성|워크스페이스 편집|워크스페이스 관리자 변경|워크스페이스 삭제|
+|:---:|:---:|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/522e1466-5ed5-45e3-a3f3-8846995b0eb1" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/25738d71-e443-4a29-bacd-6475dac925be" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/2c280bd3-49af-48c3-abc0-859af9875d49" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/0cfc70ac-0f8f-4c34-b4eb-94d8cc97c301" width="200" height="390"/>|
+
+|워크스페이스 퇴장|
+|:---:|
+|<img src="https://github.com/user-attachments/assets/c5852479-1fc8-4570-8f96-96f7d1681e35" width="200" height="390"/>|
+
+|채널 생성|채널 편집|채널 관리자 변경|채널 삭제|
+|:---:|:---:|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/e118f1fe-b384-4b4a-8a62-fedbf6a71cdb" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/8e3bcdb1-d093-4534-b1db-b230f9db0f12" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/e7c8729d-cb2a-486d-a5bb-d1899b1995b1" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/f6bba4e0-7a8e-49bc-8d80-2ed1a23ec30f" width="200" height="390"/>|
+
+|채널 퇴장|채널 탐색 + 채털 채팅 입장|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/dcf66363-54b4-4dd2-b68f-2343ea59ad88" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/a8d93dd4-679b-4511-9478-8fb275245a7a" width="200" height="390"/>|
+
+|DM 채팅 생성|DM 실시간 채팅|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/89ea334e-b1ae-4ebd-9cfc-763b03c67a5f" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/4b44da86-efd3-4720-af30-81c675785c06" width="400" height="390"/>|
+
+|프로필 수정|코인 결제|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/68373f3f-2182-4ae2-874f-8addb1445ec5" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/eca668f4-c16c-4238-b142-2796b8db81b4" width="200" height="390"/>|
+
+<br/>
 <br/>
 
 ## 🔥 트러블 슈팅
@@ -152,15 +184,7 @@
   ```
 
     </div>
-  </details>
 
-  <details>
-  <summary><b>해결화면</b></summary>
-  <div markdown="1">
-
-  <img src="https://github.com/user-attachments/assets/88a8aafa-68ee-401b-9278-6336a357c3ef" align="center" width="300"/>
-
-  </div>
   </details>
 
 <br/>
@@ -243,8 +267,6 @@
 
   </div>
   </details>
-
-  <br/>
 
 - 모든 버전 대응 가능한 cornerRadius Modifier 구현
 
