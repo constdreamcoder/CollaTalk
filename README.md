@@ -76,6 +76,13 @@
 
 <br/>
 
+## 💾 Realm DB 구조
+
+
+<img src="https://github.com/user-attachments/assets/67c5748d-d680-4499-817c-f78e17f5e484" align="image" width="100%"/>
+
+<br/>
+
 ## 📱 동작 화면
 
 |회원가입|로그인|로그아웃|소셜로그인 - 애플|
@@ -86,9 +93,9 @@
 |:---:|:---:|:---:|:---:|
 |<img src="https://github.com/user-attachments/assets/522e1466-5ed5-45e3-a3f3-8846995b0eb1" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/25738d71-e443-4a29-bacd-6475dac925be" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/2c280bd3-49af-48c3-abc0-859af9875d49" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/0cfc70ac-0f8f-4c34-b4eb-94d8cc97c301" width="200" height="390"/>|
 
-|워크스페이스 퇴장|
-|:---:|
-|<img src="https://github.com/user-attachments/assets/c5852479-1fc8-4570-8f96-96f7d1681e35" width="200" height="390"/>|
+|워크스페이스 퇴장|멤버 초대|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/c5852479-1fc8-4570-8f96-96f7d1681e35" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/56d87f2a-7a50-43c5-8c48-38c0a4f4f9be" width="200" height="390"/>|
 
 |채널 생성|채널 편집|채널 관리자 변경|채널 삭제|
 |:---:|:---:|:---:|:---:|
