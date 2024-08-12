@@ -31,9 +31,11 @@ struct MainTabView: View {
                 tab.view
                     .tabItem {
                         Image(tab.imageName)
+                            .renderingMode(.template)
                         Text(tab.title)
                     }
                     .tag(tab.rawValue)
+                    .toolbarColorScheme(.light, for: .tabBar)
             }
         }
     }
