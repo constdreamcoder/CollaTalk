@@ -174,7 +174,7 @@ extension EditProfileView {
 struct PlaceHolderImage:View {
     
     var body: some View {
-        Image(.kakaoLogo)
+        Image(.noProfilePhoto)
             .resizable()
             .aspectRatio(1.0, contentMode: .fit)
             .frame(width: 70)

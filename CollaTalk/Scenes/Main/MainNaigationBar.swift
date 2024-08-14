@@ -22,27 +22,21 @@ struct MainNaigationBar: View {
                         image
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .cornerRadius(8, corners: .allCorners)
+                            
                     },
                     placeHolderView: {
-                        Image(.workspace)
-                            .resizable()
+                        Rectangle()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .cornerRadius(8, corners: .allCorners)
                     },
                     errorView: { error in
-                        Image(.workspace)
-                            .resizable()
+                        Rectangle()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .cornerRadius(8, corners: .allCorners)
                     }
                 )
+                .foregroundStyle(.backgroundNo)
+                .background(.backgroundNo)
+                .frame(width: 32)
+                .cornerRadius(8, corners: .allCorners)
                 
                 Spacer()
                     .frame(width: 8)
@@ -61,39 +55,26 @@ struct MainNaigationBar: View {
                         image
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .clipShape(Circle())
-                            .overlay (
-                                Circle().stroke(.black, lineWidth: 2)
-                            )
-                            .padding(.leading, 8)
                     },
                     placeHolderView: {
-                        Image(.workspace)
+                        Image(.noProfilePhoto)
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .clipShape(Circle())
-                            .overlay (
-                                Circle().stroke(.black, lineWidth: 2)
-                            )
-                            .padding(.leading, 8)
                     },
                     errorView: { error in
-                        Image(.workspace)
+                        Image(.noProfilePhoto)
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .background(.brandGreen)
-                            .frame(width: 32)
-                            .clipShape(Circle())
-                            .overlay (
-                                Circle().stroke(.black, lineWidth: 2)
-                            )
-                            .padding(.leading, 8)
+                            
                     }
                 )
+                .background(.brandGreen)
+                .frame(width: 32)
+                .clipShape(Circle())
+                .overlay (
+                    Circle().stroke(.black, lineWidth: 2)
+                )
+                .padding(.leading, 8)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     store.dispatch(.editProfileAction(.fetchMyProfile))

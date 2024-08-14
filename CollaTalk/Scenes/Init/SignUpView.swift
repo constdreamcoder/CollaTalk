@@ -23,9 +23,8 @@ struct SignUpView: View {
                     title: .signUp,
                     isPresented: Binding(
                         get: { store.state.navigationState.isSignUpViewPresented },
-                        set: { store.dispatch(.navigationAction(.presentSignUpView(present: $0)))
-                        }
-                    ), 
+                        set: { store.dispatch(.navigationAction(.presentSignUpView(present: $0))) }
+                    ),
                     transitionAction: {}
                 )
                 

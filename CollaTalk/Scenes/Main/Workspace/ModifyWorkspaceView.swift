@@ -46,9 +46,9 @@ struct ModifyWorkspaceView: View {
                 
                 // TODO: - 추후 리팩토링
                 if store.state.modifyWorkspaceState.existingWorkspace == nil {
-                    Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
+                    Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .noBackgroundPhoto)
                         .resizable()
-                        .aspectRatio(1.0, contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit)
                         .frame(width: 70)
                         .background(.brandGreen)
                         .cornerRadius(8, corners: .allCorners)
@@ -65,9 +65,9 @@ struct ModifyWorkspaceView: View {
                         }
                 } else {
                     if store.state.modifyWorkspaceState.existingWorkspace?.coverImage == "" {
-                        Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
+                        Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .noBackgroundPhoto)
                             .resizable()
-                            .aspectRatio(1.0, contentMode: .fit)
+                            .aspectRatio(1, contentMode: .fit)
                             .frame(width: 70)
                             .background(.brandGreen)
                             .cornerRadius(8, corners: .allCorners)
@@ -86,7 +86,7 @@ struct ModifyWorkspaceView: View {
                         RemoteImage(path: store.state.modifyWorkspaceState.existingWorkspace?.coverImage) { image in
                             image
                                 .resizable()
-                                .aspectRatio(1.0, contentMode: .fit)
+                                .aspectRatio(1, contentMode: .fit)
                                 .frame(width: 70)
                                 .background(.brandGreen)
                                 .cornerRadius(8, corners: .allCorners)
@@ -102,7 +102,7 @@ struct ModifyWorkspaceView: View {
                                     store.dispatch(.navigationAction(.showImagePickerView(show: true)))
                                 }
                         } placeHolderView: {
-                            Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .workspace)
+                            Image(uiImage: store.state.modifyWorkspaceState.selectedImageFromGallery ?? .noBackgroundPhoto)
                                 .resizable()
                                 .aspectRatio(1.0, contentMode: .fit)
                                 .frame(width: 70)

@@ -130,22 +130,21 @@ struct ChannelMemberSection: View {
                                     image
                                         .resizable()
                                         .aspectRatio(1, contentMode: .fit)
-                                        .frame(width: 44)
+                                        
                                 },
                                 placeHolderView: {
-                                    Image(.kakaoLogo)
+                                    Image(.noProfilePhoto)
                                         .resizable()
                                         .aspectRatio(1, contentMode: .fit)
-                                        .frame(width: 44)
                                        
                                 },
                                 errorView: { error in
-                                    Image(.kakaoLogo)
+                                    Image(.noProfilePhoto)
                                         .resizable()
                                         .aspectRatio(1, contentMode: .fit)
-                                        .frame(width: 44)
                                 }
                             )
+                            .frame(width: 44)
                             .background(.brandGreen)
                             .cornerRadius(8, corners: .allCorners)
                             

@@ -95,6 +95,7 @@ struct ChatView: View {
                         .onTapGesture {
                             print("메세지 전송")
                             store.dispatch(.chatAction(.sendNewMessage))
+                            hideKeyboard()
                         }
                 }
                 .padding(.horizontal, 12)
@@ -305,27 +306,21 @@ struct ChatItem: View {
                         image
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 34)
-                            .background(.brandGreen)
-                            .cornerRadius(8, corners: .allCorners)
                     },
                     placeHolderView: {
-                        Image(.kakaoLogo)
+                        Image(.noProfilePhoto)
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 34)
-                            .background(.brandGreen)
-                            .cornerRadius(8, corners: .allCorners)
                     },
                     errorView: { error in
-                        Image(.kakaoLogo)
+                        Image(.noProfilePhoto)
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 34)
-                            .background(.brandGreen)
-                            .cornerRadius(8, corners: .allCorners)
                     }
                 )
+                .frame(width: 34)
+                .background(.brandGreen)
+                .cornerRadius(8, corners: .allCorners)
                 .contentShape(Rectangle())
                 .onTapGesture(perform: profileImageTouchAction)
                 

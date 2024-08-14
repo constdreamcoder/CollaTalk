@@ -61,27 +61,22 @@ struct DMMemberCell: View {
                     image
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 44)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
+                       
                 },
                 placeHolderView: {
-                    Image(.kakaoLogo)
+                    Image(.noProfilePhoto)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 44)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 },
                 errorView: { _ in
-                    Image(.kakaoLogo)
+                    Image(.noProfilePhoto)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 44)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 }
             )
+            .frame(width: 44)
+            .background(.brandGreen)
+            .cornerRadius(8, corners: .allCorners)
             
             Text(member.nickname)
                 .font(.body)
@@ -123,27 +118,21 @@ struct DMRoomListCell: View {
                     image
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 34)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 },
                 placeHolderView: {
-                    Image(.kakaoLogo)
+                    Image(.noProfilePhoto)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 34)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 },
                 errorView: { error in
-                    Image(.kakaoLogo)
+                    Image(.noProfilePhoto)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 34)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 }
             )
+            .frame(width: 34)
+            .background(.brandGreen)
+            .cornerRadius(8, corners: .allCorners)
             
             VStack {
                 HStack {
@@ -152,7 +141,8 @@ struct DMRoomListCell: View {
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("PM 11:23")
+//                    Text("PM 11:23")
+                    Text(dmRoom.lastDM?.createdAt.toDMTime ?? "")
                         .font(.caption2)
                         .foregroundStyle(.textSecondary)
                         .lineLimit(1)

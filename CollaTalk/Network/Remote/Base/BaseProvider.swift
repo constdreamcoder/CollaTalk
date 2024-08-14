@@ -34,6 +34,7 @@ class BaseProvider<Target: TargetType> {
             case 400...500:
                 let errorCode = try decode(response.data, as: ErrorCode.self)
                 if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                    /// 토큰 갱신 로직 - 재귀문을 통해 최대 3번까지 토큰 갱신 요청
                     if commonError == CommonError.expiredAccessToken {
                         if retryCount > 0 {
                             try await RefreshTokenProvider.shared.refreshToken()
@@ -44,6 +45,7 @@ class BaseProvider<Target: TargetType> {
                         throw commonError
                     }
                 } else if let specifiicError = ErrorType(rawValue: errorCode.errorCode) {
+                    /// Refresh 토큰 만료 로직 - Refresh 토큰 만료 시 유저를 사용자를 로그인 화면으로 유도
                     if let specifiicError = specifiicError as? RefreshTokenError,
                        specifiicError == RefreshTokenError.expiredRefreshToken {
                         

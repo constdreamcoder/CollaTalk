@@ -748,6 +748,7 @@
 		0037BC052C42D1FA00E9AF0A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */,
 				00F1B6952C438BB000E7EA56 /* MainView.swift */,
 				0037BC0D2C42D6A700E9AF0A /* Tab */,
 				0037BC082C42D5F800E9AF0A /* Home */,
@@ -764,7 +765,6 @@
 		0037BC082C42D5F800E9AF0A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				00F1B6912C43696900E7EA56 /* MainNaigationBar.swift */,
 				0037BC0B2C42D66200E9AF0A /* HomeEmpty */,
 				0037BC0C2C42D66D00E9AF0A /* HomeDefault */,
 			);

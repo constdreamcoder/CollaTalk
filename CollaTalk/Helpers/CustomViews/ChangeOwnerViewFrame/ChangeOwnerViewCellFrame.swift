@@ -22,19 +22,22 @@ struct ChangeOwnerViewCellFrame: View {
                     image
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 44)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
                 },
                 placeHolderView: {
-                    Image(.kakaoLogo)
+                    Image(.noProfilePhoto)
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
-                        .frame(width: 44)
-                        .background(.brandGreen)
-                        .cornerRadius(8, corners: .allCorners)
+                       
+                },
+                errorView: { error in
+                    Image(.noProfilePhoto)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
                 }
             )
+            .frame(width: 44)
+            .background(.brandGreen)
+            .cornerRadius(8, corners: .allCorners)
             
             VStack {
                 Text(nickname)

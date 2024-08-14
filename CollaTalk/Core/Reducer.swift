@@ -724,19 +724,6 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             }
         case .initializeAllElements:
             break
-//            mutatingState.dmState.dmRoom = nil
-//            mutatingState.dmState.opponent = nil
-//            mutatingState.dmState.dms = []
-//            mutatingState.dmState.dmCount = 0
-//            
-//            mutatingState.channelState.channel = nil
-//            mutatingState.channelState.channelChats = []
-//            mutatingState.channelState.channelChatCount = 0
-//            
-//            mutatingState.chatState.chatRoomType = .dm
-//            mutatingState.chatState.message = ""
-//            mutatingState.chatState.isMessageEmpty = false
-//            mutatingState.chatState.selectedImages = []
         case .sendNewMessage:
             mutatingState.isLoading = true
         case .writeMessage(let message):
@@ -751,6 +738,9 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
             mutatingState.chatState.selectedImages.append(contentsOf: newImages)
             mutatingState.isLoading = false
         case .receiveNewDirectMessage(let receivedDM):
+            mutatingState.chatState.message = ""
+            mutatingState.chatState.selectedImages = []
+            mutatingState.chatState.isMessageEmpty = true
             break
         case .completeSendDMAction:
             mutatingState.isLoading = false
@@ -763,6 +753,10 @@ let appReducer: Reducer<AppState, AppAction> = { state, action in
         case .completeSendChannelChatAction:
             mutatingState.isLoading = false
         case .receiveNewChannelChat(let receivedChannelChat):
+            
+            mutatingState.chatState.message = ""
+            mutatingState.chatState.selectedImages = []
+            mutatingState.chatState.isMessageEmpty = true
             break
         }
     case .channelAction(let channelAction):
