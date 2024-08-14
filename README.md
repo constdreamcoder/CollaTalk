@@ -118,7 +118,89 @@
 
 ## 🔥 트러블 슈팅
 
-### 1. window 계층을 활용한 토스트 메시지 구현
+### 1. 이미지 다운로드 시, 토큰 만료 추적을 위한 갱신 로직 직접 구현
+
+문제상황
+
+- Kingfisher로 이미지로 다운로드 시, Header에 토큰 추가는 가능하나 토큰 갱신 로직 추가는 Kingfisher 라이브러리 구조상 추가하기 불편함을 느낌
+
+- 이에 이미지 다운로드 로직을 직접 구현함
+
+<br/>
+
+해결방법
+
+- 방법1: 토큰 갱신하는 모듈을 따로 두어 관리
+
+  - 이렇게 독립적인 모듈로서 관리된다면 유지보수 관점에서 상당히 큰 이점을 누릴 수 있지만 개인적인으로 생각했을 때 타이머를 이용해 **Background에서 주기적으로 토큰 만료를 모니터링하여 불필요한 자원이 낭비**되고, 또, 토큰 갱신 요청 시점이 API 요청 시점에 종속적이지 않아 **정확한 시점에 토큰이 갱신되지 않을 것** 같아 해당 방법은 배제
+
+- 방법2: 다른 API 요청 시 토큰 만료 추적 및 갱신 로직과 통합 구현
+
+  - 이렇게 구현하면 **방법1**에서 언급되었던 **자원 낭비 문제**와 **부정확한 토큰 갱신 시점 문제**를 해결 가능
+
+    - **자원 낭비 문제 해결**: 타이머를 이용해 항시 토큰 만료 여부를 모니터링하지 않아도 됨
+    - **부정확한 토큰 갱신 시점 문제 해결**: **API 요청 -> 토큰 만료 여부 확인** 순으로 네트워크 요청이 이루어지기 때문에 정확한 시점에 토큰 갱신이 가능
+
+  <br/>
+
+  <details>
+  <summary><b>토큰 갱신 코드</b></summary>
+  <div markdown="1">
+
+  ```swift
+  func performRequest<DecodedType: Decodable, ErrorType: RawRepresentable & Error>(
+      _ target: Target,
+      errorType: ErrorType.Type,
+      retryCount: Int = 3,
+      decodingHandler: (Data) throws -> DecodedType?
+  ) async throws -> DecodedType? where ErrorType.RawValue == String {
+      do {
+          let response = try await request(target)
+          switch response.statusCode {
+          case 200:
+              return try decodingHandler(response.data)
+          case 400...500:
+              let errorCode = try decode(response.data, as: ErrorCode.self)
+              if let commonError = CommonError(rawValue: errorCode.errorCode) {
+                  /// 토큰 갱신 로직 - 재귀문을 통해 최대 3번까지 토큰 갱신 요청
+                  if commonError == CommonError.expiredAccessToken {
+                      if retryCount > 0 {
+                          try await RefreshTokenProvider.shared.refreshToken()
+                          
+                          return try await performRequest(target, errorType: errorType, retryCount: retryCount - 1, decodingHandler: decodingHandler)
+                      }
+                  } else {
+                      throw commonError
+                  }
+              } else if let specifiicError = ErrorType(rawValue: errorCode.errorCode) {
+                  /// Refresh 토큰 만료 로직 - Refresh 토큰 만료 시 유저를 사용자를 로그인 화면으로 유도
+                  if let specifiicError = specifiicError as? RefreshTokenError,
+                      specifiicError == RefreshTokenError.expiredRefreshToken {
+                      
+                      UserDefaultsManager.removeObject(forKey: .userInfo)
+                      UserDefaultsManager.removeObject(forKey: .selectedWorkspace)
+                      
+                      NotificationCenter.default.post(name: .gobackToRootView, object: nil, userInfo: [NotificationNameKey.gobackToRootView: true])
+                  } else {
+                      throw specifiicError
+                  }
+              }
+          default: break
+          }
+      } catch {
+          throw error
+      }
+      return nil
+  } 
+  ```
+
+  </div>
+  </details>
+
+
+<br/>
+
+### 2. window 계층을 활용한 토스트 메시지 구현
 
 문제상황
 
@@ -205,7 +287,7 @@
 
 <br/>
 
-### 2. SwiftUI 버전 대응 - onChange, cornerRadius Modifier
+### 3. SwiftUI 버전 대응 - onChange, cornerRadius Modifier
 
 문제상황
 
