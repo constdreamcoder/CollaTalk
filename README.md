@@ -72,14 +72,14 @@
 
 ## ⚙️ 아키텍처
 
-<img src="https://github.com/user-attachments/assets/8c17a6f0-39e8-4800-bcba-18453884d6a5" align="image" width="100%"/>
+<img src="https://github.com/user-attachments/assets/203197fe-2719-4afc-9277-905cd1952a38" align="image" width="100%"/>
 
 <br/>
 
 ## 💾 Realm DB 구조
 
 
-<img src="https://github.com/user-attachments/assets/67c5748d-d680-4499-817c-f78e17f5e484" align="image" width="100%"/>
+<img src="https://github.com/user-attachments/assets/bbb4d58c-0958-4222-ae0a-4c3124f2c5a2" align="image" width="100%"/>
 
 <br/>
 
