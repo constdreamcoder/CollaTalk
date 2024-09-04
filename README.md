@@ -44,45 +44,6 @@
 
 <br/>
 
-## 🛠 기술 소개
-
-- SwiftUI, Swift Concurrency, Combine
-- Redux Pattern, Router / Coordinator Pattern, Repository Pattern
-- Moya, LocalizedError, NSCache
-- Realm, IAMPort, SocketIO, UserDefaults
-- KakaoOpenSDK(Kakao Login) / AuthenticationServices(Apple Login)
-
-<br/>
-
-## 💻 기술 적용
-
-- **Redux** 패턴을 통해 중앙 집중화된 상태 관리와 예측 가능한 단방향 데이터 흐름으로 확장성과 유지 보수성을 확보
-- **NSCache**를 활용하여 메모리 효율적인 이미지 데이터 캐싱과 불필요한 이미지 데이터 재 다운로드 방지
-- **LocalizedError** 프로토콜 준수를 통한 직관적이고 현지화된 네트워크 오류 메시지 제공
-- **Coordinator** 패턴을 활용한 소셜 로그인 구현으로 책임 분리
-- **Realm**을 활용한 채팅 내역 저장 DB 구현
-- 여러 결제 대행사(PG) 및 간편결제 로직을 WebView 기반으로 구현하여 **결제 기능** 도입
-- Navigation Stack을 **Router**로 구현하여 화면 전환 관리
-- **Moya**의 **Router** 패턴 구현으로 네트워크 통신 모듈화
-- **PluginType** 프로토콜 준수하는 Plugin 구성으로 네트워크 Logging 구현
-- Realm의 **Repository** 패턴 구성으로 데이터 접근 로직 추상화
-
-
-<br/>
-
-## ⚙️ 아키텍처
-
-<img src="https://github.com/user-attachments/assets/203197fe-2719-4afc-9277-905cd1952a38" align="image" width="100%"/>
-
-<br/>
-
-## 💾 Realm DB 구조
-
-
-<img src="https://github.com/user-attachments/assets/bbb4d58c-0958-4222-ae0a-4c3124f2c5a2" align="image" width="100%"/>
-
-<br/>
-
 ## 📱 동작 화면
 
 |회원가입|로그인|로그아웃|소셜로그인 - 애플|
@@ -114,6 +75,42 @@
 |<img src="https://github.com/user-attachments/assets/68373f3f-2182-4ae2-874f-8addb1445ec5" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/eca668f4-c16c-4238-b142-2796b8db81b4" width="200" height="390"/>|
 
 <br/>
+
+## 🛠 기술 소개
+
+- SwiftUI, Swift Concurrency, Combine
+- Redux Pattern, Router / Coordinator Pattern, Repository Pattern
+- Moya, LocalizedError, NSCache
+- Realm, IAMPort, SocketIO, UserDefaults
+- KakaoOpenSDK(Kakao Login) / AuthenticationServices(Apple Login)
+
+<br/>
+
+## 💻 기술 적용
+
+- **Redux** 패턴을 통해 중앙 집중화된 상태 관리와 예측 가능한 단방향 데이터 흐름으로 확장성과 유지 보수성을 확보
+- **NSCache**를 활용하여 메모리 효율적인 이미지 데이터 캐싱과 불필요한 이미지 데이터 재 다운로드 방지
+- **LocalizedError** 프로토콜 준수를 통한 직관적이고 현지화된 네트워크 오류 메시지 제공
+- **Coordinator** 패턴을 활용한 소셜 로그인 구현으로 책임 분리
+- **Realm**을 활용한 채팅 내역 저장 DB 구현
+- 여러 결제 대행사(PG) 및 간편결제 로직을 WebView 기반으로 구현하여 **결제 기능** 도입
+- Navigation Stack을 **Router**로 구현하여 화면 전환 관리
+- **Moya**의 **Router** 패턴 구현으로 네트워크 통신 모듈화
+- **PluginType** 프로토콜 준수하는 Plugin 구성으로 네트워크 Logging 구현
+- Realm의 **Repository** 패턴 구성으로 데이터 접근 로직 추상화
+
+<br/>
+
+## ⚙️ 아키텍처
+
+<img src="https://github.com/user-attachments/assets/203197fe-2719-4afc-9277-905cd1952a38" align="image" width="100%"/>
+
+<br/>
+
+## 💾 Realm DB 구조
+
+<img src="https://github.com/user-attachments/assets/bbb4d58c-0958-4222-ae0a-4c3124f2c5a2" align="image" width="100%"/>
+
 <br/>
 
 ## 🔥 트러블 슈팅
