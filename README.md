@@ -62,7 +62,7 @@
 |:---:|:---:|:---:|:---:|
 |<img src="https://github.com/user-attachments/assets/e118f1fe-b384-4b4a-8a62-fedbf6a71cdb" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/8e3bcdb1-d093-4534-b1db-b230f9db0f12" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/e7c8729d-cb2a-486d-a5bb-d1899b1995b1" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/f6bba4e0-7a8e-49bc-8d80-2ed1a23ec30f" width="200" height="390"/>|
 
-|채널 퇴장|채널 탐색 + 채털 채팅 입장|
+|채널 퇴장|채널 탐색 + 채널 채팅 입장|
 |:---:|:---:|
 |<img src="https://github.com/user-attachments/assets/dcf66363-54b4-4dd2-b68f-2343ea59ad88" width="200" height="390"/>|<img src="https://github.com/user-attachments/assets/a8d93dd4-679b-4511-9478-8fb275245a7a" width="200" height="390"/>|
 
